@@ -115,8 +115,9 @@ export const checkHomeCaregivingGrant = (
     "Care recipient is a Singapore Citizen (SC)",
     "Care recipient is not in a residential long-term care institution (e.g. nursing home)",
     "If household has no income, the annual value of property must be not more than $21,000",
-    "If your household monthly income per person is $1,500 or less and your household owns no more than one property, you may qualify for $400 in monthly cash payouts",
-    "If your household monthly income per person is between $1,501 and $3,600, you may qualify for $250 monthly cash payout",
+    "If your household monthly income per person is $1,500 or less and your household owns no more than one property, you may qualify for $600 in monthly cash payouts",
+    "If your household monthly income per person is between $1,501 and $3,600, you may qualify for $400 monthly cash payout",
+    "If your household monthly income per person is between $3,601 and $4,800, you may qualify for $200 monthly cash payout",
   ];
   const additionalVerificationCriteria = [
     "Care recipient must always require some assistance with at least 3 Activities of Daily Living, as certified via a Functional Assessment Report",
@@ -143,6 +144,7 @@ export const checkHomeCaregivingGrant = (
     additionalVerificationCriteria.push(reasons[2]);
     additionalVerificationCriteria.push(reasons[3]);
     additionalVerificationCriteria.push(reasons[4]);
+    additionalVerificationCriteria.push(reasons[5]);
   } else if (user.monthly_pchi === 0) {
     if (
       user.annual_property_value !== null &&
@@ -154,12 +156,14 @@ export const checkHomeCaregivingGrant = (
     }
   } else if (user.monthly_pchi <= 1500) {
     eligibleReasons.push(reasons[3]);
-  } else if (user.monthly_pchi >= 1501 && user.monthly_pchi <= 3600) {
+  } else if (user.monthly_pchi <= 3600) {
     eligibleReasons.push(reasons[4]);
+  } else if (user.monthly_pchi <= 4800) {
+    eligibleReasons.push(reasons[5]);
   } else {
-    ineligibleReasons.push(reasons[2]);
     ineligibleReasons.push(reasons[3]);
     ineligibleReasons.push(reasons[4]);
+    ineligibleReasons.push(reasons[5]);
   }
 
   return {
@@ -225,24 +229,77 @@ export const checkMdwLevyConcession = (
 };
 
 export const checkMohLtcSubsidy = (user: UserDataFull): EligibilityResult => {
-  const reasons = [
-    "User of Non-Residential Long-Term Care service is a Singapore Citizen (SC) or Permanent Resident (PR)",
-  ];
+  const citizenshipReason =
+    "User of Non-Residential Long-Term Care service is a Singapore Citizen (SC) or Permanent Resident (PR)";
   const additionalVerificationCriteria = [
     "The service provider is government-funded",
   ];
-  const criteriaCount = reasons.length + additionalVerificationCriteria.length;
+  const criteriaCount = 2;
 
   const eligibleReasons: string[] = [];
   const ineligibleReasons: string[] = [];
-  if (
-    [Citizenship.CITIZEN, Citizenship.PR].includes(
-      user.care_recipient_citizenship,
-    )
-  ) {
-    eligibleReasons.push(reasons[0]);
+
+  const isCitizen = user.care_recipient_citizenship === Citizenship.CITIZEN;
+  const isPR = user.care_recipient_citizenship === Citizenship.PR;
+
+  if (isCitizen || isPR) {
+    eligibleReasons.push(citizenshipReason);
   } else {
-    ineligibleReasons.push(reasons[0]);
+    ineligibleReasons.push(citizenshipReason);
+  }
+
+  if (isCitizen || isPR) {
+    if (user.monthly_pchi === null) {
+      additionalVerificationCriteria.push(
+        "Subsidy level is based on monthly household per capita income (PCHI) — share your household information to see which tier you qualify for",
+      );
+    } else {
+      const citizenLabel = isCitizen
+        ? "Singapore Citizen"
+        : "Permanent Resident";
+      let subsidyPercent: number | null = null;
+      let tierRange: string = "";
+
+      if (user.monthly_pchi === 0) {
+        if (
+          user.annual_property_value !== null &&
+          user.annual_property_value <= 21000
+        ) {
+          subsidyPercent = isCitizen ? 80 : 55;
+          tierRange =
+            "no household income and annual property value of $21,000 or less";
+        } else {
+          ineligibleReasons.push(
+            "Annual property value exceeds $21,000 with no household income — not eligible for subsidy",
+          );
+        }
+      } else if (user.monthly_pchi <= 900) {
+        subsidyPercent = isCitizen ? 80 : 55;
+        tierRange = "PCHI of $900 or below";
+      } else if (user.monthly_pchi <= 1500) {
+        subsidyPercent = isCitizen ? 75 : 50;
+        tierRange = "PCHI between $901 and $1,500";
+      } else if (user.monthly_pchi <= 2300) {
+        subsidyPercent = isCitizen ? 60 : 40;
+        tierRange = "PCHI between $1,501 and $2,300";
+      } else if (user.monthly_pchi <= 2600) {
+        subsidyPercent = isCitizen ? 50 : 30;
+        tierRange = "PCHI between $2,301 and $2,600";
+      } else if (user.monthly_pchi <= 3600) {
+        subsidyPercent = isCitizen ? 30 : 15;
+        tierRange = "PCHI between $2,601 and $3,600";
+      } else {
+        ineligibleReasons.push(
+          "Monthly PCHI exceeds $3,600 — not eligible for subsidy on non-residential long-term care services",
+        );
+      }
+
+      if (subsidyPercent !== null) {
+        eligibleReasons.push(
+          `As a ${citizenLabel} with ${tierRange}, you may qualify for a ${subsidyPercent}% subsidy on non-residential long-term care services`,
+        );
+      }
+    }
   }
 
   return {

@@ -20,6 +20,7 @@ function SupportDetails() {
   const isSignedIn = useAuthStore((state) => state.isSignedIn);
   const userId = useAuthStore((state) => state.userId);
   const [user, setUser] = useState<UserData>();
+  const [userLoadError, setUserLoadError] = useState(false);
 
   useEffect(() => {
     fetch("/data/schemes.json")
@@ -38,6 +39,7 @@ function SupportDetails() {
         .then((response) => setUser(response.data))
         .catch((error) => {
           console.error(error);
+          setUserLoadError(true);
           toast.error("Failed to fetch user data");
         });
     }
@@ -62,14 +64,14 @@ function SupportDetails() {
     }
   }, [isSignedIn, userId, scheme, subsidyInfo]);
 
-  if (!scheme || !user) {
+  if (!scheme) {
     return <LoadingSpinner />;
   }
 
-  const eligibilityResults = checkAllSchemesEligibility(user);
-  const schemeHere = eligibilityResults.find(
-    (result) => result.schemeId === scheme.id,
-  );
+  const eligibilityResults = user ? checkAllSchemesEligibility(user) : [];
+  const schemeHere = user
+    ? eligibilityResults.find((result) => result.schemeId === scheme.id)
+    : undefined;
 
   return (
     <div className="flex h-full w-full flex-col gap-4 py-6">
@@ -87,15 +89,18 @@ function SupportDetails() {
       </section>
       <section className="flex flex-col gap-2">
         <h3 className="text-lg font-semibold">Eligibility</h3>
-        {isSignedIn && scheme.pchiRequired && user.monthly_pchi === null && (
-          <section className="flex flex-col gap-4 rounded border border-brand-primary-300 bg-brand-primary-100 p-4">
-            <p className="text-brand-primary-900">
-              Share your household information to see how much subsidy you may
-              be eligible for
-            </p>
-            <PCHIDrawer />
-          </section>
-        )}
+        {isSignedIn &&
+          scheme.pchiRequired &&
+          user &&
+          user.monthly_pchi === null && (
+            <section className="flex flex-col gap-4 rounded border border-brand-primary-300 bg-brand-primary-100 p-4">
+              <p className="text-brand-primary-900">
+                Share your household information to see how much subsidy you may
+                be eligible for
+              </p>
+              <PCHIDrawer />
+            </section>
+          )}
         {subsidyInfo && (
           <section className="flex flex-col gap-4 rounded border border-brand-primary-300 bg-brand-primary-100 p-4">
             <p className="text-brand-primary-900">
@@ -123,8 +128,13 @@ function SupportDetails() {
           </section>
         )}
         <div className="flex flex-col place-content-start place-items-start gap-3 rounded-md border border-gray-200 bg-white p-4 text-left">
-          {/* <CustomMarkdown content={scheme.eligibility} /> */}
           <div className="w-full">
+            {isSignedIn && userLoadError && (
+              <p className="text-sm text-gray-500">
+                Could not load your profile data. Your personalised eligibility
+                assessment is unavailable — please try again later.
+              </p>
+            )}
             <div className="flex flex-col gap-4">
               {schemeHere?.eligibleReasons.map((message, index) => (
                 <div key={index} className="flex items-start gap-3">
