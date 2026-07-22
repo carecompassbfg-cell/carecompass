@@ -27,15 +27,19 @@ def calculate_pchi(
     
     # Calculate subsidy level based on user info
     citizenship = user.care_recipient_citizenship
+    household_size = user.household_size
+    total_monthly_household_income = user.total_monthly_household_income
     monthly_pchi = user.monthly_pchi
     annual_property_value = user.annual_property_value
 
-    if monthly_pchi is None:
+    if monthly_pchi is None or household_size is None or total_monthly_household_income is None:
         raise HTTPException(status_code=400, detail="user does not have PCHI info")
 
     # Determine PCHI band and subsidy level
     if monthly_pchi == 0:
         # No PCHI case - check annual value only
+        if annual_property_value is None:
+            raise HTTPException(status_code=400, detail="user does not have annual property value info")
         if annual_property_value <= 21000:
             subsidy_level = 80 if citizenship == Citizenship.CITIZEN else 55
         else:
@@ -64,10 +68,10 @@ def calculate_pchi(
             pchi_band = "$3,601 and above"
 
     return PCHIResponse(
-        household_size=user.household_size,
-        total_monthly_household_income=user.total_monthly_household_income,
-        annual_property_value=user.annual_property_value,
-        monthly_pchi=user.monthly_pchi,
+        household_size=household_size,
+        total_monthly_household_income=total_monthly_household_income,
+        annual_property_value=annual_property_value,
+        monthly_pchi=monthly_pchi,
         pchi_band=pchi_band,
         subsidy_level=subsidy_level,
         correct_as_of="1 Oct 2024"

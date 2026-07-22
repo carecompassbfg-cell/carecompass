@@ -69,7 +69,7 @@ def create_user(
     userToAdd: UserCreate, 
     db: DbDependency,
     current_user_clerk_id: CurrentUserClerkIdDependency
-) -> UserResponse:
+):
     # Check if user already exists
     user = db.query(User).filter(User.clerk_id == current_user_clerk_id).first()
     if user:

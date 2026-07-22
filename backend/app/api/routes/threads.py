@@ -40,7 +40,7 @@ class ThreadReadResponse(ThreadBase):
 @router.post('/threads')
 async def create_thread(
     current_user: CurrentUserDependency,
-    db: DbDependency = None
+    db: DbDependency
 ) -> ThreadCreateResponse:
     # current_user is already verified to exist in database from the dependency
     
@@ -63,7 +63,7 @@ async def create_thread(
 async def thread_messages(
     thread_id: str, 
     current_user: CurrentUserDependency,
-    db: DbDependency = None
+    db: DbDependency
 ):
     try:
         # First check if thread exists and user has access
@@ -80,6 +80,8 @@ async def thread_messages(
         extracted_values = []
         for message in thread_messages:
             for content_block in message.content:
+                if content_block.type != "text":
+                    continue
                 extracted_values.append({
                     "id": message.id,
                     "role": message.role,
@@ -100,7 +102,7 @@ async def create_message(
     thread_id: str, 
     req: ChatCompletionRequest, 
     current_user: CurrentUserDependency,
-    db: DbDependency = None
+    db: DbDependency
 ) -> EventSourceResponse:
     # Verify thread access
     thread = db.query(Thread).filter(Thread.thread_id == thread_id).first()
@@ -124,6 +126,6 @@ async def create_message(
 @router.get('/threads', response_model=List[ThreadReadResponse])
 async def read_user_threads(
     current_user: CurrentUserDependency,
-    db: DbDependency = None
+    db: DbDependency
 ):
     return db.query(Thread).filter(Thread.user_id == current_user.clerk_id).all()

@@ -16,8 +16,8 @@ CLERK_JWKS_URL = os.getenv("CLERK_JWKS_URL")
 CLERK_ISSUER = os.getenv("CLERK_JWT_ISSUER")
 
 @cached(cache=TTLCache(maxsize=1, ttl=3600))  # refresh every hour
-def get_jwks():
-    response = httpx.get(CLERK_JWKS_URL)
+def get_jwks(url:str):
+    response = httpx.get(url)
     return response.json()
 
 async def get_current_user_clerk_id(
@@ -38,7 +38,7 @@ async def get_current_user_clerk_id(
             issuer=CLERK_ISSUER,
             options={"verify_aud": False}
         )
-        clerk_id: str = payload.get("sub")
+        clerk_id = payload.get("sub")
         if not clerk_id:
             raise HTTPException(
                 status_code=401,
