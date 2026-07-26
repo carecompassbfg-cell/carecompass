@@ -138,11 +138,12 @@ async def rank_daycare_centers(
     home_coords = None
     if pref.location:
         home_coords = getCoordFromAddress(pref.location)
-        if not home_coords:
-            raise HTTPException(
-                status_code=status.HTTP_400_BAD_REQUEST,
-                detail="Invalid address provided"
-            )
+    
+    if not home_coords:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Invalid address provided"
+        )
 
     # Get top k closest centers
     centers = nsmallest(
@@ -177,8 +178,9 @@ async def rank_daycare_centers(
         response.append(center_response)
 
     # Sort centers again by distance from home (with more accurate values from gmaps)
+    # Put None at the back
     if pref.location:
-        response.sort(key=lambda x: x.distance_from_home)
+        response.sort(key=lambda x: (x.distance_from_home is None, x.distance_from_home))
     
     return response
 

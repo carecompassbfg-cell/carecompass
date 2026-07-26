@@ -23,23 +23,23 @@ class ReviewBase(BaseModel):
     target_id: int
     target_type: ReviewableType
     overall_rating: int
-    author_name: str = "Anonymous"
     content: Optional[str] = None
     author_id: Optional[str] = None
+
+class ReviewCreate(ReviewBase):
+    author_name: str = "Anonymous"
     google_review_id: Optional[str] = None
     google_author_url: Optional[str] = None
     google_author_photo_url: Optional[str] = None
     published_time: Optional[datetime] = None
 
-class ReviewCreate(ReviewBase):
-    pass
-
 class GoogleReviewCreate(ReviewBase):
     review_source: ReviewSource = Field(default=ReviewSource.GOOGLE, frozen=True)
-    google_review_id: str
     author_name: str
+    google_review_id: str
     google_author_url: str
     google_author_photo_url: str
+    published_time: Optional[datetime] = None
 
     @model_validator(mode='before')
     def validate_review_source(cls, values):
@@ -51,6 +51,10 @@ class ReviewResponse(ReviewBase):
     model_config = ConfigDict(from_attributes=True)
 
     id: int
+    author_name: str = "Anonymous"
+    google_review_id: Optional[str] = None
+    google_author_url: Optional[str] = None
+    google_author_photo_url: Optional[str] = None
     # published time is not optional in the response
     published_time: datetime
 

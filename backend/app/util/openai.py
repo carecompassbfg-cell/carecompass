@@ -26,11 +26,12 @@ async def stream_chat_responses(thread_id: str, query: str) -> AsyncGenerator[st
         role="user",
         content=query
     )
-
+    assistant_id = os.getenv('OPENAI_ASSISTANT_ID')
+    if not assistant_id:
+        raise RuntimeError("OPENAI_ASSISTANT_ID is not set")
     stream = client.beta.threads.runs.create(
         thread_id=thread_id,
-        # TODO: get from config
-        assistant_id=os.getenv('OPENAI_ASSISTANT_ID'),
+        assistant_id=assistant_id,
         stream=True,
         response_format={ "type": "json_object" }
     )
@@ -47,8 +48,10 @@ async def stream_chat_responses(thread_id: str, query: str) -> AsyncGenerator[st
 async def process_event(event):
     if isinstance(event, ThreadMessageDelta):
         data = event.data.delta.content
-        for d in data:
-            yield d.text.value
+        if data:
+            for d in data:
+                if d.type == "text" and d.text and d.text.value is not None:
+                    yield d.text.value
 
     elif any(
         isinstance(event, cls)

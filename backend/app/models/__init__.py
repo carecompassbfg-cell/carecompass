@@ -7,3 +7,4 @@ from app.models.review import *
 from app.models.bookmark import *
 from app.models.care_receipient import *
 from app.models.mood import *
+from app.models.magic_link_token import *
