@@ -30,7 +30,7 @@ async def get_current_user_clerk_id(
         )
     
     try:
-        jwks = get_jwks()
+        jwks = get_jwks(CLERK_JWKS_URL)
         payload = jwt.decode(
             credentials.credentials,
             jwks,
