@@ -46,7 +46,7 @@ def get_owned_thread(db: Session, thread_id: str, current_user: User) -> Thread:
 @router.post('/threads')
 async def create_thread(
     current_user: CurrentUserDependency,
-    db: DbDependency = None
+    db: DbDependency
 ) -> ThreadCreateResponse:
     conversation = await client.conversations.create()
 
@@ -64,7 +64,7 @@ async def create_thread(
 async def thread_messages(
     thread_id: str,
     current_user: CurrentUserDependency,
-    db: DbDependency = None
+    db: DbDependency
 ):
     thread = get_owned_thread(db, thread_id, current_user)
 
@@ -95,7 +95,7 @@ async def create_message(
     thread_id: str,
     req: ChatCompletionRequest,
     current_user: CurrentUserDependency,
-    db: DbDependency = None
+    db: DbDependency
 ) -> EventSourceResponse:
     thread = get_owned_thread(db, thread_id, current_user)
 
@@ -110,6 +110,6 @@ async def create_message(
 @router.get('/threads', response_model=List[ThreadReadResponse])
 async def read_user_threads(
     current_user: CurrentUserDependency,
-    db: DbDependency = None
+    db: DbDependency
 ):
     return db.query(Thread).filter(Thread.user_id == current_user.clerk_id).all()

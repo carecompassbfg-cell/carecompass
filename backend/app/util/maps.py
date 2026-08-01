@@ -50,7 +50,7 @@ def getRouteDistance(
         - RouteDistance: The distance between the two locations and the estimated travel duration
     """
     gmaps = GoogleMapsClient(key=os.getenv('GOOGLE_MAPS_API_KEY'))
-    dist = gmaps.distance_matrix(
+    dist = gmaps.distance_matrix( # type: ignore[attr-defined]
         origins=[origin],
         destinations=[destination],
         mode=mode,
