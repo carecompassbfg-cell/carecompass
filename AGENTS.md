@@ -138,7 +138,7 @@ from app.models import User
 
 ### Backend Environment Variables
 - Copy `.env.template` to `.env`
-- Required variables: `OPENAI_API_KEY`, `OPENAI_ASSISTANT_ID`, database credentials
+- Required variables: `OPENAI_API_KEY`, `OPENAI_MODEL`, database credentials
 - Use `python-dotenv` for local development
 
 ## Error Handling

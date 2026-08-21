@@ -9,7 +9,7 @@ cp .env.template .env
 ```
 
 Configure `.env`. In particular:
-- `OPENAI_API_KEY` and `OPENAI_ASSISTANT_ID`: Production configs are stored in AWS Secrets Manager (boto3 automation not set up yet).
+- `OPENAI_API_KEY` and `OPENAI_MODEL`: Production configs are stored in AWS Secrets Manager (boto3 automation not set up yet).
 - **Database:** See `Database` section for the values to use for local dev.
 
 ### Dependencies

@@ -1,71 +1,43 @@
-# util functions for dealing with OpenAI's assistant API
-
-import asyncio
 import json
 import os
-import re
-
-from app.core.database import *
 from typing import AsyncGenerator
-from openai import OpenAI
-from openai.types.beta.assistant_stream_event import (
-    ThreadMessageDelta,
-    ThreadRunFailed,
-    ThreadRunCancelling,
-    ThreadRunCancelled,
-    ThreadRunExpired,
-    ThreadRunStepFailed,
-    ThreadRunStepCancelled,
-)
 
-client = OpenAI()
+from openai import AsyncOpenAI
 
-async def stream_chat_responses(thread_id: str, query: str) -> AsyncGenerator[str, None]:
-    client.beta.threads.messages.create(
-        thread_id=thread_id,
-        role="user",
-        content=query
-    )
-    assistant_id = os.getenv('OPENAI_ASSISTANT_ID')
-    if not assistant_id:
-        raise RuntimeError("OPENAI_ASSISTANT_ID is not set")
-    stream = client.beta.threads.runs.create(
-        thread_id=thread_id,
-        assistant_id=assistant_id,
-        stream=True,
-        response_format={ "type": "json_object" }
-    )
+from app.util.prompts import SYSTEM_PROMPT
 
-    for event in stream:
-        async for token in process_event(event):
-            yield json.dumps({ "token": token })
-            # let the event loop actually send the token before processing the next.
-            # this prevents tokens from being buffered because they're processed
-            # in the same event loop.
-            await asyncio.sleep(0)
-        
+client = AsyncOpenAI()
 
-async def process_event(event):
-    if isinstance(event, ThreadMessageDelta):
-        data = event.data.delta.content
-        if data:
-            for d in data:
-                if d.type == "text" and d.text and d.text.value is not None:
-                    yield d.text.value
+OPENAI_MODEL = os.getenv("OPENAI_MODEL", "gpt-5.4-mini")
 
-    elif any(
-        isinstance(event, cls)
-        for cls in [
-            ThreadRunFailed,
-            ThreadRunCancelling,
-            ThreadRunCancelled,
-            ThreadRunExpired,
-            ThreadRunStepFailed,
-            ThreadRunStepCancelled,
-        ]
-    ):
-        raise Exception("Run failed")
 
-# Temporary solution to remove citation from the openai response
-def remove_citation(text: str) -> str:
-    return re.sub(r'【.*】', '', text)
+async def stream_chat_responses(
+    conversation_id: str,
+    query: str,
+) -> AsyncGenerator[str, None]:
+    async with client.responses.stream(
+        model=OPENAI_MODEL,
+        instructions=SYSTEM_PROMPT,
+        # `text.format: json_object` requires the word "json" to appear
+        # somewhere in `input`; the actual format spec lives in SYSTEM_PROMPT.
+        input=[
+            {"role": "developer", "content": "Respond only with the JSON format described in your instructions."},
+            {"role": "user", "content": query},
+        ],
+        conversation={"id": conversation_id},
+        text={"format": {"type": "json_object"}},
+    ) as stream:
+        async for event in stream:
+            if event.type == "response.output_text.delta":
+                yield json.dumps({"token": event.delta})
+            elif event.type in ("response.failed", "response.incomplete"):
+                error = event.response.error
+                incomplete_details = event.response.incomplete_details
+                reason = (
+                    error.message if error
+                    else incomplete_details.reason if incomplete_details
+                    else event.type
+                )
+                raise RuntimeError(f"Response generation failed: {reason}")
+            elif event.type == "error":
+                raise RuntimeError(f"Response generation failed: {event.message}")
