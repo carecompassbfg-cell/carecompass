@@ -18,6 +18,7 @@ import {
   isSheetQuestion,
   PAY_FOR_META,
   QUESTION_META,
+  getSourceLine,
   SOURCE_LABELS,
 } from "@/util/schemeCatalog";
 
@@ -131,7 +132,7 @@ function SchemeDetail() {
           )}
           <span className="flex items-center gap-1">
             <SchemeIcon name="info-meta" size={13} />
-            From {SOURCE_LABELS[scheme.source]}
+            {getSourceLine(scheme)}
           </span>
         </div>
       </header>
@@ -287,8 +288,9 @@ function SchemeDetail() {
       <p className="flex items-start gap-2 pb-4 text-xs leading-[18px] text-gray-600">
         <SchemeIcon name="info-footer" size={16} />
         <span>
-          From {scheme.sources.map((source) => source.name).join(", ")}, last
-          refreshed {formatDate(scheme.lastRefreshed)}.
+          {scheme.tier === 1
+            ? `Reviewed by CareCompass on ${formatDate(scheme.lastRefreshed)}.`
+            : `From ${SOURCE_LABELS[scheme.source]}, last refreshed ${formatDate(scheme.lastRefreshed)}.`}
         </span>
       </p>
 

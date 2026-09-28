@@ -198,12 +198,15 @@ export const pickBestMatches = (
   limit: number = BEST_MATCHES_LIMIT,
 ): SchemeWithStatus[] => sortBestMatches(items).slice(0, limit);
 
-// Number of schemes per category, including only categories that have any
+// Number of schemes per category, leaving out ones that don't match the
+// profile so a tile's count equals its category page's "All N". Categories
+// with nothing to show are left out.
 export const countByCategory = (
-  schemes: CatalogScheme[],
+  items: SchemeWithStatus[],
 ): Partial<Record<PayForCategory, number>> => {
   const counts: Partial<Record<PayForCategory, number>> = {};
-  for (const scheme of schemes) {
+  for (const { scheme, status } of items) {
+    if (status.status === "not_a_match") continue;
     counts[scheme.payFor] = (counts[scheme.payFor] ?? 0) + 1;
   }
   return counts;
@@ -244,3 +247,9 @@ export const SOURCE_LABELS: Record<CatalogScheme["source"], string> = {
   carecompass: "CareCompass",
   schemes_sg: "Schemes.sg",
 };
+
+// Meta-line text for where a scheme's information comes from
+export const getSourceLine = (scheme: CatalogScheme): string =>
+  scheme.source === "carecompass"
+    ? "Reviewed by CareCompass"
+    : `From ${SOURCE_LABELS[scheme.source]}`;

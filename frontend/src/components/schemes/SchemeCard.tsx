@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { SchemeWithStatus, SOURCE_LABELS } from "@/util/schemeCatalog";
+import { getSourceLine, SchemeWithStatus } from "@/util/schemeCatalog";
 import SchemeIcon, { FOCUS_RING } from "./SchemeIcon";
 import StatusPill from "./StatusPill";
 
@@ -34,7 +34,7 @@ export default function SchemeCard({ item }: { item: SchemeWithStatus }) {
         )}
         <span className="flex items-center gap-1">
           <SchemeIcon name="info-meta" size={13} />
-          {scheme.agency} · From {SOURCE_LABELS[scheme.source]}
+          {scheme.agency} · {getSourceLine(scheme)}
         </span>
       </div>
     </Link>

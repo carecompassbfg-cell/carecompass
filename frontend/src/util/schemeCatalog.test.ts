@@ -95,11 +95,20 @@ describe("pickBestMatches", () => {
 });
 
 describe("countByCategory", () => {
+  const withStatus = (
+    id: string,
+    payFor: PayForCategory,
+    status: SchemeStatusKind,
+  ): SchemeWithStatus => ({
+    scheme: makeScheme(id, 1, payFor),
+    status: makeStatus(status),
+  });
+
   it("counts schemes per category and leaves out empty categories", () => {
     const counts = countByCategory([
-      makeScheme("a", 1, PayForCategory.TAX_CPF),
-      makeScheme("b", 2, PayForCategory.TAX_CPF),
-      makeScheme("c", 2, PayForCategory.TRANSPORT),
+      withStatus("a", PayForCategory.TAX_CPF, "likely"),
+      withStatus("b", PayForCategory.TAX_CPF, "provider_decides"),
+      withStatus("c", PayForCategory.TRANSPORT, "needs_answers"),
     ]);
     expect(counts).toEqual({
       [PayForCategory.TAX_CPF]: 2,
@@ -108,9 +117,23 @@ describe("countByCategory", () => {
     expect(counts[PayForCategory.MEDICAL_BILLS]).toBeUndefined();
   });
 
-  it("covers every scheme in the sample catalog", () => {
+  it("leaves out not_a_match schemes, matching the category page's All count", () => {
+    const counts = countByCategory([
+      withStatus("a", PayForCategory.TAX_CPF, "likely"),
+      withStatus("b", PayForCategory.TAX_CPF, "not_a_match"),
+      withStatus("c", PayForCategory.TRANSPORT, "not_a_match"),
+    ]);
+    expect(counts).toEqual({ [PayForCategory.TAX_CPF]: 1 });
+  });
+
+  it("covers every scheme in the sample catalog when none are ruled out", () => {
     const schemes = catalog as CatalogScheme[];
-    const counts = countByCategory(schemes);
+    const counts = countByCategory(
+      schemes.map((scheme) => ({
+        scheme,
+        status: makeStatus("provider_decides"),
+      })),
+    );
     const total = Object.values(counts).reduce((sum, n) => sum + (n ?? 0), 0);
     expect(total).toBe(schemes.length);
     expect(counts[PayForCategory.CARE_SERVICES]).toBe(2);

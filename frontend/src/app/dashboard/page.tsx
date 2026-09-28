@@ -70,10 +70,7 @@ export default function SchemesPage() {
   const statusCounts = useMemo(() => countByStatus(items), [items]);
   const bestMatches = useMemo(() => pickBestMatches(items), [items]);
   const allMatchesCount = statusCounts.likely + statusCounts.needs_answers;
-  const categoryCounts = useMemo(
-    () => countByCategory(items.map(({ scheme }) => scheme)),
-    [items],
-  );
+  const categoryCounts = useMemo(() => countByCategory(items), [items]);
   const areaItems = items.filter(
     ({ scheme }) => scheme.area.kind === "district",
   );
