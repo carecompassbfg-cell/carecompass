@@ -1,13 +1,23 @@
+import { ProfileQuestionId } from "../types/scheme";
 import { Citizenship, Residence, UserDataFull } from "../types/user";
 
 // Types
-interface EligibilityResult {
+
+// A fact the caregiver has not told us yet, with the entries in
+// additionalVerificationDetails that exist only because it is missing.
+export interface PendingQuestion {
+  id: ProfileQuestionId;
+  details: string[];
+}
+
+export interface EligibilityResult {
   id: string;
   criteriaCount: number;
   eligibleReasons: string[];
   ineligibleReasons?: string[];
   additionalVerificationDetails?: string[];
   otherDetails?: string[];
+  pendingQuestions?: PendingQuestion[];
 }
 
 enum EligibilityStatus {
@@ -127,6 +137,7 @@ export const checkHomeCaregivingGrant = (
 
   const eligibleReasons = [];
   const ineligibleReasons = [];
+  const pendingQuestions: PendingQuestion[] = [];
 
   if (user.care_recipient_citizenship === Citizenship.CITIZEN) {
     eligibleReasons.push(reasons[0]);
@@ -145,6 +156,10 @@ export const checkHomeCaregivingGrant = (
     additionalVerificationCriteria.push(reasons[3]);
     additionalVerificationCriteria.push(reasons[4]);
     additionalVerificationCriteria.push(reasons[5]);
+    pendingQuestions.push({
+      id: ProfileQuestionId.HOUSEHOLD_INCOME,
+      details: reasons.slice(2, 6),
+    });
   } else if (user.monthly_pchi === 0) {
     if (
       user.annual_property_value !== null &&
@@ -172,6 +187,7 @@ export const checkHomeCaregivingGrant = (
     eligibleReasons,
     ineligibleReasons,
     additionalVerificationDetails: additionalVerificationCriteria,
+    pendingQuestions,
   };
 };
 
@@ -238,6 +254,7 @@ export const checkMohLtcSubsidy = (user: UserDataFull): EligibilityResult => {
 
   const eligibleReasons: string[] = [];
   const ineligibleReasons: string[] = [];
+  const pendingQuestions: PendingQuestion[] = [];
 
   const isCitizen = user.care_recipient_citizenship === Citizenship.CITIZEN;
   const isPR = user.care_recipient_citizenship === Citizenship.PR;
@@ -250,9 +267,13 @@ export const checkMohLtcSubsidy = (user: UserDataFull): EligibilityResult => {
 
   if (isCitizen || isPR) {
     if (user.monthly_pchi === null) {
-      additionalVerificationCriteria.push(
-        "Subsidy level is based on monthly household per capita income (PCHI) — share your household information to see which tier you qualify for",
-      );
+      const pchiDetail =
+        "Subsidy level is based on monthly household per capita income (PCHI) — share your household information to see which tier you qualify for";
+      additionalVerificationCriteria.push(pchiDetail);
+      pendingQuestions.push({
+        id: ProfileQuestionId.HOUSEHOLD_INCOME,
+        details: [pchiDetail],
+      });
     } else {
       const citizenLabel = isCitizen
         ? "Singapore Citizen"
@@ -308,6 +329,7 @@ export const checkMohLtcSubsidy = (user: UserDataFull): EligibilityResult => {
     eligibleReasons,
     ineligibleReasons,
     additionalVerificationDetails: additionalVerificationCriteria,
+    pendingQuestions,
   };
 };
 
