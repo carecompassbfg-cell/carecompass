@@ -88,6 +88,9 @@ def run(
     extra_missing: Optional[List[dict]] = None,
 ) -> dict:
     """Classify and build every output. Pure apart from its inputs."""
+    problems = cat.validate_overrides(overrides)
+    if problems:
+        raise ValueError("overrides.json is invalid: " + "; ".join(problems))
     records = [cat.classify_record(raw, overrides) for raw in raw_details]
     previous_records = previous_state["records"] if previous_state else []
     cat.assign_ids(records, previous_records)
@@ -98,10 +101,12 @@ def run(
     )
     diff = cat.diff_runs(previous_records, state_records) if previous_state else None
     tier1 = cat.tier1_description_changes(previous_records, state_records)
+    to_review = cat.overrides_to_review(previous_records, state_records)
     has_changes = (
         previous_state is None
         or bool(diff and (diff["added"] or diff["removed"] or diff["changed"]))
         or any(m["changed"] for m in tier1)
+        or any(o["sourceChanged"] for o in to_review)
     )
     report_md = report.render_report(
         synced_on=synced_on,
@@ -110,6 +115,7 @@ def run(
         retired=retired,
         diff=diff,
         tier1_changes=tier1,
+        overrides_to_review=to_review,
         extra_includes=overrides.get("extra_includes", []),
         extra_missing=extra_missing or [],
         feedback=report.api_feedback(raw_details, raw_listed),

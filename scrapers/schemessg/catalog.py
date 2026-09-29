@@ -5,6 +5,7 @@ between runs. No network or file IO.
 """
 
 from collections import Counter
+from datetime import date
 from typing import Dict, List, Optional, Tuple
 
 import classify as c
@@ -25,6 +26,7 @@ DIFF_FIELDS = [
     "agency",
     "summary",
     "description",
+    "valueText",
     "eligibility",
     "whatItGives",
     "link",
@@ -35,9 +37,49 @@ DIFF_FIELDS = [
 ]
 
 
+# Text we may override by hand for a Tier 2 scheme. Each override needs a
+# "reason" and a "checked_on" date, and is flagged in the report when the
+# Schemes.sg text it replaces changes.
+CONTENT_FIELDS = ["summary", "description", "valueText"]
+
+# what_it_gives values too generic to be worth showing under "What you get"
+GENERIC_GIVES = {
+    "financial assistance (general)",
+    "information services",
+    "referral services",
+    "referral and information services",
+}
+
 # ---------------------------------------------------------------------------
 # Overrides
 # ---------------------------------------------------------------------------
+
+
+def validate_overrides(overrides: dict) -> List[str]:
+    """Problems with overrides.json; an empty list means it is valid."""
+    problems = []
+    for override in overrides.get("schemes", []):
+        label = override.get("match", {}).get("name") or override.get("match", {}).get("link")
+        if not label:
+            problems.append("A scheme override has no match name or link")
+            continue
+        if override.get("action") not in (None, "include", "exclude"):
+            problems.append(f"{label}: action must be include or exclude")
+        if any(field in override for field in CONTENT_FIELDS):
+            if not override.get("reason"):
+                problems.append(f"{label}: text overrides need a reason")
+            checked_on = override.get("checked_on")
+            if not checked_on or not _is_iso_date(checked_on):
+                problems.append(f"{label}: text overrides need checked_on as YYYY-MM-DD")
+    return problems
+
+
+def _is_iso_date(value: str) -> bool:
+    try:
+        date.fromisoformat(value)
+        return True
+    except (TypeError, ValueError):
+        return False
 
 
 def _matches(match: dict, record: dict, require_all: bool) -> bool:
@@ -138,6 +180,9 @@ def normalise_record(raw: dict) -> dict:
         "address": raw.get("address"),
         "normLink": c.normalise_link(raw.get("link")),
         "normName": c.normalise_name(raw.get("scheme")),
+        # Schemes.sg's own text, kept even when overrides.json replaces it
+        "sourceSummary": c.clean_text(raw.get("summary")),
+        "sourceDescription": c.clean_text(raw.get("description")),
     }
 
 
@@ -170,6 +215,15 @@ def classify_record(raw: dict, overrides: dict) -> dict:
         if override.get("area"):
             area = override["area"]
             notes.append("area set by override")
+        content_fields = [f for f in CONTENT_FIELDS if f in override]
+        if content_fields:
+            for field in content_fields:
+                record[field] = override[field]
+            record["contentOverride"] = {
+                "fields": content_fields,
+                "reason": override.get("reason"),
+                "checkedOn": override.get("checked_on"),
+            }
 
     if tier1_id:
         status = TIER1
@@ -283,7 +337,12 @@ def to_catalog_scheme(record: dict, synced_on: str, env: str) -> dict:
         "summary": record["summary"],
         "description": record["description"],
         **({"eligibility": record["eligibility"]} if record["eligibility"] else {}),
-        "whatYouGet": record["whatItGives"],
+        **({"valueText": record["valueText"]} if record.get("valueText") else {}),
+        "whatYouGet": [
+            item
+            for item in record["whatItGives"]
+            if item.strip().lower() not in GENERIC_GIVES
+        ],
         "payFor": record["payFor"],
         "area": record["area"],
         "link": record["link"],
@@ -333,7 +392,16 @@ def build_outputs(
 
 def state_record(record: dict) -> dict:
     """What we keep from each run to diff against next time."""
-    keys = ["id", "sourceId", "normLink", "normName", "tier1Id"] + DIFF_FIELDS
+    keys = [
+        "id",
+        "sourceId",
+        "normLink",
+        "normName",
+        "tier1Id",
+        "sourceSummary",
+        "sourceDescription",
+        "contentOverride",
+    ] + DIFF_FIELDS
     return {key: record.get(key) for key in keys}
 
 
@@ -379,6 +447,42 @@ def tier1_description_changes(previous: List[dict], current: List[dict]) -> List
                 and before.get("description") != record.get("description"),
                 "old": before.get("description") if before else None,
                 "new": record.get("description"),
+            }
+        )
+    return results
+
+
+# ---------------------------------------------------------------------------
+# Text overrides to review
+# ---------------------------------------------------------------------------
+
+
+def overrides_to_review(previous: List[dict], current: List[dict]) -> List[dict]:
+    """Every active text override, flagged when the Schemes.sg text it
+    replaces changed since the last run."""
+    prev_by_id = {r["id"]: r for r in previous}
+    results = []
+    for record in sorted(
+        (r for r in current if r.get("contentOverride")), key=lambda r: r["name"]
+    ):
+        before = prev_by_id.get(record["id"])
+        has_baseline = before is not None and "sourceSummary" in before
+        changed_fields = []
+        if has_baseline:
+            if before.get("sourceSummary") != record.get("sourceSummary"):
+                changed_fields.append("summary")
+            if before.get("sourceDescription") != record.get("sourceDescription"):
+                changed_fields.append("description")
+        results.append(
+            {
+                "name": record["name"],
+                "link": record["link"],
+                "override": record["contentOverride"],
+                "hasBaseline": has_baseline,
+                "sourceChanged": bool(changed_fields),
+                "changedFields": changed_fields,
+                "before": before if has_baseline else None,
+                "after": record,
             }
         )
     return results

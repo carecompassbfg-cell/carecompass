@@ -16,23 +16,22 @@ Synced on 2026-09-29 from the **dev** environment, category "Seniors & Caregivin
 
 ## Changes since the last run
 
-### Added (1)
+### Changed (1)
 
-- Medifund (published, medical_bills)
+- **South West Caregiver Support Fund**: summary, description
 
-### Changed (5)
+## Overrides to review
 
-- **Financial and Food Rations assistance (Temporary)**: status
-  - status: `unclassified` → `excluded`
-- **Financial Assistance and Food Relief**: status
-  - status: `unclassified` → `excluded`
-- **Financial Assistance Schemes & Food Vouchers**: status
-  - status: `unclassified` → `excluded`
-- **Mobile Access for Seniors**: status
-  - status: `unclassified` → `excluded`
-- **South West Caregiver Support Fund**: status, payFor
-  - status: `unclassified` → `published`
-  - payFor: `unclassified` → `monthly_payouts`
+Text we override by hand in overrides.json. When Schemes.sg changes the text we replaced, re-check the override and update `checked_on`.
+
+No Schemes.sg text behind an override changed.
+
+### South West Caregiver Support Fund
+
+- Overrides: summary, description, valueText
+- Reason: Schemes.sg says $800 (summary) and $500 (description); official South West CDC page says $1,000
+- Checked on: 2026-09-29
+- Status: Baseline recorded this run; changes are tracked from the next run
 
 ## Tier 1 matches
 

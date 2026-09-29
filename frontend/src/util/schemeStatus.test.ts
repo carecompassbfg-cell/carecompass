@@ -128,6 +128,13 @@ describe("getSchemeStatus", () => {
   });
 });
 
+const GENERIC_GIVES = [
+  "financial assistance (general)",
+  "information services",
+  "referral services",
+  "referral and information services",
+];
+
 describe("catalog files", () => {
   const payFor = Object.values(PayForCategory) as string[];
 
@@ -149,7 +156,13 @@ describe("catalog files", () => {
       expect(scheme.source).toBe("schemes_sg");
       expect(scheme.sourceId).toBeTruthy();
       expect(scheme.checkerId).toBeUndefined();
-      expect(scheme.valueText).toBeUndefined();
+      // valueText only comes from a reviewed override in overrides.json
+      if (scheme.valueText !== undefined) {
+        expect(scheme.valueText.length).toBeGreaterThan(0);
+      }
+      for (const item of scheme.whatYouGet) {
+        expect(GENERIC_GIVES).not.toContain(item.toLowerCase());
+      }
       expect(scheme.name.startsWith("[Sample]")).toBe(false);
       expect(payFor).toContain(scheme.payFor);
       expect(Number.isNaN(Date.parse(scheme.lastRefreshed))).toBe(false);

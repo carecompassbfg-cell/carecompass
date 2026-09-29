@@ -11,8 +11,7 @@
     "eligibility": "- Singapore Citizens or Permanent Residents born in 1980 or later are automatically covered from 1 October 2020 or when they turn 30, whichever is later.\n- Singapore Citizens or Permanent Residents born in 1979 or earlier can choose to join if they are not severely disabled.\n- Singapore Citizens or Permanent Residents born between 1970 and 1979, insured under ElderShield 400 and not severely disabled, will be auto-enrolled from December 2021.",
     "whatYouGet": [
       "Financial assistance for daily living expenses",
-      "Financial assistance for healthcare",
-      "Information services"
+      "Financial assistance for healthcare"
     ],
     "payFor": "monthly_payouts",
     "area": {
@@ -40,8 +39,7 @@
     "whatYouGet": [
       "Financial assistance for daily living expenses",
       "Financial assistance for healthcare",
-      "Helpline services",
-      "Referral services"
+      "Helpline services"
     ],
     "payFor": "monthly_payouts",
     "area": {
@@ -145,9 +143,7 @@
     "description": "- Individuals who are financially constrained or unemployed due to old age, sickness or disability, but are not eligible for government financial assistance.\n- Low-income families with young children and/or family members who are elderly, disabled, sick or have special needs.\n- Families which are adversely affected by unexpected circumstances, such as loss of breadwinner, permanent disability, etc.",
     "eligibility": "Applicants must be:\n- Individuals financially constrained or unemployed due to old age, sickness, or disability, and not eligible for government financial assistance.\n- Low-income families with young children and/or family members who are elderly, disabled, sick, or have special needs.\n- Families affected by unexpected circumstances (e.g., loss of breadwinner, permanent disability).\nApplicants are assessed through home visits every 6 months. Referrals accepted from hospitals, family service centres, grassroots organisations, and public agencies.",
     "whatYouGet": [
-      "Financial assistance (general)",
       "Financial assistance for daily living expenses",
-      "Referral services",
       "Casework",
       "Counselling"
     ],
@@ -171,12 +167,11 @@
     "tier": 2,
     "name": "South West Caregiver Support Fund",
     "agency": "South West District CDC",
-    "summary": "One-time $800 aid for South West caregivers.",
-    "description": "The South West Caregiver Support Fund is an interim one-time assistance of $500, to help caregivers defray self-care and caregiving expenses.",
+    "summary": "One-off cash to help caregivers in the South West District with caregiving costs.",
+    "description": "It gives a one-off $1,000 to help with self-care and caregiving expenses.",
     "eligibility": "- Resident of South West District\n- Applicant or immediate family member is a Singapore Citizen\n- Per Capita Household Income (PCHI) of $1,500 and below\n- Caregiver and Care Recipient must reside in the same household\n- Care Recipient requires assistance with at least 3 Activities of Daily Living (ADL): washing, feeding, dressing, toileting, moving",
-    "whatYouGet": [
-      "Financial assistance (general)"
-    ],
+    "valueText": "$1,000 one-off",
+    "whatYouGet": [],
     "payFor": "monthly_payouts",
     "area": {
       "kind": "district",
@@ -231,8 +226,7 @@
     "whatYouGet": [
       "Financial assistance for assistive technology and medical equipment",
       "Financial assistance for healthcare",
-      "Financial assistance for daily living expenses",
-      "Information services"
+      "Financial assistance for daily living expenses"
     ],
     "payFor": "equipment_home",
     "area": {
@@ -343,8 +337,7 @@
     "description": "Your loved one can be covered for standard medical and hospitalisation treatment at government or restructured hospitals, polyclinics and approved intermediate and long-term care services if they are sick and need financial assistance, using the Medical Fee Exemption Card.",
     "whatYouGet": [
       "Financial assistance for healthcare",
-      "Financial assistance for chronic or terminal illnesses",
-      "Information services"
+      "Financial assistance for chronic or terminal illnesses"
     ],
     "payFor": "medical_bills",
     "area": {
@@ -460,8 +453,7 @@
       "Financial assistance for chronic or terminal illnesses",
       "Transport subsidies",
       "Traditional Chinese Medicine (TCM)",
-      "Casework",
-      "Referral services"
+      "Casework"
     ],
     "payFor": "medical_bills",
     "area": {
@@ -487,7 +479,6 @@
     "description": "MRSS aims to help senior Singapore Citizens with lower retirement savings build up more. This will boost their monthly payouts in retirement. The Government will match every dollar of cash top-ups made to the RA of eligible members up to $600 per year.",
     "eligibility": "Eligibility is automatically assessed each year. Criteria: Singapore Citizen, age 55 and above as of 31 December of the assessment year (from 2026, also Singaporeans with disabilities below age 55), Retirement Account savings less than $106,500 (Basic Retirement Sum for 2025), average monthly income not more than $4,000, annual value of residence not more than $21,000. Must be a Singapore Citizen when the matching grant is credited. From 2025, no age cap (previously 70).",
     "whatYouGet": [
-      "Financial assistance (general)",
       "Financial planning and retirement support"
     ],
     "payFor": "tax_cpf",

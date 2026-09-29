@@ -37,7 +37,7 @@ pipenv run pytest                  # tests, no network
    - **relevance**: kept if `scheme_type` has "Caregiver Support", `who_is_it_for` has "Caregivers" or "Elderly with dementia", or it's money aimed at "Elderly"/"Low income elderly". Children/youth programmes and family-only items are dropped.
    - **payFor** (money only): scored from name, agency, `what_it_gives` and summary keywords. A category needs a clear lead; otherwise the scheme is `unclassified` and not published.
    - **area**: islandwide when `service_area` is empty, "No Service Boundaries" or "Singapore"; CDC funds use the CDC district; otherwise the `service_area` text. `planning_area` is the agency's office and is ignored.
-3. Applies `overrides.json`, gives each scheme a stable id and writes the outputs.
+3. Applies `overrides.json`, gives each scheme a stable id and writes the outputs. Generic `what_it_gives` values ("Financial assistance (general)", "Information services", "Referral services", "Referral and information services") are left out of "What you get".
 
 ## Outputs
 
@@ -78,4 +78,5 @@ Hand-edited and committed. Matches use the official link and/or the scheme name,
 - `action`: `include` forces a scheme to be kept, `exclude` drops it.
 - `payFor`: sets the category (and treats the scheme as money), which publishes an unclassified scheme.
 - `area`: `{ "kind": "islandwide" }` or `{ "kind": "district", "name": "..." }`.
+- `summary`, `description`, `valueText`: replace Schemes.sg's text for a Tier 2 scheme when it is wrong. These need a `reason` and a `checked_on` date (YYYY-MM-DD); the sync refuses to run without them. The Schemes.sg text is still recorded, and the report lists every text override under "Overrides to review", flagging it when the Schemes.sg text it replaces changes.
 - `extra_includes`: schemes outside the "Seniors & Caregiving" category. The sync lists the full catalogue (no category filter), matches each entry by normalised name or link (plus `agency` when given, to tell apart generic names), fetches its detail and classifies it like the rest, forced in with the given `payFor`/`area`. Entries that can't be found are flagged in the report.

@@ -158,6 +158,7 @@ def render_report(
     feedback: List[str],
     extra_includes: Optional[List[dict]] = None,
     extra_missing: Optional[List[dict]] = None,
+    overrides_to_review: Optional[List[dict]] = None,
 ) -> str:
     by_status = Counter(r["status"] for r in records)
     fetched = len(records) + len(retired)
@@ -210,6 +211,52 @@ def render_report(
                             f"`{after.get(field)}`"
                         )
             lines.append("")
+
+    # Text overrides
+    to_review = overrides_to_review or []
+    if to_review:
+        flagged = [o for o in to_review if o["sourceChanged"]]
+        lines += [
+            "## Overrides to review",
+            "",
+            "Text we override by hand in overrides.json. When Schemes.sg changes "
+            "the text we replaced, re-check the override and update `checked_on`.",
+            "",
+        ]
+        if not flagged:
+            lines += ["No Schemes.sg text behind an override changed.", ""]
+        for item in to_review:
+            override = item["override"]
+            if item["sourceChanged"]:
+                state = (
+                    "**Schemes.sg text changed since the last run: review this override** "
+                    f"({', '.join(item['changedFields'])})"
+                )
+            elif item["hasBaseline"]:
+                state = "Schemes.sg text unchanged"
+            else:
+                state = "Baseline recorded this run; changes are tracked from the next run"
+            lines += [
+                f"### {item['name']}",
+                "",
+                f"- Overrides: {', '.join(override['fields'])}",
+                f"- Reason: {override.get('reason')}",
+                f"- Checked on: {override.get('checkedOn')}",
+                f"- Status: {state}",
+                "",
+            ]
+            for field in item["changedFields"]:
+                key = "sourceSummary" if field == "summary" else "sourceDescription"
+                lines += [
+                    f"Schemes.sg {field} before:",
+                    "",
+                    _quote(item["before"].get(key)),
+                    "",
+                    f"Schemes.sg {field} now:",
+                    "",
+                    _quote(item["after"].get(key)),
+                    "",
+                ]
 
     # Tier 1
     lines += [

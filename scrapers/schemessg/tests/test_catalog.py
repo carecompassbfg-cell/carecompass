@@ -1,5 +1,7 @@
 import copy
 
+import pytest
+
 import catalog as cat
 import sync
 from conftest import make_raw
@@ -316,3 +318,78 @@ def test_diff_skips_fields_missing_from_last_state():
         del record["eligibility"]  # state written before the field existed
     after = state_of([make_raw(eligibility="New")], previous=before)
     assert cat.diff_runs(before, after)["changed"] == []
+
+
+# --- text overrides ----------------------------------------------------------
+
+TEXT_OVERRIDE = {
+    "match": {"name": "Example Caregiving Grant"},
+    "action": "include",
+    "summary": "Our summary.",
+    "description": "Our description.",
+    "valueText": "$1,000 one-off",
+    "reason": "Official page says $1,000",
+    "checked_on": "2026-09-29",
+}
+
+
+def with_text_override(**changes):
+    return {**OVERRIDES, "schemes": [{**TEXT_OVERRIDE, **changes}]}
+
+
+def test_text_override_needs_reason_and_checked_on():
+    assert cat.validate_overrides(with_text_override()) == []
+    missing_reason = with_text_override(reason="")
+    assert any("reason" in p for p in cat.validate_overrides(missing_reason))
+    bad_date = with_text_override(checked_on="29/09/2026")
+    assert any("checked_on" in p for p in cat.validate_overrides(bad_date))
+    with pytest.raises(ValueError):
+        sync.run([make_raw()], [], [], missing_reason, None, "2026-09-29", "dev")
+
+
+def test_text_override_replaces_text_and_keeps_the_source():
+    [record] = classify_all([make_raw(summary="Source summary")], overrides=with_text_override())
+    [item], _ = cat.build_outputs([record], "2026-09-29", "dev")
+    assert item["summary"] == "Our summary."
+    assert item["description"] == "Our description."
+    assert item["valueText"] == "$1,000 one-off"
+    assert record["sourceSummary"] == "Source summary"
+    assert record["contentOverride"]["checkedOn"] == "2026-09-29"
+
+
+def test_override_to_review_is_flagged_when_source_text_changes():
+    overrides = with_text_override()
+    first = sync.run([make_raw(summary="Was $800")], [], [], overrides, None, "2026-09-29", "dev")
+    same = sync.run([make_raw(summary="Was $800")], [], [], overrides, first["state"], "2026-10-06", "dev")
+    changed = sync.run([make_raw(summary="Now $900")], [], [], overrides, first["state"], "2026-10-06", "dev")
+    assert not same["has_changes"]
+    assert changed["has_changes"]
+    assert "review this override" in changed["report"]
+    assert "Now $900" in changed["report"]
+    assert "review this override" not in same["report"]
+
+
+def test_override_to_review_records_a_baseline_the_first_time():
+    [record] = classify_all([make_raw()], overrides=with_text_override())
+    [review] = cat.overrides_to_review([], [cat.state_record(record)])
+    assert not review["hasBaseline"] and not review["sourceChanged"]
+
+
+# --- what you get ------------------------------------------------------------
+
+
+def test_generic_what_it_gives_values_are_not_shown():
+    raw = make_raw(what_it_gives=[
+        "Financial assistance (general)", "Information services",
+        "Referral and information services", "Financial assistance for healthcare",
+    ])
+    [record] = classify_all([raw])
+    [item], _ = cat.build_outputs([record], "2026-09-29", "dev")
+    assert item["whatYouGet"] == ["Financial assistance for healthcare"]
+
+
+def test_what_you_get_is_empty_when_only_generic_values():
+    raw = make_raw(what_it_gives=["Financial assistance (general)", "Referral services"])
+    [record] = classify_all([raw])
+    [item], _ = cat.build_outputs([record], "2026-09-29", "dev")
+    assert item["whatYouGet"] == []
