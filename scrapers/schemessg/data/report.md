@@ -6,17 +6,33 @@ Synced on 2026-09-29 from the **dev** environment, category "Seniors & Caregivin
 
 | | Count |
 |---|---:|
-| Fetched | 146 |
-| Published (money, Tier 2) | 17 |
+| Fetched | 147 |
+| Published (money, Tier 2) | 19 |
 | Other services and programmes (`other.json`) | 71 |
-| Excluded | 49 |
-| Unclassified money (not published) | 5 |
+| Excluded | 53 |
+| Unclassified money (not published) | 0 |
 | Tier 1 matches (ours, not published) | 4 |
 | Retired or not found | 0 |
 
 ## Changes since the last run
 
-No changes.
+### Added (1)
+
+- Medifund (published, medical_bills)
+
+### Changed (5)
+
+- **Financial and Food Rations assistance (Temporary)**: status
+  - status: `unclassified` → `excluded`
+- **Financial Assistance and Food Relief**: status
+  - status: `unclassified` → `excluded`
+- **Financial Assistance Schemes & Food Vouchers**: status
+  - status: `unclassified` → `excluded`
+- **Mobile Access for Seniors**: status
+  - status: `unclassified` → `excluded`
+- **South West Caregiver Support Fund**: status, payFor
+  - status: `unclassified` → `published`
+  - payFor: `unclassified` → `monthly_payouts`
 
 ## Tier 1 matches
 
@@ -38,9 +54,15 @@ https://www.aic.sg/financial-assistance/foreign-domestic-worker-levy-concession 
 
 https://www.moh.gov.sg/seeking-healthcare/find-a-facility-or-service/mental-health-services/intermediate-and-long-term-care-services (no change)
 
-## Published schemes (17)
+## Extra includes from the full catalogue
 
-### Monthly payouts (6)
+Schemes outside the category that overrides.json asks for.
+
+- Medifund: Medifund (published)
+
+## Published schemes (19)
+
+### Cash support (7)
 
 | Scheme | Agency | Area |
 |---|---|---|
@@ -50,6 +72,7 @@ https://www.moh.gov.sg/seeking-healthcare/find-a-facility-or-service/mental-heal
 | [Interim Disability Assistance Programme for the Elderly (IDAPE)](https://www.moh.gov.sg/managing-expenses/schemes-and-subsidies/interim-disability-assistance-programme-for-the-elderly) | Ministry of Health (MOH) | Islandwide |
 | [Pioneer Generation Disability Assistance Scheme (PioneerDAS)](https://www.aic.sg/financial-assistance/pioneer-generation-disability-assistance-scheme) | Agency for Integrated Care | Islandwide |
 | [Public Assistance Programme](https://sbws.org.sg/en/services-affiliates/social-welfare-and-community-services/public-assistance-programme/) | Singapore Buddhist Welfare Service | Islandwide |
+| [South West Caregiver Support Fund](https://southwest.cdc.gov.sg/what-we-do/for-caregivers/csf/) | South West District CDC | South West District |
 
 ### Equipment and home (2)
 
@@ -64,13 +87,14 @@ https://www.moh.gov.sg/seeking-healthcare/find-a-facility-or-service/mental-heal
 |---|---|---|
 | [Singapore Red Cross' TransportAid](https://www.redcross.sg/get-assistance/transportaid.html) | Singapore Red Cross | Islandwide |
 
-### Medical bills (6)
+### Medical bills (7)
 
 | Scheme | Agency | Area |
 |---|---|---|
 | [Community Health Assist Scheme (CHAS)](https://www.chas.sg/) | Ministry of Health (MOH) | Islandwide |
 | [Medical Assistance](https://www.tzuchi.org.sg/en/our-missions/charity/medical-assistance/) | Buddhist Compassion Relief Tzu-Chi Foundation (Singapore) | Islandwide |
 | [Medical Fee Exemption Card (MFEC)](https://www.aic.sg/financial-assistance/medical-fee-exemption-card-mfec/) | Ministry of Social and Family Development (MSF), Ministry of Health (MOH), Agency for Integrated Care (AIC) | Islandwide |
+| [Medifund](https://www.aic.sg/financial-assistance/medifund) | Agency for Integrated Care | Islandwide |
 | [Merdeka Generation Package](https://www.moh.gov.sg/managing-expenses/schemes-and-subsidies/merdeka-generation-package) | Ministry of Health (MOH) | Islandwide |
 | [Pioneer Generation Package](https://www.moh.gov.sg/cost-financing/healthcare-schemes-subsidies/pioneer-generation-package) | Ministry of Health (MOH) | Islandwide |
 | [Viriya Elderly Medical Programme (VEMP)](https://viriya.org.sg/service/seniors/) | Viriya Community Services | Islandwide |
@@ -82,19 +106,11 @@ https://www.moh.gov.sg/seeking-healthcare/find-a-facility-or-service/mental-heal
 | [Matched Retirement Savings Scheme](https://www.cpf.gov.sg/member/growing-your-savings/saving-more-with-cpf/matching-grant-for-seniors-who-top-up) | Central Provident Fund (CPF) | Islandwide |
 | [Medisave Care](https://www.cpf.gov.sg/member/healthcare-financing/medisave-care-for-long-term-care-needs) | Central Provident Fund (CPF) | Islandwide |
 
-## Unclassified money schemes (5)
+## Unclassified money schemes (0)
 
 Financial help that doesn't map cleanly to one category, so it is not published. Set `payFor` in overrides.json to publish one.
 
-| Scheme | Agency | What it gives | Scores |
-|---|---|---|---|
-| [Financial and Food Rations assistance (Temporary)](https://www.bethelcs.org.sg/social-services/overview) | Bethel Social Services \| Bethel Community Services | Financial assistance (general), Food support, Casework, Referral services, Counselling, Community events, Healthcare (general/basic services), Traditional Chinese Medicine (TCM), Befriending services, Helpline services | - |
-| [Financial Assistance and Food Relief](https://catholicwelfare.org.sg/our-programmes-services/#:~:text=We%20provide%20financial%20assistance,%20food%20relief) | Catholic Welfare Services | Nursing home care, Social assistance, Shelters, Childcare, Youth programmes, Education support, Vocational training, Counselling, Casework, Befriending services, Financial assistance (general), Food support, Residential care/programmes, Referral services, Support groups | - |
-| [Financial Assistance Schemes & Food Vouchers](https://www.eurasians.sg/family-support/) | Eurasian Association Singapore | Financial assistance (general), Financial assistance for daily living expenses, Food support, Referral services, Counselling, Casework, Befriending services, Educational programmes, Social and community bonding | - |
-| [Mobile Access for Seniors](https://www.imda.gov.sg/programme-listing/Mobile-Access-for-Seniors) | Infocomm Media Development Authority (IMDA) | Financial assistance for mobile plans, Financial assistance for assistive technology and mobile devices, Information services | - |
-| [South West Caregiver Support Fund](https://southwest.cdc.gov.sg/what-we-do/for-caregivers/csf/) | South West District CDC | Financial assistance (general) | - |
-
-## Excluded (49)
+## Excluded (53)
 
 | Scheme | Agency | Kind | Reason |
 |---|---|---|---|
@@ -147,6 +163,10 @@ Financial help that doesn't map cleanly to one category, so it is not published.
 | The Saturday Movement | The Saturday Movement | service_or_programme | Not aimed at caregivers or seniors with a care need |
 | Traditional Chinese Medicine Free Clinic | Buddhist Compassion Relief Tzu-Chi Foundation (Singapore) | service_or_programme | Not aimed at caregivers or seniors with a care need |
 | Tzu Chi Free Clinic | Tzu Chi Singapore | service_or_programme | Not aimed at caregivers or seniors with a care need |
+| Financial and Food Rations assistance (Temporary) | Bethel Social Services \| Bethel Community Services | money | Override: General cash and food aid (Bethel Community Services), not specific to caregiving |
+| Financial Assistance and Food Relief | Catholic Welfare Services | money | Override: General cash and food aid (Catholic Welfare Services), not specific to caregiving |
+| Financial Assistance Schemes & Food Vouchers | Eurasian Association Singapore | money | Override: General cash and food aid (Eurasian Association), not specific to caregiving |
+| Mobile Access for Seniors | Infocomm Media Development Authority (IMDA) | money | Override: Subsidised phone plans and devices, not caregiving costs |
 
 ## Retired or not found (0)
 
@@ -154,13 +174,13 @@ None.
 
 ## Feedback for Schemes.sg
 
-- `eligibility` is filled in for 117 of 146 schemes, although it was described as null everywhere. We don't publish it yet.
-- `status` is null for 143 of 146 schemes (other values: {'active': 3}). Is null the same as active?
+- `eligibility` is filled in for 118 of 147 schemes, although it was described as null everywhere. We don't publish it yet.
+- `status` is null for 144 of 147 schemes (other values: {'active': 3}). Is null the same as active?
 - List responses include a `service_area` key, but it is always null; the value only appears in detail responses.
 - `what_it_gives` has items split inside parentheses for 2 scheme(s), e.g. "Benefits and perks for PWDs (transport", "discounts", "facilities)". We rejoin them. Affected: CARA Membership, Merdeka Generation Package.
 - 8 official link(s) are shared by more than one scheme (usually an agency's general services page), so a link alone can't identify a scheme. Shared: carecorner.org.sg/services/caregiver-support, lakeside.org.sg/our-services/seniors-services, mindfull.org.sg/caregiver-education, onehopecentre.org/help-recovery-programmes, sasco.org.sg/our-services, sreenarayanamission.org/our-services/community-programmes, touch.org.sg/get-assistance/caregivers.html, tzuchi.org.sg/en/our-missions/medicine/traditional-chinese-medicine-free-clinic.
 - Several schemes share a generic name ("Active Ageing Centre" x5, "Active Ageing Centres" x4, "Pertapis Centre for Women and Girls" x2); including the operator in the name would help users.
-- `phone` has mixed types ({'NoneType': 117, 'str': 21, 'list': 8}): sometimes a string, sometimes a list.
+- `phone` has mixed types ({'NoneType': 118, 'str': 21, 'list': 8}): sometimes a string, sometimes a list.
 - `who_is_it_for` values differ only by case: Caregivers, Families, Persons with Disabilities (PWDs), Persons with disabilities (PWDs), caregivers, families.
 - The same agency is written in different ways: Alzheimer's Disease Association / Alzheimers' Disease Association; BCARE / Bcare; Loving Heart Multi Service Centre / Loving Heart Multi-Service Centre; TOUCH Community Services / Touch Community Services.
 - In a category-filtered list, `scheme_type` only contains that category's types, so every scheme needs a detail call to get its full `scheme_type`.

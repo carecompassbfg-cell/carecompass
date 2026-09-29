@@ -31,7 +31,7 @@ pipenv run pytest                  # tests, no network
 
 ## What it does
 
-1. Lists every scheme in the category, then fetches each one's detail (the filtered list trims `scheme_type` and has no `service_area`). Retired schemes are skipped and listed in the report. Requests are spaced out and retried on 429/5xx with backoff, respecting `Retry-After`.
+1. Lists every scheme in the category (plus any `extra_includes` from the full catalogue), then fetches each one's detail (the filtered list trims `scheme_type` and has no `service_area`). Retired schemes are skipped and listed in the report. Requests are spaced out and retried on 429/5xx with backoff, respecting `Retry-After`.
 2. Classifies each scheme (`classify.py`):
    - **kind**: `money` when financial help is the point of the scheme (at least a third of `what_it_gives` is financial help, or the name says grant/fund/subsidy and it lists financial help). Providers that list financial help as one item among many are `service_or_programme`.
    - **relevance**: kept if `scheme_type` has "Caregiver Support", `who_is_it_for` has "Caregivers" or "Elderly with dementia", or it's money aimed at "Elderly"/"Low income elderly". Children/youth programmes and family-only items are dropped.
@@ -43,7 +43,7 @@ pipenv run pytest                  # tests, no network
 
 | File | |
 |---|---|
-| `frontend/public/data/catalog.schemessg.json` | Published Tier 2 money schemes as `CatalogScheme[]`. |
+| `frontend/public/data/catalog.schemessg.json` | Published Tier 2 money schemes as `CatalogScheme[]`, including Schemes.sg's `eligibility` text when it has one. |
 | `data/other.json` | Relevant services and programmes, for Care services and Help and support later. Not used by the frontend yet. |
 | `data/report.md` | Review report: counts, published by category, unclassified, excluded with reasons, retired, Tier 1 description changes, changes since the last run and feedback for Schemes.sg. |
 | `data/state.json` | This run's normalised records, used to diff the next run. |
@@ -65,7 +65,11 @@ Hand-edited and committed. Matches use the official link and/or the scheme name,
   ],
   "schemes": [
     { "match": { "name": "Mobile Access for Seniors" }, "action": "exclude", "reason": "Phone plans, not care costs" },
-    { "match": { "link": "https://southwest.cdc.gov.sg/what-we-do/for-caregivers/csf/" }, "action": "include", "payFor": "monthly_payouts" }
+    { "match": { "name": "South West Caregiver Support Fund" }, "action": "include", "payFor": "monthly_payouts",
+      "area": { "kind": "district", "name": "South West District" } }
+  ],
+  "extra_includes": [
+    { "name": "Medifund", "agency": "Agency for Integrated Care", "payFor": "medical_bills" }
   ]
 }
 ```
@@ -74,3 +78,4 @@ Hand-edited and committed. Matches use the official link and/or the scheme name,
 - `action`: `include` forces a scheme to be kept, `exclude` drops it.
 - `payFor`: sets the category (and treats the scheme as money), which publishes an unclassified scheme.
 - `area`: `{ "kind": "islandwide" }` or `{ "kind": "district", "name": "..." }`.
+- `extra_includes`: schemes outside the "Seniors & Caregiving" category. The sync lists the full catalogue (no category filter), matches each entry by normalised name or link (plus `agency` when given, to tell apart generic names), fetches its detail and classifies it like the rest, forced in with the given `payFor`/`area`. Entries that can't be found are flagged in the report.

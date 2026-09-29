@@ -22,5 +22,54 @@
       "link": "https://www.moh.gov.sg/seeking-healthcare/find-a-facility-or-service/mental-health-services/intermediate-and-long-term-care-services"
     }
   ],
-  "schemes": []
+  "schemes": [
+    {
+      "match": {
+        "name": "South West Caregiver Support Fund"
+      },
+      "action": "include",
+      "payFor": "monthly_payouts",
+      "area": {
+        "kind": "district",
+        "name": "South West District"
+      },
+      "reason": "One-off cash for caregivers in the South West District"
+    },
+    {
+      "match": {
+        "name": "Mobile Access for Seniors"
+      },
+      "action": "exclude",
+      "reason": "Subsidised phone plans and devices, not caregiving costs"
+    },
+    {
+      "match": {
+        "name": "Financial Assistance Schemes & Food Vouchers"
+      },
+      "action": "exclude",
+      "reason": "General cash and food aid (Eurasian Association), not specific to caregiving"
+    },
+    {
+      "match": {
+        "name": "Financial Assistance and Food Relief"
+      },
+      "action": "exclude",
+      "reason": "General cash and food aid (Catholic Welfare Services), not specific to caregiving"
+    },
+    {
+      "match": {
+        "name": "Financial and Food Rations assistance (Temporary)"
+      },
+      "action": "exclude",
+      "reason": "General cash and food aid (Bethel Community Services), not specific to caregiving"
+    }
+  ],
+  "extra_includes": [
+    {
+      "name": "Medifund",
+      "agency": "Agency for Integrated Care",
+      "payFor": "medical_bills",
+      "reason": "Safety net for medical bills; listed outside Seniors & Caregiving"
+    }
+  ]
 }

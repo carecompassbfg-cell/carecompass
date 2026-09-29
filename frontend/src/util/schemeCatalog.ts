@@ -29,10 +29,10 @@ export const PAY_FOR_META: Record<PayForCategory, PayForMeta> = {
     icon: "cat-care-services",
   },
   [PayForCategory.MONTHLY_PAYOUTS]: {
-    label: "Monthly payouts",
-    description: "Regular cash for caregiving costs",
-    title: "Monthly payouts",
-    pageDescription: "Regular cash to help with the cost of caregiving",
+    label: "Cash support",
+    description: "Monthly or one-off cash for caregiving costs",
+    title: "Cash support",
+    pageDescription: "Monthly or one-off cash for caregiving costs",
     icon: "cat-monthly-payouts",
   },
   [PayForCategory.HELPER_COSTS]: {

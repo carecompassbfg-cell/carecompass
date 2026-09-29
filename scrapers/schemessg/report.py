@@ -8,7 +8,7 @@ import classify as c
 
 PAY_FOR_LABELS = {
     "care_services": "Care services",
-    "monthly_payouts": "Monthly payouts",
+    "monthly_payouts": "Cash support",
     "helper_costs": "Helper costs",
     "caregiver_courses": "Caregiver courses",
     "equipment_home": "Equipment and home",
@@ -156,6 +156,8 @@ def render_report(
     diff: Optional[dict],
     tier1_changes: List[dict],
     feedback: List[str],
+    extra_includes: Optional[List[dict]] = None,
+    extra_missing: Optional[List[dict]] = None,
 ) -> str:
     by_status = Counter(r["status"] for r in records)
     fetched = len(records) + len(retired)
@@ -233,6 +235,24 @@ def render_report(
         ]
         if match["changed"]:
             lines += ["Old:", "", _quote(match["old"]), "", "New:", "", _quote(match["new"]), ""]
+
+    # Extra includes
+    if extra_includes:
+        missing_names = {e.get("name") or e.get("link") for e in extra_missing or []}
+        lines += [
+            "## Extra includes from the full catalogue",
+            "",
+            "Schemes outside the category that overrides.json asks for.",
+            "",
+        ]
+        for entry in extra_includes:
+            label = entry.get("name") or entry.get("link")
+            found = [r for r in records if cat.extra_include_matches(entry, r)]
+            if label in missing_names or not found:
+                lines.append(f"- {label}: **not found** in the full catalogue")
+            else:
+                lines += [f"- {label}: {r['name']} ({r['status']})" for r in found]
+        lines.append("")
 
     # Published
     published = [r for r in records if r["status"] == cat.PUBLISHED]

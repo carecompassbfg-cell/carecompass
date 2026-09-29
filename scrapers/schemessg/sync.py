@@ -85,6 +85,7 @@ def run(
     previous_state: Optional[dict],
     synced_on: str,
     env: str,
+    extra_missing: Optional[List[dict]] = None,
 ) -> dict:
     """Classify and build every output. Pure apart from its inputs."""
     records = [cat.classify_record(raw, overrides) for raw in raw_details]
@@ -109,6 +110,8 @@ def run(
         retired=retired,
         diff=diff,
         tier1_changes=tier1,
+        extra_includes=overrides.get("extra_includes", []),
+        extra_missing=extra_missing or [],
         feedback=report.api_feedback(raw_details, raw_listed),
     )
     return {
@@ -137,15 +140,33 @@ def main() -> int:
 
     client = api.SchemesSgClient(settings["api_key"], settings["base_url"])
     print(f"Fetching schemes from the {settings['env']} environment...")
-    raw_listed, raw_details, retired = api.fetch_all(client)
-    print(f"Fetched {len(raw_listed)} schemes ({len(retired)} retired or missing).")
+    overrides = read_json(OVERRIDES_FILE, {})
+    raw_listed = list(client.list_schemes())
+    raw_details, retired = api.fetch_details(client, raw_listed)
+
+    # overrides.json extra_includes: schemes outside the category, found in
+    # the full catalogue
+    extra_missing: List[dict] = []
+    if overrides.get("extra_includes"):
+        full_catalogue = list(client.list_schemes(category=None))
+        known_ids = {item["scheme_id"] for item in raw_listed}
+        extra_ids, extra_missing = cat.match_extra_includes(
+            overrides, full_catalogue, known_ids
+        )
+        extra_listed = [i for i in full_catalogue if i["scheme_id"] in extra_ids]
+        extra_details, extra_retired = api.fetch_details(client, extra_listed)
+        raw_details += extra_details
+        retired += extra_retired
+        print(f"Fetched {len(extra_details)} extra include(s) from the full catalogue.")
+    print(f"Fetched {len(raw_details) + len(retired)} schemes ({len(retired)} retired or missing).")
 
     synced_on = datetime.now(SINGAPORE).date().isoformat()
     result = run(
         raw_details=raw_details,
         raw_listed=raw_listed,
         retired=retired,
-        overrides=read_json(OVERRIDES_FILE, {}),
+        overrides=overrides,
+        extra_missing=extra_missing,
         previous_state=read_json(STATE_FILE, None),
         synced_on=synced_on,
         env=settings["env"],

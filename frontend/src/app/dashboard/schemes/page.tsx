@@ -22,6 +22,33 @@ import {
   SOURCE_LABELS,
 } from "@/util/schemeCatalog";
 
+// Collapsible eligibility text. Tier 2 text comes from Schemes.sg, so it
+// carries a note saying so.
+function FullEligibility({
+  content,
+  note,
+}: {
+  content: string;
+  note?: string;
+}) {
+  return (
+    <details className="group border-t border-gray-200 pt-3">
+      <summary
+        className={`flex min-h-11 cursor-pointer list-none items-center text-sm font-semibold text-interaction-links-default [&::-webkit-details-marker]:hidden ${FOCUS_RING}`}
+      >
+        <span className="flex-1">Full eligibility</span>
+        <SchemeIcon
+          name="chevron-link"
+          size={16}
+          className="transition-transform group-open:rotate-90"
+        />
+      </summary>
+      {note && <p className="pb-2 text-xs text-gray-600">{note}</p>}
+      <CustomMarkdown content={content} />
+    </details>
+  );
+}
+
 function ChecklistRow({
   icon,
   title,
@@ -190,6 +217,12 @@ function SchemeDetail() {
               Check the official page
               <span className="sr-only">(opens in a new tab)</span>
             </a>
+            {scheme.eligibility && (
+              <FullEligibility
+                content={scheme.eligibility}
+                note="Eligibility as described by Schemes.sg"
+              />
+            )}
           </>
         ) : (
           <>
@@ -247,19 +280,7 @@ function SchemeDetail() {
             )}
 
             {scheme.eligibility && (
-              <details className="group border-t border-gray-200 pt-3">
-                <summary
-                  className={`flex min-h-11 cursor-pointer list-none items-center text-sm font-semibold text-interaction-links-default [&::-webkit-details-marker]:hidden ${FOCUS_RING}`}
-                >
-                  <span className="flex-1">Full eligibility</span>
-                  <SchemeIcon
-                    name="chevron-link"
-                    size={16}
-                    className="transition-transform group-open:rotate-90"
-                  />
-                </summary>
-                <CustomMarkdown content={scheme.eligibility} />
-              </details>
+              <FullEligibility content={scheme.eligibility} />
             )}
           </>
         )}
@@ -290,7 +311,7 @@ function SchemeDetail() {
         <span>
           {scheme.tier === 1
             ? `Reviewed by CareCompass on ${formatDate(scheme.lastRefreshed)}.`
-            : `From ${SOURCE_LABELS[scheme.source]}, last refreshed ${formatDate(scheme.lastRefreshed)}.`}
+            : `From ${SOURCE_LABELS[scheme.source]} · Info last updated ${formatDate(scheme.lastRefreshed)}`}
         </span>
       </p>
 

@@ -64,10 +64,13 @@ class SchemesSgClient:
                 self._sleep(_retry_delay(None, attempt))
         raise ApiError(f"GET {path} failed")  # pragma: no cover
 
-    def list_schemes(self, category: str = CATEGORY) -> Iterator[dict]:
+    def list_schemes(self, category: Optional[str] = CATEGORY) -> Iterator[dict]:
+        """Every scheme in a category, or the full catalogue when None."""
         cursor: Optional[str] = None
         while True:
-            query: Dict[str, object] = {"category": category, "limit": PAGE_SIZE}
+            query: Dict[str, object] = {"limit": PAGE_SIZE}
+            if category:
+                query["category"] = category
             if cursor:
                 query["cursor"] = cursor
             status, body = self._request(
@@ -123,17 +126,18 @@ def _retry_delay(retry_after: Optional[str], attempt: int) -> float:
     return float(min(2**attempt, 60))
 
 
-def fetch_all(client: SchemesSgClient) -> Tuple[List[dict], List[dict], List[dict]]:
-    """Every scheme in the category with its detail record.
+def fetch_details(
+    client: SchemesSgClient, listed_items: List[dict]
+) -> Tuple[List[dict], List[dict]]:
+    """Detail records for listed schemes. Returns (details, retired).
 
-    Returns (listed, details, retired). scheme_type and service_area come from the
-    detail response because the filtered list trims scheme_type to the
-    category's own types and leaves service_area empty.
+    scheme_type and service_area come from the detail response because the
+    filtered list trims scheme_type to the category's own types and leaves
+    service_area empty.
     """
-    listed_all = list(client.list_schemes())
     details: List[dict] = []
     retired: List[dict] = []
-    for listed in listed_all:
+    for listed in listed_items:
         outcome, body = client.get_scheme(listed["scheme_id"])
         if outcome == "ok":
             details.append(body)
@@ -147,4 +151,4 @@ def fetch_all(client: SchemesSgClient) -> Tuple[List[dict], List[dict], List[dic
                     "merged_into": merged_into(body),
                 }
             )
-    return listed_all, details, retired
+    return details, retired

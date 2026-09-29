@@ -25,6 +25,7 @@ DIFF_FIELDS = [
     "agency",
     "summary",
     "description",
+    "eligibility",
     "whatItGives",
     "link",
     "kind",
@@ -56,6 +57,53 @@ def find_override(overrides: dict, record: dict) -> Optional[dict]:
         if _matches(override.get("match", {}), record, require_all=True):
             return override
     return None
+
+
+def extra_include_matches(entry: dict, record: dict) -> bool:
+    """An extra include matches on name or link; a given agency must also
+    match, to pick the right scheme when a name is generic."""
+    if not _matches(entry, record, require_all=False):
+        return False
+    agency = c.normalise_name(entry.get("agency"))
+    return not agency or agency in c.normalise_name(record.get("agency"))
+
+
+def find_extra_include(overrides: dict, record: dict) -> Optional[dict]:
+    for entry in overrides.get("extra_includes", []):
+        if extra_include_matches(entry, record):
+            return entry
+    return None
+
+
+def match_extra_includes(
+    overrides: dict, listed: List[dict], known_ids: set
+) -> Tuple[List[str], List[dict]]:
+    """Find overrides.json extra_includes in the full (unfiltered) catalogue.
+
+    Returns (scheme_ids to fetch, entries not found). Schemes already in the
+    category are not fetched twice.
+    """
+    to_fetch: List[str] = []
+    missing: List[dict] = []
+    for entry in overrides.get("extra_includes", []):
+        found = [
+            item
+            for item in listed
+            if extra_include_matches(
+                entry,
+                {
+                    "normLink": c.normalise_link(item.get("link")),
+                    "normName": c.normalise_name(item.get("scheme")),
+                    "agency": item.get("agency"),
+                },
+            )
+        ]
+        if not found:
+            missing.append(entry)
+        for item in found:
+            if item["scheme_id"] not in known_ids and item["scheme_id"] not in to_fetch:
+                to_fetch.append(item["scheme_id"])
+    return to_fetch, missing
 
 
 def find_tier1_match(overrides: dict, record: dict) -> Optional[str]:
@@ -103,6 +151,10 @@ def classify_record(raw: dict, overrides: dict) -> dict:
 
     tier1_id = find_tier1_match(overrides, record)
     override = find_override(overrides, record)
+    extra = find_extra_include(overrides, record)
+    if extra and not override:
+        override = {**extra, "action": "include"}
+        override.setdefault("reason", "extra include from the full catalogue")
     if override:
         action = override.get("action")
         if action == "exclude":
@@ -230,6 +282,7 @@ def to_catalog_scheme(record: dict, synced_on: str, env: str) -> dict:
         "agency": record["agency"],
         "summary": record["summary"],
         "description": record["description"],
+        **({"eligibility": record["eligibility"]} if record["eligibility"] else {}),
         "whatYouGet": record["whatItGives"],
         "payFor": record["payFor"],
         "area": record["area"],
@@ -298,7 +351,11 @@ def diff_runs(previous: List[dict], current: List[dict]) -> dict:
     changed = []
     for record_id in sorted(curr_by_id.keys() & prev_by_id.keys()):
         before, after = prev_by_id[record_id], curr_by_id[record_id]
-        fields = [f for f in DIFF_FIELDS if before.get(f) != after.get(f)]
+        # Fields missing from last run's state (added to the sync since) are
+        # skipped, so adding a field doesn't flag every scheme as changed.
+        fields = [
+            f for f in DIFF_FIELDS if f in before and before.get(f) != after.get(f)
+        ]
         if fields:
             changed.append({"before": before, "after": after, "fields": fields})
     return {"added": added, "removed": removed, "changed": changed}

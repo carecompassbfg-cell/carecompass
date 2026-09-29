@@ -254,3 +254,65 @@ def test_report_mentions_retired_and_feedback():
     assert "Old Grant (retired, merged into new)" in result["report"]
     assert "## Feedback for Schemes.sg" in result["report"]
     assert "`eligibility` is filled in" in result["report"]
+
+
+# --- extra includes ----------------------------------------------------------
+
+EXTRA = {
+    **OVERRIDES,
+    "extra_includes": [
+        {"name": "Medifund", "agency": "Agency for Integrated Care", "payFor": "medical_bills"}
+    ],
+}
+
+
+def test_extra_includes_are_found_in_the_full_catalogue_by_name_and_agency():
+    listed = [
+        {"scheme_id": "m1", "scheme": "MediFund", "agency": "Agency for Integrated Care",
+         "link": "https://www.aic.sg/financial-assistance/medifund"},
+        {"scheme_id": "m2", "scheme": "Medifund", "agency": "Some Hospital", "link": "https://h.sg/mf"},
+        {"scheme_id": "x", "scheme": "Other", "agency": "AIC", "link": "https://aic.sg/other"},
+    ]
+    to_fetch, missing = cat.match_extra_includes(EXTRA, listed, known_ids=set())
+    assert to_fetch == ["m1"] and missing == []
+
+
+def test_extra_includes_skip_schemes_already_in_the_category_and_report_missing():
+    listed = [{"scheme_id": "m1", "scheme": "Medifund", "agency": "Agency for Integrated Care", "link": ""}]
+    assert cat.match_extra_includes(EXTRA, listed, known_ids={"m1"}) == ([], [])
+    to_fetch, missing = cat.match_extra_includes(EXTRA, [], known_ids=set())
+    assert to_fetch == [] and missing[0]["name"] == "Medifund"
+
+
+def test_extra_include_is_published_with_its_pay_for():
+    raw = make_raw(
+        scheme="Medifund",
+        agency="Agency for Integrated Care",
+        who_is_it_for=["Low income"],
+        scheme_type=["Financial Assistance", "Healthcare"],
+        what_it_gives=["Financial assistance for healthcare", "Casework", "Counselling", "Referral services"],
+        link="https://www.aic.sg/financial-assistance/medifund",
+    )
+    record = cat.classify_record(raw, EXTRA)
+    assert record["status"] == cat.PUBLISHED
+    assert record["payFor"] == "medical_bills"
+
+
+# --- eligibility -------------------------------------------------------------
+
+
+def test_eligibility_is_published_when_present():
+    [record] = classify_all([make_raw(eligibility="Singapore Citizens\r\naged 65+")])
+    [item], _ = cat.build_outputs([record], "2026-09-29", "dev")
+    assert item["eligibility"] == "Singapore Citizens\naged 65+"
+    [record] = classify_all([make_raw(eligibility=None)])
+    [item], _ = cat.build_outputs([record], "2026-09-29", "dev")
+    assert "eligibility" not in item
+
+
+def test_diff_skips_fields_missing_from_last_state():
+    before = state_of([make_raw(eligibility="Old")])
+    for record in before:
+        del record["eligibility"]  # state written before the field existed
+    after = state_of([make_raw(eligibility="New")], previous=before)
+    assert cat.diff_runs(before, after)["changed"] == []
