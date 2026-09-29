@@ -1,0 +1,79 @@
+{
+  "_help": "Hand-edited. Matches use the official link and/or scheme name (normalised), never Schemes.sg IDs, because IDs differ between dev and prod. See README.md.",
+  "tier1_matches": [
+    {
+      "tier1_id": "HOME-CAREGIVING-GRANT",
+      "name": "Home Caregiving Grant (HCG)",
+      "link": "https://www.aic.sg/financial-assistance/home-caregiving-grant"
+    },
+    {
+      "tier1_id": "CAREGIVERS-TRAINING-GRANT",
+      "name": "Caregivers Training Grant (CTG)",
+      "link": "https://aic.sg/financial-assistance/caregivers-training-grant"
+    },
+    {
+      "tier1_id": "MIGRANT-DOMESTIC-WORKER-LEVY",
+      "name": "Migrant Domestic Worker (MDW) Levy Concession For Persons With Disabilities",
+      "link": "https://www.aic.sg/financial-assistance/foreign-domestic-worker-levy-concession"
+    },
+    {
+      "tier1_id": "MOH-NR-LTC-SUBSIDY",
+      "name": "Subsidies for Government-Funded Intermediate and Long Term Care (ILTC) Services",
+      "link": "https://www.moh.gov.sg/seeking-healthcare/find-a-facility-or-service/mental-health-services/intermediate-and-long-term-care-services"
+    }
+  ],
+  "schemes": [
+    {
+      "match": {
+        "name": "South West Caregiver Support Fund"
+      },
+      "action": "include",
+      "payFor": "monthly_payouts",
+      "area": {
+        "kind": "district",
+        "name": "South West District"
+      },
+      "reason": "Schemes.sg says $800 (summary) and $500 (description); official South West CDC page says $1,000",
+      "summary": "One-off cash to help caregivers in the South West District with caregiving costs.",
+      "valueText": "$1,000 one-off",
+      "description": "It gives a one-off $1,000 to help with self-care and caregiving expenses.",
+      "checked_on": "2026-09-29"
+    },
+    {
+      "match": {
+        "name": "Mobile Access for Seniors"
+      },
+      "action": "exclude",
+      "reason": "Subsidised phone plans and devices, not caregiving costs"
+    },
+    {
+      "match": {
+        "name": "Financial Assistance Schemes & Food Vouchers"
+      },
+      "action": "exclude",
+      "reason": "General cash and food aid (Eurasian Association), not specific to caregiving"
+    },
+    {
+      "match": {
+        "name": "Financial Assistance and Food Relief"
+      },
+      "action": "exclude",
+      "reason": "General cash and food aid (Catholic Welfare Services), not specific to caregiving"
+    },
+    {
+      "match": {
+        "name": "Financial and Food Rations assistance (Temporary)"
+      },
+      "action": "exclude",
+      "reason": "General cash and food aid (Bethel Community Services), not specific to caregiving"
+    }
+  ],
+  "extra_includes": [
+    {
+      "name": "Medifund",
+      "agency": "Agency for Integrated Care",
+      "payFor": "medical_bills",
+      "reason": "Safety net for medical bills; listed outside Seniors & Caregiving"
+    }
+  ]
+}

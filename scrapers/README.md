@@ -5,3 +5,4 @@ The scrapers are currently just simple scripts which are running on-demand local
 ### List of scrapers
 - dementiahub
 - sgw (supportgowhere), for schemes and dementia day care centres
+- schemessg (Schemes.sg partner API), for Tier 2 financial schemes; runs weekly via GitHub Actions

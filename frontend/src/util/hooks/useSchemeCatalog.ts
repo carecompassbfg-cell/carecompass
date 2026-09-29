@@ -6,8 +6,16 @@ import { UserData } from "@/types/user";
 import { SchemeWithStatus } from "@/util/schemeCatalog";
 import { getSchemeStatus } from "@/util/schemeStatus";
 
-// TODO(schemes): switch to the real catalog endpoint once it exists
-const CATALOG_URL = "/data/catalog.sample.json";
+// Tier 1 schemes we maintain, and Tier 2 schemes from the weekly Schemes.sg
+// sync (scrapers/schemessg)
+const TIER1_URL = "/data/catalog.tier1.json";
+const SCHEMESSG_URL = "/data/catalog.schemessg.json";
+
+const fetchCatalog = async (url: string): Promise<CatalogScheme[]> => {
+  const response = await fetch(url);
+  if (!response.ok) throw new Error(`${url}: HTTP ${response.status}`);
+  return response.json();
+};
 
 // Loads the scheme catalog and the signed-in user's profile, and works out
 // each scheme's status. Signed-out users get getSchemeStatus(scheme, null).
@@ -22,16 +30,24 @@ export default function useSchemeCatalog() {
   const [userLoadError, setUserLoadError] = useState(false);
 
   useEffect(() => {
-    fetch(CATALOG_URL)
-      .then((response) => {
-        if (!response.ok) throw new Error(`HTTP ${response.status}`);
-        return response.json() as Promise<CatalogScheme[]>;
-      })
-      .then(setCatalog)
-      .catch((error) => {
-        console.error(error);
+    Promise.allSettled([
+      fetchCatalog(TIER1_URL),
+      fetchCatalog(SCHEMESSG_URL),
+    ]).then(([tier1, schemesSg]) => {
+      if (tier1.status === "rejected") {
+        console.error(tier1.reason);
         setCatalogError(true);
-      });
+        return;
+      }
+      // Tier 1 still shows if the Schemes.sg file fails to load
+      if (schemesSg.status === "rejected") {
+        console.error(schemesSg.reason);
+      }
+      setCatalog([
+        ...tier1.value,
+        ...(schemesSg.status === "fulfilled" ? schemesSg.value : []),
+      ]);
+    });
   }, []);
 
   const refreshUser = useCallback(async () => {
