@@ -1,0 +1,26 @@
+{
+  "_help": "Hand-edited. Matches use the official link and/or scheme name (normalised), never Schemes.sg IDs, because IDs differ between dev and prod. See README.md.",
+  "tier1_matches": [
+    {
+      "tier1_id": "HOME-CAREGIVING-GRANT",
+      "name": "Home Caregiving Grant (HCG)",
+      "link": "https://www.aic.sg/financial-assistance/home-caregiving-grant"
+    },
+    {
+      "tier1_id": "CAREGIVERS-TRAINING-GRANT",
+      "name": "Caregivers Training Grant (CTG)",
+      "link": "https://aic.sg/financial-assistance/caregivers-training-grant"
+    },
+    {
+      "tier1_id": "MIGRANT-DOMESTIC-WORKER-LEVY",
+      "name": "Migrant Domestic Worker (MDW) Levy Concession For Persons With Disabilities",
+      "link": "https://www.aic.sg/financial-assistance/foreign-domestic-worker-levy-concession"
+    },
+    {
+      "tier1_id": "MOH-NR-LTC-SUBSIDY",
+      "name": "Subsidies for Government-Funded Intermediate and Long Term Care (ILTC) Services",
+      "link": "https://www.moh.gov.sg/seeking-healthcare/find-a-facility-or-service/mental-health-services/intermediate-and-long-term-care-services"
+    }
+  ],
+  "schemes": []
+}

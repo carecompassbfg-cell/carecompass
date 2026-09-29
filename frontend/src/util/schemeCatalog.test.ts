@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import catalog from "../../public/data/catalog.sample.json";
+import catalog from "../../public/data/catalog.tier1.json";
 import {
   CatalogScheme,
   PayForCategory,
@@ -126,7 +126,7 @@ describe("countByCategory", () => {
     expect(counts).toEqual({ [PayForCategory.TAX_CPF]: 1 });
   });
 
-  it("covers every scheme in the sample catalog when none are ruled out", () => {
+  it("covers every Tier 1 scheme when none are ruled out", () => {
     const schemes = catalog as CatalogScheme[];
     const counts = countByCategory(
       schemes.map((scheme) => ({
@@ -136,7 +136,7 @@ describe("countByCategory", () => {
     );
     const total = Object.values(counts).reduce((sum, n) => sum + (n ?? 0), 0);
     expect(total).toBe(schemes.length);
-    expect(counts[PayForCategory.CARE_SERVICES]).toBe(2);
+    expect(counts[PayForCategory.CARE_SERVICES]).toBe(1);
   });
 });
 

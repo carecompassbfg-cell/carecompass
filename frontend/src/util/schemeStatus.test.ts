@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
-import catalog from "../../public/data/catalog.sample.json";
+import schemesSgCatalog from "../../public/data/catalog.schemessg.json";
+import tier1Catalog from "../../public/data/catalog.tier1.json";
 import {
   CatalogScheme,
   PayForCategory,
@@ -13,12 +14,30 @@ import {
 } from "@/types/user";
 import { getSchemeStatus } from "@/util/schemeStatus";
 
-const CATALOG = catalog as CatalogScheme[];
+const TIER1 = tier1Catalog as CatalogScheme[];
+const SCHEMES_SG = schemesSgCatalog as CatalogScheme[];
 
 const findScheme = (id: string): CatalogScheme => {
-  const scheme = CATALOG.find((s) => s.id === id);
-  if (!scheme) throw new Error(`Scheme ${id} not in sample catalog`);
+  const scheme = TIER1.find((s) => s.id === id);
+  if (!scheme) throw new Error(`Scheme ${id} not in the Tier 1 catalog`);
   return scheme;
+};
+
+const TIER2_SCHEME: CatalogScheme = {
+  id: "ssg-example",
+  source: "schemes_sg",
+  sourceId: "abc",
+  tier: 2,
+  name: "Example",
+  agency: "Agency",
+  summary: "",
+  description: "",
+  whatYouGet: [],
+  payFor: PayForCategory.TRANSPORT,
+  area: { kind: "islandwide" },
+  link: "https://example.com",
+  sources: [],
+  lastRefreshed: "2026-09-29",
 };
 
 const makeUser = (overrides: Partial<UserDataFull> = {}): UserDataFull => ({
@@ -43,9 +62,10 @@ const withoutPchi = (user: UserDataFull): UserDataFull => ({
 
 describe("getSchemeStatus", () => {
   it("returns provider_decides for a Tier 2 scheme", () => {
-    const tier2 = CATALOG.find((s) => s.tier === 2)!;
-    expect(getSchemeStatus(tier2, makeUser()).status).toBe("provider_decides");
-    expect(getSchemeStatus(tier2, null).status).toBe("provider_decides");
+    expect(getSchemeStatus(TIER2_SCHEME, makeUser()).status).toBe(
+      "provider_decides",
+    );
+    expect(getSchemeStatus(TIER2_SCHEME, null).status).toBe("provider_decides");
   });
 
   it("keeps a Tier 1 scheme with only agency checks as likely", () => {
@@ -100,7 +120,7 @@ describe("getSchemeStatus", () => {
   });
 
   it("returns needs_answers with questions for every Tier 1 scheme when signed out", () => {
-    for (const scheme of CATALOG.filter((s) => s.tier === 1)) {
+    for (const scheme of TIER1) {
       const result = getSchemeStatus(scheme, null);
       expect(result.status).toBe("needs_answers");
       expect(result.questionsToAsk.length).toBeGreaterThan(0);
@@ -108,19 +128,36 @@ describe("getSchemeStatus", () => {
   });
 });
 
-describe("catalog.sample.json", () => {
-  it("has well-formed entries", () => {
-    const payFor = Object.values(PayForCategory) as string[];
-    for (const scheme of CATALOG) {
+describe("catalog files", () => {
+  const payFor = Object.values(PayForCategory) as string[];
+
+  it("catalog.tier1.json has our 5 Tier 1 schemes, each with a checker", () => {
+    expect(TIER1).toHaveLength(5);
+    for (const scheme of TIER1) {
+      expect(scheme.tier).toBe(1);
+      expect(scheme.source).toBe("carecompass");
+      expect(scheme.checkerId).toBeDefined();
       expect(payFor).toContain(scheme.payFor);
       expect(Number.isNaN(Date.parse(scheme.lastRefreshed))).toBe(false);
-      if (scheme.tier === 1) {
-        expect(scheme.source).toBe("carecompass");
-        expect(scheme.checkerId).toBeDefined();
-      } else {
-        expect(scheme.source).toBe("schemes_sg");
-        expect(scheme.name.startsWith("[Sample]")).toBe(true);
-      }
     }
+  });
+
+  it("catalog.schemessg.json has only published Tier 2 schemes", () => {
+    expect(SCHEMES_SG.length).toBeGreaterThan(0);
+    for (const scheme of SCHEMES_SG) {
+      expect(scheme.tier).toBe(2);
+      expect(scheme.source).toBe("schemes_sg");
+      expect(scheme.sourceId).toBeTruthy();
+      expect(scheme.checkerId).toBeUndefined();
+      expect(scheme.valueText).toBeUndefined();
+      expect(scheme.name.startsWith("[Sample]")).toBe(false);
+      expect(payFor).toContain(scheme.payFor);
+      expect(Number.isNaN(Date.parse(scheme.lastRefreshed))).toBe(false);
+    }
+  });
+
+  it("ids are unique across both files", () => {
+    const ids = [...TIER1, ...SCHEMES_SG].map((scheme) => scheme.id);
+    expect(new Set(ids).size).toBe(ids.length);
   });
 });

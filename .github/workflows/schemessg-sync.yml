@@ -1,0 +1,64 @@
+name: Schemes.sg - Weekly sync
+
+# Pulls Tier 2 schemes from the Schemes.sg partner API and, when anything
+# changed, opens or updates a PR into staging. Never pushes to staging or main.
+
+on:
+  schedule:
+    # Monday 02:00 Singapore time (Sunday 18:00 UTC)
+    - cron: "0 18 * * 0"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: schemessg-sync
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: ./scrapers/schemessg
+
+    steps:
+      - name: Checkout staging
+        uses: actions/checkout@v4
+        with:
+          ref: staging
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Run tests
+        run: |
+          python -m pip install --quiet pytest
+          python -m pytest -q
+
+      - name: Sync from Schemes.sg
+        env:
+          SCHEMESSG_API_KEY: ${{ secrets.SCHEMESSG_API_KEY }}
+          SCHEMESSG_BASE_URL: ${{ secrets.SCHEMESSG_BASE_URL || vars.SCHEMESSG_BASE_URL }}
+          SCHEMESSG_ENV: ${{ secrets.SCHEMESSG_ENV || vars.SCHEMESSG_ENV || 'dev' }}
+        run: python sync.py
+
+      - name: Open or update PR into staging
+        uses: peter-evans/create-pull-request@v7
+        with:
+          base: staging
+          branch: bot/schemessg-sync
+          delete-branch: true
+          add-paths: |
+            frontend/public/data/catalog.schemessg.json
+            scrapers/schemessg/data/other.json
+            scrapers/schemessg/data/report.md
+            scrapers/schemessg/data/state.json
+          commit-message: "chore: weekly Schemes.sg sync"
+          title: "Schemes.sg weekly sync"
+          body-path: scrapers/schemessg/data/report.md
