@@ -19,7 +19,7 @@ const PILL_STYLES: Record<
   provider_decides: {
     className: "bg-gray-100 text-gray-600",
     icon: "info-pill",
-    label: "Provider decides",
+    label: "Check with agency",
   },
   not_a_match: {
     className: "bg-red-100 text-red-600",
@@ -29,6 +29,9 @@ const PILL_STYLES: Record<
 };
 
 export const getStatusLabel = (status: SchemeStatus): string => {
+  if (status.status === "needs_answers" && status.requiresSignIn) {
+    return "Sign in to check";
+  }
   if (status.status === "needs_answers" && status.questionsToAsk.length > 0) {
     return QUESTION_META[status.questionsToAsk[0]].pillLabel;
   }

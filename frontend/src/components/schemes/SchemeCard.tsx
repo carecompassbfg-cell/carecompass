@@ -34,7 +34,7 @@ export default function SchemeCard({ item }: { item: SchemeWithStatus }) {
         )}
         <span className="flex items-center gap-1">
           <SchemeIcon name="info-meta" size={13} />
-          {scheme.agency} · {getSourceLine(scheme)}
+          {getSourceLine(scheme)}
         </span>
       </div>
     </Link>

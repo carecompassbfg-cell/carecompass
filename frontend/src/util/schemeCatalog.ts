@@ -87,6 +87,8 @@ export const isPayForCategory = (value: string): value is PayForCategory =>
 // Questions the question sheet can ask. The other ProfileQuestionIds are
 // collected at onboarding, so signed-out users are asked to sign in instead.
 export const SHEET_QUESTIONS: ProfileQuestionId[] = [
+  // Asked when the profile has no age (onboarding used to save 0)
+  ProfileQuestionId.CARE_RECIPIENT_AGE,
   ProfileQuestionId.HOUSEHOLD_INCOME,
   ProfileQuestionId.ADL_NEEDS,
   ProfileQuestionId.HAS_FAR,
@@ -139,9 +141,9 @@ export const QUESTION_META: Record<ProfileQuestionId, QuestionMeta> = {
     summary: "Is there long-term care insurance?",
   },
   [ProfileQuestionId.CARE_RECIPIENT_AGE]: {
-    pillLabel: "Sign in to check",
+    pillLabel: "Share their age to check",
     rowTitle: "Age",
-    rowHint: "Sign in and complete the profile to check this.",
+    rowHint: "Some schemes depend on age.",
     summary: "How old are they?",
   },
   [ProfileQuestionId.CARE_RECIPIENT_CITIZENSHIP]: {
@@ -248,8 +250,14 @@ export const SOURCE_LABELS: Record<CatalogScheme["source"], string> = {
   schemes_sg: "Schemes.sg",
 };
 
-// Meta-line text for where a scheme's information comes from
+// Meta line on cards and the detail page: agency first, then where the
+// information comes from
 export const getSourceLine = (scheme: CatalogScheme): string =>
   scheme.source === "carecompass"
-    ? "Reviewed by CareCompass"
-    : `From ${SOURCE_LABELS[scheme.source]}`;
+    ? `${scheme.agency} · Reviewed by CareCompass`
+    : `${scheme.agency} · From ${SOURCE_LABELS[scheme.source]}`;
+
+// When we last checked a Tier 1 scheme against official sources, or when the
+// weekly sync last refreshed a Tier 2 scheme
+export const getLastUpdated = (scheme: CatalogScheme): string | undefined =>
+  scheme.tier === 1 ? scheme.lastChecked : scheme.lastRefreshed;

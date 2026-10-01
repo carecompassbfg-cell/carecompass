@@ -12,7 +12,11 @@ import { ProfileQuestionId } from "@/types/scheme";
 import { BackButton } from "@/ui/button";
 import LoadingSpinner from "@/ui/loading";
 import useSchemeCatalog from "@/util/hooks/useSchemeCatalog";
-import { getProfileFacts, getRecipientName } from "@/util/recipient";
+import {
+  getProfileFacts,
+  getRecipientName,
+  getRecipientTitleName,
+} from "@/util/recipient";
 import {
   countByCategory,
   countByStatus,
@@ -109,7 +113,7 @@ export default function SchemesPage() {
 
       <header className="flex flex-col gap-1.5">
         <h1 className="text-[28px] font-bold leading-[34px] text-gray-800">
-          Financial schemes for {name}
+          Financial schemes for {getRecipientTitleName(user)}
         </h1>
         {profileFacts.length > 0 && (
           <p className="flex flex-wrap items-center gap-x-1.5 text-sm leading-5 text-gray-600">
@@ -120,7 +124,7 @@ export default function SchemesPage() {
               </span>
             ))}
             <Link
-              href="/profile"
+              href="/profile/care-recipient-info/edit?returnTo=/dashboard"
               className={`inline-flex min-h-11 items-center px-1 font-semibold text-interaction-links-default ${FOCUS_RING}`}
             >
               Edit<span className="sr-only"> profile</span>
@@ -163,7 +167,7 @@ export default function SchemesPage() {
           </div>
           <div className="flex flex-1 flex-col-reverse gap-0.5 rounded-[10px] bg-gray-100 p-2.5 text-gray-600">
             <dt className="text-xs font-semibold leading-4">
-              Provider decides
+              Check with agency
             </dt>
             <dd className="text-[22px] font-bold">
               {statusCounts.provider_decides}

@@ -1,5 +1,27 @@
 {
   "_help": "Hand-edited. Matches use the official link and/or scheme name (normalised), never Schemes.sg IDs, because IDs differ between dev and prod. See README.md.",
+  "agency_short_names": {
+    "Agency for Integrated Care": "AIC",
+    "Agency for Integrated Care (AIC)": "AIC",
+    "Ministry of Health": "MOH",
+    "Ministry of Health (MOH)": "MOH",
+    "Ministry of Social and Family Development": "MSF",
+    "Ministry of Social and Family Development (MSF)": "MSF",
+    "Central Provident Fund": "CPF Board",
+    "Central Provident Fund (CPF)": "CPF Board",
+    "Central Provident Fund Board": "CPF Board",
+    "Inland Revenue Authority of Singapore": "IRAS",
+    "Inland Revenue Authority of Singapore (IRAS)": "IRAS",
+    "Ministry of Manpower": "MOM",
+    "Ministry of Manpower (MOM)": "MOM",
+    "Housing & Development Board": "HDB",
+    "Housing and Development Board": "HDB",
+    "Housing & Development Board (HDB)": "HDB",
+    "South West District CDC": "South West CDC",
+    "Singapore Red Cross": "Singapore Red Cross",
+    "Infocomm Media Development Authority": "IMDA",
+    "Infocomm Media Development Authority (IMDA)": "IMDA"
+  },
   "tier1_matches": [
     {
       "tier1_id": "HOME-CAREGIVING-GRANT",

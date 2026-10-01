@@ -74,6 +74,7 @@ Hand-edited and committed. Matches use the official link and/or the scheme name,
 }
 ```
 
+- `agency_short_names`: full agency name → short label shown in the app (e.g. "Agency for Integrated Care (AIC)" → "AIC"). Matched ignoring case and punctuation. When several agencies are listed, the first one is used ("MOH, CPF, AIC" → "MOH"). Names not in the map keep their own text, with case variants ("TOUCH" / "Touch") collapsed to one spelling. Sources keep the full name.
 - `tier1_matches`: a Schemes.sg scheme that is one of our Tier 1 schemes. It matches on link **or** name, is never published, and is tracked in the report.
 - `action`: `include` forces a scheme to be kept, `exclude` drops it.
 - `payFor`: sets the category (and treats the scheme as money), which publishes an unclassified scheme.

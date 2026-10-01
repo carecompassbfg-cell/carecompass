@@ -17,10 +17,12 @@ import { FormEvent, Suspense, useState } from "react";
 import { toast } from "sonner";
 import { useAuthStore } from "@/stores/auth";
 import { api } from "@/api";
+import { AGE_ERROR, parseAge } from "@/util/profileInput";
 
 type PersonalDetails = {
   citizenship: string;
-  care_recipient_age: number;
+  // Typed text so the field starts empty; sent as a number
+  care_recipient_age: string;
   care_recipient_citizenship: string;
   care_recipient_residence: Residence;
   care_recipient_relationship: string;
@@ -66,20 +68,27 @@ function PersonalDetailsForm() {
 
   const [personalDetails, setPersonalDetails] = useState<PersonalDetails>({
     citizenship: "",
-    care_recipient_age: 0,
+    care_recipient_age: "",
     care_recipient_citizenship: "",
     care_recipient_residence: Residence.HOME,
     care_recipient_relationship: "",
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const submitDisabled = Object.values(personalDetails).some((v) => v === "");
+  const age = parseAge(personalDetails.care_recipient_age);
+  const showAgeError =
+    personalDetails.care_recipient_age !== "" && age === null;
+  const submitDisabled =
+    age === null || Object.values(personalDetails).some((v) => v === "");
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setIsSubmitting(true);
     try {
-      const res = await api.post<UserData>("/users", personalDetails);
+      const res = await api.post<UserData>("/users", {
+        ...personalDetails,
+        care_recipient_age: age,
+      });
       setUserData(true, res.data);
       router.push("/home");
     } catch (error) {
@@ -153,17 +162,22 @@ function PersonalDetailsForm() {
         <Stack gap={0} spacing={0}>
           <FormLabel isRequired>{`Loved one’s age`}</FormLabel>
           <NumberInput
-            min={0}
+            min={1}
+            max={120}
             placeholder="Age"
             value={personalDetails.care_recipient_age}
             name="carerecipient_age"
+            isInvalid={showAgeError}
             onChange={(e) =>
               setPersonalDetails({
                 ...personalDetails,
-                care_recipient_age: Number(e),
+                care_recipient_age: e,
               })
             }
           />
+          {showAgeError && (
+            <p className="pt-1 text-sm text-red-600">{AGE_ERROR}</p>
+          )}
         </Stack>
         <Stack gap={0} spacing={0}>
           <FormLabel isRequired>{`Loved one’s residential status`}</FormLabel>

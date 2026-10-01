@@ -10,7 +10,7 @@ const FILTERS: { value: Filter; label: string }[] = [
   { value: "all", label: "All" },
   { value: "likely", label: "Likely eligible" },
   { value: "needs_answers", label: "Need answers" },
-  { value: "provider_decides", label: "Provider decides" },
+  { value: "provider_decides", label: "Check with agency" },
 ];
 
 // Filterable list of scheme cards. Schemes that don't match the profile are

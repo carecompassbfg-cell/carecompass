@@ -119,6 +119,39 @@ describe("getSchemeStatus", () => {
     );
   });
 
+  it("asks for the age instead of treating 0 as aged 0", () => {
+    for (const id of ["PARENT-RELIEF", "CAREGIVERS-TRAINING-GRANT"]) {
+      const result = getSchemeStatus(
+        findScheme(id),
+        makeUser({ care_recipient_age: 0 }),
+      );
+      expect(result.status).toBe("needs_answers");
+      expect(result.questionsToAsk).toContain(
+        ProfileQuestionId.CARE_RECIPIENT_AGE,
+      );
+      expect(result.reasonsNotMet).toEqual([]);
+    }
+  });
+
+  it("asks for the age of a PR care recipient for the MDW levy concession", () => {
+    const result = getSchemeStatus(
+      findScheme("MIGRANT-DOMESTIC-WORKER-LEVY"),
+      makeUser({
+        care_recipient_age: null as unknown as number,
+        care_recipient_citizenship: Citizenship.PR,
+      }),
+    );
+    expect(result.status).toBe("needs_answers");
+    expect(result.questionsToAsk).toEqual([
+      ProfileQuestionId.CARE_RECIPIENT_AGE,
+    ]);
+  });
+
+  it("marks signed-out questions as needing sign-in", () => {
+    const result = getSchemeStatus(findScheme("PARENT-RELIEF"), null);
+    expect(result.requiresSignIn).toBe(true);
+  });
+
   it("returns needs_answers with questions for every Tier 1 scheme when signed out", () => {
     for (const scheme of TIER1) {
       const result = getSchemeStatus(scheme, null);
@@ -145,7 +178,9 @@ describe("catalog files", () => {
       expect(scheme.source).toBe("carecompass");
       expect(scheme.checkerId).toBeDefined();
       expect(payFor).toContain(scheme.payFor);
-      expect(Number.isNaN(Date.parse(scheme.lastRefreshed))).toBe(false);
+      // Tier 1 records when we checked it, not a sync date
+      expect(Number.isNaN(Date.parse(scheme.lastChecked ?? ""))).toBe(false);
+      expect(scheme.lastRefreshed).toBeUndefined();
     }
   });
 
@@ -165,7 +200,8 @@ describe("catalog files", () => {
       }
       expect(scheme.name.startsWith("[Sample]")).toBe(false);
       expect(payFor).toContain(scheme.payFor);
-      expect(Number.isNaN(Date.parse(scheme.lastRefreshed))).toBe(false);
+      expect(Number.isNaN(Date.parse(scheme.lastRefreshed ?? ""))).toBe(false);
+      expect(scheme.lastChecked).toBeUndefined();
     }
   });
 

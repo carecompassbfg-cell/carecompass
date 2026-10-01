@@ -23,7 +23,7 @@
         "url": "https://www.iras.gov.sg/taxes/individual-income-tax/basics-of-individual-income-tax/tax-reliefs-rebates-and-deductions/tax-reliefs/parent-relief-parent-relief-(disability)"
       }
     ],
-    "lastRefreshed": "2026-06-17",
+    "lastChecked": "2026-06-17",
     "checkerId": "PARENT-RELIEF",
     "eligibility": "- Your dependant(s) were 55 years of age and above in 2024\n- Your dependant(s) did not have an annual income of more than $8,000 each in year 2024 - No other relevant reliefs have been claimed on your dependant\n- If your dependant(s) were living with you in the same household in Singapore, you qualify for $9,000 in tax relief per dependant\n- If your dependant(s) who do/does not live with you but you have incurred more than S$2,000 supporting them, you may qualify for $5,500 in tax relief per dependant",
     "nextSteps": "**1. Consider if your dependant(s) is/are eligible for [Parent Relief (Disability)](https://www.iras.gov.sg/taxes/individual-income-tax/basics-of-individual-income-tax/tax-reliefs-rebates-and-deductions/tax-reliefs/parent-relief-parent-relief-(disability))**\n- This provides up to $14,000 in tax relief per dependant \n- Requires an additional form to be submitted and documentation of disability \n\n**2. After you receive your Notice of Assessment in 2025, follow these steps if it is your first time claiming Parent Relief**\n\na) Log in with your Singpass or Singpass Foreign user Account (SFA) at myTax Portal.\n\nb) Go to \"Individuals\" > \"File Income Tax Return\".\n\nc) Select \"File\" to File Income Tax Return.\n\nd) Go to \"4. Deductions, Tax Reliefs and Rebates\".\n\ne) Select \"Add New\" > \"Parent\".\n\nf) Fill in the relevant information and select \"Update\""
@@ -52,7 +52,7 @@
         "url": "https://www.aic.sg/financial-assistance/caregivers-training-grant-ctg/"
       }
     ],
-    "lastRefreshed": "2026-06-17",
+    "lastChecked": "2026-06-17",
     "checkerId": "CAREGIVERS-TRAINING-GRANT",
     "eligibility": "- Care recipient is a Singapore Citizen or Permanent Resident\n- Care recipient is aged 65 and older OR have a disability certified by a doctor's memo or Functional Assessment Report\n- Caregiver must be person in charge of caring for the care recipient (this can include family members and foreign domestic workers)\n- The full grant quantum has not been claimed by other family members or caregivers\n- Selected course is on the approved list of courses\n- Completion of the training course with a certificate of attendance if there is one",
     "nextSteps": "**1. Complete the Caregiver Training Grant form [here](https://www.aic.sg/wp-content/uploads/2023/11/CTG-Application-form.pdf)**.\nBe sure to provide the requested documents:\n- Care Recipient's NRIC / Birth Certificate\n- Caregivier's NRIC\n\n**2. Select an approved course from the list [here](https://training-healthcare.vertis.digital/)**. Provide the completed form to the training provider at least 2 weeks before the course begins."
@@ -79,7 +79,7 @@
         "url": "https://www.aic.sg/financial-assistance/home-caregiving-grant/"
       }
     ],
-    "lastRefreshed": "2026-06-17",
+    "lastChecked": "2026-06-17",
     "checkerId": "HOME-CAREGIVING-GRANT",
     "eligibility": "- Care recipient is a Singapore Citizen (SC)\n- Care recipient must always require some assistance with at least 3 Activities of Daily Living, as certified via a Functional Assessment Report\n- Care recipient is not in a residential long-term care institution (e.g. nursing home)\n- If your household monthly income per person is $1,500 or less* and your household owns no more than one property, you may qualify for $600 in monthly cash payouts\n- If your household monthly income per person is between $1,501 and $3,600, you may qualify for $400 monthly cash payout\n- If your household monthly income per person is between $3,601 and $4,800, you may qualify for $200 monthly cash payout\n*If household has no income, the annual value of property must be $21,000 or less",
     "nextSteps": "1. Complete Means Testing [here](https://www.homes.gov.sg/eservice/) to verify your eligibility.\n\n2. Obtain a [Functional Assessment Report](https://www.aic.sg/wp-content/uploads/2023/05/Functional-Assessment-Report.pdf) from your GP or care provider. The cost of the Report will vary from provider to provider.\n\n3. Apply for the the Home Caregiving Grant [here](https://cp.efinance.aic.sg/) when steps 1 and 2 are completed and your eligibility has been confirmed."
@@ -106,7 +106,7 @@
         "url": "https://form.gov.sg/5b18fbddd1b046001a65ef3c"
       }
     ],
-    "lastRefreshed": "2026-06-17",
+    "lastChecked": "2026-06-17",
     "checkerId": "MIGRANT-DOMESTIC-WORKER-LEVY",
     "eligibility": "- Care recipient is a Singaporean Citizen\n- Applicant lives with care recipient\n- Care recipient is elderly person aged 67 and above*\n\nOR\n\n- Care recipient is a Singaporean Permanent Resident AND\n- Applicant is a Singapore Citizen AND\n- Applicant lives with care recipient\n- Care recipient is elderly person aged 67 and above*\n\n*or person with disability as certified by Functional Assessment Report as requiring assistance with at least 1 activity of daily living",
     "nextSteps": "1. Apply for the concession [here](https://form.gov.sg/5b18fbddd1b046001a65ef3c)\n\n *Note: the concession will be auto-applied if you or your spouse is aged 67 and above"
@@ -135,7 +135,7 @@
         "url": "https://www.moh.gov.sg/managing-expenses/schemes-and-subsidies/subsidy-framework-for-non-residential-long-term-care-services"
       }
     ],
-    "lastRefreshed": "2026-06-17",
+    "lastChecked": "2026-06-17",
     "checkerId": "MOH-NR-LTC-SUBSIDY",
     "eligibility": "- User of Non-Residential Long-Term Care service is a Singapore Citizen (SC) or Permanent Resident (PR)\n- The service provider is government-funded\n- Subsidy levels are based on monthly household per capita income (PCHI). Singapore Citizens receive higher subsidies than Permanent Residents. Share your household income information to see your estimated subsidy tier.",
     "nextSteps": "1. Approach your doctor at the hospital or polyclinic, or AIC to apply for admission to a subsidised Non-Residential LTC service"

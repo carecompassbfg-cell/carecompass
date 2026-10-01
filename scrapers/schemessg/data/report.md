@@ -1,6 +1,6 @@
 # Schemes.sg sync report
 
-Synced on 2026-09-29 from the **dev** environment, category "Seniors & Caregiving".
+Synced on 2026-10-01 from the **dev** environment, category "Seniors & Caregiving".
 
 ## Counts
 
@@ -16,9 +16,34 @@ Synced on 2026-09-29 from the **dev** environment, category "Seniors & Caregivin
 
 ## Changes since the last run
 
-### Changed (1)
+### Changed (26)
 
-- **South West Caregiver Support Fund**: summary, description
+- **Caregivers Training Grant (CTG)**: agency
+- **CareShield Life**: agency
+- **ElderFund**: agency
+- **Migrant Domestic Worker (MDW) Levy Concession For Persons With Disabilities**: agency
+- **Home Caregiving Grant (HCG)**: agency
+- **Home Personal Care**: agency
+- **Medical Fee Exemption Card (MFEC)**: agency
+- **Medifund**: agency
+- **Pioneer Generation Disability Assistance Scheme (PioneerDAS)**: agency
+- **Seniors' Mobility and Enabling Fund (SMF)**: agency
+- **Financial Assistance**: agency
+- **Financial and Food Rations assistance (Temporary)**: agency
+- **Community Health Assist Scheme (CHAS)**: agency
+- **Matched Retirement Savings Scheme**: agency
+- **Medisave Care**: agency
+- **Enhancement for Active Seniors (EASE)**: agency
+- **Mobile Access for Seniors**: agency
+- **Interim Disability Assistance Programme for the Elderly (IDAPE)**: agency
+- **Subsidies for Government-Funded Intermediate and Long Term Care (ILTC) Services**: agency
+- **Merdeka Generation Package**: agency
+- **Pioneer Generation Package**: agency
+- **Caregiving @ South West**: agency
+- **South West Caregiver Support Fund**: agency
+- **ComCare Long Term Assistance (LTA)**: agency
+- **TOUCH Caregivers Support**: agency
+- **TOUCH Ubi Hostel (TUH)**: agency
 
 ## Overrides to review
 
@@ -31,7 +56,7 @@ No Schemes.sg text behind an override changed.
 - Overrides: summary, description, valueText
 - Reason: Schemes.sg says $800 (summary) and $500 (description); official South West CDC page says $1,000
 - Checked on: 2026-09-29
-- Status: Baseline recorded this run; changes are tracked from the next run
+- Status: Schemes.sg text unchanged
 
 ## Tier 1 matches
 
@@ -65,20 +90,20 @@ Schemes outside the category that overrides.json asks for.
 
 | Scheme | Agency | Area |
 |---|---|---|
-| [CareShield Life](https://www.aic.sg/financial-assistance/careshield-life) | Agency for Integrated Care | Islandwide |
-| [ComCare Long Term Assistance (LTA)](https://supportgowhere.life.gov.sg/schemes/COMCARE-LTA/comcare-long-term-assistance-lta) | Ministry of Social and Family Development (MSF) | Islandwide |
-| [ElderFund](https://www.aic.sg/financial-assistance/elderfund) | Ministry of Health (MOH), Central Provident Fund (CPF), Agency for Integrated Care (AIC) | Islandwide |
-| [Interim Disability Assistance Programme for the Elderly (IDAPE)](https://www.moh.gov.sg/managing-expenses/schemes-and-subsidies/interim-disability-assistance-programme-for-the-elderly) | Ministry of Health (MOH) | Islandwide |
-| [Pioneer Generation Disability Assistance Scheme (PioneerDAS)](https://www.aic.sg/financial-assistance/pioneer-generation-disability-assistance-scheme) | Agency for Integrated Care | Islandwide |
+| [CareShield Life](https://www.aic.sg/financial-assistance/careshield-life) | AIC | Islandwide |
+| [ComCare Long Term Assistance (LTA)](https://supportgowhere.life.gov.sg/schemes/COMCARE-LTA/comcare-long-term-assistance-lta) | MSF | Islandwide |
+| [ElderFund](https://www.aic.sg/financial-assistance/elderfund) | MOH | Islandwide |
+| [Interim Disability Assistance Programme for the Elderly (IDAPE)](https://www.moh.gov.sg/managing-expenses/schemes-and-subsidies/interim-disability-assistance-programme-for-the-elderly) | MOH | Islandwide |
+| [Pioneer Generation Disability Assistance Scheme (PioneerDAS)](https://www.aic.sg/financial-assistance/pioneer-generation-disability-assistance-scheme) | AIC | Islandwide |
 | [Public Assistance Programme](https://sbws.org.sg/en/services-affiliates/social-welfare-and-community-services/public-assistance-programme/) | Singapore Buddhist Welfare Service | Islandwide |
-| [South West Caregiver Support Fund](https://southwest.cdc.gov.sg/what-we-do/for-caregivers/csf/) | South West District CDC | South West District |
+| [South West Caregiver Support Fund](https://southwest.cdc.gov.sg/what-we-do/for-caregivers/csf/) | South West CDC | South West District |
 
 ### Equipment and home (2)
 
 | Scheme | Agency | Area |
 |---|---|---|
-| [Enhancement for Active Seniors (EASE)](https://www.hdb.gov.sg/managing-my-home/upgrading-and-redevelopment/enhancement-for-active-seniors-ease) | Housing & Development Board | Islandwide |
-| [Seniors' Mobility and Enabling Fund (SMF)](https://www.aic.sg/financial-assistance/seniors-mobility-enabling-fund) | Agency for Integrated Care (AIC), Ministry of Health (MOH) | Islandwide |
+| [Enhancement for Active Seniors (EASE)](https://www.hdb.gov.sg/managing-my-home/upgrading-and-redevelopment/enhancement-for-active-seniors-ease) | HDB | Islandwide |
+| [Seniors' Mobility and Enabling Fund (SMF)](https://www.aic.sg/financial-assistance/seniors-mobility-enabling-fund) | AIC | Islandwide |
 
 ### Transport (1)
 
@@ -90,20 +115,20 @@ Schemes outside the category that overrides.json asks for.
 
 | Scheme | Agency | Area |
 |---|---|---|
-| [Community Health Assist Scheme (CHAS)](https://www.chas.sg/) | Ministry of Health (MOH) | Islandwide |
+| [Community Health Assist Scheme (CHAS)](https://www.chas.sg/) | MOH | Islandwide |
 | [Medical Assistance](https://www.tzuchi.org.sg/en/our-missions/charity/medical-assistance/) | Buddhist Compassion Relief Tzu-Chi Foundation (Singapore) | Islandwide |
-| [Medical Fee Exemption Card (MFEC)](https://www.aic.sg/financial-assistance/medical-fee-exemption-card-mfec/) | Ministry of Social and Family Development (MSF), Ministry of Health (MOH), Agency for Integrated Care (AIC) | Islandwide |
-| [Medifund](https://www.aic.sg/financial-assistance/medifund) | Agency for Integrated Care | Islandwide |
-| [Merdeka Generation Package](https://www.moh.gov.sg/managing-expenses/schemes-and-subsidies/merdeka-generation-package) | Ministry of Health (MOH) | Islandwide |
-| [Pioneer Generation Package](https://www.moh.gov.sg/cost-financing/healthcare-schemes-subsidies/pioneer-generation-package) | Ministry of Health (MOH) | Islandwide |
+| [Medical Fee Exemption Card (MFEC)](https://www.aic.sg/financial-assistance/medical-fee-exemption-card-mfec/) | MSF | Islandwide |
+| [Medifund](https://www.aic.sg/financial-assistance/medifund) | AIC | Islandwide |
+| [Merdeka Generation Package](https://www.moh.gov.sg/managing-expenses/schemes-and-subsidies/merdeka-generation-package) | MOH | Islandwide |
+| [Pioneer Generation Package](https://www.moh.gov.sg/cost-financing/healthcare-schemes-subsidies/pioneer-generation-package) | MOH | Islandwide |
 | [Viriya Elderly Medical Programme (VEMP)](https://viriya.org.sg/service/seniors/) | Viriya Community Services | Islandwide |
 
 ### Tax and CPF (2)
 
 | Scheme | Agency | Area |
 |---|---|---|
-| [Matched Retirement Savings Scheme](https://www.cpf.gov.sg/member/growing-your-savings/saving-more-with-cpf/matching-grant-for-seniors-who-top-up) | Central Provident Fund (CPF) | Islandwide |
-| [Medisave Care](https://www.cpf.gov.sg/member/healthcare-financing/medisave-care-for-long-term-care-needs) | Central Provident Fund (CPF) | Islandwide |
+| [Matched Retirement Savings Scheme](https://www.cpf.gov.sg/member/growing-your-savings/saving-more-with-cpf/matching-grant-for-seniors-who-top-up) | CPF Board | Islandwide |
+| [Medisave Care](https://www.cpf.gov.sg/member/healthcare-financing/medisave-care-for-long-term-care-needs) | CPF Board | Islandwide |
 
 ## Unclassified money schemes (0)
 
@@ -138,7 +163,7 @@ Financial help that doesn't map cleanly to one category, so it is not published.
 | Care At Centre | Salem Welfare Services | service_or_programme | Not aimed at caregivers or seniors with a care need |
 | CareElderly Active Ageing Centres | Care Community Services Society Singapore | service_or_programme | Not aimed at caregivers or seniors with a care need |
 | Case Management | Sree Narayana Mission | service_or_programme | Not aimed at caregivers or seniors with a care need |
-| Financial Assistance | BCARE | service_or_programme | Not aimed at caregivers or seniors with a care need |
+| Financial Assistance | Bcare | service_or_programme | Not aimed at caregivers or seniors with a care need |
 | Food Assistance | A Packet of Rice | service_or_programme | Not aimed at caregivers or seniors with a care need |
 | Friends @ St Hilda’s Link | St Hilda's Community Services | service_or_programme | Not aimed at caregivers or seniors with a care need |
 | Geylang East Active Ageing Centre | Geylang East Home for the Aged | service_or_programme | Not aimed at caregivers or seniors with a care need |
@@ -162,10 +187,10 @@ Financial help that doesn't map cleanly to one category, so it is not published.
 | The Saturday Movement | The Saturday Movement | service_or_programme | Not aimed at caregivers or seniors with a care need |
 | Traditional Chinese Medicine Free Clinic | Buddhist Compassion Relief Tzu-Chi Foundation (Singapore) | service_or_programme | Not aimed at caregivers or seniors with a care need |
 | Tzu Chi Free Clinic | Tzu Chi Singapore | service_or_programme | Not aimed at caregivers or seniors with a care need |
-| Financial and Food Rations assistance (Temporary) | Bethel Social Services \| Bethel Community Services | money | Override: General cash and food aid (Bethel Community Services), not specific to caregiving |
+| Financial and Food Rations assistance (Temporary) | Bethel Social Services | money | Override: General cash and food aid (Bethel Community Services), not specific to caregiving |
 | Financial Assistance and Food Relief | Catholic Welfare Services | money | Override: General cash and food aid (Catholic Welfare Services), not specific to caregiving |
 | Financial Assistance Schemes & Food Vouchers | Eurasian Association Singapore | money | Override: General cash and food aid (Eurasian Association), not specific to caregiving |
-| Mobile Access for Seniors | Infocomm Media Development Authority (IMDA) | money | Override: Subsidised phone plans and devices, not caregiving costs |
+| Mobile Access for Seniors | IMDA | money | Override: Subsidised phone plans and devices, not caregiving costs |
 
 ## Retired or not found (0)
 

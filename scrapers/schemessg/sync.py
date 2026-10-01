@@ -92,6 +92,7 @@ def run(
     if problems:
         raise ValueError("overrides.json is invalid: " + "; ".join(problems))
     records = [cat.classify_record(raw, overrides) for raw in raw_details]
+    cat.normalise_agency_case(records)
     previous_records = previous_state["records"] if previous_state else []
     cat.assign_ids(records, previous_records)
 

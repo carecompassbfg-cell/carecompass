@@ -4,6 +4,7 @@ Pure functions: overrides, stable ids, catalog/other outputs and the diff
 between runs. No network or file IO.
 """
 
+import re
 from collections import Counter
 from datetime import date
 from typing import Dict, List, Optional, Tuple
@@ -107,7 +108,8 @@ def extra_include_matches(entry: dict, record: dict) -> bool:
     if not _matches(entry, record, require_all=False):
         return False
     agency = c.normalise_name(entry.get("agency"))
-    return not agency or agency in c.normalise_name(record.get("agency"))
+    full_agency = record.get("agencyFull") or record.get("agency")
+    return not agency or agency in c.normalise_name(full_agency)
 
 
 def find_extra_include(overrides: dict, record: dict) -> Optional[dict]:
@@ -148,6 +150,43 @@ def match_extra_includes(
     return to_fetch, missing
 
 
+# ---------------------------------------------------------------------------
+# Agency short names
+# ---------------------------------------------------------------------------
+
+_AGENCY_SPLIT = re.compile(r"\s*\|\s*|,\s*(?=[A-Z])")
+
+
+def first_agency(agency: Optional[str]) -> str:
+    """The first agency when several are listed, e.g. "Ministry of Health
+    (MOH), Central Provident Fund (CPF)" → "Ministry of Health (MOH)"."""
+    text = " ".join((agency or "").split())
+    return _AGENCY_SPLIT.split(text)[0].strip() if text else ""
+
+
+def short_agency(agency: Optional[str], short_names: Dict[str, str]) -> str:
+    """Short label from overrides.json agency_short_names (matched after
+    normalising case and punctuation), else the first agency's own text."""
+    first = first_agency(agency)
+    lookup = {c.normalise_name(full): short for full, short in short_names.items()}
+    return lookup.get(c.normalise_name(first), first)
+
+
+def normalise_agency_case(records: List[dict]) -> None:
+    """Use one spelling for agency names that differ only in case
+    ("TOUCH Community Services" / "Touch Community Services"): the one with
+    the fewest capitals, then alphabetical, so the choice is stable."""
+    variants: Dict[str, set] = {}
+    for record in records:
+        variants.setdefault(record["agency"].lower(), set()).add(record["agency"])
+    preferred = {
+        key: sorted(names, key=lambda n: (sum(ch.isupper() for ch in n), n))[0]
+        for key, names in variants.items()
+    }
+    for record in records:
+        record["agency"] = preferred[record["agency"].lower()]
+
+
 def find_tier1_match(overrides: dict, record: dict) -> Optional[str]:
     """Tier 1 matches are keyed by link or name, never by Schemes.sg ID."""
     for match in overrides.get("tier1_matches", []):
@@ -167,6 +206,7 @@ def normalise_record(raw: dict) -> dict:
         "sourceId": raw.get("scheme_id"),
         "name": (raw.get("scheme") or "").strip(),
         "agency": (raw.get("agency") or "").strip(),
+        "agencyFull": " ".join((raw.get("agency") or "").split()),
         "summary": c.clean_text(raw.get("summary")),
         "description": c.clean_text(raw.get("description")),
         "eligibility": c.clean_text(raw.get("eligibility")) or None,
@@ -188,6 +228,9 @@ def normalise_record(raw: dict) -> dict:
 
 def classify_record(raw: dict, overrides: dict) -> dict:
     record = normalise_record(raw)
+    record["agency"] = short_agency(
+        record["agencyFull"], overrides.get("agency_short_names", {})
+    )
     kind = c.classify_kind(raw)
     keep, reason = c.classify_relevance(raw, kind)
     pay_for = c.classify_pay_for(raw) if kind == c.MONEY else None
@@ -319,7 +362,12 @@ def assign_ids(records: List[dict], previous: List[dict]) -> None:
 
 def to_catalog_scheme(record: dict, synced_on: str, env: str) -> dict:
     """A published record as a frontend CatalogScheme (Tier 2)."""
-    sources = [{"name": record["agency"] or "Official page", "url": record["link"]}]
+    sources = [
+        {
+            "name": record.get("agencyFull") or record["agency"] or "Official page",
+            "url": record["link"],
+        }
+    ]
     if env == "prod" and record["sourceId"]:
         sources.append(
             {

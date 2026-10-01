@@ -22,6 +22,7 @@ export type LtcInsurance =
   | typeof NOT_SURE;
 
 export interface SchemeAnswers {
+  [ProfileQuestionId.CARE_RECIPIENT_AGE]?: number | typeof NOT_SURE;
   [ProfileQuestionId.HOUSEHOLD_INCOME]?: "saved" | typeof NOT_SURE;
   [ProfileQuestionId.ADL_NEEDS]?: AdlActivity[] | typeof NOT_SURE;
   [ProfileQuestionId.HAS_FAR]?: YesNoNotSure;
