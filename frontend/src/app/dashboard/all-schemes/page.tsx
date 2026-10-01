@@ -11,6 +11,7 @@ import { isAnswered, useSchemeAnswersStore } from "@/stores/schemeAnswers";
 import { BackButton } from "@/ui/button";
 import LoadingSpinner from "@/ui/loading";
 import useSchemeCatalog from "@/util/hooks/useSchemeCatalog";
+import { COMMUNITY_TELEGRAM_URL } from "@/util/links";
 import { getRecipientName } from "@/util/recipient";
 import {
   applyFilters,
@@ -393,9 +394,18 @@ function AllSchemes() {
 
       <p className="flex items-start gap-2 pb-4 text-xs leading-[18px] text-gray-600">
         <Info aria-hidden size={16} className="shrink-0" />
-        {/* TODO: link "Tell us" once the app has a feedback form */}
         <span>
-          Can&apos;t find a scheme? Tell us and we&apos;ll look into adding it.
+          Can&apos;t find a scheme?{" "}
+          <a
+            href={COMMUNITY_TELEGRAM_URL}
+            target="_blank"
+            rel="noreferrer"
+            className={`font-semibold text-interaction-links-default underline ${FOCUS_RING}`}
+          >
+            Tell us
+            <span className="sr-only"> on Telegram (opens in a new tab)</span>
+          </a>{" "}
+          and we&apos;ll look into adding it.
         </span>
       </p>
 

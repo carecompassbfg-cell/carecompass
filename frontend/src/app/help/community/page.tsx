@@ -2,6 +2,7 @@
 
 import { Button } from "@chakra-ui/react";
 import { BackButton } from "@/ui/button";
+import { COMMUNITY_TELEGRAM_URL } from "@/util/links";
 
 type PartnerData = {
   name: string;
@@ -22,7 +23,7 @@ const PARTNERS: PartnerData[] = [
     name: "CareCompass User Community",
     description:
       "Join our community of caregivers on Telegram to exchange advice and provide feedback on what you’d like to see on the app!",
-    link: "https://t.me/+OFlWBBcS7OdlZTM1",
+    link: COMMUNITY_TELEGRAM_URL,
     cta: "Join Now",
   },
 ];
