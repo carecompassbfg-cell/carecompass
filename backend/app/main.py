@@ -6,6 +6,7 @@ from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 from app.api import router
+from app.core.privacy import event_scrubber, scrub_personal_data
 import sentry_sdk
 
 sentry_sdk.init(
@@ -13,6 +14,9 @@ sentry_sdk.init(
     # Set traces_sample_rate to 1.0 to capture 100%
     # of transactions for tracing.
     traces_sample_rate=1.0,
+    # Keep the care recipient's name and scheme answers out of error reports
+    before_send=scrub_personal_data,
+    event_scrubber=event_scrubber,
     _experiments={
         # Set continuous_profiling_auto_start to True
         # to automatically start the profiler on when
@@ -33,6 +37,7 @@ origins = [
     "https://my.carecompass.sg",
     "https://prod-frontend.carecompass.sg",
     "https://staging-frontend.carecompass.sg",
+    "https://staging.carecompass.sg",
     "https://carecompass-bfg.vercel.app"
 ]
 
