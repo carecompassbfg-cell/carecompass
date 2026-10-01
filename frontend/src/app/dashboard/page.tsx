@@ -1,9 +1,11 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import { Button } from "@chakra-ui/react";
 import { SignInButton } from "@clerk/nextjs";
+import { ChevronRight, CircleHelp, CircleX, Search } from "lucide-react";
+import AboutPanel from "@/components/schemes/AboutPanel";
 import QuestionSheet from "@/components/schemes/QuestionSheet";
 import SchemeCard from "@/components/schemes/SchemeCard";
 import SchemeIcon, { FOCUS_RING } from "@/components/schemes/SchemeIcon";
@@ -25,6 +27,29 @@ import {
   pickBestMatches,
   QUESTION_META,
 } from "@/util/schemeCatalog";
+
+// The three status counts in the summary box; each opens the full list
+// filtered to that status
+const SUMMARY_TILES = [
+  {
+    status: "likely",
+    label: "Likely eligible",
+    ariaLabel: "likely eligible",
+    className: "bg-green-100 text-green-600",
+  },
+  {
+    status: "needs_answers",
+    label: "Need answers",
+    ariaLabel: "need answers",
+    className: "bg-yellow-50 text-yellow-600",
+  },
+  {
+    status: "provider_decides",
+    label: "Check with agency",
+    ariaLabel: "check with agency",
+    className: "bg-gray-100 text-gray-600",
+  },
+] as const;
 
 const PLAN_AHEAD_URL = "https://mylegacy.life.gov.sg/end-of-life-planning/";
 
@@ -63,6 +88,8 @@ export default function SchemesPage() {
     refreshUser,
   } = useSchemeCatalog();
   const answers = useSchemeAnswersStore((state) => state.answers);
+  const [isAboutOpen, setIsAboutOpen] = useState(false);
+  const aboutButtonRef = useRef<HTMLButtonElement>(null);
   const [isSheetOpen, setIsSheetOpen] = useState(false);
 
   const name = getRecipientName(user);
@@ -149,30 +176,59 @@ export default function SchemesPage() {
         aria-label="Summary"
         className="flex flex-col gap-3.5 rounded-2xl border border-gray-200 bg-white p-4"
       >
-        <p className="text-[15px] leading-[22px] text-gray-800">
-          We checked <b>{items.length}</b> grants, subsidies and reliefs
-          {user ? ` against ${name}'s profile.` : "."}
-        </p>
-        <dl className="flex gap-2">
-          <div className="flex flex-1 flex-col-reverse gap-0.5 rounded-[10px] bg-green-100 p-2.5 text-green-600">
-            <dt className="text-xs font-semibold leading-4">Likely eligible</dt>
-            <dd className="text-[22px] font-bold">{statusCounts.likely}</dd>
-          </div>
-          <div className="flex flex-1 flex-col-reverse gap-0.5 rounded-[10px] bg-yellow-50 p-2.5 text-yellow-600">
-            <dt className="text-xs font-semibold leading-4">Need answers</dt>
-            <dd className="text-[22px] font-bold">
-              {statusCounts.needs_answers}
-            </dd>
-          </div>
-          <div className="flex flex-1 flex-col-reverse gap-0.5 rounded-[10px] bg-gray-100 p-2.5 text-gray-600">
-            <dt className="text-xs font-semibold leading-4">
-              Check with agency
-            </dt>
-            <dd className="text-[22px] font-bold">
-              {statusCounts.provider_decides}
-            </dd>
-          </div>
-        </dl>
+        <div className="flex items-start gap-2">
+          <p className="flex-1 text-[15px] leading-[22px] text-gray-800">
+            We checked <b>{items.length}</b> grants, subsidies and reliefs
+            {user ? ` against ${name}'s profile.` : "."}
+          </p>
+          <button
+            ref={aboutButtonRef}
+            type="button"
+            onClick={() => setIsAboutOpen(true)}
+            aria-label="About these results"
+            className={`-mr-2 -mt-2 flex size-11 shrink-0 items-center justify-center rounded-full text-gray-600 hover:bg-gray-100 ${FOCUS_RING}`}
+          >
+            <CircleHelp aria-hidden size={20} />
+          </button>
+        </div>
+        <ul className="flex gap-2">
+          {SUMMARY_TILES.map((tile) => {
+            const count = statusCounts[tile.status];
+            return (
+              <li key={tile.status} className="flex flex-1">
+                <Link
+                  href={`/dashboard/all-schemes?status=${tile.status}`}
+                  aria-label={`${count} ${tile.ariaLabel}, see the list`}
+                  className={`flex min-h-11 w-full flex-col gap-0.5 rounded-[10px] p-2.5 ${tile.className} ${FOCUS_RING}`}
+                >
+                  <span className="flex items-center justify-between">
+                    <span className="text-[22px] font-bold">{count}</span>
+                    <ChevronRight aria-hidden size={18} />
+                  </span>
+                  <span className="text-xs font-semibold leading-4">
+                    {tile.label}
+                  </span>
+                </Link>
+              </li>
+            );
+          })}
+        </ul>
+        {statusCounts.not_a_match > 0 && (
+          <Link
+            href="/dashboard/all-schemes?status=not_a_match"
+            className={`-my-1 flex min-h-11 items-center gap-1.5 text-[13px] text-gray-600 ${FOCUS_RING}`}
+          >
+            <CircleX aria-hidden size={16} className="shrink-0" />
+            <span>
+              {statusCounts.not_a_match}{" "}
+              {statusCounts.not_a_match === 1
+                ? "doesn't look like a fit"
+                : "don't look like a fit"}{" "}
+              for {name}
+            </span>
+            <ChevronRight aria-hidden size={16} className="shrink-0" />
+          </Link>
+        )}
         {openQuestions.length > 0 && (
           <div className="flex flex-col gap-2.5 border-t border-gray-200 pt-3.5">
             <div className="flex items-start gap-2.5">
@@ -233,7 +289,7 @@ export default function SchemesPage() {
           ))}
           {allMatchesCount > bestMatches.length && (
             <Link
-              href="/dashboard/matches"
+              href="/dashboard/all-schemes?status=likely,needs_answers"
               className={`flex min-h-11 items-center justify-center gap-1 rounded-xl border border-gray-200 bg-white p-3 text-[15px] font-semibold text-interaction-links-default ${FOCUS_RING}`}
             >
               See all {allMatchesCount} matches
@@ -242,6 +298,29 @@ export default function SchemesPage() {
           )}
         </section>
       )}
+
+      <Link
+        href="/dashboard/all-schemes"
+        className={`flex min-h-11 items-center gap-3 rounded-xl border border-interaction-main-default bg-white p-3.5 ${FOCUS_RING}`}
+      >
+        <span className="flex size-9 shrink-0 items-center justify-center rounded-[10px] bg-blue-100 text-interaction-main-default">
+          <Search aria-hidden size={20} />
+        </span>
+        <span className="flex flex-1 flex-col gap-0.5">
+          <span className="text-[15px] font-semibold leading-5 text-interaction-links-default">
+            Search all caregiving schemes
+          </span>
+          <span className="text-[13px] leading-[18px] text-gray-600">
+            All {items.length}, including ones that may not fit. Filter by what
+            it pays for.
+          </span>
+        </span>
+        <ChevronRight
+          aria-hidden
+          size={18}
+          className="shrink-0 text-interaction-main-default"
+        />
+      </Link>
 
       {/* Browse by category */}
       <section aria-labelledby="browse" className="flex flex-col gap-2.5">
@@ -352,6 +431,13 @@ export default function SchemesPage() {
           agency makes the final decision.
         </span>
       </p>
+
+      <AboutPanel
+        isOpen={isAboutOpen}
+        onClose={() => setIsAboutOpen(false)}
+        recipientName={name}
+        returnFocusRef={aboutButtonRef}
+      />
 
       {isSheetOpen && (
         <QuestionSheet

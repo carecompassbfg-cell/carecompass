@@ -14,7 +14,7 @@ const PILL_STYLES: Record<
   needs_answers: {
     className: "bg-yellow-50 text-yellow-600",
     icon: "question-pill",
-    label: "Needs answers",
+    label: "Need answers",
   },
   provider_decides: {
     className: "bg-gray-100 text-gray-600",
