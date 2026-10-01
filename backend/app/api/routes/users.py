@@ -1,7 +1,18 @@
-from typing import List, Optional
+import json
+import re
+import unicodedata
+from datetime import datetime, timezone
+from typing import Annotated, List, Literal, Optional, Union
 
 from fastapi import APIRouter, HTTPException, Depends
-from pydantic import BaseModel, ConfigDict
+from pydantic import (
+    BaseModel,
+    ConfigDict,
+    Field,
+    StrictBool,
+    StrictInt,
+    field_validator,
+)
 from pydantic.alias_generators import to_camel
 
 from app.api.routes.threads import ThreadReadResponse
@@ -13,11 +24,90 @@ router = APIRouter()
 
 
 # Pydantic models
+
+CARE_RECIPIENT_NAME_MAX_LENGTH = 40
+POSTAL_CODE_PATTERN = re.compile(r"[0-9]{6}")
+
+NotSure = Literal["not_sure"]
+YesNoNotSure = Literal["yes", "no", "not_sure"]
+
+
+class SchemeAnswers(BaseModel):
+    """Answers from the schemes question sheet. Personal and partly
+    health-related: stored encrypted, never logged."""
+
+    model_config = ConfigDict(extra="forbid")
+
+    # How many of the 6 daily activities need help
+    adl_needs: Optional[Union[Annotated[StrictInt, Field(ge=0, le=6)], NotSure]] = None
+    adl_full_help: Optional[YesNoNotSure] = None
+    ltc_insurance: Optional[
+        Literal["careshield_life", "eldershield", "neither", "not_sure"]
+    ] = None
+    has_far: Optional[YesNoNotSure] = None
+    care_recipient_age_not_sure: Optional[StrictBool] = None
+    # Set by the server whenever the answers are saved
+    updated_at: Optional[datetime] = None
+
+
+def clean_care_recipient_name(value: Optional[str]) -> Optional[str]:
+    """Strip whitespace; empty becomes None; at most 40 characters; no
+    control characters."""
+    if value is None:
+        return None
+    name = value.strip()
+    if not name:
+        return None
+    if len(name) > CARE_RECIPIENT_NAME_MAX_LENGTH:
+        raise ValueError(
+            f"must be {CARE_RECIPIENT_NAME_MAX_LENGTH} characters or fewer"
+        )
+    if any(unicodedata.category(char) == "Cc" for char in name):
+        raise ValueError("must not contain control characters")
+    return name
+
+
+def clean_home_postal_code(value: Optional[str]) -> Optional[str]:
+    """Remove spaces; empty becomes None; otherwise exactly 6 digits."""
+    if value is None:
+        return None
+    postal_code = "".join(value.split())
+    if not postal_code:
+        return None
+    if not POSTAL_CODE_PATTERN.fullmatch(postal_code):
+        raise ValueError("must be a 6-digit postal code")
+    return postal_code
+
+
+def serialize_scheme_answers(answers: Optional[SchemeAnswers]) -> Optional[str]:
+    """JSON text for the encrypted column, with a server-set updated_at."""
+    if answers is None:
+        return None
+    stamped = answers.model_copy(update={"updated_at": datetime.now(timezone.utc)})
+    return json.dumps(stamped.model_dump(mode="json", exclude_none=True))
+
+
+def parse_scheme_answers(value: Optional[str]) -> Optional[dict]:
+    """Stored JSON text back to a dict; anything unreadable reads as None."""
+    if value is None:
+        return None
+    try:
+        parsed = json.loads(value)
+    except (TypeError, ValueError):
+        return None
+    return parsed if isinstance(parsed, dict) else None
+
+
 class UserBase(BaseModel):
     model_config = ConfigDict(from_attributes=True)
 
     citizenship: Citizenship
     contact_number: Optional[int] = None
+
+    # Both optional, so clients that don't know about them are unaffected
+    care_recipient_name: Optional[str] = None
+    scheme_answers: Optional[SchemeAnswers] = None
+    home_postal_code: Optional[str] = None
     
     care_recipient_age: int
     care_recipient_citizenship: Citizenship
@@ -28,6 +118,16 @@ class UserBase(BaseModel):
     total_monthly_household_income: Optional[int] = None
     annual_property_value: Optional[int] = None
     monthly_pchi: Optional[int] = None
+
+    @field_validator("care_recipient_name")
+    @classmethod
+    def validate_care_recipient_name(cls, value: Optional[str]) -> Optional[str]:
+        return clean_care_recipient_name(value)
+
+    @field_validator("home_postal_code")
+    @classmethod
+    def validate_home_postal_code(cls, value: Optional[str]) -> Optional[str]:
+        return clean_home_postal_code(value)
 
 class UserCreate(UserBase):
     pass
@@ -44,6 +144,14 @@ class UserUpdate(UserBase):
 class UserResponse(UserBase):
     id: int # primary key in db
     threads: List[ThreadReadResponse] = []
+
+    # The database keeps the answers as JSON text
+    @field_validator("scheme_answers", mode="before")
+    @classmethod
+    def parse_stored_scheme_answers(cls, value):
+        if isinstance(value, str):
+            return parse_scheme_answers(value)
+        return value
 
 class PCHIBase(BaseModel):
     model_config = ConfigDict(
@@ -75,7 +183,9 @@ def create_user(
     if user:
         raise HTTPException(status_code=400, detail="user already exists")
     
-    user = User(**userToAdd.model_dump(), clerk_id=current_user_clerk_id)
+    data = userToAdd.model_dump()
+    data["scheme_answers"] = serialize_scheme_answers(userToAdd.scheme_answers)
+    user = User(**data, clerk_id=current_user_clerk_id)
     db.add(user)
     db.commit()
     db.refresh(user)
@@ -104,6 +214,10 @@ def update_user(
     current_user: CurrentUserDependency
 ):
     data_dict = user_info.model_dump(exclude_unset=True)
+    # Sending scheme_answers replaces the whole object (null clears it);
+    # leaving it out leaves it unchanged
+    if "scheme_answers" in data_dict:
+        data_dict["scheme_answers"] = serialize_scheme_answers(user_info.scheme_answers)
 
     for key, value in data_dict.items():
         setattr(current_user, key, value)
