@@ -47,6 +47,11 @@ class User(Base):
     scheme_answers: Mapped[Optional[str]] = mapped_column(
         EncryptedType(Text, DB_ENCRYPTION_SECRET), nullable=True
     )
+    home_postal_code: Mapped[Optional[str]] = mapped_column(
+        EncryptedType(String, DB_ENCRYPTION_SECRET),
+        nullable=True,
+        comment="Postal code where the care recipient lives",
+    )
 
     care_recipient_age: Mapped[Optional[int]] = mapped_column(Integer)
     care_recipient_citizenship: Mapped[Optional[Citizenship]] = mapped_column(SQLAlchemyEnum(Citizenship))

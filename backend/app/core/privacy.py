@@ -1,7 +1,7 @@
 """Keep personal data about the care recipient out of Sentry.
 
-The care recipient's name and the scheme answers (which include
-health-related daily-activity answers) are personal data. Sentry would
+The care recipient's name, home postal code and the scheme answers (which
+include health-related daily-activity answers) are personal data. Sentry would
 otherwise attach request bodies and stack-frame variables to error reports,
 so for the users endpoints we drop both, and the field names are on the
 scrubber's denylist everywhere else.
@@ -11,7 +11,7 @@ from typing import Any, Dict, Optional
 
 from sentry_sdk.scrubber import DEFAULT_DENYLIST, EventScrubber
 
-PERSONAL_FIELDS = ["care_recipient_name", "scheme_answers"]
+PERSONAL_FIELDS = ["care_recipient_name", "scheme_answers", "home_postal_code"]
 
 # Routes whose request bodies or local variables can hold those fields
 _PERSONAL_PATHS = ("/users",)

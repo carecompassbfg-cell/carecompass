@@ -1,4 +1,5 @@
 import json
+import re
 import unicodedata
 from datetime import datetime, timezone
 from typing import Annotated, List, Literal, Optional, Union
@@ -25,6 +26,7 @@ router = APIRouter()
 # Pydantic models
 
 CARE_RECIPIENT_NAME_MAX_LENGTH = 40
+POSTAL_CODE_PATTERN = re.compile(r"[0-9]{6}")
 
 NotSure = Literal["not_sure"]
 YesNoNotSure = Literal["yes", "no", "not_sure"]
@@ -65,6 +67,18 @@ def clean_care_recipient_name(value: Optional[str]) -> Optional[str]:
     return name
 
 
+def clean_home_postal_code(value: Optional[str]) -> Optional[str]:
+    """Remove spaces; empty becomes None; otherwise exactly 6 digits."""
+    if value is None:
+        return None
+    postal_code = "".join(value.split())
+    if not postal_code:
+        return None
+    if not POSTAL_CODE_PATTERN.fullmatch(postal_code):
+        raise ValueError("must be a 6-digit postal code")
+    return postal_code
+
+
 def serialize_scheme_answers(answers: Optional[SchemeAnswers]) -> Optional[str]:
     """JSON text for the encrypted column, with a server-set updated_at."""
     if answers is None:
@@ -93,6 +107,7 @@ class UserBase(BaseModel):
     # Both optional, so clients that don't know about them are unaffected
     care_recipient_name: Optional[str] = None
     scheme_answers: Optional[SchemeAnswers] = None
+    home_postal_code: Optional[str] = None
     
     care_recipient_age: int
     care_recipient_citizenship: Citizenship
@@ -108,6 +123,11 @@ class UserBase(BaseModel):
     @classmethod
     def validate_care_recipient_name(cls, value: Optional[str]) -> Optional[str]:
         return clean_care_recipient_name(value)
+
+    @field_validator("home_postal_code")
+    @classmethod
+    def validate_home_postal_code(cls, value: Optional[str]) -> Optional[str]:
+        return clean_home_postal_code(value)
 
 class UserCreate(UserBase):
     pass

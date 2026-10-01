@@ -15,7 +15,7 @@ pytestmark = requires_db
 
 BACKEND_DIR = Path(__file__).resolve().parent.parent
 TEST_CLERK_ID = "test-clerk-user-profile-answers"
-NEW_COLUMNS = ("care_recipient_name", "scheme_answers")
+NEW_COLUMNS = ("care_recipient_name", "scheme_answers", "home_postal_code")
 
 NEW_USER = {
     "citizenship": "CITIZEN",
@@ -76,7 +76,8 @@ def raw_row(engine):
     with engine.connect() as connection:
         return connection.execute(
             text(
-                "SELECT care_recipient_name, scheme_answers, care_recipient_age "
+                "SELECT care_recipient_name, scheme_answers, care_recipient_age, "
+                "home_postal_code "
                 "FROM users WHERE clerk_id = :id"
             ),
             {"id": TEST_CLERK_ID},
@@ -89,7 +90,8 @@ def new_columns(engine):
             text(
                 "SELECT column_name, data_type, is_nullable, column_default "
                 "FROM information_schema.columns WHERE table_name = 'users' "
-                "AND column_name IN ('care_recipient_name', 'scheme_answers')"
+                "AND column_name IN "
+                "('care_recipient_name', 'scheme_answers', 'home_postal_code')"
             )
         ).all()
     return {row[0]: row[1:] for row in rows}
@@ -98,7 +100,7 @@ def new_columns(engine):
 # --- migration ---------------------------------------------------------------
 
 
-def test_migration_adds_two_nullable_encrypted_columns(engine):
+def test_migration_adds_three_nullable_encrypted_columns(engine):
     columns = new_columns(engine)
     assert set(columns) == set(NEW_COLUMNS)
     for data_type, nullable, default in columns.values():
@@ -123,10 +125,12 @@ def test_migration_downgrades_and_upgrades(alembic_config, engine):
 def test_new_fields_are_null_for_an_existing_user(client, user):
     assert user["care_recipient_name"] is None
     assert user["scheme_answers"] is None
+    assert user["home_postal_code"] is None
     response = client.get("/users/me")
     assert response.status_code == 200
     assert response.json()["care_recipient_name"] is None
     assert response.json()["scheme_answers"] is None
+    assert response.json()["home_postal_code"] is None
 
 
 def test_patch_saves_name_and_answers(client, user):
@@ -153,7 +157,7 @@ def test_values_are_encrypted_in_the_database(client, engine, user):
             "scheme_answers": {"ltc_insurance": "eldershield"},
         },
     )
-    name, answers, _ = raw_row(engine)
+    name, answers, _, _ = raw_row(engine)
     for stored in (name, answers):
         raw = bytes(stored)
         assert b"Mdm Lim" not in raw
@@ -200,9 +204,37 @@ def test_empty_name_clears_it(client, user):
     assert client.get("/users/me").json()["care_recipient_name"] is None
 
 
+def test_postal_code_round_trip(client, user):
+    response = client.patch("/users/me", json={"home_postal_code": " 560 123 "})
+    assert response.status_code == 200, response.text
+    assert client.get("/users/me").json()["home_postal_code"] == "560123"
+    # Other fields leave it alone; empty clears it
+    client.patch("/users/me", json={"care_recipient_age": 81})
+    assert client.get("/users/me").json()["home_postal_code"] == "560123"
+    client.patch("/users/me", json={"home_postal_code": ""})
+    assert client.get("/users/me").json()["home_postal_code"] is None
+
+
+def test_postal_code_is_encrypted_in_the_database(client, engine, user):
+    client.patch("/users/me", json={"home_postal_code": "560123"})
+    *_, postal_code = raw_row(engine)
+    raw = bytes(postal_code)
+    assert b"560123" not in raw
+    assert len(raw) > 6
+
+
+def test_onboarding_accepts_a_postal_code(client):
+    response = client.post("/users", json={**NEW_USER, "home_postal_code": "560123"})
+    assert response.status_code == 200, response.text
+    assert response.json()["home_postal_code"] == "560123"
+
+
 @pytest.mark.parametrize(
     "payload",
     [
+        {"home_postal_code": "12345"},
+        {"home_postal_code": "abcdef"},
+        {"home_postal_code": "1234567"},
         {"scheme_answers": {"adl_needs": 9}},
         {"scheme_answers": {"unknown_key": True}},
         {"care_recipient_name": "x" * 41},

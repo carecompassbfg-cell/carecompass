@@ -1,6 +1,6 @@
-"""add care recipient name and scheme answers
+"""add care recipient name, scheme answers and home postal code
 
-Additive only: two new nullable, encrypted columns on users. No defaults,
+Additive only: three new nullable, encrypted columns on users. No defaults,
 no data changes, no other tables touched, so the running app keeps working
 before and after it is applied.
 
@@ -41,8 +41,18 @@ def upgrade() -> None:
             comment="JSON: answers from the schemes question sheet",
         ),
     )
+    op.add_column(
+        "users",
+        sa.Column(
+            "home_postal_code",
+            EncryptedType(),
+            nullable=True,
+            comment="Postal code where the care recipient lives",
+        ),
+    )
 
 
 def downgrade() -> None:
+    op.drop_column("users", "home_postal_code")
     op.drop_column("users", "scheme_answers")
     op.drop_column("users", "care_recipient_name")

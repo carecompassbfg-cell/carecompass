@@ -10,6 +10,7 @@ from app.api.routes.users import (
     UserResponse,
     UserUpdate,
     clean_care_recipient_name,
+    clean_home_postal_code,
     parse_scheme_answers,
     serialize_scheme_answers,
 )
@@ -49,6 +50,32 @@ def test_update_model_validates_the_name():
     assert UserUpdate(care_recipient_name="  Pa ").care_recipient_name == "Pa"
     with pytest.raises(ValidationError):
         UserUpdate(care_recipient_name="x" * 41)
+
+
+# --- home_postal_code ----------------------------------------------------------
+
+
+def test_postal_code_spaces_are_removed():
+    assert clean_home_postal_code(" 560 123 ") == "560123"
+    assert clean_home_postal_code("560123") == "560123"
+
+
+def test_empty_postal_code_becomes_none():
+    assert clean_home_postal_code("   ") is None
+    assert clean_home_postal_code("") is None
+    assert clean_home_postal_code(None) is None
+
+
+@pytest.mark.parametrize("bad", ["12345", "abcdef", "1234567", "56O123", "５６０１２３"])
+def test_postal_code_must_be_six_digits(bad):
+    with pytest.raises(ValueError):
+        clean_home_postal_code(bad)
+
+
+def test_update_model_validates_the_postal_code():
+    assert UserUpdate(home_postal_code="560 123").home_postal_code == "560123"
+    with pytest.raises(ValidationError):
+        UserUpdate(home_postal_code="12345")
 
 
 # --- SchemeAnswers -----------------------------------------------------------
@@ -117,6 +144,7 @@ def test_response_reads_stored_json_text():
         citizenship = "CITIZEN"
         contact_number = None
         care_recipient_name = "Mum"
+        home_postal_code = "560123"
         scheme_answers = serialize_scheme_answers(SchemeAnswers(adl_needs=2))
         care_recipient_age = 78
         care_recipient_citizenship = "CITIZEN"
@@ -129,6 +157,7 @@ def test_response_reads_stored_json_text():
 
     response = UserResponse.model_validate(Row())
     assert response.care_recipient_name == "Mum"
+    assert response.home_postal_code == "560123"
     assert response.scheme_answers.adl_needs == 2
     assert response.scheme_answers.updated_at is not None
 
