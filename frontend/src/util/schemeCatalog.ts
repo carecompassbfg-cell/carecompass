@@ -84,15 +84,17 @@ export const PAY_FOR_ORDER: PayForCategory[] = Object.values(PayForCategory);
 export const isPayForCategory = (value: string): value is PayForCategory =>
   (PAY_FOR_ORDER as string[]).includes(value);
 
-// Questions the question sheet can ask. The other ProfileQuestionIds are
-// collected at onboarding, so signed-out users are asked to sign in instead.
+// Questions the question sheet can ask, in the order it asks them
+// (docs/schemes/tier1-schemes.md, "Questions the sheet needs"). The other
+// ProfileQuestionIds are profile fields: signed-out users are asked to sign
+// in, signed-in users to update the profile. has_far and housing_type are
+// not asked.
 export const SHEET_QUESTIONS: ProfileQuestionId[] = [
   // Asked when the profile has no age (onboarding used to save 0)
   ProfileQuestionId.CARE_RECIPIENT_AGE,
-  ProfileQuestionId.HOUSEHOLD_INCOME,
   ProfileQuestionId.ADL_NEEDS,
-  ProfileQuestionId.HAS_FAR,
-  ProfileQuestionId.HOUSING_TYPE,
+  ProfileQuestionId.ADL_FULL_HELP,
+  ProfileQuestionId.HOUSEHOLD_INCOME,
   ProfileQuestionId.LTC_INSURANCE,
 ];
 
@@ -119,8 +121,14 @@ export const QUESTION_META: Record<ProfileQuestionId, QuestionMeta> = {
   [ProfileQuestionId.ADL_NEEDS]: {
     pillLabel: "Confirm daily-activity needs",
     rowTitle: "Help needed with daily activities",
-    rowHint: "Such as bathing, dressing or moving around the home.",
+    rowHint: "Such as bathing, dressing or moving around.",
     summary: "Which daily activities need help?",
+  },
+  [ProfileQuestionId.ADL_FULL_HELP]: {
+    pillLabel: "Confirm how much help is needed",
+    rowTitle: "Full help with daily activities",
+    rowHint: "Whether someone needs to do at least 3 of them fully.",
+    summary: "Is full help needed?",
   },
   [ProfileQuestionId.HAS_FAR]: {
     pillLabel: "Confirm assessment report",
@@ -137,8 +145,8 @@ export const QUESTION_META: Record<ProfileQuestionId, QuestionMeta> = {
   [ProfileQuestionId.LTC_INSURANCE]: {
     pillLabel: "Share insurance cover",
     rowTitle: "Long-term care insurance",
-    rowHint: "ElderShield or CareShield Life cover.",
-    summary: "Is there long-term care insurance?",
+    rowHint: "CareShield Life or ElderShield cover.",
+    summary: "Is there CareShield Life or ElderShield cover?",
   },
   [ProfileQuestionId.CARE_RECIPIENT_AGE]: {
     pillLabel: "Share their age to check",
@@ -153,9 +161,9 @@ export const QUESTION_META: Record<ProfileQuestionId, QuestionMeta> = {
     summary: "What is their citizenship?",
   },
   [ProfileQuestionId.CARE_RECIPIENT_RESIDENCE]: {
-    pillLabel: "Sign in to check",
+    pillLabel: "Confirm where they live",
     rowTitle: "Where they live",
-    rowHint: "Sign in and complete the profile to check this.",
+    rowHint: "Update your loved one's profile to check this.",
     summary: "Where do they live?",
   },
   [ProfileQuestionId.CAREGIVER_CITIZENSHIP]: {
@@ -235,15 +243,16 @@ export const collectQuestions = (
 ): ProfileQuestionId[] =>
   Array.from(new Set(items.flatMap(({ status }) => status.questionsToAsk)));
 
-// Questions the sheet should ask now: open, askable in the sheet, and not
-// already answered this session
+// Questions the sheet should ask now: ones that could change a status (asked
+// by a scheme that needs answers, not one already ruled out), askable in the
+// sheet, and not already answered this session
 export const getOpenSheetQuestions = (
   items: SchemeWithStatus[],
   isAnswered: (id: ProfileQuestionId) => boolean,
 ): ProfileQuestionId[] =>
-  collectQuestions(items).filter(
-    (id) => isSheetQuestion(id) && !isAnswered(id),
-  );
+  collectQuestions(
+    items.filter(({ status }) => status.status === "needs_answers"),
+  ).filter((id) => isSheetQuestion(id) && !isAnswered(id));
 
 export const SOURCE_LABELS: Record<CatalogScheme["source"], string> = {
   carecompass: "CareCompass",

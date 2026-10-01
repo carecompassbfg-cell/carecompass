@@ -1,7 +1,8 @@
 name: Schemes.sg - Weekly sync
 
-# Pulls Tier 2 schemes from the Schemes.sg partner API and, when anything
-# changed, opens or updates a PR into staging. Never pushes to staging or main.
+# Pulls Tier 2 schemes from the Schemes.sg partner API and checks the official
+# pages behind our Tier 1 schemes. When anything changed, opens or updates a
+# PR into staging. Never pushes to staging or main.
 
 on:
   schedule:
@@ -59,6 +60,7 @@ jobs:
             scrapers/schemessg/data/other.json
             scrapers/schemessg/data/report.md
             scrapers/schemessg/data/state.json
+            scrapers/schemessg/data/tier1_sources.json
           commit-message: "chore: weekly Schemes.sg sync"
           title: "Schemes.sg weekly sync"
           body-path: scrapers/schemessg/data/report.md

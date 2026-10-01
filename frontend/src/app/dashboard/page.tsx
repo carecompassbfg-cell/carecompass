@@ -8,7 +8,6 @@ import QuestionSheet from "@/components/schemes/QuestionSheet";
 import SchemeCard from "@/components/schemes/SchemeCard";
 import SchemeIcon, { FOCUS_RING } from "@/components/schemes/SchemeIcon";
 import { isAnswered, useSchemeAnswersStore } from "@/stores/schemeAnswers";
-import { ProfileQuestionId } from "@/types/scheme";
 import { BackButton } from "@/ui/button";
 import LoadingSpinner from "@/ui/loading";
 import useSchemeCatalog from "@/util/hooks/useSchemeCatalog";
@@ -64,9 +63,7 @@ export default function SchemesPage() {
     refreshUser,
   } = useSchemeCatalog();
   const answers = useSchemeAnswersStore((state) => state.answers);
-  // Snapshot of the questions when the sheet opens, so answering one doesn't
-  // reshuffle the rest mid-way
-  const [sheetQuestions, setSheetQuestions] = useState<ProfileQuestionId[]>();
+  const [isSheetOpen, setIsSheetOpen] = useState(false);
 
   const name = getRecipientName(user);
   const profileFacts = getProfileFacts(user);
@@ -86,8 +83,10 @@ export default function SchemesPage() {
         : [],
     [items, answers, isSignedIn],
   );
-  const schemesUnlocked = items.filter(({ status }) =>
-    status.questionsToAsk.some((id) => openQuestions.includes(id)),
+  const schemesUnlocked = items.filter(
+    ({ status }) =>
+      status.status === "needs_answers" &&
+      status.questionsToAsk.some((id) => openQuestions.includes(id)),
   ).length;
 
   if (isLoading) {
@@ -198,7 +197,7 @@ export default function SchemesPage() {
               colorScheme="blue"
               width="full"
               minHeight="44px"
-              onClick={() => setSheetQuestions(openQuestions)}
+              onClick={() => setIsSheetOpen(true)}
             >
               Answer now
             </Button>
@@ -354,11 +353,10 @@ export default function SchemesPage() {
         </span>
       </p>
 
-      {sheetQuestions && (
+      {isSheetOpen && (
         <QuestionSheet
           isOpen
-          onClose={() => setSheetQuestions(undefined)}
-          questions={sheetQuestions}
+          onClose={() => setIsSheetOpen(false)}
           items={items}
           recipientName={name}
           isSignedIn={isSignedIn}

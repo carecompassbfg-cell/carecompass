@@ -34,7 +34,10 @@ export enum PayForCategory {
 // when the caregiver is signed out.
 export enum ProfileQuestionId {
   HOUSEHOLD_INCOME = "household_income",
+  // Stored as adl_count (0–6) in the session answers
   ADL_NEEDS = "adl_needs",
+  // Only asked when 3 or more daily activities are ticked
+  ADL_FULL_HELP = "adl_full_help",
   HAS_FAR = "has_far",
   HOUSING_TYPE = "housing_type",
   LTC_INSURANCE = "ltc_insurance",

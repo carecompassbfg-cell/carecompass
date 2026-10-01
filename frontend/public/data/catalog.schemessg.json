@@ -1,32 +1,5 @@
 [
   {
-    "id": "ssg-aic-careshield-life",
-    "source": "schemes_sg",
-    "sourceId": "cxMMY70781j5U34BDhSo",
-    "tier": 2,
-    "name": "CareShield Life",
-    "agency": "AIC",
-    "summary": "Long-term care insurance for severe disability.",
-    "description": "CareShield Life is a long-term care insurance scheme launched on 1 October 2020, which provides basic financial protection should an individual become severely disabled, especially during old age, and need care for a prolonged duration.\n\nFrom 1 October 2020, all Singapore Citizens or Permanent Residents, born in 1980 or later, will be automatically covered under CareShield Life from 1 October 2020, or when they turn 30, whichever is later.\n\nFrom 6 November 2021, all Singapore Citizens or Permanent Residents born in 1979 or earlier can choose to join CareShield Life, if they are not severely disabled. To make joining more convenient, Singapore Citizens or Permanent Residents born between 1970 and 1979 (both inclusive) who are insured under ElderShield 400 scheme and are not severely disabled will be auto-enrolled onto CareShield Life from December 2021.",
-    "eligibility": "- Singapore Citizens or Permanent Residents born in 1980 or later are automatically covered from 1 October 2020 or when they turn 30, whichever is later.\n- Singapore Citizens or Permanent Residents born in 1979 or earlier can choose to join if they are not severely disabled.\n- Singapore Citizens or Permanent Residents born between 1970 and 1979, insured under ElderShield 400 and not severely disabled, will be auto-enrolled from December 2021.",
-    "whatYouGet": [
-      "Financial assistance for daily living expenses",
-      "Financial assistance for healthcare"
-    ],
-    "payFor": "monthly_payouts",
-    "area": {
-      "kind": "islandwide"
-    },
-    "link": "https://www.aic.sg/financial-assistance/careshield-life",
-    "sources": [
-      {
-        "name": "Agency for Integrated Care",
-        "url": "https://www.aic.sg/financial-assistance/careshield-life"
-      }
-    ],
-    "lastRefreshed": "2026-10-01"
-  },
-  {
     "id": "ssg-supportgowhere-comcare-long-term-assistance-lta",
     "source": "schemes_sg",
     "sourceId": "IhKLeOTlBTc8tSkAgKEP",
@@ -209,34 +182,6 @@
       {
         "name": "Housing & Development Board",
         "url": "https://www.hdb.gov.sg/managing-my-home/upgrading-and-redevelopment/enhancement-for-active-seniors-ease"
-      }
-    ],
-    "lastRefreshed": "2026-10-01"
-  },
-  {
-    "id": "ssg-aic-seniors-mobility-enabling-fund",
-    "source": "schemes_sg",
-    "sourceId": "xLzabY4HEQmB6nXqOeKE",
-    "tier": 2,
-    "name": "Seniors' Mobility and Enabling Fund (SMF)",
-    "agency": "AIC",
-    "summary": "Subsidies for seniors' mobility and healthcare needs.",
-    "description": "Provides holistic support for seniors to age in place within the community by extending subsidies to Singaporean seniors requiring mobility and assistive devices for daily independent living and to remain ambulant in the community, and receiving Government funded home care and care within the community, needing home healthcare items for their care.",
-    "eligibility": "Singaporean seniors requiring mobility and assistive devices for daily living, and those receiving government-funded home care or community care who need home healthcare items.",
-    "whatYouGet": [
-      "Financial assistance for assistive technology and medical equipment",
-      "Financial assistance for healthcare",
-      "Financial assistance for daily living expenses"
-    ],
-    "payFor": "equipment_home",
-    "area": {
-      "kind": "islandwide"
-    },
-    "link": "https://www.aic.sg/financial-assistance/seniors-mobility-enabling-fund",
-    "sources": [
-      {
-        "name": "Agency for Integrated Care (AIC), Ministry of Health (MOH)",
-        "url": "https://www.aic.sg/financial-assistance/seniors-mobility-enabling-fund"
       }
     ],
     "lastRefreshed": "2026-10-01"
@@ -490,33 +435,6 @@
       {
         "name": "Central Provident Fund (CPF)",
         "url": "https://www.cpf.gov.sg/member/growing-your-savings/saving-more-with-cpf/matching-grant-for-seniors-who-top-up"
-      }
-    ],
-    "lastRefreshed": "2026-10-01"
-  },
-  {
-    "id": "ssg-cpf-medisave-care-for-long-term-care-needs",
-    "source": "schemes_sg",
-    "sourceId": "8DX3MLX0sbk2XKZlfXT7",
-    "tier": 2,
-    "name": "Medisave Care",
-    "agency": "CPF Board",
-    "summary": "Monthly MediSave withdrawals for severe disability care.",
-    "description": "After setting aside a minimum amount to ensure adequacy for other medical expenses, Singapore Citizens and Permanent Residents will be able to withdraw up to a total of $200/month from their own and/or their spouse’s MediSave account for long term care, if they are not able to perform three or more of the six activities of daily living as listed on their website.",
-    "eligibility": "- Singapore Citizen or Permanent Resident\n- Aged 30 and above\n- Assessed by an MOH-accredited assessor to be unable to perform at least three out of six activities of daily living (washing, dressing, feeding, toileting, mobility indoors, transferring)\n- Minimum MediSave balance of $5,000\n- Severe disability assessment required",
-    "whatYouGet": [
-      "Financial assistance for healthcare",
-      "Financial assistance for daily living expenses"
-    ],
-    "payFor": "tax_cpf",
-    "area": {
-      "kind": "islandwide"
-    },
-    "link": "https://www.cpf.gov.sg/member/healthcare-financing/medisave-care-for-long-term-care-needs",
-    "sources": [
-      {
-        "name": "Central Provident Fund (CPF)",
-        "url": "https://www.cpf.gov.sg/member/healthcare-financing/medisave-care-for-long-term-care-needs"
       }
     ],
     "lastRefreshed": "2026-10-01"

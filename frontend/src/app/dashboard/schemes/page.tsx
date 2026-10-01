@@ -7,7 +7,6 @@ import { SignInButton } from "@clerk/nextjs";
 import QuestionSheet from "@/components/schemes/QuestionSheet";
 import SchemeIcon, { FOCUS_RING } from "@/components/schemes/SchemeIcon";
 import StatusPill from "@/components/schemes/StatusPill";
-import { isAnswered, useSchemeAnswersStore } from "@/stores/schemeAnswers";
 import { ProfileQuestionId } from "@/types/scheme";
 import { BackButton } from "@/ui/button";
 import CustomMarkdown from "@/ui/CustomMarkdown";
@@ -65,9 +64,11 @@ function ChecklistRow({
     <li className="flex items-start gap-2.5">
       <SchemeIcon name={icon} size={22} />
       <div className="flex flex-1 flex-col gap-0.5">
-        <span className="text-[15px] leading-[21px] text-gray-800">
-          {title}
-        </span>
+        {/* Reasons can hold a link, e.g. to ElderFund */}
+        <CustomMarkdown
+          content={title}
+          className="text-[15px] leading-[21px] text-gray-800 prose-p:my-0"
+        />
         {hint && (
           <span className="text-[13px] leading-[18px] text-gray-600">
             {hint}
@@ -95,13 +96,7 @@ function SchemeDetail() {
   const id = params.get("id");
   const { items, user, isSignedIn, isLoading, userLoadError, refreshUser } =
     useSchemeCatalog();
-  const answers = useSchemeAnswersStore((state) => state.answers);
-  // Snapshot of the questions when the sheet opens, so answering one doesn't
-  // reshuffle the rest mid-way
-  const [sheet, setSheet] = useState<{
-    start: ProfileQuestionId;
-    questions: ProfileQuestionId[];
-  }>();
+  const [sheetStart, setSheetStart] = useState<ProfileQuestionId>();
 
   if (isLoading) {
     return <LoadingSpinner />;
@@ -126,15 +121,6 @@ function SchemeDetail() {
   const { scheme, status } = item;
   const name = getRecipientName(user);
   const category = PAY_FOR_META[scheme.payFor];
-  const openSheet = (start: ProfileQuestionId) =>
-    setSheet({
-      start,
-      questions: status.questionsToAsk.filter(
-        (question) =>
-          isSheetQuestion(question) &&
-          (question === start || !isAnswered(answers, question)),
-      ),
-    });
 
   return (
     <div className="flex w-full flex-col gap-4 py-6">
@@ -240,7 +226,7 @@ function SchemeDetail() {
                     isSignedIn && isSheetQuestion(question) ? (
                       <button
                         type="button"
-                        onClick={() => openSheet(question)}
+                        onClick={() => setSheetStart(question)}
                         className={`min-h-11 rounded-lg border border-interaction-main-default px-3 text-sm font-semibold text-interaction-links-default ${FOCUS_RING}`}
                       >
                         Answer
@@ -248,6 +234,17 @@ function SchemeDetail() {
                           : {QUESTION_META[question].rowTitle}
                         </span>
                       </button>
+                    ) : isSignedIn ? (
+                      // Profile fields (e.g. where they live) are changed on
+                      // the profile page, not in the question sheet
+                      <Link
+                        href={`/profile/care-recipient-info/edit?returnTo=${encodeURIComponent(
+                          `/dashboard/schemes?id=${scheme.id}`,
+                        )}`}
+                        className={`flex min-h-11 items-center rounded-lg border border-interaction-main-default px-3 text-sm font-semibold text-interaction-links-default ${FOCUS_RING}`}
+                      >
+                        Update profile
+                      </Link>
                     ) : !isSignedIn ? (
                       <SignInButton>
                         <button
@@ -328,12 +325,12 @@ function SchemeDetail() {
         )}
       </p>
 
-      {sheet && (
+      {sheetStart && (
         <QuestionSheet
           isOpen
-          onClose={() => setSheet(undefined)}
-          questions={sheet.questions}
-          startAt={sheet.start}
+          onClose={() => setSheetStart(undefined)}
+          scopeSchemeId={scheme.id}
+          startAt={sheetStart}
           items={items}
           recipientName={name}
           isSignedIn={isSignedIn}

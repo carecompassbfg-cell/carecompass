@@ -2,32 +2,21 @@ import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
 import { immer } from "zustand/middleware/immer";
 import { ProfileQuestionId } from "@/types/scheme";
+import { AdlFullHelp, CheckAnswers, LtcPlan } from "@/util/eligibilityChecker";
 
 export const NOT_SURE = "not_sure";
 
-export type AdlActivity =
-  | "bathing"
-  | "dressing"
-  | "eating"
-  | "toileting"
-  | "moving_around"
-  | "transferring";
-
 export type YesNoNotSure = "yes" | "no" | typeof NOT_SURE;
-export type HousingType = "hdb" | "private" | "other" | typeof NOT_SURE;
-export type LtcInsurance =
-  | "eldershield"
-  | "careshield_life"
-  | "neither"
-  | typeof NOT_SURE;
 
 export interface SchemeAnswers {
   [ProfileQuestionId.CARE_RECIPIENT_AGE]?: number | typeof NOT_SURE;
   [ProfileQuestionId.HOUSEHOLD_INCOME]?: "saved" | typeof NOT_SURE;
-  [ProfileQuestionId.ADL_NEEDS]?: AdlActivity[] | typeof NOT_SURE;
+  // adl_count: how many of the 6 daily activities need help (0 = none)
+  [ProfileQuestionId.ADL_NEEDS]?: number | typeof NOT_SURE;
+  [ProfileQuestionId.ADL_FULL_HELP]?: AdlFullHelp;
+  [ProfileQuestionId.LTC_INSURANCE]?: LtcPlan;
+  // Defined for next steps later; not asked yet
   [ProfileQuestionId.HAS_FAR]?: YesNoNotSure;
-  [ProfileQuestionId.HOUSING_TYPE]?: HousingType;
-  [ProfileQuestionId.LTC_INSURANCE]?: LtcInsurance;
 }
 
 interface SchemeAnswersState {
@@ -61,7 +50,8 @@ export const useSchemeAnswersStore = create<
         }),
     })),
     {
-      name: "cc-scheme-answers",
+      // v2: daily activities are stored as a count, not a list
+      name: "cc-scheme-answers-v2",
       storage: createJSONStorage(() => sessionStorage),
     },
   ),
@@ -74,4 +64,14 @@ export const isAnswered = (
 ): boolean => {
   const value = answers[id as keyof SchemeAnswers];
   return value !== undefined && value !== NOT_SURE;
+};
+
+// The sheet's answers in the shape the eligibility checks read
+export const toCheckAnswers = (answers: SchemeAnswers): CheckAnswers => {
+  const adl = answers[ProfileQuestionId.ADL_NEEDS];
+  return {
+    adlCount: typeof adl === "number" ? adl : null,
+    adlFullHelp: answers[ProfileQuestionId.ADL_FULL_HELP],
+    ltcInsurance: answers[ProfileQuestionId.LTC_INSURANCE],
+  };
 };

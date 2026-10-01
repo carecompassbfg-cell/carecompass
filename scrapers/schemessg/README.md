@@ -47,8 +47,16 @@ pipenv run pytest                  # tests, no network
 | `data/other.json` | Relevant services and programmes, for Care services and Help and support later. Not used by the frontend yet. |
 | `data/report.md` | Review report: counts, published by category, unclassified, excluded with reasons, retired, Tier 1 description changes, changes since the last run and feedback for Schemes.sg. |
 | `data/state.json` | This run's normalised records, used to diff the next run. |
+| `data/tier1_sources.json` | Hash of each Tier 1 source page's visible text, used to spot changes next run. |
 
 When nothing changed since the last run, no file is rewritten, so the weekly job opens no PR.
+
+## Watching Tier 1 source pages
+
+`watch_sources.py` (run by `sync.py`) fetches every source URL in `frontend/public/data/catalog.tier1.json`, keeps only the visible text (the `<main>` element when there is one; scripts, styles, menus and footers are dropped), hashes it and compares with `data/tier1_sources.json`.
+
+- A changed hash is listed in the report (and so the sync PR) under "Tier 1 sources that changed. Re-check docs/schemes/tier1-schemes.md", and opens a PR even if nothing else changed.
+- Pages without real content (rendered with JavaScript, like IRAS and some CPF articles), non-HTML pages and pages that can't be fetched go under "Can't watch automatically. Check by hand twice a year". They never fail the run, and a page that fails once keeps its last good hash.
 
 ## Stable ids
 

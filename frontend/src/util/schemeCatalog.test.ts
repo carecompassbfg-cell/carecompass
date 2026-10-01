@@ -3,10 +3,12 @@ import catalog from "../../public/data/catalog.tier1.json";
 import {
   CatalogScheme,
   PayForCategory,
+  ProfileQuestionId,
   SchemeStatus,
   SchemeStatusKind,
 } from "@/types/scheme";
 import {
+  getOpenSheetQuestions,
   countByCategory,
   countByStatus,
   pickBestMatches,
@@ -154,5 +156,53 @@ describe("countByStatus", () => {
       provider_decides: 1,
       not_a_match: 0,
     });
+  });
+});
+
+describe("getOpenSheetQuestions", () => {
+  const withQuestions = (
+    id: string,
+    kind: SchemeStatusKind,
+    questions: ProfileQuestionId[],
+  ): SchemeWithStatus => ({
+    scheme: makeScheme(id, 1),
+    status: { ...makeStatus(kind), questionsToAsk: questions },
+  });
+
+  it("only counts questions that could change a status", () => {
+    const items = [
+      withQuestions("a", "needs_answers", [ProfileQuestionId.ADL_NEEDS]),
+      // Already ruled out: answering won't change it
+      withQuestions("b", "not_a_match", [ProfileQuestionId.HOUSEHOLD_INCOME]),
+      // Profile field, not asked in the sheet
+      withQuestions("c", "needs_answers", [
+        ProfileQuestionId.CARE_RECIPIENT_RESIDENCE,
+      ]),
+    ];
+    expect(getOpenSheetQuestions(items, () => false)).toEqual([
+      ProfileQuestionId.ADL_NEEDS,
+    ]);
+  });
+
+  it("leaves out questions already answered this session", () => {
+    const items = [
+      withQuestions("a", "needs_answers", [
+        ProfileQuestionId.ADL_NEEDS,
+        ProfileQuestionId.HOUSEHOLD_INCOME,
+      ]),
+    ];
+    expect(
+      getOpenSheetQuestions(items, (id) => id === ProfileQuestionId.ADL_NEEDS),
+    ).toEqual([ProfileQuestionId.HOUSEHOLD_INCOME]);
+  });
+
+  it("never asks housing type or the Functional Assessment Report", () => {
+    const items = [
+      withQuestions("a", "needs_answers", [
+        ProfileQuestionId.HOUSING_TYPE,
+        ProfileQuestionId.HAS_FAR,
+      ]),
+    ];
+    expect(getOpenSheetQuestions(items, () => false)).toEqual([]);
   });
 });

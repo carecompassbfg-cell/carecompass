@@ -20,6 +20,7 @@ from typing import Dict, List, Optional
 import catalog as cat
 import client as api
 import report
+import watch_sources
 
 HERE = Path(__file__).resolve().parent
 REPO_ROOT = HERE.parent.parent
@@ -30,6 +31,8 @@ STATE_FILE = DATA_DIR / "state.json"
 OTHER_FILE = DATA_DIR / "other.json"
 REPORT_FILE = DATA_DIR / "report.md"
 CATALOG_FILE = REPO_ROOT / "frontend" / "public" / "data" / "catalog.schemessg.json"
+TIER1_CATALOG_FILE = REPO_ROOT / "frontend" / "public" / "data" / "catalog.tier1.json"
+TIER1_SOURCES_FILE = DATA_DIR / "tier1_sources.json"
 
 SINGAPORE = timezone(timedelta(hours=8))
 
@@ -86,6 +89,7 @@ def run(
     synced_on: str,
     env: str,
     extra_missing: Optional[List[dict]] = None,
+    source_watch: Optional[Dict[str, List[dict]]] = None,
 ) -> dict:
     """Classify and build every output. Pure apart from its inputs."""
     problems = cat.validate_overrides(overrides)
@@ -108,6 +112,7 @@ def run(
         or bool(diff and (diff["added"] or diff["removed"] or diff["changed"]))
         or any(m["changed"] for m in tier1)
         or any(o["sourceChanged"] for o in to_review)
+        or bool(source_watch and source_watch["changed"])
     )
     report_md = report.render_report(
         synced_on=synced_on,
@@ -117,6 +122,9 @@ def run(
         diff=diff,
         tier1_changes=tier1,
         overrides_to_review=to_review,
+        source_watch_lines=(
+            watch_sources.render_section(source_watch) if source_watch else None
+        ),
         extra_includes=overrides.get("extra_includes", []),
         extra_missing=extra_missing or [],
         feedback=report.api_feedback(raw_details, raw_listed),
@@ -168,12 +176,28 @@ def main() -> int:
     print(f"Fetched {len(raw_details) + len(retired)} schemes ({len(retired)} retired or missing).")
 
     synced_on = datetime.now(SINGAPORE).date().isoformat()
+
+    # Watch the official pages behind Tier 1. Never fails the sync.
+    source_state, source_watch = None, None
+    try:
+        tier1_catalog = read_json(TIER1_CATALOG_FILE, [])
+        source_state, source_watch = watch_sources.watch(
+            tier1_catalog, read_json(TIER1_SOURCES_FILE, {}), synced_on
+        )
+        print(
+            f"Tier 1 sources: {len(source_watch['changed'])} changed, "
+            f"{len(source_watch['unwatchable'])} can't be watched."
+        )
+    except Exception as error:  # noqa: BLE001 - watching is best effort
+        print(f"Tier 1 source watch skipped: {type(error).__name__}")
+
     result = run(
         raw_details=raw_details,
         raw_listed=raw_listed,
         retired=retired,
         overrides=overrides,
         extra_missing=extra_missing,
+        source_watch=source_watch,
         previous_state=read_json(STATE_FILE, None),
         synced_on=synced_on,
         env=settings["env"],
@@ -187,6 +211,8 @@ def main() -> int:
     write_json(CATALOG_FILE, result["catalog"])
     write_json(OTHER_FILE, result["other"])
     write_json(STATE_FILE, result["state"])
+    if source_state is not None:
+        write_json(TIER1_SOURCES_FILE, source_state)
     write_text(REPORT_FILE, result["report"])
 
     statuses: Dict[str, int] = {}

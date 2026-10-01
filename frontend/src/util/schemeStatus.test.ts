@@ -76,47 +76,41 @@ describe("getSchemeStatus", () => {
     expect(result.status).toBe("likely");
     expect(result.questionsToAsk).toEqual([]);
     expect(result.agencyWillCheck).toContain(
-      "Selected course is on the approved list of courses",
+      "The course is on the approved list",
     );
   });
 
   it("asks for household income when monthly_pchi is missing", () => {
-    const result = getSchemeStatus(
-      findScheme("HOME-CAREGIVING-GRANT"),
-      withoutPchi(makeUser()),
-    );
-    expect(result.status).toBe("needs_answers");
-    expect(result.questionsToAsk).toEqual([ProfileQuestionId.HOUSEHOLD_INCOME]);
-    // Income tiers are questions for the caregiver, not agency checks
-    expect(
-      result.agencyWillCheck.some((d) =>
-        d.includes("household monthly income"),
-      ),
-    ).toBe(false);
-    expect(result.agencyWillCheck).toHaveLength(1);
-  });
-
-  it("asks for household income for the MOH subsidy too", () => {
     const result = getSchemeStatus(
       findScheme("MOH-NR-LTC-SUBSIDY"),
       withoutPchi(makeUser()),
     );
     expect(result.status).toBe("needs_answers");
     expect(result.questionsToAsk).toEqual([ProfileQuestionId.HOUSEHOLD_INCOME]);
+    // Agency-only conditions never become questions
     expect(result.agencyWillCheck).toEqual([
-      "The service provider is government-funded",
+      "The provider is government-funded",
+      "The doctor or AIC referral",
     ]);
   });
 
-  it("returns not_a_match for an ineligible profile", () => {
+  it("puts a hard no ahead of missing answers", () => {
     const result = getSchemeStatus(
       findScheme("HOME-CAREGIVING-GRANT"),
-      makeUser({ care_recipient_citizenship: Citizenship.OTHER }),
+      withoutPchi(makeUser({ care_recipient_citizenship: Citizenship.OTHER })),
     );
     expect(result.status).toBe("not_a_match");
-    expect(result.reasonsNotMet).toContain(
-      "Care recipient is a Singapore Citizen (SC)",
-    );
+    expect(result.reasonsNotMet).toContain("For Singapore Citizens and PRs");
+  });
+
+  it("uses session answers passed in", () => {
+    const scheme = findScheme("MEDISAVE-CARE");
+    expect(getSchemeStatus(scheme, makeUser()).status).toBe("needs_answers");
+    expect(
+      getSchemeStatus(scheme, makeUser(), {
+        answers: { adlCount: 3, adlFullHelp: "yes" },
+      }).status,
+    ).toBe("likely");
   });
 
   it("asks for the age instead of treating 0 as aged 0", () => {
@@ -171,12 +165,24 @@ const GENERIC_GIVES = [
 describe("catalog files", () => {
   const payFor = Object.values(PayForCategory) as string[];
 
-  it("catalog.tier1.json has our 5 Tier 1 schemes, each with a checker", () => {
-    expect(TIER1).toHaveLength(5);
+  it("catalog.tier1.json has our 8 Tier 1 schemes, each with a check", () => {
+    expect(TIER1.map((scheme) => scheme.id)).toEqual([
+      "PARENT-RELIEF",
+      "CAREGIVERS-TRAINING-GRANT",
+      "HOME-CAREGIVING-GRANT",
+      "MIGRANT-DOMESTIC-WORKER-LEVY",
+      "MOH-NR-LTC-SUBSIDY",
+      "SENIORS-MOBILITY-ENABLING-FUND",
+      "MEDISAVE-CARE",
+      "CARESHIELD-ELDERSHIELD-CLAIM",
+    ]);
     for (const scheme of TIER1) {
       expect(scheme.tier).toBe(1);
       expect(scheme.source).toBe("carecompass");
-      expect(scheme.checkerId).toBeDefined();
+      expect(scheme.checkerId).toBe(scheme.id);
+      expect(scheme.eligibility).toBeTruthy();
+      expect(scheme.nextSteps).toBeTruthy();
+      expect(scheme.sources.length).toBeGreaterThan(0);
       expect(payFor).toContain(scheme.payFor);
       // Tier 1 records when we checked it, not a sync date
       expect(Number.isNaN(Date.parse(scheme.lastChecked ?? ""))).toBe(false);
@@ -208,5 +214,42 @@ describe("catalog files", () => {
   it("ids are unique across both files", () => {
     const ids = [...TIER1, ...SCHEMES_SG].map((scheme) => scheme.id);
     expect(new Set(ids).size).toBe(ids.length);
+  });
+});
+
+describe("Tier 1 content from docs/schemes/tier1-schemes.md", () => {
+  it("records when each scheme was last checked", () => {
+    for (const scheme of TIER1) {
+      expect(scheme.lastChecked).toBe(
+        scheme.id === "CARESHIELD-ELDERSHIELD-CLAIM"
+          ? "2026-10-01"
+          : "2026-09-30",
+      );
+    }
+  });
+
+  it("uses MOM's levy concession page for the MDW levy concession", () => {
+    const mdw = findScheme("MIGRANT-DOMESTIC-WORKER-LEVY");
+    const levyConcession =
+      "https://www.mom.gov.sg/passes-and-permits/work-permit-for-foreign-domestic-worker/foreign-domestic-worker-levy/levy-concession";
+    expect(mdw.name).toBe("Migrant Domestic Worker Levy Concession");
+    expect(mdw.link).toBe(levyConcession);
+    expect(mdw.sources.map((source) => source.url)).toEqual([levyConcession]);
+  });
+
+  it("uses the 1 Jul 2026 table for the day care and home care subsidies", () => {
+    const ltc = findScheme("MOH-NR-LTC-SUBSIDY");
+    expect(ltc.name).toBe("Subsidies for day care and home care");
+    expect(ltc.valueText).toBe("Up to 95% off fees");
+    expect(ltc.whatYouGet.join(" ")).toContain(
+      "$3,601–$4,800 | 35% | 20% | 10%",
+    );
+    expect(ltc.whatYouGet[0]).toContain("home personal care");
+  });
+
+  it("doesn't list Home Personal Care as a scheme", () => {
+    expect(
+      TIER1.some((scheme) => /home personal care/i.test(scheme.name)),
+    ).toBe(false);
   });
 });

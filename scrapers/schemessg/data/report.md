@@ -7,43 +7,16 @@ Synced on 2026-10-01 from the **dev** environment, category "Seniors & Caregivin
 | | Count |
 |---|---:|
 | Fetched | 147 |
-| Published (money, Tier 2) | 19 |
+| Published (money, Tier 2) | 16 |
 | Other services and programmes (`other.json`) | 71 |
 | Excluded | 53 |
 | Unclassified money (not published) | 0 |
-| Tier 1 matches (ours, not published) | 4 |
+| Tier 1 matches (ours, not published) | 7 |
 | Retired or not found | 0 |
 
 ## Changes since the last run
 
-### Changed (26)
-
-- **Caregivers Training Grant (CTG)**: agency
-- **CareShield Life**: agency
-- **ElderFund**: agency
-- **Migrant Domestic Worker (MDW) Levy Concession For Persons With Disabilities**: agency
-- **Home Caregiving Grant (HCG)**: agency
-- **Home Personal Care**: agency
-- **Medical Fee Exemption Card (MFEC)**: agency
-- **Medifund**: agency
-- **Pioneer Generation Disability Assistance Scheme (PioneerDAS)**: agency
-- **Seniors' Mobility and Enabling Fund (SMF)**: agency
-- **Financial Assistance**: agency
-- **Financial and Food Rations assistance (Temporary)**: agency
-- **Community Health Assist Scheme (CHAS)**: agency
-- **Matched Retirement Savings Scheme**: agency
-- **Medisave Care**: agency
-- **Enhancement for Active Seniors (EASE)**: agency
-- **Mobile Access for Seniors**: agency
-- **Interim Disability Assistance Programme for the Elderly (IDAPE)**: agency
-- **Subsidies for Government-Funded Intermediate and Long Term Care (ILTC) Services**: agency
-- **Merdeka Generation Package**: agency
-- **Pioneer Generation Package**: agency
-- **Caregiving @ South West**: agency
-- **South West Caregiver Support Fund**: agency
-- **ComCare Long Term Assistance (LTA)**: agency
-- **TOUCH Caregivers Support**: agency
-- **TOUCH Ubi Hostel (TUH)**: agency
+No changes.
 
 ## Overrides to review
 
@@ -66,9 +39,17 @@ These are our own schemes. The sync never publishes or overwrites them; check wh
 
 https://aic.sg/financial-assistance/caregivers-training-grant (no change)
 
+### CARESHIELD-ELDERSHIELD-CLAIM: CareShield Life
+
+https://www.aic.sg/financial-assistance/careshield-life (no change)
+
 ### HOME-CAREGIVING-GRANT: Home Caregiving Grant (HCG)
 
 https://www.aic.sg/financial-assistance/home-caregiving-grant (no change)
+
+### MEDISAVE-CARE: Medisave Care
+
+https://www.cpf.gov.sg/member/healthcare-financing/medisave-care-for-long-term-care-needs (no change)
 
 ### MIGRANT-DOMESTIC-WORKER-LEVY: Migrant Domestic Worker (MDW) Levy Concession For Persons With Disabilities
 
@@ -78,19 +59,22 @@ https://www.aic.sg/financial-assistance/foreign-domestic-worker-levy-concession 
 
 https://www.moh.gov.sg/seeking-healthcare/find-a-facility-or-service/mental-health-services/intermediate-and-long-term-care-services (no change)
 
+### SENIORS-MOBILITY-ENABLING-FUND: Seniors' Mobility and Enabling Fund (SMF)
+
+https://www.aic.sg/financial-assistance/seniors-mobility-enabling-fund (no change)
+
 ## Extra includes from the full catalogue
 
 Schemes outside the category that overrides.json asks for.
 
 - Medifund: Medifund (published)
 
-## Published schemes (19)
+## Published schemes (16)
 
-### Cash support (7)
+### Cash support (6)
 
 | Scheme | Agency | Area |
 |---|---|---|
-| [CareShield Life](https://www.aic.sg/financial-assistance/careshield-life) | AIC | Islandwide |
 | [ComCare Long Term Assistance (LTA)](https://supportgowhere.life.gov.sg/schemes/COMCARE-LTA/comcare-long-term-assistance-lta) | MSF | Islandwide |
 | [ElderFund](https://www.aic.sg/financial-assistance/elderfund) | MOH | Islandwide |
 | [Interim Disability Assistance Programme for the Elderly (IDAPE)](https://www.moh.gov.sg/managing-expenses/schemes-and-subsidies/interim-disability-assistance-programme-for-the-elderly) | MOH | Islandwide |
@@ -98,12 +82,11 @@ Schemes outside the category that overrides.json asks for.
 | [Public Assistance Programme](https://sbws.org.sg/en/services-affiliates/social-welfare-and-community-services/public-assistance-programme/) | Singapore Buddhist Welfare Service | Islandwide |
 | [South West Caregiver Support Fund](https://southwest.cdc.gov.sg/what-we-do/for-caregivers/csf/) | South West CDC | South West District |
 
-### Equipment and home (2)
+### Equipment and home (1)
 
 | Scheme | Agency | Area |
 |---|---|---|
 | [Enhancement for Active Seniors (EASE)](https://www.hdb.gov.sg/managing-my-home/upgrading-and-redevelopment/enhancement-for-active-seniors-ease) | HDB | Islandwide |
-| [Seniors' Mobility and Enabling Fund (SMF)](https://www.aic.sg/financial-assistance/seniors-mobility-enabling-fund) | AIC | Islandwide |
 
 ### Transport (1)
 
@@ -123,12 +106,11 @@ Schemes outside the category that overrides.json asks for.
 | [Pioneer Generation Package](https://www.moh.gov.sg/cost-financing/healthcare-schemes-subsidies/pioneer-generation-package) | MOH | Islandwide |
 | [Viriya Elderly Medical Programme (VEMP)](https://viriya.org.sg/service/seniors/) | Viriya Community Services | Islandwide |
 
-### Tax and CPF (2)
+### Tax and CPF (1)
 
 | Scheme | Agency | Area |
 |---|---|---|
 | [Matched Retirement Savings Scheme](https://www.cpf.gov.sg/member/growing-your-savings/saving-more-with-cpf/matching-grant-for-seniors-who-top-up) | CPF Board | Islandwide |
-| [Medisave Care](https://www.cpf.gov.sg/member/healthcare-financing/medisave-care-for-long-term-care-needs) | CPF Board | Islandwide |
 
 ## Unclassified money schemes (0)
 
@@ -195,6 +177,18 @@ Financial help that doesn't map cleanly to one category, so it is not published.
 ## Retired or not found (0)
 
 None.
+
+## Tier 1 sources that changed. Re-check docs/schemes/tier1-schemes.md
+
+None.
+
+Started watching (no earlier copy to compare): https://www.aic.sg/financial-assistance/caregivers-training-grant-ctg/, https://www.aic.sg/financial-assistance/home-caregiving-grant/, https://www.mom.gov.sg/passes-and-permits/work-permit-for-foreign-domestic-worker/foreign-domestic-worker-levy/levy-concession, https://www.moh.gov.sg/managing-expenses/schemes-and-subsidies/subsidy-framework-for-non-residential-long-term-care-services, https://www.aic.sg/Care-Services/Enhanced-Home-Personal-Care, https://www.aic.sg/financial-assistance/seniors-mobility-and-enabling-fund/, https://aic.sg/Financial-Assistance/MediSave-Care, https://www.cpf.gov.sg/member/healthcare-financing/careshield-life, https://www.aic.sg/financial-assistance/careshield-life, https://aic.sg/Financial-Assistance/ElderShield
+
+## Can't watch automatically. Check by hand twice a year
+
+- https://www.iras.gov.sg/taxes/individual-income-tax/basics-of-individual-income-tax/tax-reliefs-rebates-and-deductions/tax-reliefs/parent-relief-parent-relief-(disability) (Parent Relief): no real content without JavaScript
+- https://www.cpf.gov.sg/service/article/what-is-medisave-care (MediSave Care): no real content without JavaScript
+- https://www.cpf.gov.sg/service/article/what-is-the-monthly-payout-amount-for-careshield-life (CareShield Life and ElderShield payouts): no real content without JavaScript
 
 ## Feedback for Schemes.sg
 

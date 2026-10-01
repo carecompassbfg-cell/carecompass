@@ -1,23 +1,8 @@
 import { CatalogScheme, ProfileQuestionId, SchemeStatus } from "@/types/scheme";
 import { UserDataFull } from "@/types/user";
-import {
-  checkCaregiversTrainingGrant,
-  checkHomeCaregivingGrant,
-  checkMdwLevyConcession,
-  checkMohLtcSubsidy,
-  checkParentRelief,
-  EligibilityResult,
-} from "@/util/eligibilityChecker";
+import { CHECKS, CheckAnswers } from "@/util/eligibilityChecker";
 
-const CHECKERS: Record<string, (user: UserDataFull) => EligibilityResult> = {
-  "PARENT-RELIEF": checkParentRelief,
-  "CAREGIVERS-TRAINING-GRANT": checkCaregiversTrainingGrant,
-  "HOME-CAREGIVING-GRANT": checkHomeCaregivingGrant,
-  "MIGRANT-DOMESTIC-WORKER-LEVY": checkMdwLevyConcession,
-  "MOH-NR-LTC-SUBSIDY": checkMohLtcSubsidy,
-};
-
-// Profile facts each checker reads, asked when the caregiver is signed out
+// What each check needs, shown when the caregiver is signed out
 const SIGNED_OUT_QUESTIONS: Record<string, ProfileQuestionId[]> = {
   "PARENT-RELIEF": [
     ProfileQuestionId.CARE_RECIPIENT_AGE,
@@ -31,6 +16,7 @@ const SIGNED_OUT_QUESTIONS: Record<string, ProfileQuestionId[]> = {
     ProfileQuestionId.CARE_RECIPIENT_CITIZENSHIP,
     ProfileQuestionId.CARE_RECIPIENT_RESIDENCE,
     ProfileQuestionId.HOUSEHOLD_INCOME,
+    ProfileQuestionId.ADL_NEEDS,
   ],
   "MIGRANT-DOMESTIC-WORKER-LEVY": [
     ProfileQuestionId.CARE_RECIPIENT_CITIZENSHIP,
@@ -42,6 +28,21 @@ const SIGNED_OUT_QUESTIONS: Record<string, ProfileQuestionId[]> = {
     ProfileQuestionId.CARE_RECIPIENT_CITIZENSHIP,
     ProfileQuestionId.HOUSEHOLD_INCOME,
   ],
+  "SENIORS-MOBILITY-ENABLING-FUND": [
+    ProfileQuestionId.CARE_RECIPIENT_CITIZENSHIP,
+    ProfileQuestionId.CARE_RECIPIENT_AGE,
+    ProfileQuestionId.HOUSEHOLD_INCOME,
+  ],
+  "MEDISAVE-CARE": [
+    ProfileQuestionId.CARE_RECIPIENT_CITIZENSHIP,
+    ProfileQuestionId.ADL_NEEDS,
+    ProfileQuestionId.ADL_FULL_HELP,
+  ],
+  "CARESHIELD-ELDERSHIELD-CLAIM": [
+    ProfileQuestionId.ADL_NEEDS,
+    ProfileQuestionId.ADL_FULL_HELP,
+    ProfileQuestionId.LTC_INSURANCE,
+  ],
 };
 
 const PROVIDER_DECIDES: SchemeStatus = {
@@ -52,15 +53,25 @@ const PROVIDER_DECIDES: SchemeStatus = {
   agencyWillCheck: [],
 };
 
+export interface StatusOptions {
+  // Answers from the question sheet this session
+  answers?: CheckAnswers;
+  // Injected so tests don't depend on the real date
+  today?: Date;
+}
+
+// Any hard "no" → not a match; a missing answer → needs answers; everything
+// checkable met → likely. Agency-only conditions never block "likely".
 export const getSchemeStatus = (
   scheme: CatalogScheme,
   user: UserDataFull | null,
+  { answers = {}, today = new Date() }: StatusOptions = {},
 ): SchemeStatus => {
-  const checker = scheme.checkerId ? CHECKERS[scheme.checkerId] : undefined;
+  const check = scheme.checkerId ? CHECKS[scheme.checkerId] : undefined;
 
-  // Tier 2 schemes have no checker; a Tier 1 scheme without a known checker
+  // Tier 2 schemes have no check; a Tier 1 scheme without a known check
   // falls back to the same behaviour rather than guessing.
-  if (scheme.tier === 2 || !scheme.checkerId || !checker) {
+  if (scheme.tier === 2 || !scheme.checkerId || !check) {
     return { ...PROVIDER_DECIDES };
   }
 
@@ -75,27 +86,23 @@ export const getSchemeStatus = (
     };
   }
 
-  const result = checker(user);
-  const pendingQuestions = result.pendingQuestions ?? [];
-  const pendingDetails = new Set(pendingQuestions.flatMap((q) => q.details));
-
-  const reasonsMet = result.eligibleReasons;
-  const reasonsNotMet = result.ineligibleReasons ?? [];
-  const questionsToAsk = Array.from(new Set(pendingQuestions.map((q) => q.id)));
-  const agencyWillCheck = (result.additionalVerificationDetails ?? []).filter(
-    (detail) => !pendingDetails.has(detail),
-  );
-
+  const result = check(user, answers, today);
   let status: SchemeStatus["status"];
-  if (reasonsNotMet.length > 0) {
+  if (result.notMet.length > 0) {
     status = "not_a_match";
-  } else if (questionsToAsk.length > 0) {
+  } else if (result.questions.length > 0) {
     status = "needs_answers";
-  } else if (reasonsMet.length === 0) {
+  } else if (result.met.length === 0) {
     status = "not_a_match";
   } else {
     status = "likely";
   }
 
-  return { status, reasonsMet, reasonsNotMet, questionsToAsk, agencyWillCheck };
+  return {
+    status,
+    reasonsMet: result.met,
+    reasonsNotMet: result.notMet,
+    questionsToAsk: result.questions,
+    agencyWillCheck: result.agencyWillCheck,
+  };
 };
