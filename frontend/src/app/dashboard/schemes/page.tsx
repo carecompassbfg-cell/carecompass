@@ -18,6 +18,7 @@ import {
   isSheetQuestion,
   PAY_FOR_META,
   QUESTION_META,
+  getLastUpdated,
   getSourceLine,
   SOURCE_LABELS,
 } from "@/util/schemeCatalog";
@@ -140,9 +141,6 @@ function SchemeDetail() {
       <BackButton />
 
       <header className="flex flex-col gap-2">
-        <p className="text-[13px] font-semibold text-gray-600">
-          {scheme.agency}
-        </p>
         <h1 className="text-[26px] font-bold leading-8 text-gray-800">
           {scheme.name}
         </h1>
@@ -204,8 +202,7 @@ function SchemeDetail() {
         {scheme.tier === 2 ? (
           <>
             <p className="text-sm leading-5 text-gray-600">
-              {scheme.agency} decides case by case, so we can&apos;t give a yes
-              or no. Check the official page for who can apply.
+              Check eligibility on the official website.
             </p>
             <a
               href={scheme.link}
@@ -306,13 +303,29 @@ function SchemeDetail() {
         </a>
       </section>
 
-      <p className="flex items-start gap-2 pb-4 text-xs leading-[18px] text-gray-600">
-        <SchemeIcon name="info-footer" size={16} />
-        <span>
-          {scheme.tier === 1
-            ? `Reviewed by CareCompass on ${formatDate(scheme.lastRefreshed)}.`
-            : `From ${SOURCE_LABELS[scheme.source]} · Info last updated ${formatDate(scheme.lastRefreshed)}`}
-        </span>
+      <p className="pb-4 text-xs text-gray-600">
+        Last updated {formatDate(getLastUpdated(scheme) ?? "")} ·{" "}
+        {scheme.tier === 1 ? (
+          <>
+            Sources:{" "}
+            {scheme.sources.map((source, index) => (
+              <span key={source.url}>
+                {index > 0 && ", "}
+                <a
+                  href={source.url}
+                  target="_blank"
+                  rel="noreferrer"
+                  className={`underline ${FOCUS_RING}`}
+                >
+                  {source.name}
+                  <span className="sr-only"> (opens in a new tab)</span>
+                </a>
+              </span>
+            ))}
+          </>
+        ) : (
+          `From ${SOURCE_LABELS[scheme.source]}`
+        )}
       </p>
 
       {sheet && (

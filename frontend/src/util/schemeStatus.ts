@@ -71,6 +71,7 @@ export const getSchemeStatus = (
       reasonsNotMet: [],
       questionsToAsk: [...(SIGNED_OUT_QUESTIONS[scheme.checkerId] ?? [])],
       agencyWillCheck: [],
+      requiresSignIn: true,
     };
   }
 

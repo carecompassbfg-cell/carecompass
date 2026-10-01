@@ -1,7 +1,18 @@
 import { Citizenship, Residence, UserDataFull } from "@/types/user";
+import { isKnownAge } from "@/util/profileInput";
 
-// Nothing stores the care recipient's name yet. When it does, change this one
-// function and every schemes screen picks it up.
+// Nothing stores the care recipient's name yet. Both helpers take the user so
+// they can return the saved name or nickname instead.
+// TODO(schemes step 5): use the saved name/nickname once the profile has one.
+
+// For headings, e.g. "Financial schemes for you and your loved one"
+export const getRecipientTitleName = (
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  user: UserDataFull | null | undefined,
+): string => "you and your loved one";
+
+// For sentences, e.g. "Can your loved one get this?". Use capitalise() when
+// it starts a sentence.
 export const getRecipientName = (
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   user: UserDataFull | null | undefined,
@@ -30,7 +41,7 @@ export const getProfileFacts = (
 ): string[] => {
   if (!user) return [];
   const facts: string[] = [];
-  if (typeof user.care_recipient_age === "number") {
+  if (isKnownAge(user.care_recipient_age)) {
     facts.push(`Aged ${user.care_recipient_age}`);
   }
   const citizenship = CITIZENSHIP_LABELS[user.care_recipient_citizenship];

@@ -1,8 +1,10 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { api } from "@/api";
 import { useAuthStore } from "@/stores/auth";
-import { CatalogScheme } from "@/types/scheme";
+import { useSchemeAnswersStore } from "@/stores/schemeAnswers";
+import { CatalogScheme, ProfileQuestionId } from "@/types/scheme";
 import { UserData } from "@/types/user";
+import { isKnownAge } from "@/util/profileInput";
 import { SchemeWithStatus } from "@/util/schemeCatalog";
 import { getSchemeStatus } from "@/util/schemeStatus";
 
@@ -67,7 +69,19 @@ export default function useSchemeCatalog() {
     }
   }, [isSignedIn, userData, userLoadError, refreshUser]);
 
-  const user = isSignedIn ? (userData ?? null) : null;
+  const sessionAge = useSchemeAnswersStore(
+    (state) => state.answers[ProfileQuestionId.CARE_RECIPIENT_AGE],
+  );
+
+  // Session answers from the question sheet fill gaps in the saved profile.
+  // TODO(schemes step 5): save answers to the profile instead.
+  const user = useMemo(() => {
+    if (!isSignedIn || !userData) return null;
+    if (!isKnownAge(userData.care_recipient_age) && isKnownAge(sessionAge)) {
+      return { ...userData, care_recipient_age: sessionAge };
+    }
+    return userData;
+  }, [isSignedIn, userData, sessionAge]);
 
   const items: SchemeWithStatus[] = useMemo(
     () =>

@@ -72,7 +72,10 @@ export interface CatalogScheme {
   area: SchemeArea;
   link: string;
   sources: SchemeSourceLink[];
-  lastRefreshed: string;
+  // Tier 1: date we last checked it against official sources
+  lastChecked?: string;
+  // Tier 2: date the weekly Schemes.sg sync last refreshed it
+  lastRefreshed?: string;
   checkerId?: string;
   // Carried over from SchemeData so Tier 1 content is not lost (markdown)
   eligibility?: string;
@@ -91,6 +94,8 @@ export interface SchemeStatus {
   reasonsNotMet: string[];
   questionsToAsk: ProfileQuestionId[];
   agencyWillCheck: string[];
+  // Signed out: the questions can only be answered after signing in
+  requiresSignIn?: boolean;
 }
 
 export interface SubsidyInfo extends PCHIBase {

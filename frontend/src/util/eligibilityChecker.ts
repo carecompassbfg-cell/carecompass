@@ -1,5 +1,6 @@
 import { ProfileQuestionId } from "../types/scheme";
 import { Citizenship, Residence, UserDataFull } from "../types/user";
+import { isKnownAge } from "./profileInput";
 
 // Types
 
@@ -53,8 +54,14 @@ export const checkParentRelief = (user: UserDataFull): EligibilityResult => {
   const criteriaCount = reasons.length + additionalVerificationCriteria.length;
   const eligibleReasons = [];
   const ineligibleReasons = [];
+  const pendingQuestions: PendingQuestion[] = [];
 
-  if (user.care_recipient_age >= 55) {
+  if (!isKnownAge(user.care_recipient_age)) {
+    pendingQuestions.push({
+      id: ProfileQuestionId.CARE_RECIPIENT_AGE,
+      details: [reasons[0]],
+    });
+  } else if (user.care_recipient_age >= 55) {
     eligibleReasons.push(reasons[0]);
   } else {
     ineligibleReasons.push(reasons[0]);
@@ -72,6 +79,7 @@ export const checkParentRelief = (user: UserDataFull): EligibilityResult => {
     eligibleReasons,
     ineligibleReasons,
     additionalVerificationDetails: additionalVerificationCriteria,
+    pendingQuestions,
   };
 };
 
@@ -103,7 +111,13 @@ export const checkCaregiversTrainingGrant = (
     ineligibleReasons.push(reasons[0]);
   }
 
-  if (user.care_recipient_age >= 65) {
+  const pendingQuestions: PendingQuestion[] = [];
+  if (!isKnownAge(user.care_recipient_age)) {
+    pendingQuestions.push({
+      id: ProfileQuestionId.CARE_RECIPIENT_AGE,
+      details: [reasons[1]],
+    });
+  } else if (user.care_recipient_age >= 65) {
     eligibleReasons.push(reasons[1]);
   } else {
     ineligibleReasons.push(reasons[1]);
@@ -115,6 +129,7 @@ export const checkCaregiversTrainingGrant = (
     eligibleReasons,
     ineligibleReasons,
     additionalVerificationDetails: additionalVerificationCriteria,
+    pendingQuestions,
   };
 };
 
@@ -196,6 +211,15 @@ export const checkMdwLevyConcession = (
 ): EligibilityResult => {
   let eligibleReasons: string[] = [];
   let ineligibleReasons: string[] = [];
+  const pendingQuestions: PendingQuestion[] = [];
+  const ageReason = "Care recipient is elderly person aged 67 and above*";
+
+  // Case two needs the age; when it isn't known, ask rather than reject
+  const isCaseTwoWithoutAge =
+    user.care_recipient_citizenship === Citizenship.PR &&
+    user.citizenship === Citizenship.CITIZEN &&
+    user.care_recipient_residence === Residence.HOME &&
+    !isKnownAge(user.care_recipient_age);
 
   const isCaseOne =
     user.care_recipient_citizenship === Citizenship.CITIZEN &&
@@ -215,6 +239,16 @@ export const checkMdwLevyConcession = (
       "Applicant lives with care recipient",
       "Care recipient is elderly person aged 67 and above*",
     ];
+  } else if (isCaseTwoWithoutAge) {
+    eligibleReasons = [
+      "Care recipient is a Singaporean Permanent Resident",
+      "Applicant is a Singapore Citizen",
+      "Applicant lives with care recipient",
+    ];
+    pendingQuestions.push({
+      id: ProfileQuestionId.CARE_RECIPIENT_AGE,
+      details: [ageReason],
+    });
   } else if (isCaseTwo) {
     eligibleReasons = [
       "Care recipient is a Singaporean Permanent Resident",
@@ -241,6 +275,7 @@ export const checkMdwLevyConcession = (
     eligibleReasons,
     ineligibleReasons,
     otherDetails: otherDetails,
+    pendingQuestions,
   };
 };
 

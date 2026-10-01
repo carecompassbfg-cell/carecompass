@@ -393,3 +393,57 @@ def test_what_you_get_is_empty_when_only_generic_values():
     [record] = classify_all([raw])
     [item], _ = cat.build_outputs([record], "2026-09-29", "dev")
     assert item["whatYouGet"] == []
+
+
+# --- agency short names ------------------------------------------------------
+
+SHORT_NAMES = {
+    "Ministry of Health (MOH)": "MOH",
+    "Agency for Integrated Care": "AIC",
+    "Agency for Integrated Care (AIC)": "AIC",
+    "Central Provident Fund (CPF)": "CPF Board",
+}
+
+
+def test_short_agency_maps_known_names_ignoring_case_and_punctuation():
+    assert cat.short_agency("Agency for Integrated Care (AIC)", SHORT_NAMES) == "AIC"
+    assert cat.short_agency("agency for integrated care", SHORT_NAMES) == "AIC"
+    assert cat.short_agency("Ministry of Health (MOH)", SHORT_NAMES) == "MOH"
+
+
+def test_short_agency_uses_the_first_of_several_agencies():
+    elderfund = "Ministry of Health (MOH), Central Provident Fund (CPF), Agency for Integrated Care (AIC)"
+    assert cat.short_agency(elderfund, SHORT_NAMES) == "MOH"
+    assert cat.first_agency("Bethel Social Services | Bethel Community Services") == (
+        "Bethel Social Services"
+    )
+
+
+def test_short_agency_falls_back_to_the_original_text():
+    assert cat.short_agency("Viriya  Community Services", SHORT_NAMES) == (
+        "Viriya Community Services"
+    )
+
+
+def test_agency_case_variants_get_one_spelling():
+    records = classify_all([
+        make_raw(scheme_id="1", scheme="A", agency="TOUCH Community Services", link="https://t.sg/a"),
+        make_raw(scheme_id="2", scheme="B", agency="Touch Community Services", link="https://t.sg/b"),
+    ])
+    cat.normalise_agency_case(records)
+    assert {r["agency"] for r in records} == {"Touch Community Services"}
+
+
+def test_catalog_uses_the_short_agency_and_keeps_the_full_name_in_sources():
+    overrides = {**OVERRIDES, "agency_short_names": SHORT_NAMES}
+    [record] = classify_all([make_raw()], overrides=overrides)
+    [item], _ = cat.build_outputs([record], "2026-09-29", "dev")
+    assert item["agency"] == "AIC"
+    assert item["sources"][0]["name"] == "Agency for Integrated Care (AIC)"
+
+
+def test_extra_includes_still_match_on_the_full_agency_name():
+    overrides = {**EXTRA, "agency_short_names": SHORT_NAMES}
+    raw = make_raw(scheme="Medifund", agency="Agency for Integrated Care",
+                   link="https://www.aic.sg/financial-assistance/medifund")
+    assert cat.classify_record(raw, overrides)["status"] == cat.PUBLISHED

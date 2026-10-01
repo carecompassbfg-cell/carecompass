@@ -13,6 +13,7 @@ import {
   YesNoNotSure,
 } from "@/stores/schemeAnswers";
 import { ProfileQuestionId } from "@/types/scheme";
+import { AGE_ERROR, parseAge } from "@/util/profileInput";
 import { capitalise } from "@/util/recipient";
 import { SchemeWithStatus } from "@/util/schemeCatalog";
 import SchemeIcon, { FOCUS_RING } from "./SchemeIcon";
@@ -52,6 +53,8 @@ const LTC_OPTIONS: Option<LtcInsurance>[] = [
 
 const getPrompt = (id: ProfileQuestionId, name: string): string => {
   switch (id) {
+    case ProfileQuestionId.CARE_RECIPIENT_AGE:
+      return `How old is ${name}?`;
     case ProfileQuestionId.HOUSEHOLD_INCOME:
       return `What is ${name}'s household income?`;
     case ProfileQuestionId.ADL_NEEDS:
@@ -180,6 +183,7 @@ export default function QuestionSheet({
   const setAnswer = useSchemeAnswersStore((state) => state.setAnswer);
   const [index, setIndex] = useState(0);
   const [draft, setDraft] = useState<SchemeAnswers>({});
+  const [ageText, setAgeText] = useState("");
 
   // Start from the requested question each time the sheet opens
   useEffect(() => {
@@ -219,8 +223,41 @@ export default function QuestionSheet({
   const adl = draft[ProfileQuestionId.ADL_NEEDS];
   const adlSelected = Array.isArray(adl) ? adl : [];
 
+  const ageAnswer = parseAge(ageText);
+  const showAgeError = ageText !== "" && ageAnswer === null;
+
   const renderBody = () => {
     switch (current) {
+      case ProfileQuestionId.CARE_RECIPIENT_AGE:
+        return (
+          <div className="flex flex-col gap-1">
+            <label
+              htmlFor="sheet-age"
+              className="text-sm font-semibold text-gray-800"
+            >
+              Age
+            </label>
+            <input
+              id="sheet-age"
+              type="number"
+              inputMode="numeric"
+              min={1}
+              max={120}
+              value={ageText}
+              onChange={(event) => setAgeText(event.target.value)}
+              aria-invalid={showAgeError}
+              aria-describedby={showAgeError ? "sheet-age-error" : undefined}
+              className={`min-h-11 rounded-lg border px-3 text-[15px] text-gray-800 ${
+                showAgeError ? "border-red-600" : "border-gray-300"
+              } ${FOCUS_RING}`}
+            />
+            {showAgeError && (
+              <p id="sheet-age-error" className="text-sm text-red-600">
+                {AGE_ERROR}
+              </p>
+            )}
+          </div>
+        );
       case ProfileQuestionId.HOUSEHOLD_INCOME:
         return isSignedIn ? (
           <PCHIForm
@@ -301,9 +338,11 @@ export default function QuestionSheet({
 
   const draftValue = draft[current as keyof SchemeAnswers];
   const canContinue =
-    current === ProfileQuestionId.ADL_NEEDS
-      ? adlSelected.length > 0
-      : draftValue !== undefined;
+    current === ProfileQuestionId.CARE_RECIPIENT_AGE
+      ? ageAnswer !== null
+      : current === ProfileQuestionId.ADL_NEEDS
+        ? adlSelected.length > 0
+        : draftValue !== undefined;
   // Household income has its own Save button inside PCHIForm
   const showContinue = current !== ProfileQuestionId.HOUSEHOLD_INCOME;
 
@@ -358,7 +397,8 @@ export default function QuestionSheet({
 
             {renderBody()}
 
-            {current === ProfileQuestionId.HOUSEHOLD_INCOME ||
+            {current === ProfileQuestionId.CARE_RECIPIENT_AGE ||
+            current === ProfileQuestionId.HOUSEHOLD_INCOME ||
             current === ProfileQuestionId.ADL_NEEDS ||
             current === ProfileQuestionId.HOUSING_TYPE ? (
               <button
@@ -390,10 +430,15 @@ export default function QuestionSheet({
                 className="w-full"
                 isDisabled={!canContinue}
                 onClick={() =>
-                  saveAndNext(
-                    current as keyof SchemeAnswers,
-                    draftValue as never,
-                  )
+                  current === ProfileQuestionId.CARE_RECIPIENT_AGE
+                    ? saveAndNext(
+                        ProfileQuestionId.CARE_RECIPIENT_AGE,
+                        ageAnswer ?? undefined,
+                      )
+                    : saveAndNext(
+                        current as keyof SchemeAnswers,
+                        draftValue as never,
+                      )
                 }
               >
                 Continue
