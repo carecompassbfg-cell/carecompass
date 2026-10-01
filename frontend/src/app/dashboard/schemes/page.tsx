@@ -303,7 +303,7 @@ function SchemeDetail() {
         </a>
       </section>
 
-      <p className="pb-4 text-xs text-gray-500">
+      <p className="pb-4 text-xs text-gray-600">
         Last updated {formatDate(getLastUpdated(scheme) ?? "")} ·{" "}
         {scheme.tier === 1 ? (
           <>
