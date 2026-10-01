@@ -57,10 +57,15 @@ jobs:
         with:
           context: ./backend
           file: ./backend/Dockerfile
-          push: true
+          # Pull requests only build (never push), so an unmerged branch can't
+          # become an image that Backend - CD could deploy
+          push: ${{ github.event_name != 'pull_request' }}
+          # ci-<sha> on every pushed build; ci-latest (what Backend - CD
+          # deploys by default) only on a push to main, never on a manual
+          # workflow_dispatch build
           tags: |
             ${{ env.DOCKER_REGISTRY != '' && format('{0}/{1}:ci-{2}', env.DOCKER_REGISTRY, env.DOCKER_IMAGE_NAME, github.sha) || format('{0}:ci-{1}', env.DOCKER_IMAGE_NAME, github.sha) }}
-            ${{ env.DOCKER_REGISTRY != '' && format('{0}/{1}:ci-latest', env.DOCKER_REGISTRY, env.DOCKER_IMAGE_NAME) || format('{0}:ci-latest', env.DOCKER_IMAGE_NAME) }}
+            ${{ (github.event_name == 'push' && github.ref == 'refs/heads/main') && (env.DOCKER_REGISTRY != '' && format('{0}/{1}:ci-latest', env.DOCKER_REGISTRY, env.DOCKER_IMAGE_NAME) || format('{0}:ci-latest', env.DOCKER_IMAGE_NAME)) || '' }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
