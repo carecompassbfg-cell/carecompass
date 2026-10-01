@@ -522,10 +522,18 @@ const checkSevereDisability = (
     result.notMet.push(notMetText);
   } else if (answers.adlFullHelp === "yes") {
     result.met.push("Needs full help with at least 3 daily activities");
+  } else if (answers.adlFullHelp === "no") {
+    result.notMet.push(
+      "For severe disability: needs full help with at least 3 daily activities",
+    );
   } else {
-    // "no", "not sure" or not answered: the severe disability assessment
-    // decides, so keep asking rather than ruling it out
+    // Not answered yet, or "not sure". "Not sure" counts as answered (the
+    // sheet won't ask again) but the scheme stays at "needs answers" until
+    // the severe disability assessment decides.
     ask(result, ProfileQuestionId.ADL_FULL_HELP);
+    if (answers.adlFullHelp === "not_sure") {
+      result.agencyWillCheck.push("The severe disability assessment decides");
+    }
   }
   return adl;
 };

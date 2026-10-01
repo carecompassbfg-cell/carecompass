@@ -461,15 +461,49 @@ describe("7. MediSave Care", () => {
       "For severe disability: needs full help with at least 3 daily activities",
     );
   });
+});
 
-  it("keeps asking about full help when it's not sure or no", () => {
-    for (const adlFullHelp of ["not_sure", "no"] as const) {
-      const result = status("MEDISAVE-CARE", makeUser(), {
+describe("full help with daily activities (schemes 7 and 8)", () => {
+  const SEVERE_IDS = ["MEDISAVE-CARE", "CARESHIELD-ELDERSHIELD-CLAIM"];
+  const covered: CheckAnswers = { ltcInsurance: "eldershield" };
+
+  it('"No" is not a fit', () => {
+    for (const id of SEVERE_IDS) {
+      const result = status(id, makeUser(), {
+        ...covered,
         adlCount: 3,
-        adlFullHelp,
+        adlFullHelp: "no",
+      });
+      expect(result.status).toBe("not_a_match");
+      expect(result.reasonsNotMet).toContain(
+        "For severe disability: needs full help with at least 3 daily activities",
+      );
+    }
+  });
+
+  it('"Not sure" stays needs answers and leaves it to the assessment', () => {
+    for (const id of SEVERE_IDS) {
+      const result = status(id, makeUser(), {
+        ...covered,
+        adlCount: 3,
+        adlFullHelp: "not_sure",
       });
       expect(result.status).toBe("needs_answers");
       expect(result.questionsToAsk).toEqual([Q.ADL_FULL_HELP]);
+      expect(result.agencyWillCheck).toContain(
+        "The severe disability assessment decides",
+      );
+    }
+  });
+
+  it("asks when full help hasn't been answered yet", () => {
+    for (const id of SEVERE_IDS) {
+      const result = status(id, makeUser(), { ...covered, adlCount: 3 });
+      expect(result.status).toBe("needs_answers");
+      expect(result.questionsToAsk).toEqual([Q.ADL_FULL_HELP]);
+      expect(result.agencyWillCheck).not.toContain(
+        "The severe disability assessment decides",
+      );
     }
   });
 });

@@ -57,13 +57,19 @@ export const useSchemeAnswersStore = create<
   ),
 );
 
-// A question counts as answered unless the caregiver said "not sure"
+// Questions where "not sure" is a final answer: the sheet doesn't ask again
+// and the strip doesn't count them (the assessment decides instead)
+const NOT_SURE_IS_FINAL = [ProfileQuestionId.ADL_FULL_HELP];
+
+// A question counts as answered unless the caregiver said "not sure" (except
+// where "not sure" is final)
 export const isAnswered = (
   answers: SchemeAnswers,
   id: ProfileQuestionId,
 ): boolean => {
   const value = answers[id as keyof SchemeAnswers];
-  return value !== undefined && value !== NOT_SURE;
+  if (value === undefined) return false;
+  return value !== NOT_SURE || NOT_SURE_IS_FINAL.includes(id);
 };
 
 // The sheet's answers in the shape the eligibility checks read
