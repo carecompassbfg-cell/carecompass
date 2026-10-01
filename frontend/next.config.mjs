@@ -1,6 +1,17 @@
 import { withSentryConfig } from "@sentry/nextjs";
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  async redirects() {
+    return [
+      {
+        // "See all matches" moved to the All caregiving schemes page; keeps
+        // old links and bookmarks working
+        source: "/dashboard/matches",
+        destination: "/dashboard/all-schemes?status=likely,needs_answers",
+        permanent: false,
+      },
+    ];
+  },
   experimental: {
     missingSuspenseWithCSRBailout: false,
   },

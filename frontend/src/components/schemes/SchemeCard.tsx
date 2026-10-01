@@ -1,9 +1,17 @@
 import Link from "next/link";
+import { CircleX } from "lucide-react";
 import { getSourceLine, SchemeWithStatus } from "@/util/schemeCatalog";
 import SchemeIcon, { FOCUS_RING } from "./SchemeIcon";
 import StatusPill from "./StatusPill";
 
-export default function SchemeCard({ item }: { item: SchemeWithStatus }) {
+export default function SchemeCard({
+  item,
+  reason,
+}: {
+  item: SchemeWithStatus;
+  // Why it doesn't fit, shown on "not a fit" cards
+  reason?: string;
+}) {
   const { scheme, status } = item;
   return (
     <Link
@@ -23,6 +31,16 @@ export default function SchemeCard({ item }: { item: SchemeWithStatus }) {
       {scheme.valueText && (
         <p className="text-[15px] font-bold text-gray-800">
           {scheme.valueText}
+        </p>
+      )}
+      {reason && (
+        <p className="flex items-start gap-1 text-xs leading-4 text-gray-600">
+          <CircleX
+            aria-hidden
+            size={13}
+            className="mt-px shrink-0 text-gray-500"
+          />
+          {reason}
         </p>
       )}
       <div className="flex flex-wrap gap-3 text-xs leading-4 text-gray-500">
