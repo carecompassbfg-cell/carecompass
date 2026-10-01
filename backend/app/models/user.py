@@ -1,7 +1,7 @@
 import os
 from enum import Enum
 from typing import TYPE_CHECKING, List, Optional
-from sqlalchemy import Integer, String
+from sqlalchemy import Integer, String, Text
 from sqlalchemy import Enum as SQLAlchemyEnum
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from app.models.base import Base
@@ -36,6 +36,16 @@ class User(Base):
     citizenship: Mapped[Optional[Citizenship]] = mapped_column(SQLAlchemyEnum(Citizenship))
     contact_number: Mapped[Optional[str]] = mapped_column(
         EncryptedType(String, DB_ENCRYPTION_SECRET), nullable=True, comment="Assumes SG phone number"
+    )
+
+    # Personal data, encrypted at rest like contact_number. Never log these.
+    care_recipient_name: Mapped[Optional[str]] = mapped_column(
+        EncryptedType(String, DB_ENCRYPTION_SECRET), nullable=True
+    )
+    # JSON text of the schemes question-sheet answers (includes health-related
+    # daily-activity answers)
+    scheme_answers: Mapped[Optional[str]] = mapped_column(
+        EncryptedType(Text, DB_ENCRYPTION_SECRET), nullable=True
     )
 
     care_recipient_age: Mapped[Optional[int]] = mapped_column(Integer)

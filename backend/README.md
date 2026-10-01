@@ -52,6 +52,16 @@ Alembic does not handle enums well: it does not drop enum types on downgrade and
 
 To seed sample data locally, run `python _local/db/seed/seed.py`. See `_local/db/seed/README.md` for details.
 
+## Tests
+
+```bash
+pipenv install --dev
+pytest                       # unit tests only; database tests are skipped
+TEST_DATABASE_URL=postgresql://postgres:postgres@localhost:5432/carecompass_test pytest
+```
+
+The database tests (migrations and the `/users` API) run only when `TEST_DATABASE_URL` points at a **local** Postgres; they refuse any other host, so they can never touch a shared or live database. Create the empty test database first (for example `createdb carecompass_test`).
+
 ## Run
 
 ```bash
