@@ -1,21 +1,22 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Drawer } from "vaul";
 import { Button } from "@opengovsg/design-system-react";
 import { SignInButton } from "@clerk/nextjs";
 import { PCHIForm } from "@/components/PCHIForm";
 import {
-  AdlActivity,
-  HousingType,
-  LtcInsurance,
+  isAnswered,
   NOT_SURE,
-  SchemeAnswers,
   useSchemeAnswersStore,
-  YesNoNotSure,
 } from "@/stores/schemeAnswers";
 import { ProfileQuestionId } from "@/types/scheme";
+import { AdlFullHelp, LtcPlan } from "@/util/eligibilityChecker";
 import { AGE_ERROR, parseAge } from "@/util/profileInput";
 import { capitalise } from "@/util/recipient";
-import { SchemeWithStatus } from "@/util/schemeCatalog";
+import {
+  getOpenSheetQuestions,
+  SchemeWithStatus,
+  SHEET_QUESTIONS,
+} from "@/util/schemeCatalog";
 import SchemeIcon, { FOCUS_RING } from "./SchemeIcon";
 
 interface Option<T extends string> {
@@ -23,30 +24,25 @@ interface Option<T extends string> {
   label: string;
 }
 
-const ADL_OPTIONS: Option<AdlActivity>[] = [
-  { value: "bathing", label: "Bathing" },
-  { value: "dressing", label: "Dressing" },
-  { value: "eating", label: "Eating" },
-  { value: "toileting", label: "Using the toilet" },
-  { value: "moving_around", label: "Moving around the home" },
-  { value: "transferring", label: "Getting in and out of bed" },
+// Wording from docs/schemes/tier1-schemes.md, "Questions the sheet needs"
+const ADL_OPTIONS = [
+  "Bathing",
+  "Dressing",
+  "Eating",
+  "Using the toilet",
+  "Moving around or getting in and out of bed",
+  "Continence",
 ];
 
-const FAR_OPTIONS: Option<YesNoNotSure>[] = [
+const FULL_HELP_OPTIONS: Option<AdlFullHelp>[] = [
   { value: "yes", label: "Yes" },
   { value: "no", label: "No" },
   { value: NOT_SURE, label: "Not sure" },
 ];
 
-const HOUSING_OPTIONS: Option<HousingType>[] = [
-  { value: "hdb", label: "HDB flat" },
-  { value: "private", label: "Private property" },
-  { value: "other", label: "Other" },
-];
-
-const LTC_OPTIONS: Option<LtcInsurance>[] = [
-  { value: "eldershield", label: "ElderShield" },
+const LTC_OPTIONS: Option<LtcPlan>[] = [
   { value: "careshield_life", label: "CareShield Life" },
+  { value: "eldershield", label: "ElderShield" },
   { value: "neither", label: "Neither" },
   { value: NOT_SURE, label: "Not sure" },
 ];
@@ -55,16 +51,14 @@ const getPrompt = (id: ProfileQuestionId, name: string): string => {
   switch (id) {
     case ProfileQuestionId.CARE_RECIPIENT_AGE:
       return `How old is ${name}?`;
+    case ProfileQuestionId.ADL_NEEDS:
+      return `Which of these does ${name} need help with?`;
+    case ProfileQuestionId.ADL_FULL_HELP:
+      return "For at least 3 of these, do they need someone to do it fully for them?";
     case ProfileQuestionId.HOUSEHOLD_INCOME:
       return `What is ${name}'s household income?`;
-    case ProfileQuestionId.ADL_NEEDS:
-      return `Does ${name} need help with any of these every day?`;
-    case ProfileQuestionId.HAS_FAR:
-      return `Does ${name} have a Functional Assessment Report?`;
-    case ProfileQuestionId.HOUSING_TYPE:
-      return `What type of home does ${name} live in?`;
     case ProfileQuestionId.LTC_INSURANCE:
-      return `Is ${name} covered by long-term care insurance?`;
+      return `Is ${name} covered by CareShield Life or ElderShield?`;
     default:
       return "";
   }
@@ -157,74 +151,112 @@ function RadioOptions<T extends string>({
   );
 }
 
-// Bottom sheet that asks one profile question at a time.
+// Bottom sheet that asks one question at a time. The steps are worked out
+// from the live statuses, so a follow-up (full help, insurance) appears as
+// soon as an earlier answer makes it matter, and a question that no longer
+// changes any status is dropped.
 // Answers stay in useSchemeAnswersStore for this session only, except
 // household income, which saves to the profile through the existing PCHIForm.
 export default function QuestionSheet({
   isOpen,
   onClose,
-  questions,
-  startAt,
   items,
+  scopeSchemeId,
+  startAt,
   recipientName,
   isSignedIn,
   onIncomeSaved,
 }: {
   isOpen: boolean;
   onClose: () => void;
-  questions: ProfileQuestionId[];
-  startAt?: ProfileQuestionId;
+  // Every scheme with its current status
   items: SchemeWithStatus[];
+  // Only ask what this scheme needs (from its detail page)
+  scopeSchemeId?: string;
+  startAt?: ProfileQuestionId;
   recipientName: string;
   isSignedIn: boolean;
   onIncomeSaved: () => Promise<void>;
 }) {
   const answers = useSchemeAnswersStore((state) => state.answers);
   const setAnswer = useSchemeAnswersStore((state) => state.setAnswer);
-  const [index, setIndex] = useState(0);
-  const [draft, setDraft] = useState<SchemeAnswers>({});
+  // Questions answered or skipped since the sheet opened
+  const [done, setDone] = useState<ProfileQuestionId[]>([]);
   const [ageText, setAgeText] = useState("");
+  const [adlSelected, setAdlSelected] = useState<string[]>([]);
+  const [noneOfThese, setNoneOfThese] = useState(false);
+  const [fullHelp, setFullHelp] = useState<AdlFullHelp>();
+  const [ltc, setLtc] = useState<LtcPlan>();
 
-  // Start from the requested question each time the sheet opens
   useEffect(() => {
     if (isOpen) {
-      const start = startAt ? questions.indexOf(startAt) : 0;
-      setIndex(Math.max(start, 0));
-      setDraft(answers);
+      setDone([]);
+      setAgeText("");
+      setAdlSelected([]);
+      setNoneOfThese(false);
+      setFullHelp(undefined);
+      setLtc(undefined);
     }
-    // Only reset when the sheet opens, not while answering
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isOpen]);
 
-  const total = questions.length;
-  const current = questions[index];
+  const scoped = useMemo(
+    () =>
+      scopeSchemeId
+        ? items.filter(({ scheme }) => scheme.id === scopeSchemeId)
+        : items,
+    [items, scopeSchemeId],
+  );
+  const open = getOpenSheetQuestions(scoped, (id) => isAnswered(answers, id));
+  const steps = SHEET_QUESTIONS.filter(
+    (id) => done.includes(id) || open.includes(id) || id === startAt,
+  );
+  const remaining = steps.filter((id) => !done.includes(id));
+  const current = startAt && !done.includes(startAt) ? startAt : remaining[0];
 
-  const next = () => {
-    if (index + 1 >= total) {
-      onClose();
-    } else {
-      setIndex(index + 1);
-    }
-  };
-
-  const saveAndNext = <K extends keyof SchemeAnswers>(
-    id: K,
-    value: SchemeAnswers[K],
-  ) => {
-    setAnswer(id, value);
-    next();
-  };
+  useEffect(() => {
+    if (isOpen && !current) onClose();
+  }, [isOpen, current, onClose]);
 
   if (!current) return null;
 
-  const schemesAffected = items.filter(({ status }) =>
-    status.questionsToAsk.includes(current),
-  );
-  const adl = draft[ProfileQuestionId.ADL_NEEDS];
-  const adlSelected = Array.isArray(adl) ? adl : [];
+  const finish = (id: ProfileQuestionId) => setDone([...done, id]);
 
+  const schemesAffected = items.filter(
+    ({ status }) =>
+      status.status === "needs_answers" &&
+      status.questionsToAsk.includes(current),
+  );
   const ageAnswer = parseAge(ageText);
   const showAgeError = ageText !== "" && ageAnswer === null;
+
+  const save = () => {
+    switch (current) {
+      case ProfileQuestionId.CARE_RECIPIENT_AGE:
+        if (ageAnswer !== null) setAnswer(current, ageAnswer);
+        break;
+      case ProfileQuestionId.ADL_NEEDS:
+        setAnswer(current, noneOfThese ? 0 : adlSelected.length);
+        break;
+      case ProfileQuestionId.ADL_FULL_HELP:
+        setAnswer(current, fullHelp);
+        break;
+      case ProfileQuestionId.LTC_INSURANCE:
+        setAnswer(current, ltc);
+        break;
+    }
+    finish(current);
+  };
+
+  const canContinue =
+    current === ProfileQuestionId.CARE_RECIPIENT_AGE
+      ? ageAnswer !== null
+      : current === ProfileQuestionId.ADL_NEEDS
+        ? noneOfThese || adlSelected.length > 0
+        : current === ProfileQuestionId.ADL_FULL_HELP
+          ? fullHelp !== undefined
+          : current === ProfileQuestionId.LTC_INSURANCE
+            ? ltc !== undefined
+            : false;
 
   const renderBody = () => {
     switch (current) {
@@ -258,13 +290,50 @@ export default function QuestionSheet({
             )}
           </div>
         );
+      case ProfileQuestionId.ADL_NEEDS:
+        return (
+          <div className="flex flex-col gap-2.5">
+            {ADL_OPTIONS.map((label) => (
+              <CheckboxOption
+                key={label}
+                label={label}
+                checked={adlSelected.includes(label)}
+                onChange={(checked) => {
+                  setNoneOfThese(false);
+                  setAdlSelected(
+                    checked
+                      ? [...adlSelected, label]
+                      : adlSelected.filter((value) => value !== label),
+                  );
+                }}
+              />
+            ))}
+            <CheckboxOption
+              label="None of these"
+              checked={noneOfThese}
+              onChange={(checked) => {
+                setNoneOfThese(checked);
+                if (checked) setAdlSelected([]);
+              }}
+            />
+          </div>
+        );
+      case ProfileQuestionId.ADL_FULL_HELP:
+        return (
+          <RadioOptions
+            name="adl_full_help"
+            options={FULL_HELP_OPTIONS}
+            value={fullHelp}
+            onChange={setFullHelp}
+          />
+        );
       case ProfileQuestionId.HOUSEHOLD_INCOME:
         return isSignedIn ? (
           <PCHIForm
             callbackFn={async () => {
               setAnswer(ProfileQuestionId.HOUSEHOLD_INCOME, "saved");
               await onIncomeSaved();
-              next();
+              finish(ProfileQuestionId.HOUSEHOLD_INCOME);
             }}
           />
         ) : (
@@ -278,73 +347,32 @@ export default function QuestionSheet({
             </SignInButton>
           </div>
         );
-      case ProfileQuestionId.ADL_NEEDS:
-        return (
-          <div className="flex flex-col gap-2.5">
-            {ADL_OPTIONS.map((option) => (
-              <CheckboxOption
-                key={option.value}
-                label={option.label}
-                checked={adlSelected.includes(option.value)}
-                onChange={(checked) =>
-                  setDraft({
-                    ...draft,
-                    [ProfileQuestionId.ADL_NEEDS]: checked
-                      ? [...adlSelected, option.value]
-                      : adlSelected.filter((value) => value !== option.value),
-                  })
-                }
-              />
-            ))}
-          </div>
-        );
-      case ProfileQuestionId.HAS_FAR:
-        return (
-          <RadioOptions
-            name="has_far"
-            options={FAR_OPTIONS}
-            value={draft[ProfileQuestionId.HAS_FAR]}
-            onChange={(value) =>
-              setDraft({ ...draft, [ProfileQuestionId.HAS_FAR]: value })
-            }
-          />
-        );
-      case ProfileQuestionId.HOUSING_TYPE:
-        return (
-          <RadioOptions
-            name="housing_type"
-            options={HOUSING_OPTIONS}
-            value={draft[ProfileQuestionId.HOUSING_TYPE]}
-            onChange={(value) =>
-              setDraft({ ...draft, [ProfileQuestionId.HOUSING_TYPE]: value })
-            }
-          />
-        );
       case ProfileQuestionId.LTC_INSURANCE:
         return (
-          <RadioOptions
-            name="ltc_insurance"
-            options={LTC_OPTIONS}
-            value={draft[ProfileQuestionId.LTC_INSURANCE]}
-            onChange={(value) =>
-              setDraft({ ...draft, [ProfileQuestionId.LTC_INSURANCE]: value })
-            }
-          />
+          <div className="flex flex-col gap-2.5">
+            <RadioOptions
+              name="ltc_insurance"
+              options={LTC_OPTIONS}
+              value={ltc}
+              onChange={setLtc}
+            />
+            <p className="text-[13px] leading-[18px] text-gray-600">
+              Check on the CPF website or app under Healthcare.
+            </p>
+          </div>
         );
       default:
         return null;
     }
   };
 
-  const draftValue = draft[current as keyof SchemeAnswers];
-  const canContinue =
-    current === ProfileQuestionId.CARE_RECIPIENT_AGE
-      ? ageAnswer !== null
-      : current === ProfileQuestionId.ADL_NEEDS
-        ? adlSelected.length > 0
-        : draftValue !== undefined;
   // Household income has its own Save button inside PCHIForm
   const showContinue = current !== ProfileQuestionId.HOUSEHOLD_INCOME;
+  // Full help and insurance have "Not sure" among their options
+  const showNotSure =
+    current === ProfileQuestionId.CARE_RECIPIENT_AGE ||
+    current === ProfileQuestionId.ADL_NEEDS ||
+    current === ProfileQuestionId.HOUSEHOLD_INCOME;
 
   return (
     <Drawer.Root open={isOpen} onOpenChange={(open) => !open && onClose()}>
@@ -355,11 +383,11 @@ export default function QuestionSheet({
           <div className="flex flex-col gap-4 overflow-y-auto px-5 pb-6 pt-2">
             <div className="flex items-center justify-between">
               <p className="text-[13px] font-semibold text-gray-600">
-                Question {index + 1} of {total}
+                Question {done.length + 1} of {steps.length}
               </p>
               <button
                 type="button"
-                onClick={next}
+                onClick={() => finish(current)}
                 className={`min-h-11 px-2 text-sm font-semibold text-interaction-links-default ${FOCUS_RING}`}
               >
                 Skip
@@ -369,15 +397,17 @@ export default function QuestionSheet({
               role="progressbar"
               aria-label="Progress"
               aria-valuemin={1}
-              aria-valuemax={total}
-              aria-valuenow={index + 1}
+              aria-valuemax={steps.length}
+              aria-valuenow={done.length + 1}
               className="flex gap-1.5"
             >
-              {questions.map((id, i) => (
+              {steps.map((id, i) => (
                 <span
                   key={id}
                   className={`h-1 flex-1 rounded-full ${
-                    i <= index ? "bg-interaction-main-default" : "bg-gray-200"
+                    i <= done.length
+                      ? "bg-interaction-main-default"
+                      : "bg-gray-200"
                   }`}
                 />
               ))}
@@ -390,29 +420,31 @@ export default function QuestionSheet({
                 {current === ProfileQuestionId.ADL_NEEDS &&
                   "Pick all that apply. "}
                 This lets us check {schemesAffected.length} more{" "}
-                {schemesAffected.length === 1 ? "scheme" : "schemes"}, like the{" "}
+                {schemesAffected.length === 1 ? "scheme" : "schemes"}, like{" "}
                 {schemesAffected[0].scheme.name}.
               </Drawer.Description>
             )}
 
             {renderBody()}
 
-            {current === ProfileQuestionId.CARE_RECIPIENT_AGE ||
-            current === ProfileQuestionId.HOUSEHOLD_INCOME ||
-            current === ProfileQuestionId.ADL_NEEDS ||
-            current === ProfileQuestionId.HOUSING_TYPE ? (
+            {showNotSure && (
               <button
                 type="button"
-                onClick={() => saveAndNext(current, NOT_SURE as never)}
+                onClick={() => {
+                  setAnswer(current as never, NOT_SURE as never);
+                  finish(current);
+                }}
                 className={`flex min-h-11 items-center gap-2.5 py-2.5 text-left text-[15px] text-gray-600 ${FOCUS_RING}`}
               >
                 <span
                   aria-hidden
                   className="size-5 shrink-0 rounded border border-gray-400 bg-white"
                 />
-                Not sure yet
+                {current === ProfileQuestionId.ADL_NEEDS
+                  ? "Not sure"
+                  : "Not sure yet"}
               </button>
-            ) : null}
+            )}
 
             {current === ProfileQuestionId.ADL_NEEDS && (
               <div className="flex items-start gap-2 rounded-[10px] bg-blue-50 p-3 text-[13px] leading-[18px] text-gray-600">
@@ -429,17 +461,7 @@ export default function QuestionSheet({
               <Button
                 className="w-full"
                 isDisabled={!canContinue}
-                onClick={() =>
-                  current === ProfileQuestionId.CARE_RECIPIENT_AGE
-                    ? saveAndNext(
-                        ProfileQuestionId.CARE_RECIPIENT_AGE,
-                        ageAnswer ?? undefined,
-                      )
-                    : saveAndNext(
-                        current as keyof SchemeAnswers,
-                        draftValue as never,
-                      )
-                }
+                onClick={save}
               >
                 Continue
               </Button>

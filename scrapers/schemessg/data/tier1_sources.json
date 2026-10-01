@@ -1,0 +1,87 @@
+{
+  "https://www.iras.gov.sg/taxes/individual-income-tax/basics-of-individual-income-tax/tax-reliefs-rebates-and-deductions/tax-reliefs/parent-relief-parent-relief-(disability)": {
+    "watchable": false,
+    "note": "no real content without JavaScript",
+    "scheme": "Parent Relief"
+  },
+  "https://www.aic.sg/financial-assistance/caregivers-training-grant-ctg/": {
+    "watchable": true,
+    "hash": "dda1c3cd746e391863cb1ab6d3d536a47fab38b8e9ba7140856d64dcbbef164a",
+    "chars": 4975,
+    "scheme": "Caregivers Training Grant",
+    "lastWatchedOn": "2026-10-01"
+  },
+  "https://www.aic.sg/financial-assistance/home-caregiving-grant/": {
+    "watchable": true,
+    "hash": "2b84eac24b138b53d4af7b6c08b9ae9ad6e980521b7ec0a95742603b12ffd0e1",
+    "chars": 11935,
+    "scheme": "Home Caregiving Grant",
+    "lastWatchedOn": "2026-10-01"
+  },
+  "https://www.mom.gov.sg/passes-and-permits/work-permit-for-foreign-domestic-worker/foreign-domestic-worker-levy/levy-concession": {
+    "watchable": true,
+    "hash": "bf0956d0a8a840d8da1900260b9f441fec71ca925a09f1acbe08e6e5b49384d2",
+    "chars": 4547,
+    "scheme": "Migrant Domestic Worker Levy Concession",
+    "lastWatchedOn": "2026-10-01"
+  },
+  "https://www.moh.gov.sg/managing-expenses/schemes-and-subsidies/subsidy-framework-for-non-residential-long-term-care-services": {
+    "watchable": true,
+    "hash": "b659a8bead3433cf94f19e5c76b1f19273183ec9eb562a4d9a38f9e76fc344d3",
+    "chars": 3257,
+    "scheme": "Subsidies for day care and home care",
+    "lastWatchedOn": "2026-10-01"
+  },
+  "https://www.aic.sg/Care-Services/Enhanced-Home-Personal-Care": {
+    "watchable": true,
+    "hash": "d97d6b29b00f601c569f2eb7f24636a3d97c4b2be4071bd1a9dd5507d4a046f0",
+    "chars": 4323,
+    "scheme": "Subsidies for day care and home care",
+    "lastWatchedOn": "2026-10-01"
+  },
+  "https://www.aic.sg/financial-assistance/seniors-mobility-and-enabling-fund/": {
+    "watchable": true,
+    "hash": "988809753542b95e0d28b555118662774e2a30a7b3a18031d5fda3a1a22ac766",
+    "chars": 14005,
+    "scheme": "Seniors' Mobility and Enabling Fund",
+    "lastWatchedOn": "2026-10-01"
+  },
+  "https://aic.sg/Financial-Assistance/MediSave-Care": {
+    "watchable": true,
+    "hash": "5bea1d68a636e54118afdc88b9d081b40c0452c29172659fcc896cd6d3e44d7f",
+    "chars": 11711,
+    "scheme": "MediSave Care",
+    "lastWatchedOn": "2026-10-01"
+  },
+  "https://www.cpf.gov.sg/service/article/what-is-medisave-care": {
+    "watchable": false,
+    "note": "no real content without JavaScript",
+    "scheme": "MediSave Care"
+  },
+  "https://www.cpf.gov.sg/member/healthcare-financing/careshield-life": {
+    "watchable": true,
+    "hash": "09df44c6ae6ae8c800310014ceb0a9d0c1943cd72a54a2f59fafc6b0dda5170a",
+    "chars": 9435,
+    "scheme": "CareShield Life and ElderShield payouts",
+    "lastWatchedOn": "2026-10-01"
+  },
+  "https://www.cpf.gov.sg/service/article/what-is-the-monthly-payout-amount-for-careshield-life": {
+    "watchable": false,
+    "note": "no real content without JavaScript",
+    "scheme": "CareShield Life and ElderShield payouts"
+  },
+  "https://www.aic.sg/financial-assistance/careshield-life": {
+    "watchable": true,
+    "hash": "6b56d6c3c2f7ae5e7bdee3062fd147a14e4dd8ebe867e8c378fd35a705de4760",
+    "chars": 12255,
+    "scheme": "CareShield Life and ElderShield payouts",
+    "lastWatchedOn": "2026-10-01"
+  },
+  "https://aic.sg/Financial-Assistance/ElderShield": {
+    "watchable": true,
+    "hash": "ecdd960d11dd7589f1cc8bc098fc7a5f04b120874e4fc691514b8e5ae706dc43",
+    "chars": 9453,
+    "scheme": "CareShield Life and ElderShield payouts",
+    "lastWatchedOn": "2026-10-01"
+  }
+}

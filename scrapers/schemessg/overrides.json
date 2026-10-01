@@ -42,6 +42,21 @@
       "tier1_id": "MOH-NR-LTC-SUBSIDY",
       "name": "Subsidies for Government-Funded Intermediate and Long Term Care (ILTC) Services",
       "link": "https://www.moh.gov.sg/seeking-healthcare/find-a-facility-or-service/mental-health-services/intermediate-and-long-term-care-services"
+    },
+    {
+      "tier1_id": "SENIORS-MOBILITY-ENABLING-FUND",
+      "name": "Seniors' Mobility and Enabling Fund (SMF)",
+      "link": "https://www.aic.sg/financial-assistance/seniors-mobility-enabling-fund"
+    },
+    {
+      "tier1_id": "MEDISAVE-CARE",
+      "name": "Medisave Care",
+      "link": "https://www.cpf.gov.sg/member/healthcare-financing/medisave-care-for-long-term-care-needs"
+    },
+    {
+      "tier1_id": "CARESHIELD-ELDERSHIELD-CLAIM",
+      "name": "CareShield Life",
+      "link": "https://www.aic.sg/financial-assistance/careshield-life"
     }
   ],
   "schemes": [

@@ -167,7 +167,7 @@ That leaves 7 schemes, plus **CareShield Life / ElderShield claims** as the 8th 
 - **Rules**
   - Recipient SC or PR → met, else Not a fit
   - Age 30 or older → met (effectively always)
-  - adl_count ≥ 3 AND adl_full_help = yes → met; adl_count < 3 → Not a fit ("For severe disability: needs full help with at least 3 daily activities"); anything unknown or "not sure" → Need answers
+  - adl_count ≥ 3 AND adl_full_help = yes → met; adl_count < 3 → Not a fit ("For severe disability: needs full help with at least 3 daily activities"); adl_full_help = no → Not a fit ("For severe disability: needs full help with at least 3 daily activities"); adl_count or adl_full_help unknown → Need answers; adl_full_help = not sure → Need answers, but counts as answered (not asked again or counted in "Answer N questions"), and add "The severe disability assessment decides" to what the agency will check
 - **The agency will check**: severe disability assessment by an MOH-accredited assessor; MediSave balance of at least $5,000
 - **nextSteps**
   1. Book a severe disability assessment with an MOH-accredited assessor. You pay $100–$250 upfront, refunded if approved.
@@ -187,7 +187,7 @@ That leaves 7 schemes, plus **CareShield Life / ElderShield claims** as the 8th 
   - Private supplements to these plans pay extra; check the policy
 - **Who is covered**: everyone born in 1980 or later (automatically, from age 30). People born 1970–1979 with ElderShield 400 were moved to CareShield Life in Dec 2021. People born in 1979 or earlier could choose to join. ElderShield closed to new members on 1 Jan 2020
 - **Rules**
-  - adl_count ≥ 3 AND adl_full_help = yes → met; adl_count < 3 → Not a fit ("For severe disability: unable to do at least 3 daily activities"); unknown or not sure → Need answers
+  - adl_count ≥ 3 AND adl_full_help = yes → met; adl_count < 3 → Not a fit ("For severe disability: unable to do at least 3 daily activities"); adl_full_help = no → Not a fit ("For severe disability: needs full help with at least 3 daily activities"); adl_count or adl_full_help unknown → Need answers; adl_full_help = not sure → Need answers, but counts as answered (not asked again or counted in "Answer N questions"), and add "The severe disability assessment decides" to what the agency will check
   - ltc_insurance = CareShield Life or ElderShield → met, and show only that plan's payout line; none → Not a fit ("Only if covered by CareShield Life or ElderShield"), with a link to ElderFund in the reason; not sure or unknown → Need answers. Hint in the question: "Check on the CPF website or app under Healthcare"
   - Age is not a rule: anyone born 1980 or later is covered automatically, so if age ≤ 45 (certainly born 1980 or later), treat ltc_insurance as CareShield Life without asking
 - **The agency will check**: a severe disability assessment by an MOH-accredited assessor; the policy is active
@@ -231,3 +231,4 @@ Every Tier 1 entry has `lastChecked` (the date we last checked it against its so
 |---|---|
 | 30 Sep 2026 | First full research of schemes 1–7 from official pages; schemes 2–7 independently re-checked; HPC/HPC+ reclassified as a care service |
 | 1 Oct 2026 | Scheme 8 (CareShield Life / ElderShield) researched and approved |
+| 1 Oct 2026 | Schemes 7 and 8: full help = no → Not a fit; full help = not sure → Need answers, counted as answered, with "The severe disability assessment decides" for the agency |

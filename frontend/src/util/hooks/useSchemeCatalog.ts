@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { api } from "@/api";
 import { useAuthStore } from "@/stores/auth";
-import { useSchemeAnswersStore } from "@/stores/schemeAnswers";
+import { toCheckAnswers, useSchemeAnswersStore } from "@/stores/schemeAnswers";
 import { CatalogScheme, ProfileQuestionId } from "@/types/scheme";
 import { UserData } from "@/types/user";
 import { isKnownAge } from "@/util/profileInput";
@@ -69,8 +69,11 @@ export default function useSchemeCatalog() {
     }
   }, [isSignedIn, userData, userLoadError, refreshUser]);
 
-  const sessionAge = useSchemeAnswersStore(
-    (state) => state.answers[ProfileQuestionId.CARE_RECIPIENT_AGE],
+  const sessionAnswers = useSchemeAnswersStore((state) => state.answers);
+  const sessionAge = sessionAnswers[ProfileQuestionId.CARE_RECIPIENT_AGE];
+  const checkAnswers = useMemo(
+    () => toCheckAnswers(sessionAnswers),
+    [sessionAnswers],
   );
 
   // Session answers from the question sheet fill gaps in the saved profile.
@@ -87,9 +90,9 @@ export default function useSchemeCatalog() {
     () =>
       (catalog ?? []).map((scheme) => ({
         scheme,
-        status: getSchemeStatus(scheme, user),
+        status: getSchemeStatus(scheme, user, { answers: checkAnswers }),
       })),
-    [catalog, user],
+    [catalog, user, checkAnswers],
   );
 
   const isLoading =
