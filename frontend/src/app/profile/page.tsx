@@ -27,6 +27,7 @@ import {
   getFormattedUserResidence,
 } from "@/util/userPropMapping";
 import { useAuthStore } from "@/stores/auth";
+import YourAnswers from "@/components/schemes/YourAnswers";
 
 export default function ProfilePage() {
   const router = useRouter();
@@ -171,6 +172,10 @@ function UserInfoAccordian({ user }: { user: UserData }) {
 
   const careRecipientDataDisplay = [
     {
+      label: "Name or nickname",
+      value: user.care_recipient_name || "Not set",
+    },
+    {
       label: "Relationship to caregiver",
       value: getFormattedUserRelationship(user.care_recipient_relationship),
     },
@@ -185,6 +190,10 @@ function UserInfoAccordian({ user }: { user: UserData }) {
     {
       label: "Staying at",
       value: getFormattedUserResidence(user.care_recipient_residence),
+    },
+    {
+      label: "Postal code",
+      value: user.home_postal_code || "Not set",
     },
   ];
 
@@ -255,7 +264,8 @@ function UserInfoAccordian({ user }: { user: UserData }) {
                 <AccordionIcon />
               </AccordionButton>
             </h2>
-            <AccordionPanel pb={4}>
+            {/* Personal data: kept out of PostHog autocapture/recordings */}
+            <AccordionPanel pb={4} className="ph-no-capture">
               <section className="flex flex-col">
                 {careRecipientDataDisplay.map((item) => (
                   <div key={item.label}>
@@ -277,6 +287,7 @@ function UserInfoAccordian({ user }: { user: UserData }) {
                   Edit
                 </Button>
               </section>
+              <YourAnswers user={user} />
             </AccordionPanel>
           </AccordionItem>
           {user.monthly_pchi !== null && (

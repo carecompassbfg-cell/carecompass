@@ -94,8 +94,15 @@ const formatDate = (iso: string): string => {
 function SchemeDetail() {
   const params = useSearchParams();
   const id = params.get("id");
-  const { items, user, isSignedIn, isLoading, userLoadError, refreshUser } =
-    useSchemeCatalog();
+  const {
+    items,
+    user,
+    isSignedIn,
+    isLoading,
+    userLoadError,
+    refreshUser,
+    saveAnswers,
+  } = useSchemeCatalog();
   const [sheetStart, setSheetStart] = useState<ProfileQuestionId>();
 
   if (isLoading) {
@@ -328,7 +335,10 @@ function SchemeDetail() {
       {sheetStart && (
         <QuestionSheet
           isOpen
-          onClose={() => setSheetStart(undefined)}
+          onClose={() => {
+            setSheetStart(undefined);
+            saveAnswers();
+          }}
           scopeSchemeId={scheme.id}
           startAt={sheetStart}
           items={items}

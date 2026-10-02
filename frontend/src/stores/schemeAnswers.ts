@@ -21,6 +21,12 @@ export interface SchemeAnswers {
 
 interface SchemeAnswersState {
   answers: SchemeAnswers;
+  // The signed-in user (UserData.id) these answers belong to; null while
+  // signed out
+  ownerId: number | null;
+  // answersFingerprint() of what was last saved to the profile, or null if
+  // nothing has been saved yet
+  savedFingerprint: string | null;
 }
 
 interface SchemeAnswersActions {
@@ -28,30 +34,55 @@ interface SchemeAnswersActions {
     id: K,
     value: SchemeAnswers[K],
   ) => void;
+  // Replace everything, e.g. with the answers loaded from the profile
+  loadAnswers: (
+    answers: SchemeAnswers,
+    ownerId: number | null,
+    savedFingerprint: string | null,
+  ) => void;
+  setOwner: (ownerId: number | null) => void;
+  markSaved: (fingerprint: string | null) => void;
   clearAnswers: () => void;
 }
 
-// Answers from the question sheet, kept for this browser session only.
-// TODO(schemes step 5): save these to the caregiver's profile via the backend
-// instead of sessionStorage. Household income already saves through PCHIForm.
+// Answers from the question sheet. Signed in, they're loaded from and saved
+// to the profile (useSchemeAnswersSync); signed out, they last for this
+// browser session only.
 export const useSchemeAnswersStore = create<
   SchemeAnswersState & SchemeAnswersActions
 >()(
   persist(
     immer((set) => ({
       answers: {},
+      ownerId: null,
+      savedFingerprint: null,
       setAnswer: (id, value) =>
         set((state) => {
           state.answers[id] = value;
         }),
+      loadAnswers: (answers, ownerId, savedFingerprint) =>
+        set((state) => {
+          state.answers = answers;
+          state.ownerId = ownerId;
+          state.savedFingerprint = savedFingerprint;
+        }),
+      setOwner: (ownerId) =>
+        set((state) => {
+          state.ownerId = ownerId;
+        }),
+      markSaved: (fingerprint) =>
+        set((state) => {
+          state.savedFingerprint = fingerprint;
+        }),
       clearAnswers: () =>
         set((state) => {
           state.answers = {};
+          state.savedFingerprint = null;
         }),
     })),
     {
-      // v2: daily activities are stored as a count, not a list
-      name: "cc-scheme-answers-v2",
+      // v3: answers are tied to a user and saved to the profile
+      name: "cc-scheme-answers-v3",
       storage: createJSONStorage(() => sessionStorage),
     },
   ),

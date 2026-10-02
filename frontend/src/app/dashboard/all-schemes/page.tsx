@@ -12,7 +12,7 @@ import { BackButton } from "@/ui/button";
 import LoadingSpinner from "@/ui/loading";
 import useSchemeCatalog from "@/util/hooks/useSchemeCatalog";
 import { COMMUNITY_TELEGRAM_URL } from "@/util/links";
-import { getRecipientName } from "@/util/recipient";
+import { getRecipientName, possessive } from "@/util/recipient";
 import {
   applyFilters,
   BrowseFilters,
@@ -381,7 +381,7 @@ function AllSchemes() {
                         href={editProfileHref}
                         className={`font-semibold text-interaction-links-default ${FOCUS_RING}`}
                       >
-                        Edit {name}&apos;s details
+                        Edit {possessive(name)} details
                       </Link>
                     </span>
                   </p>

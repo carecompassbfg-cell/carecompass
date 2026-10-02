@@ -10,8 +10,8 @@ import {
 } from "@/stores/schemeAnswers";
 import { ProfileQuestionId } from "@/types/scheme";
 import { AdlFullHelp, LtcPlan } from "@/util/eligibilityChecker";
-import { AGE_ERROR, parseAge } from "@/util/profileInput";
-import { capitalise } from "@/util/recipient";
+import { AGE_ERROR, isKnownAge, parseAge } from "@/util/profileInput";
+import { possessive } from "@/util/recipient";
 import {
   getOpenSheetQuestions,
   SchemeWithStatus,
@@ -56,7 +56,7 @@ const getPrompt = (id: ProfileQuestionId, name: string): string => {
     case ProfileQuestionId.ADL_FULL_HELP:
       return "For at least 3 of these, do they need someone to do it fully for them?";
     case ProfileQuestionId.HOUSEHOLD_INCOME:
-      return `What is ${name}'s household income?`;
+      return `What is ${possessive(name)} household income?`;
     case ProfileQuestionId.LTC_INSURANCE:
       return `Is ${name} covered by CareShield Life or ElderShield?`;
     default:
@@ -166,11 +166,18 @@ export default function QuestionSheet({
   recipientName,
   isSignedIn,
   onIncomeSaved,
+  mode = "open",
+  recipientAge,
 }: {
   isOpen: boolean;
   onClose: () => void;
   // Every scheme with its current status
   items: SchemeWithStatus[];
+  // "open": ask what's still open. "edit": go through the saved answers
+  // again (from the profile), with follow-ups as the answers allow
+  mode?: "open" | "edit";
+  // Care recipient's age, for whether the insurance question applies (edit)
+  recipientAge?: number | null;
   // Only ask what this scheme needs (from its detail page)
   scopeSchemeId?: string;
   startAt?: ProfileQuestionId;
@@ -194,8 +201,11 @@ export default function QuestionSheet({
       setAgeText("");
       setAdlSelected([]);
       setNoneOfThese(false);
-      setFullHelp(undefined);
-      setLtc(undefined);
+      // Start from what's already answered (daily activities are saved as a
+      // count, so those boxes start empty)
+      const saved = useSchemeAnswersStore.getState().answers;
+      setFullHelp(saved[ProfileQuestionId.ADL_FULL_HELP]);
+      setLtc(saved[ProfileQuestionId.LTC_INSURANCE]);
     }
   }, [isOpen]);
 
@@ -207,9 +217,25 @@ export default function QuestionSheet({
     [items, scopeSchemeId],
   );
   const open = getOpenSheetQuestions(scoped, (id) => isAnswered(answers, id));
-  const steps = SHEET_QUESTIONS.filter(
-    (id) => done.includes(id) || open.includes(id) || id === startAt,
-  );
+  const savedAdl = answers[ProfileQuestionId.ADL_NEEDS];
+  const editSteps = [
+    ProfileQuestionId.ADL_NEEDS,
+    ...(typeof savedAdl === "number" && savedAdl >= 3
+      ? [
+          ProfileQuestionId.ADL_FULL_HELP,
+          // Insurance only matters from age 46 (younger means CareShield Life)
+          ...(!isKnownAge(recipientAge) || recipientAge >= 46
+            ? [ProfileQuestionId.LTC_INSURANCE]
+            : []),
+        ]
+      : []),
+  ];
+  const steps =
+    mode === "edit"
+      ? editSteps
+      : SHEET_QUESTIONS.filter(
+          (id) => done.includes(id) || open.includes(id) || id === startAt,
+        );
   const remaining = steps.filter((id) => !done.includes(id));
   const current = startAt && !done.includes(startAt) ? startAt : remaining[0];
 
@@ -378,7 +404,9 @@ export default function QuestionSheet({
     <Drawer.Root open={isOpen} onOpenChange={(open) => !open && onClose()}>
       <Drawer.Portal>
         <Drawer.Overlay className="fixed inset-0 z-40 bg-black/40" />
-        <Drawer.Content className="fixed bottom-0 left-0 right-0 z-50 flex max-h-[90dvh] flex-col rounded-t-3xl bg-white outline-none">
+        {/* Answers are personal and health-related: keep them out of
+            PostHog autocapture and recordings */}
+        <Drawer.Content className="ph-no-capture fixed bottom-0 left-0 right-0 z-50 flex max-h-[90dvh] flex-col rounded-t-3xl bg-white outline-none">
           <Drawer.Handle className="my-2" />
           <div className="flex flex-col gap-4 overflow-y-auto px-5 pb-6 pt-2">
             <div className="flex items-center justify-between">
@@ -413,7 +441,7 @@ export default function QuestionSheet({
               ))}
             </div>
             <Drawer.Title className="text-[22px] font-bold leading-7 text-gray-800">
-              {capitalise(getPrompt(current, recipientName))}
+              {getPrompt(current, recipientName)}
             </Drawer.Title>
             {schemesAffected.length > 0 && (
               <Drawer.Description className="text-sm leading-5 text-gray-600">

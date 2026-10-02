@@ -6,6 +6,7 @@ import { CatalogScheme, ProfileQuestionId } from "@/types/scheme";
 import { UserData } from "@/types/user";
 import { isKnownAge } from "@/util/profileInput";
 import { SchemeWithStatus } from "@/util/schemeCatalog";
+import useSchemeAnswersSync from "@/util/hooks/useSchemeAnswersSync";
 import { getSchemeStatus } from "@/util/schemeStatus";
 
 // Tier 1 schemes we maintain, and Tier 2 schemes from the weekly Schemes.sg
@@ -69,6 +70,8 @@ export default function useSchemeCatalog() {
     }
   }, [isSignedIn, userData, userLoadError, refreshUser]);
 
+  // Loads saved answers from the profile; saveAnswers() runs on sheet close
+  const { saveAnswers } = useSchemeAnswersSync();
   const sessionAnswers = useSchemeAnswersStore((state) => state.answers);
   const sessionAge = sessionAnswers[ProfileQuestionId.CARE_RECIPIENT_AGE];
   const checkAnswers = useMemo(
@@ -76,8 +79,7 @@ export default function useSchemeCatalog() {
     [sessionAnswers],
   );
 
-  // Session answers from the question sheet fill gaps in the saved profile.
-  // TODO(schemes step 5): save answers to the profile instead.
+  // An age answered in the sheet fills the gap until it's saved to the profile
   const user = useMemo(() => {
     if (!isSignedIn || !userData) return null;
     if (!isKnownAge(userData.care_recipient_age) && isKnownAge(sessionAge)) {
@@ -108,5 +110,6 @@ export default function useSchemeCatalog() {
     catalogError,
     userLoadError,
     refreshUser,
+    saveAnswers,
   };
 }

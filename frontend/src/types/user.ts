@@ -31,8 +31,30 @@ export interface CareRecipientData {
   care_recipient_relationship: Relationship;
 }
 
+// Answers from the schemes question sheet, as the backend stores them
+// (scheme_answers on /users/me). Personal and partly health-related: never
+// log them or send them to analytics.
+export interface SavedSchemeAnswers {
+  adl_needs?: number | "not_sure" | null;
+  adl_full_help?: "yes" | "no" | "not_sure" | null;
+  ltc_insurance?:
+    | "careshield_life"
+    | "eldershield"
+    | "neither"
+    | "not_sure"
+    | null;
+  has_far?: "yes" | "no" | "not_sure" | null;
+  care_recipient_age_not_sure?: boolean | null;
+  // Set by the server
+  updated_at?: string | null;
+}
+
 export interface UserDataBase extends CaregiverData, CareRecipientData {
   clerk_id?: string;
+  // Personal data: never log these or send them to analytics
+  care_recipient_name?: string | null;
+  home_postal_code?: string | null;
+  scheme_answers?: SavedSchemeAnswers | null;
 }
 
 export interface UserDataFull extends UserDataBase {

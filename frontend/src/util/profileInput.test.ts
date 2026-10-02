@@ -1,5 +1,13 @@
 import { describe, expect, it } from "vitest";
-import { isKnownAge, parseAge, safeReturnTo } from "@/util/profileInput";
+import {
+  isKnownAge,
+  parseAge,
+  parsePostalCode,
+  parseRecipientName,
+  POSTAL_CODE_ERROR,
+  RECIPIENT_NAME_ERROR,
+  safeReturnTo,
+} from "@/util/profileInput";
 
 describe("isKnownAge", () => {
   it("treats 0, null and out-of-range values as not set", () => {
@@ -47,6 +55,41 @@ describe("safeReturnTo", () => {
       "/\nfoo",
     ]) {
       expect(safeReturnTo(value)).toBeNull();
+    }
+  });
+});
+
+describe("parseRecipientName", () => {
+  it("trims, and treats empty as null", () => {
+    expect(parseRecipientName("  Mum ")).toEqual({ value: "Mum" });
+    expect(parseRecipientName("")).toEqual({ value: null });
+    expect(parseRecipientName("   ")).toEqual({ value: null });
+    expect(parseRecipientName(null)).toEqual({ value: null });
+  });
+
+  it("allows up to 40 characters", () => {
+    expect(parseRecipientName("a".repeat(40)).value).toBe("a".repeat(40));
+    expect(parseRecipientName("a".repeat(41)).error).toBe(RECIPIENT_NAME_ERROR);
+  });
+
+  it("rejects control characters", () => {
+    expect(parseRecipientName("Mum\nTan").error).toBeDefined();
+  });
+});
+
+describe("parsePostalCode", () => {
+  it("strips spaces and accepts 6 digits", () => {
+    expect(parsePostalCode(" 520 123 ")).toEqual({ value: "520123" });
+  });
+
+  it("treats empty as null", () => {
+    expect(parsePostalCode("")).toEqual({ value: null });
+    expect(parsePostalCode("  ")).toEqual({ value: null });
+  });
+
+  it("rejects anything that isn't 6 digits", () => {
+    for (const value of ["12345", "1234567", "52O123", "S520123"]) {
+      expect(parsePostalCode(value).error).toBe(POSTAL_CODE_ERROR);
     }
   });
 });

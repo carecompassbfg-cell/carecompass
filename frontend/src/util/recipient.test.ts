@@ -10,7 +10,10 @@ import {
   capitalise,
   getProfileFacts,
   getRecipientName,
+  getRecipientNameAtStart,
+  getRecipientPossessive,
   getRecipientTitleName,
+  possessive,
 } from "@/util/recipient";
 import { getLastUpdated, getSourceLine } from "@/util/schemeCatalog";
 
@@ -31,6 +34,34 @@ describe("recipient names", () => {
     expect(getRecipientTitleName(user)).toBe("you and your loved one");
     expect(getRecipientName(user)).toBe("your loved one");
     expect(capitalise(getRecipientName(user))).toBe("Your loved one");
+  });
+
+  it("uses the saved name as typed, without capitalising it", () => {
+    const named = { ...user, care_recipient_name: "  ah ma " };
+    expect(getRecipientName(named)).toBe("ah ma");
+    expect(getRecipientTitleName(named)).toBe("ah ma");
+    expect(getRecipientNameAtStart(named)).toBe("ah ma");
+    expect(getRecipientTitleName({ ...user, care_recipient_name: "Mum" })).toBe(
+      "Mum",
+    );
+  });
+
+  it("falls back when there's no name, or only spaces", () => {
+    for (const care_recipient_name of [null, undefined, "", "   "]) {
+      const unnamed = { ...user, care_recipient_name };
+      expect(getRecipientName(unnamed)).toBe("your loved one");
+      expect(getRecipientTitleName(unnamed)).toBe("you and your loved one");
+      expect(getRecipientNameAtStart(unnamed)).toBe("Your loved one");
+    }
+    expect(getRecipientName(null)).toBe("your loved one");
+  });
+
+  it("makes possessives", () => {
+    expect(possessive("Mum")).toBe("Mum's");
+    expect(
+      getRecipientPossessive({ ...user, care_recipient_name: "Mr Tan" }),
+    ).toBe("Mr Tan's");
+    expect(getRecipientPossessive(user)).toBe("your loved one's");
   });
 });
 
