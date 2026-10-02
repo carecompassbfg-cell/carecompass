@@ -187,7 +187,7 @@ export default function Home() {
       <div className="flex h-full max-h-[512px] w-full flex-col place-content-between">
         <div className="mb-6 flex flex-col gap-1">
           <h1 className="text-3xl font-bold text-brand-primary-500">
-            Explore Caregiving Questions
+            What do you need help with today?
           </h1>
           <span className="text-xl font-bold text-[rgb(128,128,128,0.55)]">
             See what other caregivers are asking
