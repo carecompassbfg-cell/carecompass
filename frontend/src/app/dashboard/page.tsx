@@ -1,7 +1,8 @@
 "use client";
 
-import { useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { Button } from "@chakra-ui/react";
 import { SignInButton } from "@clerk/nextjs";
 import { ChevronRight, CircleHelp, CircleX, Search } from "lucide-react";
@@ -12,6 +13,7 @@ import SchemeIcon, { FOCUS_RING } from "@/components/schemes/SchemeIcon";
 import { isAnswered, useSchemeAnswersStore } from "@/stores/schemeAnswers";
 import { BackButton } from "@/ui/button";
 import LoadingSpinner from "@/ui/loading";
+import { getOpenQuestionSummary, readAnswerParam } from "@/util/homeSchemes";
 import useSchemeCatalog from "@/util/hooks/useSchemeCatalog";
 import {
   getProfileFacts,
@@ -22,7 +24,6 @@ import {
 import {
   countByCategory,
   countByStatus,
-  getOpenSheetQuestions,
   PAY_FOR_META,
   PAY_FOR_ORDER,
   pickBestMatches,
@@ -79,6 +80,7 @@ const ELSEWHERE_LINKS = [
 ];
 
 export default function SchemesPage() {
+  const router = useRouter();
   const {
     items,
     user,
@@ -102,18 +104,26 @@ export default function SchemesPage() {
   const allMatchesCount = statusCounts.likely + statusCounts.needs_answers;
   const categoryCounts = useMemo(() => countByCategory(items), [items]);
 
-  const openQuestions = useMemo(
+  const { openQuestions, schemesToCheck: schemesUnlocked } = useMemo(
     () =>
       isSignedIn
-        ? getOpenSheetQuestions(items, (id) => isAnswered(answers, id))
-        : [],
+        ? getOpenQuestionSummary(items, (id) => isAnswered(answers, id))
+        : { openQuestions: [], schemesToCheck: 0 },
     [items, answers, isSignedIn],
   );
-  const schemesUnlocked = items.filter(
-    ({ status }) =>
-      status.status === "needs_answers" &&
-      status.questionsToAsk.some((id) => openQuestions.includes(id)),
-  ).length;
+
+  // ?answer=1 (from the home page's "Pick up where you left off") opens the
+  // question sheet once loaded, then drops the param so Back doesn't reopen it
+  const hasOpenQuestions = openQuestions.length > 0;
+  useEffect(() => {
+    if (isLoading) return;
+    const param = readAnswerParam(window.location.search);
+    if (!param) return;
+    if (param.openSheet && hasOpenQuestions) setIsSheetOpen(true);
+    router.replace(`${window.location.pathname}${param.remainingSearch}`, {
+      scroll: false,
+    });
+  }, [isLoading, hasOpenQuestions, router]);
 
   if (isLoading) {
     return <LoadingSpinner />;
