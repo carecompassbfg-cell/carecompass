@@ -24,7 +24,7 @@ export type SyncAction =
       fingerprint: string;
     }
   // Keep answers given while signed out; they now belong to this user and
-  // are saved the next time the question sheet closes
+  // are saved to the profile straight away
   | { kind: "adopt"; ownerId: number }
   // Signed out after being signed in: drop that person's answers
   | { kind: "reset" };
@@ -59,6 +59,38 @@ export const decideSync = (
     ownerId: user.id,
     fingerprint: EMPTY_FINGERPRINT,
   };
+};
+
+interface SyncStore {
+  answers: SchemeAnswers;
+  ownerId: number | null;
+  loadAnswers: (
+    answers: SchemeAnswers,
+    ownerId: number | null,
+    savedFingerprint: string | null,
+  ) => void;
+  setOwner: (ownerId: number | null) => void;
+}
+
+// Applies decideSync to the store. On "adopt" it calls saveNow once; after
+// setOwner the next decideSync is "none", so it isn't repeated. If that save
+// fails, the answers stay and the next sheet close tries again.
+export const applySync = (
+  store: SyncStore,
+  user: UserData | null | undefined,
+  isSignedIn: boolean,
+  saveNow: () => void,
+): SyncAction => {
+  const action = decideSync(store, user, isSignedIn);
+  if (action.kind === "load") {
+    store.loadAnswers(action.answers, action.ownerId, action.fingerprint);
+  } else if (action.kind === "adopt") {
+    store.setOwner(action.ownerId);
+    saveNow();
+  } else if (action.kind === "reset") {
+    store.loadAnswers({}, null, null);
+  }
+  return action;
 };
 
 export interface ProfilePatch {

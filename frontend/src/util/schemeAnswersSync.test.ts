@@ -26,6 +26,7 @@ vi.hoisted(() => {
   });
 });
 import {
+  applySync,
   buildProfilePatch,
   decideSync,
   EMPTY_FINGERPRINT,
@@ -201,6 +202,64 @@ describe("load, answer, then save", () => {
     // Closing again without changes doesn't save again
     await closeSheet(user, patch);
     expect(patch).toHaveBeenCalledTimes(1);
+  });
+
+  it("saves answers given while signed out once, straight after signing in", async () => {
+    const store = () => useSchemeAnswersStore.getState();
+    store().setAnswer(ProfileQuestionId.ADL_NEEDS, 4);
+    store().setAnswer(ProfileQuestionId.LTC_INSURANCE, "careshield_life");
+
+    // Signed out: nothing is sent
+    const user = makeUser();
+    const patch = vi.fn(async (body: ProfilePatch) =>
+      makeUser({ scheme_answers: body.scheme_answers }),
+    );
+    const saveNow = vi.fn(() => closeSheet(user, patch));
+    expect(applySync(store(), null, false, saveNow).kind).toBe("none");
+    expect(saveNow).not.toHaveBeenCalled();
+
+    // Signed in to a profile with no answers: adopted and saved at once
+    expect(applySync(store(), user, true, saveNow).kind).toBe("adopt");
+    await saveNow.mock.results[0].value;
+    expect(patch).toHaveBeenCalledTimes(1);
+    expect(patch).toHaveBeenCalledWith({
+      scheme_answers: { adl_needs: 4, ltc_insurance: "careshield_life" },
+    });
+    expect(store().ownerId).toBe(7);
+
+    // Later syncs (e.g. after the profile updates) don't save again
+    const updated = makeUser({
+      scheme_answers: patch.mock.calls[0][0].scheme_answers,
+    });
+    expect(applySync(store(), updated, true, saveNow).kind).toBe("none");
+    expect(applySync(store(), user, true, saveNow).kind).toBe("none");
+    expect(saveNow).toHaveBeenCalledTimes(1);
+    expect(patch).toHaveBeenCalledTimes(1);
+  });
+
+  it("keeps adopted answers and retries on the next close if saving them fails", async () => {
+    const store = () => useSchemeAnswersStore.getState();
+    store().setAnswer(ProfileQuestionId.ADL_NEEDS, 2);
+    const user = makeUser();
+
+    const failing = vi.fn(async (): Promise<UserData> => {
+      throw new Error("Network Error");
+    });
+    let saveError: unknown;
+    applySync(store(), user, true, () => {
+      closeSheet(user, failing).catch((error) => {
+        saveError = error;
+      });
+    });
+    await vi.waitFor(() => expect(saveError).toBeDefined());
+    expect(failing).toHaveBeenCalledTimes(1);
+    expect(store().answers).toEqual({ [ProfileQuestionId.ADL_NEEDS]: 2 });
+
+    const working = vi.fn(async (body: ProfilePatch) =>
+      makeUser({ scheme_answers: body.scheme_answers }),
+    );
+    expect((await closeSheet(user, working)).saved).toBe(true);
+    expect(working).toHaveBeenCalledWith({ scheme_answers: { adl_needs: 2 } });
   });
 
   it("keeps the answers and retries on the next close after a failure", async () => {

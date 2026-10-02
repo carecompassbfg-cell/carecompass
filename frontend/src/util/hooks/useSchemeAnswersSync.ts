@@ -5,7 +5,7 @@ import { useAuthStore } from "@/stores/auth";
 import { useSchemeAnswersStore } from "@/stores/schemeAnswers";
 import { UserData } from "@/types/user";
 import {
-  decideSync,
+  applySync,
   ProfilePatch,
   saveAnswersIfChanged,
 } from "@/util/schemeAnswersSync";
@@ -21,19 +21,6 @@ export default function useSchemeAnswersSync() {
   const isSignedIn = useAuthStore((state) => state.isSignedIn);
   const userData = useAuthStore((state) => state.userData);
   const setUserData = useAuthStore((state) => state.setUserData);
-
-  useEffect(() => {
-    if (!isInitialised) return;
-    const store = useSchemeAnswersStore.getState();
-    const action = decideSync(store, userData, isSignedIn);
-    if (action.kind === "load") {
-      store.loadAnswers(action.answers, action.ownerId, action.fingerprint);
-    } else if (action.kind === "adopt") {
-      store.setOwner(action.ownerId);
-    } else if (action.kind === "reset") {
-      store.loadAnswers({}, null, null);
-    }
-  }, [isInitialised, isSignedIn, userData]);
 
   // Once per sheet close, not per tap. Statuses have already updated from
   // the session answers; this only keeps the profile in step.
@@ -61,6 +48,14 @@ export default function useSchemeAnswersSync() {
       toast(SAVE_FAILED_MESSAGE);
     }
   }, [isSignedIn, userData, setUserData]);
+
+  // Answers given while signed out are saved as soon as they're adopted
+  useEffect(() => {
+    if (!isInitialised) return;
+    applySync(useSchemeAnswersStore.getState(), userData, isSignedIn, () => {
+      saveAnswers();
+    });
+  }, [isInitialised, isSignedIn, userData, saveAnswers]);
 
   return { saveAnswers };
 }
