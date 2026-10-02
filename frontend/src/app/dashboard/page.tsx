@@ -320,8 +320,7 @@ export default function SchemesPage() {
             Search all caregiving schemes
           </span>
           <span className="text-[13px] leading-[18px] text-gray-600">
-            All {items.length}, including ones that may not fit. Filter by what
-            it pays for.
+            Filter by what the schemes pay for.
           </span>
         </span>
         <ChevronRight
