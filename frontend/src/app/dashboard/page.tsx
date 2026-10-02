@@ -17,6 +17,7 @@ import {
   getProfileFacts,
   getRecipientName,
   getRecipientTitleName,
+  possessive,
 } from "@/util/recipient";
 import {
   countByCategory,
@@ -86,6 +87,7 @@ export default function SchemesPage() {
     catalogError,
     userLoadError,
     refreshUser,
+    saveAnswers,
   } = useSchemeCatalog();
   const answers = useSchemeAnswersStore((state) => state.answers);
   const [isAboutOpen, setIsAboutOpen] = useState(false);
@@ -99,9 +101,6 @@ export default function SchemesPage() {
   const bestMatches = useMemo(() => pickBestMatches(items), [items]);
   const allMatchesCount = statusCounts.likely + statusCounts.needs_answers;
   const categoryCounts = useMemo(() => countByCategory(items), [items]);
-  const areaItems = items.filter(
-    ({ scheme }) => scheme.area.kind === "district",
-  );
 
   const openQuestions = useMemo(
     () =>
@@ -179,7 +178,7 @@ export default function SchemesPage() {
         <div className="flex items-start gap-2">
           <p className="flex-1 text-[15px] leading-[22px] text-gray-800">
             We checked <b>{items.length}</b> grants, subsidies and reliefs
-            {user ? ` against ${name}'s profile.` : "."}
+            {user ? ` against ${possessive(name)} profile.` : "."}
           </p>
           <button
             ref={aboutButtonRef}
@@ -358,23 +357,6 @@ export default function SchemesPage() {
         </ul>
       </section>
 
-      {/* Only for your area */}
-      {areaItems.length > 0 && (
-        <section aria-labelledby="area" className="flex flex-col gap-2.5">
-          <div className="flex flex-col gap-0.5">
-            <h2 id="area" className="text-lg font-bold leading-6 text-gray-800">
-              Only for your area
-            </h2>
-            <p className="text-sm leading-5 text-gray-600">
-              Funds run by a district or local group
-            </p>
-          </div>
-          {areaItems.map((item) => (
-            <SchemeCard key={item.scheme.id} item={item} />
-          ))}
-        </section>
-      )}
-
       {/* Not a scheme */}
       <section
         aria-labelledby="elsewhere"
@@ -442,7 +424,11 @@ export default function SchemesPage() {
       {isSheetOpen && (
         <QuestionSheet
           isOpen
-          onClose={() => setIsSheetOpen(false)}
+          onClose={() => {
+            setIsSheetOpen(false);
+            // Once per close; statuses already updated from the answers
+            saveAnswers();
+          }}
           items={items}
           recipientName={name}
           isSignedIn={isSignedIn}

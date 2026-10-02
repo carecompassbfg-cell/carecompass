@@ -17,7 +17,19 @@ import { FormEvent, Suspense, useState } from "react";
 import { toast } from "sonner";
 import { useAuthStore } from "@/stores/auth";
 import { api } from "@/api";
-import { AGE_ERROR, parseAge } from "@/util/profileInput";
+import RecipientDetailsFields from "@/components/RecipientDetailsFields";
+import { useSchemeAnswersStore } from "@/stores/schemeAnswers";
+import {
+  AGE_ERROR,
+  parseAge,
+  parsePostalCode,
+  parseRecipientName,
+} from "@/util/profileInput";
+import {
+  answersFingerprint,
+  hasSavedAnswers,
+  toSavedAnswers,
+} from "@/util/schemeAnswersAdapter";
 
 type PersonalDetails = {
   citizenship: string;
@@ -74,21 +86,42 @@ function PersonalDetailsForm() {
     care_recipient_relationship: "",
   });
 
+  // Optional, so kept apart from the required fields above
+  const [recipientName, setRecipientName] = useState("");
+  const [postalCode, setPostalCode] = useState("");
+
   const [isSubmitting, setIsSubmitting] = useState(false);
   const age = parseAge(personalDetails.care_recipient_age);
   const showAgeError =
     personalDetails.care_recipient_age !== "" && age === null;
+  const name = parseRecipientName(recipientName);
+  const postal = parsePostalCode(postalCode);
   const submitDisabled =
-    age === null || Object.values(personalDetails).some((v) => v === "");
+    age === null ||
+    Boolean(name.error) ||
+    Boolean(postal.error) ||
+    Object.values(personalDetails).some((v) => v === "");
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setIsSubmitting(true);
     try {
+      // Answers given in the question sheet while signed out are saved to
+      // the new profile, once, as part of sign-up
+      const { answers, loadAnswers } = useSchemeAnswersStore.getState();
+      const savedAnswers = toSavedAnswers(answers);
       const res = await api.post<UserData>("/users", {
         ...personalDetails,
         care_recipient_age: age,
+        care_recipient_name: name.value,
+        home_postal_code: postal.value,
+        ...(hasSavedAnswers(savedAnswers)
+          ? { scheme_answers: savedAnswers }
+          : {}),
       });
+      if (res.data) {
+        loadAnswers(answers, res.data.id, answersFingerprint(answers));
+      }
       setUserData(true, res.data);
       router.push("/home");
     } catch (error) {
@@ -202,6 +235,12 @@ function PersonalDetailsForm() {
             </Radio>
           </RadioGroup>
         </Stack>
+        <RecipientDetailsFields
+          name={recipientName}
+          postalCode={postalCode}
+          onNameChange={setRecipientName}
+          onPostalCodeChange={setPostalCode}
+        />
         <Button
           isDisabled={submitDisabled}
           isLoading={isSubmitting}

@@ -1,24 +1,36 @@
 import { Citizenship, Residence, UserDataFull } from "@/types/user";
 import { isKnownAge } from "@/util/profileInput";
 
-// Nothing stores the care recipient's name yet. Both helpers take the user so
-// they can return the saved name or nickname instead.
-// TODO(schemes step 5): use the saved name/nickname once the profile has one.
+type MaybeUser = Pick<UserDataFull, "care_recipient_name"> | null | undefined;
 
-// For headings, e.g. "Financial schemes for you and your loved one"
-export const getRecipientTitleName = (
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  user: UserDataFull | null | undefined,
-): string => "you and your loved one";
+export const RECIPIENT_FALLBACK = "your loved one";
+const TITLE_FALLBACK = "you and your loved one";
 
-// For sentences, e.g. "Can your loved one get this?". Use capitalise() when
-// it starts a sentence.
-export const getRecipientName = (
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  user: UserDataFull | null | undefined,
-): string => "your loved one";
+// The name or nickname the caregiver saved, exactly as they typed it
+// (never re-capitalised), or null
+const savedName = (user: MaybeUser): string | null =>
+  user?.care_recipient_name?.trim() || null;
 
-// For names used at the start of a sentence, e.g. "Your loved one is 78"
+// For headings, e.g. "Financial schemes for Mum" or "Financial schemes for
+// you and your loved one"
+export const getRecipientTitleName = (user: MaybeUser): string =>
+  savedName(user) ?? TITLE_FALLBACK;
+
+// For sentences, e.g. "Can Mum get this?" / "Can your loved one get this?"
+export const getRecipientName = (user: MaybeUser): string =>
+  savedName(user) ?? RECIPIENT_FALLBACK;
+
+// At the start of a sentence: the saved name as typed, or "Your loved one"
+export const getRecipientNameAtStart = (user: MaybeUser): string =>
+  savedName(user) ?? capitalise(RECIPIENT_FALLBACK);
+
+// "Mum's" / "your loved one's"
+export const possessive = (name: string): string => `${name}'s`;
+
+export const getRecipientPossessive = (user: MaybeUser): string =>
+  possessive(getRecipientName(user));
+
+// Capitalises the first letter of fixed text (not a name someone typed)
 export const capitalise = (text: string): string =>
   text.charAt(0).toUpperCase() + text.slice(1);
 

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { SchemeStatusKind } from "@/types/scheme";
+import { possessive } from "@/util/recipient";
 import { SchemeWithStatus } from "@/util/schemeCatalog";
 import SchemeCard from "./SchemeCard";
 import SchemeIcon, { FOCUS_RING } from "./SchemeIcon";
@@ -79,8 +80,7 @@ export default function SchemeList({
             className={`flex min-h-11 w-full items-center gap-2 rounded-xl border border-gray-200 bg-white p-4 text-left text-[15px] font-semibold text-gray-600 ${FOCUS_RING}`}
           >
             <span className="flex-1">
-              {hidden.length} hidden: doesn&apos;t match {recipientName}&apos;s
-              profile
+              {`${hidden.length} hidden: doesn't match ${possessive(recipientName)} profile`}
             </span>
             <SchemeIcon
               name="chevron-card"

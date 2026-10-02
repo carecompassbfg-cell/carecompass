@@ -24,7 +24,14 @@ import { BackButton } from "@/ui/button";
 import { useAuthStore } from "@/stores/auth";
 import { api } from "@/api";
 import useInitialUserData from "@/util/hooks/useInitialUserData";
-import { AGE_ERROR, parseAge, safeReturnTo } from "@/util/profileInput";
+import RecipientDetailsFields from "@/components/RecipientDetailsFields";
+import {
+  AGE_ERROR,
+  parseAge,
+  parsePostalCode,
+  parseRecipientName,
+  safeReturnTo,
+} from "@/util/profileInput";
 
 const citizenshipOptions = [
   {
@@ -71,12 +78,21 @@ function CareRecipientDetailsForm() {
   const router = useRouter();
   const returnTo = safeReturnTo(useSearchParams().get("returnTo"));
   const setUserData = useAuthStore((state) => state.setUserData);
+  const userData = useAuthStore((state) => state.userData);
   const [formData, setFormData] = useInitialUserData<CareRecipientData>(
     selectCareRecipientData,
   );
   // Typed text, so the field can be empty; 0 from onboarding means "not set"
   const [ageText, setAgeText] = useState<string>();
+  // Optional fields; undefined until edited, so they start from the profile
+  const [nameText, setNameText] = useState<string>();
+  const [postalCodeText, setPostalCodeText] = useState<string>();
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const nameValue = nameText ?? userData?.care_recipient_name ?? "";
+  const postalCodeValue = postalCodeText ?? userData?.home_postal_code ?? "";
+  const name = parseRecipientName(nameValue);
+  const postal = parsePostalCode(postalCodeValue);
 
   const ageValue =
     ageText ??
@@ -85,7 +101,11 @@ function CareRecipientDetailsForm() {
       : "");
   const age = parseAge(ageValue);
   const submitDisabled =
-    !formData || age === null || Object.values(formData).some((v) => v === "");
+    !formData ||
+    age === null ||
+    Boolean(name.error) ||
+    Boolean(postal.error) ||
+    Object.values(formData).some((v) => v === "");
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -95,6 +115,8 @@ function CareRecipientDetailsForm() {
       const res = await api.patch<UserData>("/users/me", {
         ...formData,
         care_recipient_age: age,
+        care_recipient_name: name.value,
+        home_postal_code: postal.value,
       });
       setUserData(true, res.data);
       toast.success("Care recipient info updated successfully");
@@ -184,6 +206,12 @@ function CareRecipientDetailsForm() {
           </Radio>
         </RadioGroup>
       </Stack>
+      <RecipientDetailsFields
+        name={nameValue}
+        postalCode={postalCodeValue}
+        onNameChange={setNameText}
+        onPostalCodeChange={setPostalCodeText}
+      />
       <Button
         isDisabled={submitDisabled}
         isLoading={isSubmitting}
