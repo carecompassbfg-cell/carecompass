@@ -22,7 +22,10 @@ const fetchCatalog = async (url: string): Promise<CatalogScheme[]> => {
 
 // Loads the scheme catalog and the signed-in user's profile, and works out
 // each scheme's status. Signed-out users get getSchemeStatus(scheme, null).
-export default function useSchemeCatalog() {
+// With enabled: false the catalog isn't fetched (e.g. home page, signed out).
+export default function useSchemeCatalog({
+  enabled = true,
+}: { enabled?: boolean } = {}) {
   const isInitialised = useAuthStore((state) => state.isInitialised);
   const isSignedIn = useAuthStore((state) => state.isSignedIn);
   const userData = useAuthStore((state) => state.userData);
@@ -33,6 +36,7 @@ export default function useSchemeCatalog() {
   const [userLoadError, setUserLoadError] = useState(false);
 
   useEffect(() => {
+    if (!enabled) return;
     Promise.allSettled([
       fetchCatalog(TIER1_URL),
       fetchCatalog(SCHEMESSG_URL),
@@ -51,7 +55,7 @@ export default function useSchemeCatalog() {
         ...(schemesSg.status === "fulfilled" ? schemesSg.value : []),
       ]);
     });
-  }, []);
+  }, [enabled]);
 
   const refreshUser = useCallback(async () => {
     try {
