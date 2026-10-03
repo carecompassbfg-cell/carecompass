@@ -2,14 +2,13 @@ declare global {
   namespace NodeJS {
     interface ProcessEnv {
       NODE_ENV: "development" | "production";
-      // Auth
-      NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: string;
-      CLERK_SECRET_KEY: string;
       // Backend
       NEXT_PUBLIC_APP_BACKEND_URL: string;
+      NEXT_PUBLIC_HEARTBEAT_FRONTEND_URL: string;
       // Analytics
       NEXT_PUBLIC_POSTHOG_KEY: string;
       NEXT_PUBLIC_POSTHOG_HOST: string;
+      NEXT_PUBLIC_SENTRY_DSN: string;
     }
   }
 }

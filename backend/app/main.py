@@ -31,9 +31,16 @@ app = FastAPI(
 
 # Authentication is handled via dependency injection in each route
 
-# TODO: use env variables
+# Extra allowed origins (comma-separated), e.g. the local frontend on a custom port.
+# `make dev` sets this from FRONTEND_PORT. Defaults to the standard local frontend.
+extra_origins = [
+    o.strip()
+    for o in os.getenv("CORS_EXTRA_ORIGINS", "http://localhost:3000").split(",")
+    if o.strip()
+]
+
 origins = [
-    "http://localhost:3000",
+    *extra_origins,
     "https://my.carecompass.sg",
     "https://prod-frontend.carecompass.sg",
     "https://staging-frontend.carecompass.sg",

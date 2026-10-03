@@ -42,10 +42,29 @@ This will:
 1. Start PostgreSQL via Docker
 2. Run database migrations
 3. Seed sample data
-4. Start the backend server (http://127.0.0.1:8000)
+4. Start the backend server (http://localhost:8000)
 5. Start the frontend server (http://localhost:3000)
 
-Use `make help` or `make dev-detach` for more options.
+Press Ctrl-C to stop the frontend, backend and database.
+
+#### Options
+Pass these as `make` variables:
+
+| Variable        | Default | Description                                      |
+| --------------- | ------- | ------------------------------------------------ |
+| `SEED`          | `1`     | Seed the database after migrations. `0` skips it |
+| `BACKEND_PORT`  | `8000`  | Port for the backend server                      |
+| `FRONTEND_PORT` | `3000`  | Port for the frontend server                     |
+
+```bash
+make dev SEED=0                                   # skip seeding
+make dev BACKEND_PORT=9000 FRONTEND_PORT=4000     # custom ports
+make dev SEED=0 BACKEND_PORT=9000 FRONTEND_PORT=4000
+```
+
+`make dev` automatically points the frontend at the chosen backend port and allows the chosen frontend port in the backend's CORS settings, overriding `NEXT_PUBLIC_APP_BACKEND_URL` in `frontend/.env.local` and `CORS_EXTRA_ORIGINS` in `backend/.env`. `SEED` also works with `make db-up`.
+
+Use `make help` for more options.
 
 ### Manual Setup
 

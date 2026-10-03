@@ -1,12 +1,14 @@
 # CareCompass — local dev shortcuts
 #
 # Usage:
-#   make dev [SEED=0|1]     Start DB (migrate + optional seed), then backend + frontend
+#   make dev [SEED=0|1] [BACKEND_PORT=N] [FRONTEND_PORT=N]
+#                           Start DB (migrate + optional seed), then backend + frontend
 #                           attached. Ctrl-C tears down frontend, backend, and DB.
 #   make db-up [SEED=0|1]   Start Postgres, run migrations, optionally seed
 #   make db-down            Stop Postgres
 #
 # SEED defaults to 1 (seed the DB). Pass SEED=0 to skip seeding, e.g. `make dev SEED=0`.
+# BACKEND_PORT defaults to 8000 and FRONTEND_PORT to 3000, e.g. `make dev BACKEND_PORT=9000 FRONTEND_PORT=4000`.
 
 # Recipes that need shared shell state (variables, traps, background jobs) are
 # written as a single logical line with `\` continuations, so they run in ONE
@@ -29,16 +31,27 @@ COMPOSE := $(shell docker compose version >/dev/null 2>&1 && echo "docker compos
 # Seed the DB after migrations? 1 = yes (default), 0 = no.
 SEED ?= 1
 
+# Ports for the dev servers.
+BACKEND_PORT  ?= 8000
+FRONTEND_PORT ?= 3000
+# URL the frontend uses to reach the backend (overrides NEXT_PUBLIC_APP_BACKEND_URL
+# from frontend/.env.local, since real env vars take precedence in Next.js).
+BACKEND_URL ?= http://localhost:$(BACKEND_PORT)
+# Origins the backend's CORS policy should allow for the local frontend.
+FRONTEND_ORIGINS ?= http://localhost:$(FRONTEND_PORT),http://127.0.0.1:$(FRONTEND_PORT)
+
 .PHONY: help db-up db-down dev
 
 help:
 	@echo "CareCompass local dev"
 	@echo ""
-	@echo "  make dev [SEED=0|1]     DB up + migrate (+seed) then run backend + frontend; Ctrl-C stops all"
+	@echo "  make dev [SEED=0|1] [BACKEND_PORT=N] [FRONTEND_PORT=N]"
+	@echo "                          DB up + migrate (+seed) then run backend + frontend; Ctrl-C stops all"
 	@echo "  make db-up [SEED=0|1]   Start Postgres, run migrations (+seed)"
 	@echo "  make db-down            Stop Postgres"
 	@echo ""
 	@echo "  SEED defaults to 1. Pass SEED=0 to skip seeding (e.g. make dev SEED=0)."
+	@echo "  BACKEND_PORT defaults to 8000, FRONTEND_PORT to 3000."
 
 # Start Postgres, wait until healthy, run migrations, and optionally seed.
 db-up:
@@ -84,7 +97,7 @@ db-down:
 # Bring up the DB (via db-up), then run backend + frontend attached.
 # Ctrl-C tears down frontend, backend, and the DB.
 dev: db-up
-	@echo "[make] Starting backend + frontend — press Ctrl-C to stop everything."; \
+	@echo "[make] Starting backend (:$(BACKEND_PORT)) + frontend (:$(FRONTEND_PORT)) — press Ctrl-C to stop everything."; \
 	set -m; \
 	BACKEND_PID=""; \
 	FRONTEND_PID=""; \
@@ -96,10 +109,11 @@ dev: db-up
 	  [ -n "$$BACKEND_PID" ]  && kill -TERM -"$$BACKEND_PID"  2>/dev/null || true; \
 	  ( cd $(BACKEND_DIR) && $(COMPOSE) -f $(COMPOSE_FILE) down ) || true; \
 	  echo "[make] All services stopped."; \
+	  exit 0; \
 	}; \
 	trap cleanup INT TERM EXIT; \
-	( cd $(BACKEND_DIR)  && pipenv run fastapi dev app/main.py ) & \
+	( cd $(BACKEND_DIR)  && CORS_EXTRA_ORIGINS=$(FRONTEND_ORIGINS) pipenv run fastapi dev app/main.py --port $(BACKEND_PORT) ) & \
 	BACKEND_PID=$$!; \
-	( cd $(FRONTEND_DIR) && npm run dev ) & \
+	( cd $(FRONTEND_DIR) && NEXT_PUBLIC_APP_BACKEND_URL=$(BACKEND_URL) npm run dev -- -p $(FRONTEND_PORT) ) & \
 	FRONTEND_PID=$$!; \
 	wait
