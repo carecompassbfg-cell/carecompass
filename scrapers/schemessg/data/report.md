@@ -11,8 +11,8 @@ Synced on 2026-10-05 from the **prod** environment, category "Seniors & Caregivi
 | Fetched | 194 |
 | Published (money, Tier 2) | 17 |
 | Other services and programmes (`other.json`) | 87 |
-| Excluded | 75 |
-| Unclassified money (not published) | 7 |
+| Excluded | 82 |
+| Unclassified money (not published) | 0 |
 | Tier 1 matches (ours, not published) | 8 |
 | Retired or not found | 0 |
 
@@ -41,20 +41,20 @@ Compared with the last run from the **dev** environment.
 - Free Food For All (excluded)
 - COMIT Fei Yue (other)
 - Enhancement for Active Seniors (EASE) (excluded, equipment_home)
-- Lease Buyback Scheme (unclassified, unclassified)
+- Lease Buyback Scheme (excluded, unclassified)
 - Deferred Downpayment Scheme (DDS) (excluded)
-- Silver Housing Bonus (published, equipment_home)
+- Silver Housing Bonus (excluded, equipment_home)
 - CREST HNF @ Fernvale and Jalan Kayu (other)
 - S17 Community Kitchen (excluded)
-- KampungSpirit (unclassified, unclassified)
+- KampungSpirit (excluded, unclassified)
 - CREST-Youth Lakeside Family Services @ West (excluded)
 - LB Tech Care (excluded)
-- Silver is Gold (unclassified, unclassified)
+- Silver is Gold (excluded, unclassified)
 - MINDS Caregivers Support Services (excluded)
 - MWS Active Ageing Centres (excluded)
 - NAMS Addiction Hotline (excluded)
 - Senior Care Centres (other)
-- Ray of Hope (unclassified, unclassified)
+- Ray of Hope (excluded, unclassified)
 - REACH Community Mental Health Team (other)
 - Dignity of Work Programme (other)
 - CREST @ Anchorvale & Buangkok (excluded)
@@ -66,12 +66,12 @@ Compared with the last run from the **dev** environment.
 - StrokeConnect (other)
 - Special Needs Savings Scheme (other)
 - Community Outreach Programme for the Elderly (COPE) (excluded)
-- South West Community Caring Fund (unclassified, unclassified)
+- South West Community Caring Fund (published, monthly_payouts)
 - Project Dementia and Caregiver care services (Meeting Centre Support Programme) (other)
 - Tung Ling Counselling Centre (excluded)
 - Mental Wellness Outreach for Seniors (CREST Programme) (other)
 - Counselling and Coaching for Older Persons and Caregivers (other)
-- Care & Assistance (unclassified, unclassified)
+- Care & Assistance (excluded, unclassified)
 
 ### Removed (3)
 
@@ -92,7 +92,7 @@ Compared with the last run from the **dev** environment.
 - **Caregiving @ South West**: summary, description, eligibility, whatItGives, link, kind, status, payFor
   - link: `https://southwest.cdc.gov.sg/what-we-do/for-caregivers/caregiving/` → `https://southwest.cdc.gov.sg/what-we-do/for-caregivers/caregiving-sw/`
   - kind: `service_or_programme` → `money`
-  - status: `other` → `unclassified`
+  - status: `other` → `excluded`
   - payFor: `None` → `unclassified`
 - **South West Caregiver Support Fund**: eligibility, whatItGives, link
   - link: `https://southwest.cdc.gov.sg/what-we-do/for-caregivers/csf/` → `https://southwest.cdc.gov.sg/what-we-do/for-caregivers/south-west-caregiver-support-fund/`
@@ -128,6 +128,13 @@ Schemes.sg description now:
 > - Provides a South West Resource Map to help caregivers discover key caregiving support services available within their community.
 > - Aims to make it easier for caregivers to find relevant support, information, and financial help within the district.
 > - $1,000 to help caregivers with self-care and caregiving expenses.
+
+### South West Community Caring Fund
+
+- Overrides: valueText
+- Reason: official page checked 5 Oct 2026
+- Checked on: 2026-10-05
+- Status: Baseline recorded this run; changes are tracked from the next run
 
 ## Tier 1 matches
 
@@ -187,7 +194,7 @@ Schemes outside the category that overrides.json asks for.
 
 ## Published schemes (17)
 
-### Cash support (6)
+### Cash support (7)
 
 | Scheme | Agency | Area |
 |---|---|---|
@@ -197,13 +204,13 @@ Schemes outside the category that overrides.json asks for.
 | [Pioneer Generation Disability Assistance Scheme (PioneerDAS)](https://www.aic.sg/financial-assistance/pioneer-generation-disability-assistance-scheme) | AIC | Islandwide |
 | [Public Assistance Programme](https://sbws.org.sg/en/services-affiliates/social-welfare-and-community-services/public-assistance-programme/) | Singapore Buddhist Welfare Service | Islandwide |
 | [South West Caregiver Support Fund](https://southwest.cdc.gov.sg/what-we-do/for-caregivers/south-west-caregiver-support-fund/) | South West CDC | South West District |
+| [South West Community Caring Fund](https://southwest.cdc.gov.sg/what-we-do/for-assistance/sw-community-caring-fund/) | South West CDC | South West District |
 
-### Equipment and home (2)
+### Equipment and home (1)
 
 | Scheme | Agency | Area |
 |---|---|---|
 | [Enhancement for Active Seniors (EASE)](https://www.hdb.gov.sg/managing-my-home/upgrading-and-redevelopment/enhancement-for-active-seniors-ease) | HDB | Islandwide |
-| [Silver Housing Bonus](https://www.hdb.gov.sg/managing-my-home/retirement-planning/monetising-flat-for-retirement/silver-housing-bonus) | HDB | Islandwide |
 
 ### Transport (1)
 
@@ -229,21 +236,11 @@ Schemes outside the category that overrides.json asks for.
 |---|---|---|
 | [Matched Retirement Savings Scheme](https://www.cpf.gov.sg/member/growing-your-savings/saving-more-with-cpf/matching-grant-for-seniors-who-top-up) | CPF Board | Islandwide |
 
-## Unclassified money schemes (7)
+## Unclassified money schemes (0)
 
 Financial help that doesn't map cleanly to one category, so it is not published. Set `payFor` in overrides.json to publish one.
 
-| Scheme | Agency | What it gives | Scores |
-|---|---|---|---|
-| [Care & Assistance](https://www.yong-en.org.sg/care-assistance/) | Yong-en Care Centre | Casework, Financial assistance (general), Financial assistance for daily living expenses, Food support | - |
-| [Caregiving @ South West](https://southwest.cdc.gov.sg/what-we-do/for-caregivers/caregiving-sw/) | South West CDC | Respite care/Caregiver support, Educational programmes, Financial assistance (general) | - |
-| [KampungSpirit](https://www.kampungspirit.gov.sg/) | Open Government Products | Financial assistance (general), Financial assistance for daily living expenses, Food support | - |
-| [Lease Buyback Scheme](https://www.hdb.gov.sg/residential/living-in-an-hdb-flat/for-our-seniors/monetising-your-flat-for-retirement/lease-buyback-scheme) | HDB | Financial assistance (general) | - |
-| [Ray of Hope](https://rayofhope.sg/) | Ray of Hope | Referral services, Financial assistance (general), Financial assistance for daily living expenses, Financial assistance for healthcare, Financial assistance for education, Information services | {'medical_bills': 2} |
-| [Silver is Gold](https://www.majurity.sg/funds-and-grants/silverisgold/) | The Majurity Trust Limited | Financial assistance (general) | - |
-| [South West Community Caring Fund](https://southwest.cdc.gov.sg/what-we-do/for-assistance/sw-community-caring-fund/) | South West CDC | Financial assistance (general), Financial assistance for daily living expenses | - |
-
-## Excluded (75)
+## Excluded (82)
 
 | Scheme | Agency | Kind | Reason |
 |---|---|---|---|
@@ -316,11 +313,18 @@ Financial help that doesn't map cleanly to one category, so it is not published.
 | Traditional Chinese Medicine Free Clinic | Buddhist Compassion Relief Tzu-Chi Foundation (Singapore) | service_or_programme | Not aimed at caregivers or seniors with a care need |
 | Tung Ling Counselling Centre | Tung Ling Community Services | service_or_programme | Not aimed at caregivers or seniors with a care need |
 | Tzu Chi Free Clinic | Tzu Chi Singapore | service_or_programme | Not aimed at caregivers or seniors with a care need |
+| KampungSpirit | Open Government Products | money | Override: Donor platform used by social workers for households; caregivers can't apply |
 | Enhancement for Active Seniors (EASE) | HDB | money | Override: Duplicate on production Schemes.sg (three EASE entries); we publish the HDB entry at hdb.gov.sg/managing-my-home/upgrading-and-redevelopment/enhancement-for-active-seniors-ease |
 | Enhancement for Active Seniors (EASE) | HDB | money | Override: Duplicate on production Schemes.sg (three EASE entries); we publish the HDB entry at hdb.gov.sg/managing-my-home/upgrading-and-redevelopment/enhancement-for-active-seniors-ease |
 | Financial and Food Rations assistance (Temporary) | Bethel Community Services (BCS) | money | Override: General cash and food aid (Bethel Community Services), not specific to caregiving |
 | Financial Assistance and Food Relief | Catholic Welfare Services | money | Override: General cash and food aid (Catholic Welfare Services), not specific to caregiving |
 | Financial Assistance Schemes & Food Vouchers | The Eurasian Association | money | Override: General cash and food aid (Eurasian Association), not specific to caregiving |
+| Ray of Hope | Ray of Hope | money | Override: General crowdfunding for any need, not a caregiving scheme |
+| Care & Assistance | Yong-en Care Centre | money | Override: General food and cash relief by social-worker referral (Outram area), not specific to caregiving |
+| Silver is Gold | The Majurity Trust Limited | money | Override: Grants for organisations running dementia programmes, not for individuals |
+| Silver Housing Bonus | HDB | money | Override: Housing: a bonus for moving to a smaller flat, not a care cost |
+| Lease Buyback Scheme | HDB | money | Override: Housing: retirement income from the flat lease, not a care cost |
+| Caregiving @ South West | South West CDC | money | Override: South West CDC's caregiver hub page; its fund is published separately as the South West Caregiver Support Fund |
 | Mobile Access for Seniors | IMDA | money | Override: Subsidised phone plans and devices, not caregiving costs |
 
 ## Retired or not found (0)

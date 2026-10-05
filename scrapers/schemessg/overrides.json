@@ -127,6 +127,77 @@
       },
       "action": "exclude",
       "reason": "Duplicate on production Schemes.sg (three EASE entries); we publish the HDB entry at hdb.gov.sg/managing-my-home/upgrading-and-redevelopment/enhancement-for-active-seniors-ease"
+    },
+    {
+      "match": {
+        "name": "Silver Housing Bonus",
+        "link": "https://www.hdb.gov.sg/managing-my-home/retirement-planning/monetising-flat-for-retirement/silver-housing-bonus"
+      },
+      "action": "exclude",
+      "reason": "Housing: a bonus for moving to a smaller flat, not a care cost"
+    },
+    {
+      "match": {
+        "name": "Lease Buyback Scheme",
+        "link": "https://www.hdb.gov.sg/residential/living-in-an-hdb-flat/for-our-seniors/monetising-your-flat-for-retirement/lease-buyback-scheme"
+      },
+      "action": "exclude",
+      "reason": "Housing: retirement income from the flat lease, not a care cost"
+    },
+    {
+      "match": {
+        "name": "Care & Assistance",
+        "link": "https://www.yong-en.org.sg/care-assistance/"
+      },
+      "action": "exclude",
+      "reason": "General food and cash relief by social-worker referral (Outram area), not specific to caregiving"
+    },
+    {
+      "match": {
+        "name": "Caregiving @ South West",
+        "link": "https://southwest.cdc.gov.sg/what-we-do/for-caregivers/caregiving-sw/"
+      },
+      "action": "exclude",
+      "reason": "South West CDC's caregiver hub page; its fund is published separately as the South West Caregiver Support Fund"
+    },
+    {
+      "match": {
+        "name": "KampungSpirit",
+        "link": "https://www.kampungspirit.gov.sg/"
+      },
+      "action": "exclude",
+      "reason": "Donor platform used by social workers for households; caregivers can't apply"
+    },
+    {
+      "match": {
+        "name": "Ray of Hope",
+        "link": "https://rayofhope.sg/"
+      },
+      "action": "exclude",
+      "reason": "General crowdfunding for any need, not a caregiving scheme"
+    },
+    {
+      "match": {
+        "name": "Silver is Gold",
+        "link": "https://www.majurity.sg/funds-and-grants/silverisgold/"
+      },
+      "action": "exclude",
+      "reason": "Grants for organisations running dementia programmes, not for individuals"
+    },
+    {
+      "match": {
+        "name": "South West Community Caring Fund",
+        "link": "https://southwest.cdc.gov.sg/what-we-do/for-assistance/sw-community-caring-fund/"
+      },
+      "action": "include",
+      "payFor": "monthly_payouts",
+      "area": {
+        "kind": "district",
+        "name": "South West District"
+      },
+      "valueText": "$250 one-time",
+      "reason": "official page checked 5 Oct 2026",
+      "checked_on": "2026-10-05"
     }
   ],
   "extra_includes": [

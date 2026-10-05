@@ -232,3 +232,4 @@ Every Tier 1 entry has `lastChecked` (the date we last checked it against its so
 | 30 Sep 2026 | First full research of schemes 1–7 from official pages; schemes 2–7 independently re-checked; HPC/HPC+ reclassified as a care service |
 | 1 Oct 2026 | Scheme 8 (CareShield Life / ElderShield) researched and approved |
 | 1 Oct 2026 | Schemes 7 and 8: full help = no → Not a fit; full help = not sure → Need answers, counted as answered, with "The severe disability assessment decides" for the agency |
+| 5 Oct 2026 | Scheme 8: CPF CareShield Life page changed; re-checked, no change to figures or rules |

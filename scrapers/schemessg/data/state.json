@@ -2582,7 +2582,7 @@
       ],
       "link": "https://www.hdb.gov.sg/residential/living-in-an-hdb-flat/for-our-seniors/monetising-your-flat-for-retirement/lease-buyback-scheme",
       "kind": "money",
-      "status": "unclassified",
+      "status": "excluded",
       "payFor": "unclassified",
       "area": {
         "kind": "islandwide"
@@ -2637,7 +2637,7 @@
       ],
       "link": "https://www.hdb.gov.sg/managing-my-home/retirement-planning/monetising-flat-for-retirement/silver-housing-bonus",
       "kind": "money",
-      "status": "published",
+      "status": "excluded",
       "payFor": "equipment_home",
       "area": {
         "kind": "islandwide"
@@ -2992,7 +2992,7 @@
       ],
       "link": "https://www.kampungspirit.gov.sg/",
       "kind": "money",
-      "status": "unclassified",
+      "status": "excluded",
       "payFor": "unclassified",
       "area": {
         "kind": "islandwide"
@@ -3345,7 +3345,7 @@
       ],
       "link": "https://www.majurity.sg/funds-and-grants/silverisgold/",
       "kind": "money",
-      "status": "unclassified",
+      "status": "excluded",
       "payFor": "unclassified",
       "area": {
         "kind": "islandwide"
@@ -3950,7 +3950,7 @@
       ],
       "link": "https://rayofhope.sg/",
       "kind": "money",
-      "status": "unclassified",
+      "status": "excluded",
       "payFor": "unclassified",
       "area": {
         "kind": "islandwide"
@@ -4786,7 +4786,7 @@
       ],
       "link": "https://southwest.cdc.gov.sg/what-we-do/for-caregivers/caregiving-sw/",
       "kind": "money",
-      "status": "unclassified",
+      "status": "excluded",
       "payFor": "unclassified",
       "area": {
         "kind": "district",
@@ -4837,12 +4837,18 @@
       "tier1Id": null,
       "sourceSummary": "A one-time $250 assistance from South West CDC to help low-income families with young children and low-income elderly households cover child-raising and daily living expenses.",
       "sourceDescription": "- Provides a one-time, immediate cash support of $250 to help defray child-raising costs and daily living expenses\n- Targets low-income households with young children and low-income elderly-only households in the South West District\n- Offers quick, short-term relief to bridge urgent financial needs for essentials and caregiving-related expenses\n- Simple online application with basic income and identity documentation to enable fast assistance",
-      "contentOverride": null,
+      "contentOverride": {
+        "fields": [
+          "valueText"
+        ],
+        "reason": "official page checked 5 Oct 2026",
+        "checkedOn": "2026-10-05"
+      },
       "name": "South West Community Caring Fund",
       "agency": "South West CDC",
       "summary": "A one-time $250 assistance from South West CDC to help low-income families with young children and low-income elderly households cover child-raising and daily living expenses.",
       "description": "- Provides a one-time, immediate cash support of $250 to help defray child-raising costs and daily living expenses\n- Targets low-income households with young children and low-income elderly-only households in the South West District\n- Offers quick, short-term relief to bridge urgent financial needs for essentials and caregiving-related expenses\n- Simple online application with basic income and identity documentation to enable fast assistance",
-      "valueText": null,
+      "valueText": "$250 one-time",
       "eligibility": "Applicant must meet one of the following: (1) Household has one or more children aged six years and below at the time of application, with per capita household income of $1,500 or less; OR (2) Senior aged 60 and above staying alone or together with other senior(s) aged 60 and above in the same elderly household, with per capita household income of $1,500 or less.\n\nMust also be resident of South West District.\nSingapore Citizen or at least one immediate family member is a Singapore Citizen.",
       "whatItGives": [
         "Financial assistance (general)",
@@ -4850,8 +4856,8 @@
       ],
       "link": "https://southwest.cdc.gov.sg/what-we-do/for-assistance/sw-community-caring-fund/",
       "kind": "money",
-      "status": "unclassified",
-      "payFor": "unclassified",
+      "status": "published",
+      "payFor": "monthly_payouts",
       "area": {
         "kind": "district",
         "name": "South West District"
@@ -5864,7 +5870,7 @@
       ],
       "link": "https://www.yong-en.org.sg/care-assistance/",
       "kind": "money",
-      "status": "unclassified",
+      "status": "excluded",
       "payFor": "unclassified",
       "area": {
         "kind": "district",
