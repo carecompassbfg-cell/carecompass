@@ -1,0 +1,540 @@
+[
+  {
+    "id": "ssg-supportgowhere-comcare-long-term-assistance-lta",
+    "source": "schemes_sg",
+    "sourceId": "IhKLeOTlBTc8tSkAgKEP",
+    "tier": 2,
+    "name": "ComCare Long Term Assistance (LTA)",
+    "agency": "MSF",
+    "summary": "Long-term financial aid for those unable to work.",
+    "description": "ComCare Long Term Assistance (LTA) for those who are permanently unable to work. Provides monthly cash assistance, assistance with medical expenses at public healthcare institutions, free or highly subsidised access to social support services.\n\n •  • \nComCare Long Term Assistance (LTA)\nProvides long-term support to those permanently unable to work due to old age, illness or disability, and have inadequate family support or savings to rely on for daily needs.\nSCHEME HIGHLIGHTS\nMonthly cash assistance\nAssistance with medical expenses at public healthcare institutions\nFree or highly subsidised access to social support services\nCollapse all sections\nMonthly cash assistance for living expenses\nAssistance with medical expenses at public healthcare institutions\nFree or highly subsidised access to social support services\n\n\nLTA assistance rates according to household size:\n\nHousehold Size\nCurrent Rates\nIncreased Rates\n\n(From April 2025)\n1 person\n$640\n$760\n2 persons\n$1,080\n$1,250\n3 persons\n$1,510\n$1,760\n4 persons\n$1,930\n$2,230\nSingapore Citizens and Permanent Residents\nUnable to work because of old age, illness or disability\nElderly persons who receive a small monthly payout from sources such as CPF Retirement Sum/CPF Life\nElderly persons whose children are low income themselves i.e. monthly household income per capita of $800 and below\nYou can apply at any Social Service Office.\n\nYou'll need to provide:\n\nUpdated bank account passbook(s) / statement(s) of applicant and all household members, showing clearly the latest transaction details of at least 1 month.\nOther supporting documents, if relevant:\n\nYour identity card or birth certificate (of applicant and all household members) \n\n(Note: NRIC / FIN of main applicants will not be required for online applications as the login will be via Singpass. If applicants / household members had provided these identification documents in earlier ComCare applications, they will not be required again.)\nLatest utility bill(s) (e.g. Singapore Power (SP), private electricity retailers)\nLatest Medical Certificate (with duration and fitness for work status)\nPay-slips / Employment contract (for employment without CPF contributions)\nLatest employment / termination letter (for recent changes in employment status)\nInsurance Letter (for lump-sum / regular payouts by private insurer)\nAny other supporting documents\nComCare Hotline: 1800 222 0000\nAirtime charges apply for mobile calls to 1800 service lines. Calls are free of charge only if made from regular land lines in Singapore.\nAsk_SSO@msf.gov.sg\nVisit your nearest Social Service Office\nScheme last updated 27 Feb 2025",
+    "eligibility": "Singapore Citizens and Permanent Residents who are unable to work due to old age, illness, or disability; elderly persons with small monthly payouts from sources such as CPF Retirement Sum/CPF Life; elderly persons whose children are low income (monthly household income per capita of $800 and below).",
+    "whatYouGet": [
+      "Financial assistance for daily living expenses",
+      "Financial assistance for healthcare",
+      "Helpline services"
+    ],
+    "payFor": "monthly_payouts",
+    "area": {
+      "kind": "islandwide"
+    },
+    "link": "https://supportgowhere.life.gov.sg/schemes/COMCARE-LTA/comcare-long-term-assistance-lta",
+    "sources": [
+      {
+        "name": "Ministry of Social and Family Development (MSF)",
+        "url": "https://supportgowhere.life.gov.sg/schemes/COMCARE-LTA/comcare-long-term-assistance-lta"
+      },
+      {
+        "name": "Schemes.sg",
+        "url": "https://schemes.sg/schemes/IhKLeOTlBTc8tSkAgKEP"
+      }
+    ],
+    "lastRefreshed": "2026-10-05"
+  },
+  {
+    "id": "ssg-aic-elderfund",
+    "source": "schemes_sg",
+    "sourceId": "sSpXwuKcdNRPtqEZHI4i",
+    "tier": 2,
+    "name": "ElderFund",
+    "agency": "MOH",
+    "summary": "Monthly cash aid for severely disabled elderly.",
+    "description": "ElderFund is a discretionary assistance scheme launched on 31 January 2020. It is targeted at severely disabled lower-income Singapore Citizens aged 30 and older, who are not able to benefit from CareShield Life, ElderShield, and the Interim Disability Assistance Programme for the Elderly (IDAPE), and have low MediSave balances and inadequate personal savings to meet their long-term care needs. Eligible Singapore Citizens can receive up to $250 cash per month for as long as they remain eligible, and meet the terms and conditions needed for receipt of payment.",
+    "eligibility": "Severely disabled Singapore Citizens aged 30 and older, not eligible for CareShield Life, ElderShield, or IDAPE, with low MediSave balances and inadequate personal savings for long-term care needs.",
+    "whatYouGet": [
+      "Financial assistance for daily living expenses"
+    ],
+    "payFor": "monthly_payouts",
+    "area": {
+      "kind": "islandwide"
+    },
+    "link": "https://www.aic.sg/financial-assistance/elderfund",
+    "sources": [
+      {
+        "name": "Ministry of Health (MOH), Central Provident Fund (CPF), Agency for Integrated Care (AIC)",
+        "url": "https://www.aic.sg/financial-assistance/elderfund"
+      },
+      {
+        "name": "Schemes.sg",
+        "url": "https://schemes.sg/schemes/sSpXwuKcdNRPtqEZHI4i"
+      }
+    ],
+    "lastRefreshed": "2026-10-05"
+  },
+  {
+    "id": "ssg-moh-interim-disability-assistance-programme-for-the-elderly",
+    "source": "schemes_sg",
+    "sourceId": "n1JVQhzmWsrqRAxg93nA",
+    "tier": 2,
+    "name": "Interim Disability Assistance Programme for the Elderly (IDAPE)",
+    "agency": "MOH",
+    "summary": "Financial aid for elderly excluded from ElderShield.",
+    "description": "Financial help to needy and disabled elderly Singaporeans who were not eligible to join ElderShield when it was launched in 2002 because they had exceeded the maximum entry age or had pre-existing disabilities.",
+    "eligibility": "Needy and disabled elderly Singaporeans who were not eligible to join ElderShield in 2002 because they had exceeded the maximum entry age or had pre-existing disabilities.",
+    "whatYouGet": [
+      "Financial assistance for daily living expenses"
+    ],
+    "payFor": "monthly_payouts",
+    "area": {
+      "kind": "islandwide"
+    },
+    "link": "https://www.moh.gov.sg/managing-expenses/schemes-and-subsidies/interim-disability-assistance-programme-for-the-elderly",
+    "sources": [
+      {
+        "name": "Ministry of Health (MOH)",
+        "url": "https://www.moh.gov.sg/managing-expenses/schemes-and-subsidies/interim-disability-assistance-programme-for-the-elderly"
+      },
+      {
+        "name": "Schemes.sg",
+        "url": "https://schemes.sg/schemes/n1JVQhzmWsrqRAxg93nA"
+      }
+    ],
+    "lastRefreshed": "2026-10-05"
+  },
+  {
+    "id": "ssg-aic-pioneer-generation-disability-assistance-scheme",
+    "source": "schemes_sg",
+    "sourceId": "2rK9LebmNpOVhNuJhpZc",
+    "tier": 2,
+    "name": "Pioneer Generation Disability Assistance Scheme (PioneerDAS)",
+    "agency": "AIC",
+    "summary": "Monthly cash for disabled Pioneer Generation members.",
+    "description": "The Pioneer Generation Disability Assistance Scheme (PioneerDAS) is part of the Pioneer Generation Package, which honours what Singapore’s Pioneers have done for the country. Under this scheme, Pioneers who have disabilities can receive $100 a month, which they can use for expenses.",
+    "eligibility": "Pioneers with disabilities. (Further eligibility details not provided in the text.)",
+    "whatYouGet": [
+      "Financial assistance for daily living expenses"
+    ],
+    "payFor": "monthly_payouts",
+    "area": {
+      "kind": "islandwide"
+    },
+    "link": "https://www.aic.sg/financial-assistance/pioneer-generation-disability-assistance-scheme",
+    "sources": [
+      {
+        "name": "Agency for Integrated Care",
+        "url": "https://www.aic.sg/financial-assistance/pioneer-generation-disability-assistance-scheme"
+      },
+      {
+        "name": "Schemes.sg",
+        "url": "https://schemes.sg/schemes/2rK9LebmNpOVhNuJhpZc"
+      }
+    ],
+    "lastRefreshed": "2026-10-05"
+  },
+  {
+    "id": "ssg-sbws-public-assistance-programme",
+    "source": "schemes_sg",
+    "sourceId": "QMeMEyQ79DmOcbtN2ucH",
+    "tier": 2,
+    "name": "Public Assistance Programme",
+    "agency": "Singapore Buddhist Welfare Service",
+    "summary": "Monthly financial and food aid for needy families.",
+    "description": "- Individuals who are financially constrained or unemployed due to old age, sickness or disability, but are not eligible for government financial assistance.\n- Low-income families with young children and/or family members who are elderly, disabled, sick or have special needs.\n- Families which are adversely affected by unexpected circumstances, such as loss of breadwinner, permanent disability, etc.",
+    "eligibility": "Applicants must be:\n- Individuals financially constrained or unemployed due to old age, sickness, or disability, and not eligible for government financial assistance.\n- Low-income families with young children and/or family members who are elderly, disabled, sick, or have special needs.\n- Families affected by unexpected circumstances (e.g., loss of breadwinner, permanent disability).\nApplicants are assessed through home visits every 6 months. Referrals accepted from hospitals, family service centres, grassroots organisations, and public agencies.",
+    "whatYouGet": [
+      "Financial assistance for daily living expenses",
+      "Casework",
+      "Counselling"
+    ],
+    "payFor": "monthly_payouts",
+    "area": {
+      "kind": "islandwide"
+    },
+    "link": "https://sbws.org.sg/en/services-affiliates/social-welfare-and-community-services/public-assistance-programme/",
+    "sources": [
+      {
+        "name": "Singapore Buddhist Welfare Service",
+        "url": "https://sbws.org.sg/en/services-affiliates/social-welfare-and-community-services/public-assistance-programme/"
+      },
+      {
+        "name": "Schemes.sg",
+        "url": "https://schemes.sg/schemes/QMeMEyQ79DmOcbtN2ucH"
+      }
+    ],
+    "lastRefreshed": "2026-10-05"
+  },
+  {
+    "id": "ssg-southwest-csf",
+    "source": "schemes_sg",
+    "sourceId": "0IfTwD0f8BbxmpxapZQ2",
+    "tier": 2,
+    "name": "South West Caregiver Support Fund",
+    "agency": "South West CDC",
+    "summary": "One-off cash to help caregivers in the South West District with caregiving costs.",
+    "description": "It gives a one-off $1,000 to help with self-care and caregiving expenses.",
+    "eligibility": "- Resident of South West District\n- Applicant or care recipient must be Singaporean;\n- Per capita household income ≤ $1,500 or blue CHAS card holder;\n- Caregiver and care recipient must reside in the same household; and\n- Care recipient requires assistance with min. 3 activities of daily living (ADLs): washing / feeding / dressing / toileting / mobility; OR\n- Care recipient has a certified permanent disability: physical / visual / hearing / intellectual / autism / others.",
+    "valueText": "$1,000 one-off",
+    "whatYouGet": [
+      "Respite care/Caregiver support"
+    ],
+    "payFor": "monthly_payouts",
+    "area": {
+      "kind": "district",
+      "name": "South West District"
+    },
+    "link": "https://southwest.cdc.gov.sg/what-we-do/for-caregivers/south-west-caregiver-support-fund/",
+    "sources": [
+      {
+        "name": "South West Community Development Council (South West CDC)",
+        "url": "https://southwest.cdc.gov.sg/what-we-do/for-caregivers/south-west-caregiver-support-fund/"
+      },
+      {
+        "name": "Schemes.sg",
+        "url": "https://schemes.sg/schemes/0IfTwD0f8BbxmpxapZQ2"
+      }
+    ],
+    "lastRefreshed": "2026-10-05"
+  },
+  {
+    "id": "ssg-southwest-sw-community-caring-fund",
+    "source": "schemes_sg",
+    "sourceId": "c0K5aIoUKEwgzjIR1Y7F",
+    "tier": 2,
+    "name": "South West Community Caring Fund",
+    "agency": "South West CDC",
+    "summary": "A one-time $250 assistance from South West CDC to help low-income families with young children and low-income elderly households cover child-raising and daily living expenses.",
+    "description": "- Provides a one-time, immediate cash support of $250 to help defray child-raising costs and daily living expenses\n- Targets low-income households with young children and low-income elderly-only households in the South West District\n- Offers quick, short-term relief to bridge urgent financial needs for essentials and caregiving-related expenses\n- Simple online application with basic income and identity documentation to enable fast assistance",
+    "eligibility": "Applicant must meet one of the following: (1) Household has one or more children aged six years and below at the time of application, with per capita household income of $1,500 or less; OR (2) Senior aged 60 and above staying alone or together with other senior(s) aged 60 and above in the same elderly household, with per capita household income of $1,500 or less.\n\nMust also be resident of South West District.\nSingapore Citizen or at least one immediate family member is a Singapore Citizen.",
+    "valueText": "$250 one-time",
+    "whatYouGet": [
+      "Financial assistance for daily living expenses"
+    ],
+    "payFor": "monthly_payouts",
+    "area": {
+      "kind": "district",
+      "name": "South West District"
+    },
+    "link": "https://southwest.cdc.gov.sg/what-we-do/for-assistance/sw-community-caring-fund/",
+    "sources": [
+      {
+        "name": "South West Community Development Council (South West CDC)",
+        "url": "https://southwest.cdc.gov.sg/what-we-do/for-assistance/sw-community-caring-fund/"
+      },
+      {
+        "name": "Schemes.sg",
+        "url": "https://schemes.sg/schemes/c0K5aIoUKEwgzjIR1Y7F"
+      }
+    ],
+    "lastRefreshed": "2026-10-05"
+  },
+  {
+    "id": "ssg-hdb-enhancement-for-active-seniors-ease",
+    "source": "schemes_sg",
+    "sourceId": "0TXzL4HkLRQF3NuUqHZA",
+    "tier": 2,
+    "name": "Enhancement for Active Seniors (EASE)",
+    "agency": "HDB",
+    "summary": "HDB’s EASE programme subsidises the installation of safety and accessibility features in HDB flats to help seniors and residents with mobility needs live safely at home. It provides items like grab bars, ramps, door widening, slip-resistant treatment, shower seats, and HFADs at subsidised rates.",
+    "description": "- Government-subsidised home modifications to improve safety and accessibility in HDB flats for seniors and those with mobility needs.\n- Offered as part of the Home Improvement Programme (HIP) or via EASE (Direct Application) if the block is not due for HIP or if earlier installation is desired.\n- Key improvements include:\n  - Fall prevention and support: grab bars (various types), slip-resistant floor treatment, lowering of bathroom kerbs, wall-mounted foldable shower seat, handrail at main entrance.\n  - Accessibility for wheelchair/commode users: single-step and multi-step ramps (portable or customised), wheelchair lifter (when ramps are not feasible), widening of toilet/bathroom entrances.\n  - Safety and convenience: bidet spray, set of rocker light switches, Home Fire Alarm Device (HFAD).\n- Highly subsidised costs with residents’ co-payment varying by flat type; items come with a 1-year warranty.\n- Solutions are installed only where technically feasible; site assessments determine suitable items and any ancillary works (e.g., wash basin relocation, electrical upgrades).",
+    "eligibility": "Singapore Citizen households (sold flats) and Registered Tenants (rental flats) may apply for EASE (Direct Application) if the household has a family member who is either: (1) aged 65 years and above; or (2) aged 60–64 years and requires assistance with at least one Activity of Daily Living (e.g., washing/bathing, dressing, feeding, toileting, mobility, transferring). Items are installed only where technically feasible.",
+    "whatYouGet": [
+      "Financial assistance for housing",
+      "Technology assistance"
+    ],
+    "payFor": "equipment_home",
+    "area": {
+      "kind": "islandwide"
+    },
+    "link": "https://www.hdb.gov.sg/managing-my-home/upgrading-and-redevelopment/enhancement-for-active-seniors-ease",
+    "sources": [
+      {
+        "name": "Housing & Development Board",
+        "url": "https://www.hdb.gov.sg/managing-my-home/upgrading-and-redevelopment/enhancement-for-active-seniors-ease"
+      },
+      {
+        "name": "Schemes.sg",
+        "url": "https://schemes.sg/schemes/0TXzL4HkLRQF3NuUqHZA"
+      }
+    ],
+    "lastRefreshed": "2026-10-05"
+  },
+  {
+    "id": "ssg-redcross-transportaid",
+    "source": "schemes_sg",
+    "sourceId": "wlHkIcBIE3uzOr1PVJlv",
+    "tier": 2,
+    "name": "Singapore Red Cross' TransportAid",
+    "agency": "Singapore Red Cross",
+    "summary": "Subsidised transport for low-income elderly and disabled.",
+    "description": "Singapore Red Cross’ TransportAid service helps the elderly and disabled from low-income homes get to and from their healthcare service facilities, such as medical treatments, rehabilitation and day activity centres. The TransportAid service is offered at subsidised rates, based on means testing results that are assessed by social workers.\n Call 6337 3333 or email us at transportaid@redcross.sg for more information or assistance on Transport Aid.",
+    "eligibility": "Elderly and disabled individuals from low-income homes. Subsidy rates are based on means testing results assessed by social workers.",
+    "whatYouGet": [
+      "Medical transport assistance",
+      "Transport subsidies"
+    ],
+    "payFor": "transport",
+    "area": {
+      "kind": "islandwide"
+    },
+    "link": "https://www.redcross.sg/get-assistance/transportaid.html",
+    "sources": [
+      {
+        "name": "Singapore Red Cross",
+        "url": "https://www.redcross.sg/get-assistance/transportaid.html"
+      },
+      {
+        "name": "Schemes.sg",
+        "url": "https://schemes.sg/schemes/wlHkIcBIE3uzOr1PVJlv"
+      }
+    ],
+    "lastRefreshed": "2026-10-05"
+  },
+  {
+    "id": "ssg-chas",
+    "source": "schemes_sg",
+    "sourceId": "zaLdcbwlK49THVXQbtBi",
+    "tier": 2,
+    "name": "Community Health Assist Scheme (CHAS)",
+    "agency": "MOH",
+    "summary": "Subsidies for medical and dental care at clinics.",
+    "description": "Enables Singapore Citizens from lower- to middle-income households, and all Pioneers, to receive subsidies for medical & dental care at participating General Practitioners (GP) & dental clinics near their home.",
+    "eligibility": "Singapore Citizens from lower- to middle-income households, and all Pioneers.",
+    "whatYouGet": [
+      "Financial assistance for healthcare",
+      "Financial assistance for dental services",
+      "Healthcare (general/basic services)",
+      "Dental services"
+    ],
+    "payFor": "medical_bills",
+    "area": {
+      "kind": "islandwide"
+    },
+    "link": "https://www.chas.sg/",
+    "sources": [
+      {
+        "name": "Ministry of Health (MOH)",
+        "url": "https://www.chas.sg/"
+      },
+      {
+        "name": "Schemes.sg",
+        "url": "https://schemes.sg/schemes/zaLdcbwlK49THVXQbtBi"
+      }
+    ],
+    "lastRefreshed": "2026-10-05"
+  },
+  {
+    "id": "ssg-tzuchi-medical-assistance",
+    "source": "schemes_sg",
+    "sourceId": "LeAXbtvj4oK3nhH4FrBo",
+    "tier": 2,
+    "name": "Medical Assistance",
+    "agency": "Buddhist Compassion Relief Tzu-Chi Foundation (Singapore)",
+    "summary": "Medical and dialysis aid for needy, disabled, elderly.",
+    "description": "Besides providing subsidies for medical expenses, the provision of medical supplies is also a major feature of our medical assistance programme. For long-term users who are struggling with their own limited financials, when the annual costs of their medical supplies constantly outstrip the limits of government grants and allowances, Tzu Chi will step in to fill the gap.\n\nVolunteers sort medical supplies, such as adult diapers, waste bags, nutritional milk, etc. according to type, size, quantity, and home address, before personally delivering them to individual households during the monthly home visits.",
+    "eligibility": "Needy individuals, including Singapore Citizens and Permanent Residents, who are affected by illness or disability and require medical assistance. Renal patients must be assessed and referred by medical social workers or Sengkang General Hospital for specific programmes. Elderly kidney failure patients (age 60 and above) are eligible for the Renal Conservative Care Programme.",
+    "whatYouGet": [
+      "Financial assistance for healthcare",
+      "Financial assistance for chronic or terminal illnesses",
+      "Financial assistance for assistive technology and medical equipment",
+      "Food support"
+    ],
+    "payFor": "medical_bills",
+    "area": {
+      "kind": "islandwide"
+    },
+    "link": "https://www.tzuchi.org.sg/en/our-missions/charity/medical-assistance/",
+    "sources": [
+      {
+        "name": "Buddhist Compassion Relief Tzu-Chi Foundation (Singapore)",
+        "url": "https://www.tzuchi.org.sg/en/our-missions/charity/medical-assistance/"
+      },
+      {
+        "name": "Schemes.sg",
+        "url": "https://schemes.sg/schemes/LeAXbtvj4oK3nhH4FrBo"
+      }
+    ],
+    "lastRefreshed": "2026-10-05"
+  },
+  {
+    "id": "ssg-aic-medical-fee-exemption-card-mfec",
+    "source": "schemes_sg",
+    "sourceId": "g46qLiec2dbf0M9GCash",
+    "tier": 2,
+    "name": "Medical Fee Exemption Card (MFEC)",
+    "agency": "MSF",
+    "summary": "Covers medical fees for those needing financial help.",
+    "description": "Your loved one can be covered for standard medical and hospitalisation treatment at government or restructured hospitals, polyclinics and approved intermediate and long-term care services if they are sick and need financial assistance, using the Medical Fee Exemption Card.",
+    "whatYouGet": [
+      "Financial assistance for healthcare",
+      "Financial assistance for chronic or terminal illnesses"
+    ],
+    "payFor": "medical_bills",
+    "area": {
+      "kind": "islandwide"
+    },
+    "link": "https://www.aic.sg/financial-assistance/medical-fee-exemption-card-mfec/",
+    "sources": [
+      {
+        "name": "Ministry of Social and Family Development (MSF), Ministry of Health (MOH), Agency for Integrated Care (AIC)",
+        "url": "https://www.aic.sg/financial-assistance/medical-fee-exemption-card-mfec/"
+      },
+      {
+        "name": "Schemes.sg",
+        "url": "https://schemes.sg/schemes/g46qLiec2dbf0M9GCash"
+      }
+    ],
+    "lastRefreshed": "2026-10-05"
+  },
+  {
+    "id": "ssg-aic-medifund",
+    "source": "schemes_sg",
+    "sourceId": "VHMs8PD8AxFHFCMSds8x",
+    "tier": 2,
+    "name": "Medifund",
+    "agency": "AIC",
+    "summary": "Medifund helps needy citizens pay medical bills.",
+    "description": "Medifund helps needy Singapore citizens who cannot pay their medical bills.\n\n It can be used to pay for restructured hospitals, national specialty centres, and intermediate and long-term care services.",
+    "eligibility": "Needy Singapore citizens who are unable to pay for their medical bills. Must be receiving treatment at restructured hospitals, national specialty centres, or intermediate and long-term care services.",
+    "whatYouGet": [
+      "Financial assistance for healthcare",
+      "Financial assistance for chronic or terminal illnesses"
+    ],
+    "payFor": "medical_bills",
+    "area": {
+      "kind": "islandwide"
+    },
+    "link": "https://www.aic.sg/financial-assistance/medifund",
+    "sources": [
+      {
+        "name": "Agency for Integrated Care",
+        "url": "https://www.aic.sg/financial-assistance/medifund"
+      },
+      {
+        "name": "Schemes.sg",
+        "url": "https://schemes.sg/schemes/VHMs8PD8AxFHFCMSds8x"
+      }
+    ],
+    "lastRefreshed": "2026-10-05"
+  },
+  {
+    "id": "ssg-moh-merdeka-generation-package",
+    "source": "schemes_sg",
+    "sourceId": "qA6GtDXuV49biV9ER6qX",
+    "tier": 2,
+    "name": "Merdeka Generation Package",
+    "agency": "MOH",
+    "summary": "Healthcare subsidies for Merdeka Generation seniors.",
+    "description": "Passion Silver card top-up, additional subsidies for outpatient care, MediSave top-ups, additional MediShield Life premium subsidies, additional CareShield Life participation incentive",
+    "eligibility": "Singapore citizens who: (1) Were born from 1 January 1950 to 31 December 1959, and became a Singapore citizen on or before 31 December 1996; OR (2) Were born on or before 31 December 1949, became a Singapore citizen on or before 31 December 1996, and did not receive the Pioneer Generation Package. Eligible individuals would have received a notification letter in May 2019.",
+    "whatYouGet": [
+      "Financial assistance for healthcare",
+      "Financial assistance for daily living expenses",
+      "Healthcare (general/basic services)",
+      "Benefits and perks for PWDs (transport, discounts, facilities)"
+    ],
+    "payFor": "medical_bills",
+    "area": {
+      "kind": "islandwide"
+    },
+    "link": "https://www.moh.gov.sg/managing-expenses/schemes-and-subsidies/merdeka-generation-package",
+    "sources": [
+      {
+        "name": "Ministry of Health (MOH)",
+        "url": "https://www.moh.gov.sg/managing-expenses/schemes-and-subsidies/merdeka-generation-package"
+      },
+      {
+        "name": "Schemes.sg",
+        "url": "https://schemes.sg/schemes/qA6GtDXuV49biV9ER6qX"
+      }
+    ],
+    "lastRefreshed": "2026-10-05"
+  },
+  {
+    "id": "ssg-moh-pioneer-generation-package",
+    "source": "schemes_sg",
+    "sourceId": "iol6ea7rylJvuK14byGY",
+    "tier": 2,
+    "name": "Pioneer Generation Package",
+    "agency": "MOH",
+    "summary": "Provides healthcare subsidies and financial assistance.",
+    "description": "Provides MediSave top-ups, outpatient care subsidies, CareShield Life additional participation incentives, special MediShield Life Premium subsidies and Pioneer Generation Disability Assistance Scheme.",
+    "whatYouGet": [
+      "Financial assistance for healthcare",
+      "Financial assistance for chronic or terminal illnesses",
+      "Financial assistance for daily living expenses",
+      "Healthcare (general/basic services)",
+      "Subsidies for Foreign Domestic Workers (FDWs)"
+    ],
+    "payFor": "medical_bills",
+    "area": {
+      "kind": "islandwide"
+    },
+    "link": "https://www.moh.gov.sg/cost-financing/healthcare-schemes-subsidies/pioneer-generation-package",
+    "sources": [
+      {
+        "name": "Ministry of Health (MOH)",
+        "url": "https://www.moh.gov.sg/cost-financing/healthcare-schemes-subsidies/pioneer-generation-package"
+      },
+      {
+        "name": "Schemes.sg",
+        "url": "https://schemes.sg/schemes/iol6ea7rylJvuK14byGY"
+      }
+    ],
+    "lastRefreshed": "2026-10-05"
+  },
+  {
+    "id": "ssg-viriya-seniors",
+    "source": "schemes_sg",
+    "sourceId": "TWb6eDtDEYY3jPzTblbO",
+    "tier": 2,
+    "name": "Viriya Elderly Medical Programme (VEMP)",
+    "agency": "Viriya Community Services",
+    "summary": "VEMP supports low-income seniors with medical needs.",
+    "description": "Help seniors with various medical conditions and who have low social and financial support. VEMP helps seniors cover their daily expenses. VEMP also helps the elderly cope with medical expenses including transport, TCM treatment and other consumables. Social work practitioners will work with eldercare agencies and hospitals to provide community care for the elderly. Case management services will also be provided to link the beneficiaries to the required community resources.",
+    "eligibility": "Seniors with various medical conditions and low social and financial support.",
+    "whatYouGet": [
+      "Financial assistance for daily living expenses",
+      "Financial assistance for healthcare",
+      "Financial assistance for chronic or terminal illnesses",
+      "Transport subsidies",
+      "Traditional Chinese Medicine (TCM)",
+      "Casework"
+    ],
+    "payFor": "medical_bills",
+    "area": {
+      "kind": "islandwide"
+    },
+    "link": "https://viriya.org.sg/service/seniors/",
+    "sources": [
+      {
+        "name": "Viriya Community Services",
+        "url": "https://viriya.org.sg/service/seniors/"
+      },
+      {
+        "name": "Schemes.sg",
+        "url": "https://schemes.sg/schemes/TWb6eDtDEYY3jPzTblbO"
+      }
+    ],
+    "lastRefreshed": "2026-10-05"
+  },
+  {
+    "id": "ssg-cpf-matching-grant-for-seniors-who-top-up",
+    "source": "schemes_sg",
+    "sourceId": "LEA1pvdnUM7vVlYVSZKg",
+    "tier": 2,
+    "name": "Matched Retirement Savings Scheme",
+    "agency": "CPF Board",
+    "summary": "CPF matches retirement savings for eligible Singaporeans.",
+    "description": "MRSS aims to help senior Singapore Citizens with lower retirement savings build up more. This will boost their monthly payouts in retirement. The Government will match every dollar of cash top-ups made to the RA of eligible members up to $600 per year.",
+    "eligibility": "Eligibility is automatically assessed each year. Criteria: Singapore Citizen, age 55 and above as of 31 December of the assessment year (from 2026, also Singaporeans with disabilities below age 55), Retirement Account savings less than $106,500 (Basic Retirement Sum for 2025), average monthly income not more than $4,000, annual value of residence not more than $21,000. Must be a Singapore Citizen when the matching grant is credited. From 2025, no age cap (previously 70).",
+    "whatYouGet": [
+      "Financial planning and retirement support"
+    ],
+    "payFor": "tax_cpf",
+    "area": {
+      "kind": "islandwide"
+    },
+    "link": "https://www.cpf.gov.sg/member/growing-your-savings/saving-more-with-cpf/matching-grant-for-seniors-who-top-up",
+    "sources": [
+      {
+        "name": "Central Provident Fund (CPF)",
+        "url": "https://www.cpf.gov.sg/member/growing-your-savings/saving-more-with-cpf/matching-grant-for-seniors-who-top-up"
+      },
+      {
+        "name": "Schemes.sg",
+        "url": "https://schemes.sg/schemes/LEA1pvdnUM7vVlYVSZKg"
+      }
+    ],
+    "lastRefreshed": "2026-10-05"
+  }
+]

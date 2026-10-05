@@ -1,0 +1,3264 @@
+[
+  {
+    "id": "ssg-kwsh-active-ageing-centres",
+    "sourceId": "5aiAf1OrsPxleUJt1dpp",
+    "name": "Active Ageing Centre",
+    "agency": "Kwong Wai Shiu Hospital",
+    "summary": "Centres support seniors with health and social activities.",
+    "description": "Our Active Ageing Centre is a one-stop service centre for elderly located in the community. These centres provide health and assisted-living services catered to the elderly as well as wellness activities to keep them active during their golden years.",
+    "eligibility": "All Singaporean Citizens and Permanent Residents aged 60 and above, regardless of housing types and socio-economic status, are eligible. No fee required to join.",
+    "whoIsItFor": [
+      "Elderly"
+    ],
+    "whatItGives": [
+      "Healthcare (general/basic services)",
+      "Wellness activities",
+      "Assisted-living services"
+    ],
+    "schemeType": [
+      "Elderly",
+      "Healthcare",
+      "Caregiver Support"
+    ],
+    "area": {
+      "kind": "islandwide"
+    },
+    "link": "https://www.kwsh.org.sg/care-services/active-ageing-centres/",
+    "phone": null,
+    "email": null,
+    "address": [
+      "82 Circuit Road, #01-02, MacPherson Spring Block 82 (MSCP), Singapore 370082",
+      "Block 113, McNair Road, #01-01 McNair Towers, Singapore 321113",
+      "51 Potong Pasir Avenue 1, Singapore 358400",
+      "25 St George’s Lane, Singapore 320025",
+      "69 Jellicoe Road, #02-01, Jalan Besar Community Club, Singapore 208737"
+    ],
+    "lastRefreshed": "2026-10-05"
+  },
+  {
+    "id": "ssg-lovingheart-services",
+    "sourceId": "8xSkTmhzGqSPsFx7Hwa9",
+    "name": "Active Ageing Centre",
+    "agency": "Loving Heart Multi-Service Centre",
+    "summary": "One-stop support centre for seniors and caregivers.",
+    "description": "[**AAC PROGRAMMES**](https://www.lovingheart.org.sg/programmes) Our programmes are designed to help seniors achieve both physical and mental health. Seniors are encouraged and empowered to maintain good health by staying active and taking responsibility for their own well-being with the support of the community.​Together with our nurturing and dedicated team at Loving Heart, both staff and volunteers, our seniors are encouraged to play a crucial part in designing their own ageing experience. We will help you design your personal health plan **AAC SERVICES**Our Active Ageing Centres offer a variety of services to the seniors in the community with the goal of providing a one-stop, go-to centre where seniors and their caregivers can find the support and help they require in one convenient place within the community. *Programmes marked with an asterisk are conducted in collaboration with our respective community partners:**BEFRIENDING &amp; BUDDYING**For seniors living alone or with limited social support networks.Connects seniors with the community and build their social network to support their well-being.Attend to their needs according to their level of vulnerability.This service is provided by specially trained befrienders.**SOCIAL CONNECTOR FOR SOCIAL AND LIFESTYLE INTERVENTION**Assist in connecting seniors to their preferred active ageing programmes in accordance with their health plan prescribed by their family doctor Empower seniors to self-serve and register for active ageing programmes (e.g. on digital platforms such as Healthy 365);**COMMUNITY SCREENING**AACs will be equipped with a self-served blood pressure monitor and height &amp; weighing machineThis is to empower seniors to take charge of their own health by self-recording and tracking their vital signs results (e.g. via Healthhub, pen-and-paper logbook)**COMMUNITY HEALTH POST*​**A health services touchpoint where seniors living near our centre can get easy access to health services near home.The NUHS community care team offers health counselling and education to aid seniors in making better lifestyle choices to live more healthily.**The CHP service is available at: **Loving Heart Multi-Service Centre (Blk 210, Jurong East St. 21) every 1st and 3rd Monday of each month.Loving Heart Active Ageing Centre (Blk 318A, Jurong East Ave. 1) every 2nd and 4th Monday of each month.",
+    "eligibility": "Seniors in the community, especially those living alone or with limited social support networks. No specific documents mentioned.",
+    "whoIsItFor": [
+      "Elderly",
+      "Caregivers"
+    ],
+    "whatItGives": [
+      "Befriending services",
+      "Social support",
+      "Health screening",
+      "Health counselling",
+      "Educational programmes",
+      "Referral services"
+    ],
+    "schemeType": [
+      "Elderly",
+      "Caregiver Support",
+      "Counselling and Emotional Support",
+      "General Healthcare Subsidies",
+      "Referral and Information Services"
+    ],
+    "area": {
+      "kind": "district",
+      "name": "Jurong East"
+    },
+    "link": "https://www.lovingheart.org.sg/services",
+    "phone": null,
+    "email": null,
+    "address": [
+      "Blk 210, Jurong East St. 21, Singapore",
+      "Blk 318A, Jurong East Ave. 1, Singapore"
+    ],
+    "lastRefreshed": "2026-10-05"
+  },
+  {
+    "id": "ssg-sunlove-senior-activity-centre-sac",
+    "sourceId": "SGxbFoRcNJPxqmGDGFtK",
+    "name": "Active Ageing Centre",
+    "agency": "Sunlove Abode For Intellectually-Infirmed",
+    "summary": "Free activity centres for eligible elderly.",
+    "description": "Seniors living around the designated areas are encouraged to participate in active ageing. Our centres act as a communal space for elderly to socialise with their peers and find meaningful support. We conduct purposeful activities such as karaoke, art &amp; craft and exercise sessions to keep the elderly engaged.Our services at Senior Activity Centres are free for elderly 60 years old and above who requires help with daily living activities and have little or no family support. Please approach our staff to check your eligibility to enrol for our free services.**Communal Space for Social and Recreational Activities**</h3>- Befriendingn- Information and Referraln- Managing Emergency Alert Response Callsn- Monitoring Frail and / or Home-Bound Elderlyn- Social Activities and Programmes that Promotes Intergenerational Bondingn",
+    "eligibility": "Elderly aged 60 years old and above who require help with daily living activities and have little or no family support. Eligibility confirmation required by approaching staff.",
+    "whoIsItFor": [
+      "Elderly",
+      "Elderly with dementia",
+      "Low income elderly"
+    ],
+    "whatItGives": [
+      "Befriending services",
+      "Information services",
+      "Referral services",
+      "Social activities",
+      "Monitoring services",
+      "Emergency alert response"
+    ],
+    "schemeType": [
+      "Elderly",
+      "Caregiver Support",
+      "Counselling and Emotional Support",
+      "General Public Support"
+    ],
+    "area": {
+      "kind": "district",
+      "name": "Marsiling, Chai Chee, Golden Saffron, Whampoa Dew, Depot Heights, Ang Mo Kio, Serangoon, Jalan Rajah, Haig Road, Eunos"
+    },
+    "link": "https://sunlove.org.sg/senior-activity-centre-sac/",
+    "phone": null,
+    "email": null,
+    "address": null,
+    "lastRefreshed": "2026-10-05"
+  },
+  {
+    "id": "ssg-fycs-active-ageing-centres",
+    "sourceId": "vFNkWq8MQBcLrK9cTdPk",
+    "name": "Active Ageing Centres",
+    "agency": "Fei Yue",
+    "summary": "AACs provide social, emotional, and practical support for seniors.",
+    "description": "Our Active Ageing Centres (AAC) serve as a key point of contact for seniors under our care. We proactively reach out to seniors, organise social activities and provide opportunities for seniors to interact with members of the community, with the aim to enable seniors to adopt an active lifestyle, pre-empt social isolation, and refer them to assistance in a timely fashion.A study shows that 1,021 seniors who provided data that suggested social disconnection and more than half of those said they do not have someone they can go for help. Suitable Activities for Seniors We conduct general outreach (e.g. posters, collaterals and events) to better understand the needs of seniors so as to provide suitable services and increase community awareness of our AACs’ services.[Community Programmes for Elderly](https://fycs.org/active-ageing-centres/#community-programs-for-elderly)[Buddying and Befriending Services for Seniors](https://fycs.org/active-ageing-centres/#buddying-and-befriending-services-for-seniors)[Building Outreach and Collaboration](https://fycs.org/active-ageing-centres/#building-outreach-and-collaboration)[Keeping Seniors Informed](https://fycs.org/active-ageing-centres/#keeping-seniors-informed)Community programmes for the Elderly</h3>We pride ourselves on providing a drop-in social recreational space for our seniors, where they can engage in activities. Additionally, we offer [**Active Ageing Programmes**](https://fycs.org/seniors/) (AAPs) to our seniors, and if necessary, we refer them to AAPs organised by other organisations in the community.We also assist with ad-hoc tasks, such as reading letters, and provide support with Instrumental Activities of Daily Living (IADL) whenever possible. Futhermore, within our service boundary, we diligently monitor and response to calls from the [**Alert Alarm System**](https://www.todayonline.com/singapore/better-living-conditions-seniors-emergency-buttons-rental-flats-2306471) (AAS) installed in HDB flats, ensuring the safety and well-being of our clients.Buddying and Befriending Services for Seniors</h3>We offer buddying/befriending services to seniors who are facing various challenges in their lives, such as living alone, having limited or no social support, caring for someone with high care needs, or experiencing limited social interaction due to physical or cognitive impairment.[**Read more about how our seniors have benefitted.**](https://fycs.org/active-ageing-centres/#)Our dedicated volunteers make each session meaningful by involving seniors in stimulating activities like smartphone tutorials, game playing, and fostering a healthy lifestyle. These sessions also provide seniors with a compassionate ear to listen to their thoughts and feelings.Building Outreach and Collaboration</h3>We engage in various forms of communication, such as distributing posters, creating informative materials, and organising events, with the goal of gaining a deeper understanding of the requirements of older individuals.This approach allows us to provide relevant services and enhance public knowledge about the available services offered by our AACs.Keeping Seniors Informed</h3>We offer comprehensive information on various schemes, grants, and support available for seniors and their caregivers.Additionally, if seniors require community care and social support services beyond what our ogranisation can provide, such as day care or case management, we refer them to suitable organisations that can meet their needs.",
+    "eligibility": "Seniors under the care of the AAC, especially those living alone, with limited social support, caring for someone with high care needs, or experiencing limited social interaction due to physical or cognitive impairment.",
+    "whoIsItFor": [
+      "Elderly",
+      "Elderly with dementia",
+      "Caregivers"
+    ],
+    "whatItGives": [
+      "Befriending services",
+      "Social activities",
+      "Referral services",
+      "Information services",
+      "Emotional care",
+      "Support groups",
+      "Educational programmes",
+      "Health and fitness activities",
+      "Digital inclusion programmes",
+      "Ad-hoc assistance with daily living"
+    ],
+    "schemeType": [
+      "Elderly",
+      "Caregiver Support",
+      "Counselling and Emotional Support",
+      "Referral and Information Services",
+      "General Public Support"
+    ],
+    "area": {
+      "kind": "district",
+      "name": "Service boundaries apply; within designated HDB flats and local community."
+    },
+    "link": "https://fycs.org/active-ageing-centres/",
+    "phone": null,
+    "email": null,
+    "address": null,
+    "lastRefreshed": "2026-10-05"
+  },
+  {
+    "id": "ssg-imh-apcats",
+    "sourceId": "o3yMntkocXtafnHzxEpm",
+    "name": "Aged Psychiatry Community Assessment and Treatment Services (APCATS)",
+    "agency": "Institute of Mental Health",
+    "summary": "Home-based psychiatric care for elderly and caregivers.",
+    "description": "APCATS is delivered through a multidisciplinary team comprising medical officers, psychologists, geriatric-psychiatric nurses, occupational therapists, physiotherapists and medical social workers under the supervision of a consultant geriatric psychiatrist. Its services include:\n (1) Assessment - generally conducted in the client's home.\n (2) Treatment - pitched at the resolution or alleviation of elderly's symptoms of psychiatric disorders, reducing behavioural disabilities, and relieving stress on caregivers through comprehensive psychogeriatric management strategies. These strategies include pharmacological, psychological and social interventions, via a range of hospital and community-based resources.\n (3) Psycho-education to support clients, families and caregivers to assist them to make informed choices on services and appropriate accommodation.\n (4) Case Management\n (5) Medication Home Delivery",
+    "eligibility": "Eligibility criteria are not explicitly stated in the provided text.",
+    "whoIsItFor": [
+      "Elderly",
+      "Elderly with dementia",
+      "Persons with mental health issues",
+      "Caregivers"
+    ],
+    "whatItGives": [
+      "Assessment",
+      "Mental health assessment and treatment",
+      "Psychological support/Psychotherapy",
+      "Casework",
+      "Counselling",
+      "Medication home delivery",
+      "Referral services",
+      "Psycho-education",
+      "Caregiver support"
+    ],
+    "schemeType": [
+      "Elderly",
+      "Mental Health",
+      "Counselling and Emotional Support",
+      "Caregiver Support",
+      "Community-based Services"
+    ],
+    "area": {
+      "kind": "islandwide"
+    },
+    "link": "https://www.imh.com.sg/Clinical-Services/Community-based-Services/Pages/APCATS.aspx",
+    "phone": null,
+    "email": null,
+    "address": null,
+    "lastRefreshed": "2026-10-05"
+  },
+  {
+    "id": "ssg-sacs-cluster-operators",
+    "sourceId": "OrdCokumN91j0Z4Zy7JX",
+    "name": "Anglican Cluster Operator",
+    "agency": "Singapore Anglican Community Services",
+    "summary": "Eldercare services for seniors in several towns.",
+    "description": "Anglican Cluster Operator (ACO) (Jurong East, PEACE-Connect) offer a suite of eldercare services for seniors living in Jurong East and Bukit Batok, as well as Rochor, Kallang and Novena respectively. We provide social, bio and psychological support to seniors who have little or no family support and enable them to age-in-place within the community for as long as possible through Case Management, Counselling, Information and Referral.Services available include:- **Community Resource, Engagement and Support Team (CREST) ** Provide basic emotional support and mental health information, service linkage and follow-up with clients and caregivers Provide public mental health awareness, mental health information and education to residents and their caregiversn- **Cluster Support Services ** Coordinate and deliver multi-disciplinary services as well as mobilize community resources to meet the needs of seniors living within the communityn- **Senior Group Home ** An assisted living model aims to minimise avoidable hospitalisation and premature institutionalisation, where seniors can live independently in the community as well as provide mutual support to one another.n- **Care Close to Home (C2H)* ** C2H is a community-based care service to keep individuals well-supported in the community. Providing basic nursing and home help, this programme assists seniors to age-in-place at home in a bid to minimise avoidable hospitalisation and premature institutionalisation.n- **Community Befriender Programme (CBP)* ** CBP reaches out to vulnerable seniors, including those who are isolated or at risk of poor health, and help to improve their quality of lives as well as to prevent mental and physical health deterioration. Coordinate befrienders visits to seniors to prevent social isolation and loneliness.n- **Senior Activity Centres* ** Two drop-in centres for over 2,000 seniors living in nine HDB rental blocks. Provide social/recreational programmes and activities. Provide support services, e.g. monitoring of frail and/or homebound seniors, befriending, mutual help groups, emergency alert alarm response calls, information and referral of relevant services.n*Services are only available at Anglican Cluster Operator (PEACE-Connect).",
+    "eligibility": "Seniors living in Jurong East, Bukit Batok, Rochor, Kallang, and Novena, especially those with little or no family support. Vulnerable, isolated, frail, or homebound seniors are prioritised.",
+    "whoIsItFor": [
+      "Elderly",
+      "Persons with disabilities (PWDs)",
+      "Caregivers"
+    ],
+    "whatItGives": [
+      "Counselling",
+      "Casework",
+      "Befriending services",
+      "Emotional care",
+      "Information services"
+    ],
+    "schemeType": [
+      "Elderly",
+      "Caregiver Support",
+      "Healthcare"
+    ],
+    "area": {
+      "kind": "district",
+      "name": "Jurong East, Bukit Batok, Rochor, Kallang, Novena"
+    },
+    "link": "https://www.sacs.org.sg/senior-services/cluster-operators.html",
+    "phone": null,
+    "email": null,
+    "address": null,
+    "lastRefreshed": "2026-10-05"
+  },
+  {
+    "id": "ssg-assisihospice-palliative",
+    "sourceId": "fTxzxMtSgHgUTo8f4TFS",
+    "name": "Assisi Hospice",
+    "agency": "Assisi Hospice",
+    "summary": "Palliative care for adults and children with illnesses.",
+    "description": "Provides compassionate, personalised and quality Palliative Care to adults and children with life limiting illnesses through Inpatient, Home and Day Care services.",
+    "eligibility": "Adults and children with life-limiting illnesses.",
+    "whoIsItFor": [
+      "Facing end of life",
+      "Families",
+      "Caregivers",
+      "Persons with chronic or terminal illnesses"
+    ],
+    "whatItGives": [
+      "Palliative care",
+      "Inpatient care",
+      "Home care",
+      "Day care",
+      "Counselling",
+      "Psychological support/Psychotherapy",
+      "Emotional care",
+      "Grief and bereavement support",
+      "Rehabilitation services (Physiotherapy/Occupational therapy)",
+      "Art and music therapy",
+      "Spiritual care",
+      "Volunteer companionship (NODA programme)"
+    ],
+    "schemeType": [
+      "End-of-Life/Palliative Care",
+      "Chronic or Terminal Illness Support",
+      "Counselling and Emotional Support",
+      "Residential Care",
+      "Family",
+      "Caregiver Support",
+      "Rehabilitation services"
+    ],
+    "area": {
+      "kind": "islandwide"
+    },
+    "link": "https://www.assisihospice.org.sg/palliative/#ourcareservices",
+    "phone": null,
+    "email": null,
+    "address": null,
+    "lastRefreshed": "2026-10-05"
+  },
+  {
+    "id": "ssg-lcs-elderly-services",
+    "sourceId": "dtdQZnpdL7vXw5D3yQLF",
+    "name": "Befriender Program",
+    "agency": "Life Care Society",
+    "summary": "Befriending and engagement for elderly living alone.",
+    "description": "We befriend and reach out to elderly residents who live alone. We want to make them feel valued and useful again, and show them that we genuinely care for them.We do so by partnering with Presbyterian Community Services, SARAH Elderly Activity Centre and volunteers to conduct quarterly activities to engage our elderly friends.",
+    "eligibility": "Elderly residents who live alone.",
+    "whoIsItFor": [
+      "Elderly"
+    ],
+    "whatItGives": [
+      "Befriending services",
+      "Emotional care"
+    ],
+    "schemeType": [
+      "Elderly",
+      "Caregiver Support"
+    ],
+    "area": {
+      "kind": "islandwide"
+    },
+    "link": "https://www.lcs.org.sg/what-we-do/elderly-services/",
+    "phone": null,
+    "email": null,
+    "address": null,
+    "lastRefreshed": "2026-10-05"
+  },
+  {
+    "id": "ssg-blossomseeds-befriending-services",
+    "sourceId": "FmgRV4fGrk74DS5i1NSd",
+    "name": "Blossom Seeds Befriending Services",
+    "agency": "Blossom Seeds Befriending Services",
+    "summary": "Free befriending services for isolated seniors.",
+    "description": "BSL’s Befriending services provide **compassionate support** **to seniors with limited or no social support**, empowering them to improve their mental and emotional well-being. We aim to enrich their lives with quality, meaning, and the opportunity to **Blossom In Their Ageing Years**.How does Befriending transform seniors' lives?- Be their empathetic listening earn- Be their \"helpdesk\" and refer them to other resources when requiredn- Offering companionship and emotional supportn- Keeping homebound seniors active by bringing them to our centre for activities and/or outingsn- Inspiring seniors to contribute to the community in meaningful waysn",
+    "eligibility": "Seniors experiencing social isolation, loneliness, or limited support. No specific age or documentation requirements stated, but examples include those aged 60 and above, homebound, or facing health challenges.",
+    "whoIsItFor": [
+      "Elderly"
+    ],
+    "whatItGives": [
+      "Befriending services",
+      "Emotional care",
+      "Psychological support/Psychotherapy"
+    ],
+    "schemeType": [
+      "Elderly",
+      "Caregiver Support",
+      "Mental Health"
+    ],
+    "area": {
+      "kind": "islandwide"
+    },
+    "link": "https://www.blossomseeds.sg/befriending-services",
+    "phone": "6259 8614",
+    "email": "homehelp@blossomseeds.sg",
+    "address": "105 Canberra Street, #02-01, Singapore 750105",
+    "lastRefreshed": "2026-10-05"
+  },
+  {
+    "id": "ssg-dementia-cara",
+    "sourceId": "mzq9kSFYoa9nJRSjo8mi",
+    "name": "CARA Membership",
+    "agency": "Alzheimers' Disease Association",
+    "summary": "Digital platform for dementia support and safety.",
+    "description": "CARA is a lifestyle and community digital platform that provides easy access for persons living with dementia and caregivers to connect to an ecosystem of solutions via a mobile application. It serves as a key touchpoint for members, providing personalised support across the journey of living with and caring for dementia.\nWith CARA, the Safe Return functionality has been enhanced through the provision of a unique QR code identifier for each member living with dementia. This provides Assurance that persons living with dementia can continue to move freely and independently within a safe community, giving caregivers a greater peace of mind.",
+    "eligibility": "Persons living with dementia and their caregivers. No specific document requirements mentioned.",
+    "whoIsItFor": [
+      "Persons with dementia",
+      "Caregivers",
+      "General public"
+    ],
+    "whatItGives": [
+      "Identification and safety tagging",
+      "Benefits and perks for PWDs (transport, discounts, facilities)",
+      "Information services",
+      "Referral services",
+      "Support groups"
+    ],
+    "schemeType": [
+      "Persons with Disabilities (PWD)",
+      "Elderly",
+      "Caregiver Support",
+      "General Public Support",
+      "Referral and Information Services"
+    ],
+    "area": {
+      "kind": "islandwide"
+    },
+    "link": "https://dementia.org.sg/cara/",
+    "phone": null,
+    "email": null,
+    "address": null,
+    "lastRefreshed": "2026-10-05"
+  },
+  {
+    "id": "ssg-carecorner-active-ageing",
+    "sourceId": "gTqKpMFAHbJ3UwJXK2Hy",
+    "name": "Care Corner Active Ageing Centres (AAC) and Active Ageing Centres",
+    "agency": "Care Corner Singapore",
+    "summary": "Centres support vulnerable seniors with care and meals.",
+    "description": "Our **Care Corner Active Ageing Centres (AAC)** and **Active Ageing Centres (Care)** offer a range of services that support vulnerable seniors. Located within their neighbourhoods, we provide seniors with timely access to integrated health and social care for them to age healthily and with dignity.Our centres are also a safe space for seniors to strengthen social connections with their peers, take part in recreational activities and engage in volunteerism.**Communal spaces** to strengthen social connections among seniors and caregivers**Upskilling programmes** and activities for seniors to engage meaningfully in the communityProvide **hot meals** to low-income, home-bound seniors",
+    "eligibility": null,
+    "whoIsItFor": [
+      "Elderly",
+      "Low income",
+      "Low income elderly",
+      "Persons with chronic or terminal illnesses",
+      "Caregivers"
+    ],
+    "whatItGives": [
+      "Befriending services",
+      "Helpline services",
+      "Referral services",
+      "Educational programmes",
+      "Food support",
+      "Healthcare (general/basic services)",
+      "Rehabilitation services (Physiotherapy/Occupational therapy)",
+      "Respite care/Caregiver support",
+      "Emotional care",
+      "Casework",
+      "Information services"
+    ],
+    "schemeType": [
+      "Elderly",
+      "Low Income",
+      "Healthcare",
+      "Food Support",
+      "Rehabilitation Services",
+      "Counselling and Emotional Support",
+      "Referral and Information Services",
+      "Caregiver Support"
+    ],
+    "area": {
+      "kind": "islandwide"
+    },
+    "link": "https://www.carecorner.org.sg/services/active-ageing/",
+    "phone": null,
+    "email": null,
+    "address": null,
+    "lastRefreshed": "2026-10-05"
+  },
+  {
+    "id": "ssg-carecorner-crest",
+    "sourceId": "SGm4jTYAgIAezatczoBK",
+    "name": "Care Corner CREST",
+    "agency": "Care Corner Singapore",
+    "summary": "Mental health outreach and support for elderly and caregivers.",
+    "description": "\"Care Corner CREST is a programme; serving individuals aged >18; in Toa Payoh Town; covering the region of Central Singapore; specialising in First Mental Health Touch Point (Mild symptoms, no counselling)\n\nSenior-related Mental Health (i.e. Dementia, Depression, Grief and Loss), Mindful Steps, Caregiver Support Group for persons with Dementia\n; offering basic emotional support, mental health screening, case management, family and caregiver support, outreach talks; Fees: Free; Mental health diagnosis required: No.\"",
+    "eligibility": "Suitable for Singaporean or Permanent Residents at risk of or diagnosed with mental health conditions and require support in the community.",
+    "whoIsItFor": [
+      "Elderly",
+      "Persons with mental health issues",
+      "Caregivers",
+      "General public"
+    ],
+    "whatItGives": [
+      "Emotional care",
+      "Mental health assessment and treatment",
+      "Casework",
+      "Counselling",
+      "Support groups",
+      "Information services"
+    ],
+    "schemeType": [
+      "Mental Health",
+      "Elderly",
+      "Caregiver Support",
+      "Counselling and Emotional Support",
+      "Referral and Information Services"
+    ],
+    "area": {
+      "kind": "district",
+      "name": "Toa Payoh"
+    },
+    "link": "https://www.carecorner.org.sg/services/crest/",
+    "phone": [
+      "6258 6601",
+      "6258 6601"
+    ],
+    "email": [
+      "tp.crest@carecorner.org.sg",
+      "tp.crest@carecorner.org.sg"
+    ],
+    "address": [
+      "Blk 62B, Lor 4 Toa Payoh, #02-121, 312062",
+      "Blk 214 Lor 8 Toa Payoh, #01-745, Singapore 310214"
+    ],
+    "lastRefreshed": "2026-10-05"
+  },
+  {
+    "id": "ssg-carecorner-seniors-home-care",
+    "sourceId": "4evksNWRSGKCjmViueIv",
+    "name": "Care Corner Home Care",
+    "agency": "Care Corner Singapore",
+    "summary": "Home care for frail or bedridden seniors.",
+    "description": "**Care Corner Home Care** supports frail, home-bound or bedridden seniors in their Activities of Daily Living (ADL).Our team of trained care professionals brings **specialised private nursing care** and** post-hospital care** to our seniors’ home. This makes it convenient for them to continue receiving care and medical attention from the comfort of their homes.",
+    "eligibility": "No age eligibility criteria. Government subsidies are available based on Ministry of Health’s National Means Testing guidelines.",
+    "whoIsItFor": [
+      "Elderly",
+      "Elderly with dementia",
+      "Persons with chronic or terminal illnesses",
+      "Persons with disabilities (PWDs)",
+      "Caregivers",
+      "Low income elderly"
+    ],
+    "whatItGives": [
+      "Nursing care",
+      "Personal care",
+      "Rehabilitation services (Physiotherapy/Occupational therapy)",
+      "Healthcare (general/basic services)",
+      "Medication reminders",
+      "Companionship",
+      "Health screening",
+      "Referral services",
+      "Financial assistance for healthcare"
+    ],
+    "schemeType": [
+      "Elderly",
+      "Healthcare",
+      "Caregiver Support",
+      "Rehabilitation services",
+      "Financial Assistance",
+      "Home Care"
+    ],
+    "area": {
+      "kind": "islandwide"
+    },
+    "link": "https://www.carecorner.org.sg/services/seniors-home-care/",
+    "phone": "6264 0262",
+    "email": "homecare@carecorner.org.sg",
+    "address": "Blk 131 Lorong 1 Toa Payoh #01-01 Singapore 310131",
+    "lastRefreshed": "2026-10-05"
+  },
+  {
+    "id": "ssg-carecorner-seniors-rehabilitation",
+    "sourceId": "2IO5YgFgD5soFUTxkmcB",
+    "name": "Care Corner Senior Care Centre (Toa Payoh West)",
+    "agency": "Care Corner Singapore",
+    "summary": "Therapy for seniors to regain mobility and independence.",
+    "description": "Our **Care Corner Senior Care Centre** provides therapy for seniors who may have been discharged from the hospital, had surgery, suffered from a stroke, fracture or other conditions that affects their activities of daily living (ADL).Through therapy, we improve their functional abilities and build their physical strength. We also help them to work towards independence in doing everyday things such as walking, going to the bathroom and dressing.",
+    "eligibility": "Individuals aged 16 and above who need treatment for conditions affecting mobility or daily living (e.g. stroke, traumatic brain injury, spinal cord injury, Parkinson’s disease, dementia, pain in neck/back/shoulder/knees, fall risk, difficulties with daily activities). Government subsidy eligibility follows MOH’s National Means Testing guidelines.",
+    "whoIsItFor": [
+      "Elderly",
+      "Persons with chronic or terminal illnesses",
+      "Persons with disabilities (PWDs)",
+      "Caregivers"
+    ],
+    "whatItGives": [
+      "Rehabilitation services (Physiotherapy/Occupational therapy)",
+      "Transport subsidies",
+      "Caregiver training",
+      "Referral services"
+    ],
+    "schemeType": [
+      "Elderly",
+      "Chronic or Terminal Illness Support",
+      "Rehabilitation",
+      "Caregiver Support",
+      "Persons with Disabilities (PWD)"
+    ],
+    "area": {
+      "kind": "district",
+      "name": "Toa Payoh"
+    },
+    "link": "https://www.carecorner.org.sg/services/seniors-rehabilitation/",
+    "phone": "6264 0262",
+    "email": "scctpw@carecorner.org.sg",
+    "address": "Blk 131 Lorong 1 Toa Payoh #01-01 Singapore 310131",
+    "lastRefreshed": "2026-10-05"
+  },
+  {
+    "id": "ssg-aic-care-services",
+    "sourceId": "f1GfKvG5teNsmsXa0o2f",
+    "name": "Care Services",
+    "agency": "AIC",
+    "summary": "Overnight respite care for dementia caregivers.",
+    "description": "What Is Night Respite?\nNight Respite is an overnight respite option for caregivers of persons requiring mild to moderate assistance in their Activities of Daily Living (ADL) or persons living with dementia displaying sundowning behaviour. This service provides caregivers with the opportunity to take time off from night time caregiving duties.\nHow it Helps Caregivers\nNight Respite engages persons in need living with dementia meaningfully providing support for their ADLs.\nThe service not only enable caregivers to take time off from caregiving duties to catch up on rest or fulfil other commitments. It also support caregivers in managing the sundowning issues of their loved ones.\nDownload the Night Respite brochure here.\nWhat is Sundowning?\nSundowning is the worsening of behavioural difficulties towards the end of the day. Symptoms include restlessness, agitation, suspicious behaviour, disorientation, visual and auditory hallucinations, and difficulties sleeping at night. This often occurs in the moderate to severe stages of dementia, and may be challenging for caregivers to manage.\nWhen it’s Provided\n\n- Monday to Friday, from 7pm (up to 12 hours duration)n\n- Transport option with subsidy is available if requiredn\n- Government subsidies for Singaporeans and Permanent Residents are available based on means testingn",
+    "eligibility": "Caregivers of persons requiring mild to moderate assistance in Activities of Daily Living (ADL), or persons living with dementia displaying sundowning behaviour. Government subsidies available for Singaporeans and Permanent Residents, subject to means testing.",
+    "whoIsItFor": [
+      "Caregivers",
+      "Elderly",
+      "Persons with disabilities (PWDs)",
+      "Persons with chronic or terminal illnesses"
+    ],
+    "whatItGives": [
+      "Respite care/Caregiver support",
+      "Emotional care",
+      "Support groups"
+    ],
+    "schemeType": [
+      "Elderly",
+      "Caregiver Support",
+      "Chronic or Terminal Illness Support"
+    ],
+    "area": {
+      "kind": "islandwide"
+    },
+    "link": "https://www.aic.sg/care-services/",
+    "phone": null,
+    "email": null,
+    "address": null,
+    "lastRefreshed": "2026-10-05"
+  },
+  {
+    "id": "ssg-apexrehab-services",
+    "sourceId": "VmfvFBf6IV0aShBbnTuf",
+    "name": "Caregiver support",
+    "agency": "Apex Day Rehabilitation Centre For Elderly",
+    "summary": "Support and resources for caregivers.",
+    "description": "Caregivers face a range of challenges that can be physically, emotionally, and financially draining. They provide care and support for loved ones who may be dealing with health issues, disabilities, or aging, and often do so while balancing other responsibilities such as work or caring for their own families. Caregivers may also experience feelings of isolation, anxiety, and depression, as well as financial strain and limited access to resources. Despite these challenges, caregivers continue to provide unwavering support and love for their loved ones, and their efforts should be recognized and supported. Please get in touch with us to learn more about how we can support caregivers in your community.",
+    "eligibility": "Caregivers of individuals with health issues, disabilities, or aging loved ones. No specific eligibility criteria or documents mentioned.",
+    "whoIsItFor": [
+      "Caregivers",
+      "Persons with disabilities (PWDs)",
+      "Elderly"
+    ],
+    "whatItGives": [
+      "Respite care/Caregiver support",
+      "Emotional care",
+      "Psychological support/Psychotherapy"
+    ],
+    "schemeType": [
+      "Caregiver Support",
+      "Elderly",
+      "Mental Health"
+    ],
+    "area": {
+      "kind": "islandwide"
+    },
+    "link": "https://apexrehab.org.sg/services/",
+    "phone": null,
+    "email": null,
+    "address": null,
+    "lastRefreshed": "2026-10-05"
+  },
+  {
+    "id": "ssg-mindfull-caregiver-education-caregiver-support",
+    "sourceId": "7Hro3wmRTKB6dWgWDPJf",
+    "name": "Caregiver Support",
+    "agency": "Caregivers Alliance",
+    "summary": "Fully-funded education for caregivers of mental health patients.",
+    "description": "The Individual Training & Support (ITS) programme provides emotional support, coaching, and referrals for the convenience of those who cannot leave their loved ones for long periods. Sessions may be through face-to-face meetings at a location convenient to caregivers, or through other means such as phone calls, messaging, or email.\n\nThe Engagement to Empowerment (E2E) Team facilitates the formation of community-based peer-support caregiver networks in six constituencies: Bukit Gombak, Fengshan, Henderson/ Dawson, Nee Soon East and Tampines. The team helps caregivers to connect with one another, share experiences, enhance their caregiving skills and learn self-care, in a support group that meets once a month over the course of a year.",
+    "eligibility": "Caregivers of persons with mental health conditions, dementia, or eating disorders. No other specific eligibility criteria or required documents mentioned.",
+    "whoIsItFor": [
+      "Caregivers"
+    ],
+    "whatItGives": [
+      "Emotional care",
+      "Counselling",
+      "Referral services",
+      "Support groups",
+      "Educational programmes"
+    ],
+    "schemeType": [
+      "Caregiver Support",
+      "Counselling and Emotional Support",
+      "Referral and Information Services"
+    ],
+    "area": {
+      "kind": "islandwide"
+    },
+    "link": "https://www.mindfull.org.sg/caregiver-education",
+    "phone": null,
+    "email": null,
+    "address": [
+      "491B River Valley Rd, Singapore 248373",
+      "2 Orchard Link, #04-06, Singapore 237978"
+    ],
+    "lastRefreshed": "2026-10-05"
+  },
+  {
+    "id": "ssg-able-sg-respite",
+    "sourceId": "5TkaUtDBWCe7D1EtHKbu",
+    "name": "Caregiver Support - ABLE",
+    "agency": "Caregiver Support - ABLE",
+    "summary": "Centre-based respite care for caregivers and PWDs.",
+    "description": "ABLE’s Respite Centre supports family caregivers through providing regular quality programmes and services for both caregivers and care recipients. ABLE’s support groups play an important role in engaging caregivers and providing respite from caregiving duties. We also host annual family caregiver retreats and appreciation events to acknowledge the individuals caring for the physically challenged. These activities are conducted to give caregivers a sense of community and to bond through shared experiences.",
+    "eligibility": "Family caregivers and their physically challenged care recipients. Care recipient must be cared for by professionals before caregiver can seek respite.",
+    "whoIsItFor": [
+      "Caregivers",
+      "Persons with Disabilities (PWDs)",
+      "Families"
+    ],
+    "whatItGives": [
+      "Respite care/Caregiver support",
+      "Support groups",
+      "Emotional care"
+    ],
+    "schemeType": [
+      "Caregiver Support",
+      "Persons with Disabilities (PWD)",
+      "Family"
+    ],
+    "area": {
+      "kind": "islandwide"
+    },
+    "link": "https://able-sg.org/our-services/respite/",
+    "phone": null,
+    "email": "enquiries@able-sg.org",
+    "address": null,
+    "lastRefreshed": "2026-10-05"
+  },
+  {
+    "id": "ssg-hnf-caregiver-support-training-programme",
+    "sourceId": "xnpn1SRfx4vH4oiTM4hq",
+    "name": "Caregiver Support and Training Programme",
+    "agency": "Home Nursing Foundation",
+    "summary": "Caregiver training and support with elder-sitting offered.",
+    "description": "Our Caregiver Training and Support Programme (CTSP) contains three modules and is designed to support and prepare family members and their helpers for their caregiving role. Caregivers can pick up essential caregiving skills and techniques and understand the various resources available in the community. They can also learn basic behavioral management skills to cope with the demands of caregiving. Through sharing experience and encouragement with other caregivers, this interactive training programme helps caregivers find meaning in their caregiving journey and deliver efficient care with confidence.**Understanding Caregiving**Be empowered as a caregiver. Our nurses and medical social workers will guide you in becoming a **C**ompetent, **C**aring and **C**hampion caregiver through these modules:**Module 1:** You will learn useful and essential skill on how to care for your loved ones who are frail, with disabilities, chronic illnesses or dementia.**Module 2**: You will learn about the psychosocial needs of your care recipient, identify how to avoid caregiver burnouts through self-care, behavioral management techniques and effective communication skills. Identify schemes and resources available in the community that will empower you to be a better caregiver.**Module 3:** Pick up useful tips on how you can create stronger bonds with your loved ones and turn your caregiving journey into one that is meaningful and enjoyable. To provide caregivers with peace of mind, elder-sitting is offered to those who have signed up for our Caregiver Support and Training programme. We will arrange an elder-sitter to accompany your loved ones while you attend the training with us.A certificate will be issued to participants who have completed the course (module 1).Training sessions can be conducted in different languages but will be subjected to our trainers’ availability. A minimum class size of 6 is required to commence each module. For more details on the available dates, please call us at 6854 8300 or email [caregiversupportgroup@hnf.org.sg](mailto:caregiversupportgroup@hnf.org.sg) .",
+    "eligibility": "Family members and helpers preparing for or currently in a caregiving role. Minimum class size of 6 required to commence each module.",
+    "whoIsItFor": [
+      "Caregivers",
+      "Persons with disabilities (PWDs)",
+      "Elderly"
+    ],
+    "whatItGives": [
+      "Training and education",
+      "Respite care/Caregiver support",
+      "Psychological support/Psychotherapy"
+    ],
+    "schemeType": [
+      "Caregiver Support",
+      "Elderly",
+      "Special Needs"
+    ],
+    "area": {
+      "kind": "islandwide"
+    },
+    "link": "https://www.hnf.org.sg/services/caregiver-support-training-programme/",
+    "phone": "6854 8300",
+    "email": "caregiversupportgroup@hnf.org.sg",
+    "address": null,
+    "lastRefreshed": "2026-10-05"
+  },
+  {
+    "id": "ssg-carecorner-caregiver-support-caregiver-support-group",
+    "sourceId": "i2XNihts4QddyEViFaox",
+    "name": "Caregiver Support Group",
+    "agency": "Care Corner Singapore",
+    "summary": "Caregiver support group for sharing and training.",
+    "description": "Caregiver Support Group. Our Care Corner Caregiver Support Group aims to provide relevant training and knowledge to caregiving, a safe space for caregivers to share their caregiving experiences, learn tips and gain insights from the shared experience of other caregivers to enhance care for loved ones and to build a support network of caregivers to journey alongside with.To register, click [here](https://forms.office.com/r/UgwphQd5Lf).For more information, please contact us at 6258 6601 or  tp.crest@carecorner.org.sg",
+    "eligibility": null,
+    "whoIsItFor": [
+      "Caregivers",
+      "Elderly with dementia"
+    ],
+    "whatItGives": [
+      "Support groups",
+      "Emotional care",
+      "Counselling",
+      "Training",
+      "Befriending services"
+    ],
+    "schemeType": [
+      "Caregiver Support",
+      "Elderly",
+      "Counselling and Emotional Support",
+      "Mental Health Rehabilitation"
+    ],
+    "area": {
+      "kind": "islandwide"
+    },
+    "link": "https://www.carecorner.org.sg/services/caregiver-support/",
+    "phone": "6258 6601",
+    "email": "tp.crest@carecorner.org.sg",
+    "address": null,
+    "lastRefreshed": "2026-10-05"
+  },
+  {
+    "id": "ssg-carecorner-caregiver-support-caregiver-support-group-and-pr",
+    "sourceId": "8YsYJHDswzlq8pP0UXTe",
+    "name": "Caregiver Support Group and Programmes",
+    "agency": "Care Corner Singapore",
+    "summary": "Support group for dementia caregivers.",
+    "description": "Caregiving ProgrammesSpecially curated courses to share practical tips with caregivers of persons living with dementiaCaregiving Foundational Course — ‘Embarking the Journey’A foundational 5-session course curated for new caregivers. The sessions aim to equip caregivers on:- Understanding dementian- Managing challenging behavioursn- Purposeful and meaningful engagementn- Communicating with persons living with dementian- Self-care for caregiversnHeld fortnightly across 3 months, the sessions are 1.5 hours in duration and held bilingually in English and Mandarin.To register, click here [https://forms.office.com/r\n3pCE6bz4C](https://forms.office.com/r\n3pCE6bz4C)There is a registration fee of $10. Participants are encouraged to commit to at least 3 out of 5 sessions.",
+    "eligibility": "Caregivers of persons living with dementia.",
+    "whoIsItFor": [
+      "Caregivers",
+      "Elderly with dementia"
+    ],
+    "whatItGives": [
+      "Educational programmes",
+      "Emotional care",
+      "Counselling"
+    ],
+    "schemeType": [
+      "Caregiver Support",
+      "Elderly",
+      "Mental Health",
+      "Education Support"
+    ],
+    "area": {
+      "kind": "islandwide"
+    },
+    "link": "https://www.carecorner.org.sg/services/caregiver-support/",
+    "phone": "6258 6601",
+    "email": "tp.crest@carecorner.org.sg",
+    "address": "Blk 214 Lorong 8 Toa Payoh, #01-745, Singapore 310214",
+    "lastRefreshed": "2026-10-05"
+  },
+  {
+    "id": "ssg-dementia-css",
+    "sourceId": "WfrZx3QSQS3bpkzic8C1",
+    "name": "Caregiver Support Group (Dementia)",
+    "agency": "Alzheimer's Disease Association",
+    "summary": "Free support group sessions for caregivers in multiple languages.",
+    "description": "Caregiver Support Group (in English, Mandarin and Malay) provides an opportunity for respite while meeting other caregivers in a similar situation to share caregiving experiences and practical tips, learn about dementia, and discover resources in a relaxed and safe environment. Sessions are free unless otherwise stated.\n\n The sessions are conducted in English, Mandarin and Malay at different venues for two hours, and consists of talks by guest speakers and group sharing amongst caregivers.",
+    "eligibility": "Caregivers of individuals with dementia or those seeking support and information about caregiving. No specific eligibility criteria or documents mentioned.",
+    "whoIsItFor": [
+      "Caregivers"
+    ],
+    "whatItGives": [
+      "Support groups",
+      "Respite care/Caregiver support",
+      "Educational programmes",
+      "Information services"
+    ],
+    "schemeType": [
+      "Caregiver Support",
+      "Mental Health",
+      "Elderly"
+    ],
+    "area": {
+      "kind": "islandwide"
+    },
+    "link": "https://dementia.org.sg/css/",
+    "phone": null,
+    "email": null,
+    "address": null,
+    "lastRefreshed": "2026-10-05"
+  },
+  {
+    "id": "ssg-extraordinarypeople-extraordinary-caregivers",
+    "sourceId": "kQt3NGd0ahCAb1Vlg7CF",
+    "name": "Caregiver Support Programme",
+    "agency": "Extra•Ordinary People",
+    "summary": "Workshops for caregivers of children with special needs.",
+    "description": "You are not alone on this journey.\nWe understand your challenges and want you to know you’re not alone. At Extra•Ordinary People, we are dedicated to supporting caregivers like you on this journey. Our mission is to provide you with the assistance and resources you need to navigate the complexities of decision-making.\nHere’s how we can help:\n\n- Social Work Support: Our team of compassionate social workers is here to listen, understand, and guide you in various aspects of caregiving. We aim to create a supportive network, offering emotional and practical assistance tailored to your needs.n\n- Counselling Support: Our professional counsellors provide a safe space for you to express your feelings, find resilience, and gain valuable insights to manage the emotional challenges of caregiving.n\n- Information and Referral: We offer comprehensive knowledge and connect you with relevant resources and services within our network, empowering you to make informed decisions for your child’s well-being.n\n- Service Navigation: Navigating the complex landscape of services and support can be overwhelming. Our team can help you navigate various systems, ensuring you find the right services and programs for your child’s unique needs.n\n- Respite Care Support: We understand the importance of self-care while caring for your loved one. Our respite care support provides temporary relief, allowing you to recharge and prioritize your well-being.n\n- Care Concierge Service: Simplifying your caregiving responsibilities is our goal. Our care concierge service can assist you with practical matters, such as coordinating appointments and connecting you with relevant community resources.n\n\nNeed some direction about our programmes for your child? Or perhaps you would like to learn more about what we offer here at Extra•Ordinary People and if it is a right fit. Get in touch with us at Extra•Ordinary People. We’d love to hear from you.",
+    "eligibility": "Parents and caregivers of children with special needs. No specific documents mentioned.",
+    "whoIsItFor": [
+      "Caregivers",
+      "Persons with disabilities (PWDs)",
+      "Families"
+    ],
+    "whatItGives": [
+      "Counselling",
+      "Casework",
+      "Respite care/Caregiver support",
+      "Information services",
+      "Referral services"
+    ],
+    "schemeType": [
+      "Caregiver Support",
+      "Persons with Disabilities (PWD)",
+      "Family"
+    ],
+    "area": {
+      "kind": "islandwide"
+    },
+    "link": "https://www.extraordinarypeople.sg/extraordinary-caregivers/",
+    "phone": null,
+    "email": null,
+    "address": "7500A Beach Rd #01-313, The Plaza Block A, Singapore 199591",
+    "lastRefreshed": "2026-10-05"
+  },
+  {
+    "id": "ssg-mindfull-caregiver-education-caregiver-training-programme",
+    "sourceId": "gnTjwwndfWq6LFnXlEk5",
+    "name": "Caregiver Training Programme",
+    "agency": "Caregivers Alliance",
+    "summary": "Fully-funded education for caregivers of mental health patients.",
+    "description": "Provides training to caregivers of persons with mental health issues (PMHIs), dementia and eating disorders such as anorexia, bulimia nervosa and binge eating disorders including related mental health conditions of depression, anxiety and OCD.",
+    "eligibility": "Caregivers of persons with mental health conditions, dementia, or eating disorders. No specific documents mentioned.",
+    "whoIsItFor": [
+      "Caregivers",
+      "Persons with mental health issues",
+      "Persons with special needs",
+      "Elderly with dementia"
+    ],
+    "whatItGives": [
+      "Educational programmes",
+      "Support groups",
+      "Counselling",
+      "Emotional care"
+    ],
+    "schemeType": [
+      "Caregiver Support",
+      "Mental Health",
+      "Elderly",
+      "Special Needs",
+      "Education Support"
+    ],
+    "area": {
+      "kind": "islandwide"
+    },
+    "link": "https://www.mindfull.org.sg/caregiver-education",
+    "phone": null,
+    "email": null,
+    "address": [
+      "491B River Valley Rd, Singapore 248373",
+      "2 Orchard Link, #04-06, Singapore 237978"
+    ],
+    "lastRefreshed": "2026-10-05"
+  },
+  {
+    "id": "ssg-touch-caregivers-caregivers-support-care-line",
+    "sourceId": "1c0yDwyGxsxXnLQSmd9N",
+    "name": "Caregivers Support Care Line",
+    "agency": "Touch Community Services",
+    "summary": "Support and resources for caregivers and families.",
+    "description": "Feeling stressed and unsure of how you can better care for your loved ones? Don’t worry — our care coordinators are here for you.They are trained to deal with common issues that caregivers face. Since 2012, they have been helping around 150 caregivers every month to brainstorm practical care solutions.",
+    "eligibility": "Caregivers of loved ones, including seniors and persons with disabilities or special needs. No specific eligibility documents mentioned.",
+    "whoIsItFor": [
+      "Caregivers",
+      "Persons with disabilities (PWDs)",
+      "Families"
+    ],
+    "whatItGives": [
+      "Emotional care",
+      "Counselling",
+      "Respite care/Caregiver support",
+      "Referral services",
+      "Support groups"
+    ],
+    "schemeType": [
+      "Caregiver Support",
+      "Emotional Support",
+      "Family"
+    ],
+    "area": {
+      "kind": "islandwide"
+    },
+    "link": "https://www.touch.org.sg/get-assistance/caregivers.html",
+    "phone": "6804 6555",
+    "email": "caregivers@touch.org.sg",
+    "address": null,
+    "lastRefreshed": "2026-10-05"
+  },
+  {
+    "id": "ssg-touch-caregivers-carer-lighthouse",
+    "sourceId": "ZRbmf2IWKv7xyYR96h5v",
+    "name": "Carer Lighthouse",
+    "agency": "Touch Community Services",
+    "summary": "Two-month group support programme for caregivers.",
+    "description": "In-person group session *Caregivers *This two-month programme connects caregivers and equips them with relevant resources for support. Examples of topics discussed: - Stress management n- Communication n- Long-term care planningn",
+    "eligibility": "Caregivers. No further eligibility criteria specified.",
+    "whoIsItFor": [
+      "Caregivers",
+      "Persons with disabilities (PWDs)",
+      "Families"
+    ],
+    "whatItGives": [
+      "Counselling",
+      "Emotional care",
+      "Respite care/Caregiver support",
+      "Support groups"
+    ],
+    "schemeType": [
+      "Caregiver Support",
+      "Mental Health",
+      "Family"
+    ],
+    "area": {
+      "kind": "islandwide"
+    },
+    "link": "https://www.touch.org.sg/get-assistance/caregivers.html",
+    "phone": null,
+    "email": null,
+    "address": null,
+    "lastRefreshed": "2026-10-05"
+  },
+  {
+    "id": "ssg-shenghong-family-services",
+    "sourceId": "zo2khDpUlRzvPb2uhZwb",
+    "name": "Casework & Counselling Services",
+    "agency": "Society of Sheng Hong Welfare Services",
+    "summary": "Community-based family service centre in Hougang offering casework, counselling, group programmes, and community connections for individuals and families. Supports issues like family violence, relationships, caregiving stress, and financial difficulties.",
+    "description": "Hougang Sheng Hong Family Service Centre supports individuals and families in the Hougang community to build resilience, strengthen relationships, and enhance well-being.\n\nKey services include:\n- Casework and counselling by professional social workers and counsellors for individuals, couples, and families, including home visits\n- Support for challenges such as family violence, parenting and relationship issues, caregiving stress, and financial difficulties\n- Group programmes that foster safe sharing, learning, and mutual support, such as:\n  • Women Who Lift – support for women recovering from family violence\n  • A.C.T.I.V.E. – social connection and wellness activities for seniors\n  • Building Resiliency – practical interpersonal skills to navigate life’s challenges\n- Community work that connects clients with local partners, grassroots organisations, and government agencies, helping map resources and build social cohesion and belonging\n\nThe centre aims to promote personal growth, emotional healing, and stronger family ties so residents can thrive within a compassionate, harmonious community.",
+    "eligibility": "Individuals and families with challenges",
+    "whoIsItFor": [
+      "Families",
+      "Women",
+      "Elderly",
+      "Caregivers",
+      "Facing financial hardship",
+      "Victims of abuse or harassment"
+    ],
+    "whatItGives": [
+      "Counselling",
+      "Casework",
+      "Emotional care",
+      "Befriending services",
+      "Referral services",
+      "Educational programmes",
+      "Support groups",
+      "Information services"
+    ],
+    "schemeType": [
+      "Family",
+      "Women",
+      "Elderly",
+      "Caregiver Support",
+      "Abuse/Family Violence",
+      "Counselling and Emotional Support",
+      "General Public Support"
+    ],
+    "area": {
+      "kind": "district",
+      "name": "Hougang"
+    },
+    "link": "https://shenghong.org.sg/family-services/",
+    "phone": "+65 6289 5022",
+    "email": "sshws@shenghong.org.sg",
+    "address": "Blk 237 Hougang St. 21 #01-406, Singapore 530237",
+    "lastRefreshed": "2026-10-05"
+  },
+  {
+    "id": "ssg-touch-caregivers-collaborating-with-caregivers",
+    "sourceId": "uRAYW5E3DYosLSiqKV5X",
+    "name": "Collaborating with Caregivers",
+    "agency": "Touch Community Services",
+    "summary": "Empowering caregivers through partnerships and advocacy.",
+    "description": "Advocating for caregiving *Caregivers, community &amp; corporate partners *As caregiving needs grow more complex, we leverage our partnerships to empower caregivers now and in the future.",
+    "eligibility": null,
+    "whoIsItFor": [
+      "Caregivers"
+    ],
+    "whatItGives": [
+      "Emotional care",
+      "Respite care/Caregiver support",
+      "Counselling"
+    ],
+    "schemeType": [
+      "Caregiver Support"
+    ],
+    "area": {
+      "kind": "islandwide"
+    },
+    "link": "https://www.touch.org.sg/get-assistance/caregivers.html",
+    "phone": null,
+    "email": null,
+    "address": null,
+    "lastRefreshed": "2026-10-05"
+  },
+  {
+    "id": "ssg-fycs-community-mental-health-department",
+    "sourceId": "bxR5ra2E7Wkgic63ifuH",
+    "name": "COMIT Fei Yue",
+    "agency": "Fei Yue Community Services",
+    "summary": "Fei Yue's Community Mental Health Department provides assessment, counselling, therapy, and support services for adults with mental health issues and dementia, including their caregivers, within designated Singapore constituencies.",
+    "description": "Fei Yue Community Mental Health Department offers community-based mental health support through its Community Intervention Team (COMIT) and Community Resource Engagement and Support Team (CREST). These teams provide assessment, counselling, psychotherapy, case management, psychoeducation, emotional support, monitoring, and service linkage for adults aged 18 and above with mental health conditions and dementia, as well as their caregivers. The services are delivered in collaboration with healthcare providers and community partners to ensure holistic and coordinated care within specified constituencies in Singapore.",
+    "eligibility": "Clients aged 18 and above who are suspected of or diagnosed with mental health conditions and/or dementia, as well as their caregivers, residing within specified constituencies in Singapore.",
+    "whoIsItFor": [
+      "Young adults",
+      "Elderly",
+      "Elderly with dementia",
+      "Need food support"
+    ],
+    "whatItGives": [
+      "Counselling",
+      "Casework",
+      "Emotional care",
+      "Mental health assessment and treatment",
+      "Psychological support/Psychotherapy",
+      "Referral services",
+      "Educational programmes"
+    ],
+    "schemeType": [
+      "Elderly",
+      "Caregiver Support"
+    ],
+    "area": {
+      "kind": "district",
+      "name": "Bukit Batok Sub-region 3; Choa Chu Kang + Lim Chu Kang + Western Catchment + Tengah Sub-region 1, 2, 3; Jurong West – Pioneer – Sub-region 5; Ang Mo Kio-Hougang, Hougang SMC and Punggol (under Bedok Reservoir-Punggol constituency); Buona Vista and Queenstown; Bukit Timah, Clementi and Ulu Pandan; Bukit Panjang SMC, Cashew and Zhenghua; Brickland and Choa Chu Kang; Limbang and Yew Tee; Paya Lebar and Serangoon"
+    },
+    "link": "https://fycs.org/community-mental-health-department/",
+    "phone": "6011 7658",
+    "email": "comit@fycs.org",
+    "address": null,
+    "lastRefreshed": "2026-10-05"
+  },
+  {
+    "id": "ssg-kwsh-ourservices",
+    "sourceId": "ccryv0Uno4VkQqYYDklz",
+    "name": "Community Care, Home Care & TCM for Elderly",
+    "agency": "Kwong Wai Shiu Hospital",
+    "summary": "KWSH provides subsidised healthcare for the needy.",
+    "description": "KWSH is a charitable healthcare organisation committed to looking after the sick and needy. It operates a nursing home, a rehabilitation centre, a traditional Chinese medicine centre, three community care centres and offers home care services, and is one of the largest nursing home operators in Singapore. The majority of our beneficiaries are from lower-income families and their fees are heavily subsidised by KWSH.",
+    "eligibility": "Beneficiaries are mainly from lower-income families. Specific eligibility criteria or documents required are not stated.",
+    "whoIsItFor": [
+      "Elderly",
+      "Caregivers",
+      "Persons with chronic or terminal illnesses",
+      "Persons with disabilities (PWDs)",
+      "General public"
+    ],
+    "whatItGives": [
+      "Inpatient care",
+      "Rehabilitation services",
+      "Traditional Chinese Medicine",
+      "Community care",
+      "Home care",
+      "Caregiver training",
+      "Day care",
+      "Medical and nursing services",
+      "Physiotherapy",
+      "Occupational therapy",
+      "Wellness activities",
+      "Subsidized healthcare"
+    ],
+    "schemeType": [
+      "Elderly",
+      "Healthcare",
+      "Rehabilitation",
+      "Caregiver Support",
+      "Persons with Disabilities (PWD)",
+      "Chronic or Terminal Illness Support",
+      "Community Funding",
+      "General Healthcare Subsidies"
+    ],
+    "area": {
+      "kind": "islandwide"
+    },
+    "link": "https://www.kwsh.org.sg/ourservices/",
+    "phone": null,
+    "email": null,
+    "address": null,
+    "lastRefreshed": "2026-10-05"
+  },
+  {
+    "id": "ssg-touch-community-case-management",
+    "sourceId": "l167OvjXhLpnxyjRkGVf",
+    "name": "Community Case Management",
+    "agency": "Touch Community Services",
+    "summary": "Holistic case management for vulnerable seniors.",
+    "description": "A one-stop service that helps vulnerable seniors with complex health and social needs to continue aging in place. **Enriching Seniors with Holistic Community Case Management ** At TOUCH, we strive to provide a range of home-based and community-based services to meet the diverse needs of seniors to support ageing in community. Supported by a team of social workers, our Community Case Management service aims to deliver holistic and customised care for seniors. We are the single point of contact for those under our care, and coordinate the support they need to lead independent lives as part of our community. **What We Can Offer** - General information and referral servicesn- Assessment and evaluation of seniors’ healthcare and social needs n- Service coordination and management n- Care plan monitoring n- Counselling and emotional support n- Home safety management n- Caregiver resources and support n- Support with end-of-life matters such as Lasting Power of Attorney and Advance Care Planning n",
+    "eligibility": "Vulnerable seniors with complex health and social needs. No specific documents mentioned.",
+    "whoIsItFor": [
+      "Elderly",
+      "Caregivers"
+    ],
+    "whatItGives": [
+      "Counselling",
+      "Referral services",
+      "Emotional care",
+      "Caregiver resources and support",
+      "End-of-life care"
+    ],
+    "schemeType": [
+      "Elderly",
+      "Caregiver Support",
+      "End-of-Life/Palliative Care"
+    ],
+    "area": {
+      "kind": "islandwide"
+    },
+    "link": "https://www.touch.org.sg/get-assistance/seniors/community-case-management.html",
+    "phone": null,
+    "email": null,
+    "address": null,
+    "lastRefreshed": "2026-10-05"
+  },
+  {
+    "id": "ssg-brahmcentre-counselling",
+    "sourceId": "nY4xTO7cKTttK3ZWVyP6",
+    "name": "Counselling",
+    "agency": "Brahm Centre",
+    "summary": "Brahm Centre offers free, confidential counselling and psychotherapy services for Singaporeans and PRs, focusing on mental health and emotional well-being through a mindfulness-based approach.",
+    "description": "Brahm Centre provides free counselling and psychotherapy services to Singaporeans and Permanent Residents, addressing a range of mental health issues such as anxiety, depression, marital problems, parenting challenges, addiction management, and caregiver stress. The service is conducted by trained counsellors and psychotherapists in a confidential, safe, and non-judgmental environment, with a mindfulness-based approach. The centre also supports caregivers and health providers, offering resources and assistance to help navigate mental health challenges. Sessions are by appointment and fully subsidised by AIC/MOH.",
+    "eligibility": "The counselling service is free and available to Singaporeans and Permanent Residents. Clients must provide the last 4 digits of their NRIC, demographic, and assessment data for program usage analysis. Sessions are by appointment only.",
+    "whoIsItFor": [
+      "Families",
+      "Elderly"
+    ],
+    "whatItGives": [
+      "Counselling",
+      "Emotional care",
+      "Psychological support/Psychotherapy",
+      "Referral services"
+    ],
+    "schemeType": [
+      "Family",
+      "Elderly",
+      "Caregiver Support"
+    ],
+    "area": {
+      "kind": "islandwide"
+    },
+    "link": "https://www.brahmcentre.com/counselling/",
+    "phone": "6610 3870",
+    "email": "info@brahmcentre.com",
+    "address": "47 Scotts Road #04-02A Goldbell Towers Singapore 228233",
+    "lastRefreshed": "2026-10-05"
+  },
+  {
+    "id": "ssg-tsaofoundation-counselling-and-coaching",
+    "sourceId": "pkdoRWXLQykNLM3wheiv",
+    "name": "Counselling and Coaching for Older Persons and Caregivers",
+    "agency": "Tsao Foundation",
+    "summary": "Counselling and coaching for older adults (50+) and caregivers, offering therapy and group-based skill-building with a holistic, integrated approach. Services are accessible via referral and appointment, with sliding-scale fees and potential subsidies.",
+    "description": "Hua Mei Counselling and Coaching (HMCC) by Tsao Foundation provides dedicated psycho-emotional support for older adults and their caregivers. The programme integrates counselling and coaching with Tsao Foundation’s clinical and community-based services, and partners in the community, to offer coordinated and holistic care.\n\n- Safe, confidential space for older adults and caregivers to discuss emotions, worries and challenges\n- Individual and family psychotherapy focused on healing, resilience and personal growth\n- Group-based coaching to build practical life skills and coping strategies, fostering resilience and mutual support\n- Holistic approach that aligns psycho-emotional wellness with medical and social support pathways\n- Accessible services, including sliding-scale fees with possible subsidies and home-based sessions where appropriate",
+    "eligibility": "• Adults aged 50 years and above\n• Caregivers of any age (no age limit)\n• Services available by referral and appointment only\n• Fees charged on a sliding scale; partial or full subsidies may be available for clients with financial difficulties\n• Home-based counselling may be arranged at Tsao Foundation’s discretion",
+    "whoIsItFor": [
+      "Elderly",
+      "Caregivers"
+    ],
+    "whatItGives": [
+      "Counselling",
+      "Emotional care",
+      "Psychological support/Psychotherapy",
+      "Respite care/Caregiver support",
+      "Support groups"
+    ],
+    "schemeType": [
+      "Elderly",
+      "Caregiver Support",
+      "Mental Health",
+      "Counselling and Emotional Support"
+    ],
+    "area": {
+      "kind": "islandwide"
+    },
+    "link": "https://tsaofoundation.org/towards-successful-ageing/hmcsa/counselling-and-coaching",
+    "phone": "65939455",
+    "email": "hmcc@tsaofoundation.org",
+    "address": "298 Tiong Bahru Road #15-01/06 Central Plaza, Singapore 168730",
+    "lastRefreshed": "2026-10-05"
+  },
+  {
+    "id": "ssg-reach-counselling-service",
+    "sourceId": "pyJ7NlYBaeXiRj8oBKIH",
+    "name": "Counselling & Mental Health Service",
+    "agency": "REACH Community Services",
+    "summary": "Professional counselling for individuals, couples, and families.",
+    "description": "At REACH Counselling & Mental Health Service, we provide professional counselling services to help individuals, couples and families build better lives, enduring marriages and resilient families. We create a safe space to ask difficult questions, learn new skills and work through solutions to personal and relationship struggles we face daily.",
+    "eligibility": null,
+    "whoIsItFor": [
+      "Individuals",
+      "Couples",
+      "Families",
+      "Caregivers",
+      "Persons with mental health issues"
+    ],
+    "whatItGives": [
+      "Counselling",
+      "Psychological support/Psychotherapy",
+      "Support groups",
+      "Mediation",
+      "Educational programmes",
+      "Referral services"
+    ],
+    "schemeType": [
+      "Counselling and Emotional Support",
+      "Mental Health",
+      "Family",
+      "Youth",
+      "Elderly",
+      "Caregiver Support"
+    ],
+    "area": {
+      "kind": "islandwide"
+    },
+    "link": "https://reach.org.sg/services/counselling-service/",
+    "phone": null,
+    "email": null,
+    "address": null,
+    "lastRefreshed": "2026-10-05"
+  },
+  {
+    "id": "ssg-awwa-crest",
+    "sourceId": "GH647t4f1witAujyQVHc",
+    "name": "CREST (AWWA)",
+    "agency": "AWWA Ltd",
+    "summary": "Community mental health and dementia support by AWWA CREST in Ang Mo Kio, offering screenings, psychoeducation, casework, and referrals for individuals and caregivers.",
+    "description": "AWWA’s Community Resource, Engagement and Support Team (CREST) is a community-based, first-stop touchpoint for mental health and dementia needs in the Ang Mo Kio region. It aims to identify at-risk individuals early and provide timely psychosocial support for them and their caregivers.\n\nKey supports and activities include:\n- Psychoeducational events, talks and workshops on mental health conditions and dementia\n- Individualised casework and ongoing monitoring through home visits\n- Mood and memory screening to flag early concerns\n- Information provision and referrals to appropriate services and partners\n- Psychosocial interventions and practical support to help individuals and caregivers manage day-to-day challenges\n- Collaboration with community partners to strengthen local support networks",
+    "eligibility": "• Individuals at risk of or diagnosed with a mental health condition and/or dementia\n• Caregivers supporting someone at risk of or diagnosed with a mental health condition and/or dementia, or experiencing caregiver stress\n• Reside within the Ang Mo Kio service region",
+    "whoIsItFor": [
+      "Elderly with dementia",
+      "Persons with mental health issues",
+      "Caregivers"
+    ],
+    "whatItGives": [
+      "Casework",
+      "Emotional care",
+      "Mental health assessment and treatment",
+      "Psychological support/Psychotherapy",
+      "Referral services",
+      "Educational programmes",
+      "Information services"
+    ],
+    "schemeType": [
+      "Elderly",
+      "Caregiver Support",
+      "Mental Health",
+      "Counselling and Emotional Support"
+    ],
+    "area": {
+      "kind": "district",
+      "name": "Ang Mo Kio region"
+    },
+    "link": "https://www.awwa.org.sg/our-services/crest/",
+    "phone": "65116690, 96217856",
+    "email": "crest@awwa.org.sg, contactus@awwa.org.sg",
+    "address": "CREST @ Ang Mo Kio, 123 Ang Mo Kio Ave 6, #01-4011, Singapore 560123",
+    "lastRefreshed": "2026-10-05"
+  },
+  {
+    "id": "ssg-aic-dementia-support-referrals",
+    "sourceId": "UZeAabOVG2upzoAx4Dvr",
+    "name": "CREST - Community Resource Engagement and Support Team",
+    "agency": "AIC",
+    "summary": "Community-based mental health and dementia support by AIC, offering outreach, psychotherapy, caregiver support, and coordinated care with GPs, polyclinics, and hospitals. Includes youth outreach, post-diagnostic dementia support, aftercare, and primary care integration.",
+    "description": "AIC’s Community Mental Health Programmes build an integrated network of support so people with mental health conditions and dementia—and their caregivers—can access help closer to home.\n\nKey components include:\n- Community Outreach Teams (CREST) as a first-stop in the community to listen, identify needs early, and provide basic therapeutic support and linkage to services.\n- Youth Community Outreach Teams (CREST-Youth) to raise awareness, identify youth mental health needs early, provide emotional support, involve caregivers, and connect families to health and social supports.\n- Caregiver-focused outreach (CREST-CSN) to support caregivers at risk of depression, anxiety, or burnout through awareness, early identification of needs, and linkage to help.\n- Community Intervention Teams (COMIT) offering psychotherapy and psychosocial interventions (e.g., cognitive behavioural therapy, psychoeducation) for persons with mental health issues or dementia and their caregivers, coordinated with GPs, polyclinics, and hospitals.\n- Post-Diagnostic Support (CREST-PDS) for newly diagnosed persons living with dementia and their caregivers, providing education, coordinated resources, and early care planning for six months from referral.\n- Aftercare transitional support to facilitate discharge from hospital, support adherence to care, reduce relapse, and reintegrate individuals with complex medical and social needs back into the community.\n- Assessment & Shared Care Team (ASCAT) providing clinical consultation for primary care and community partners, triage by psychiatrists for urgent/severe cases, and gatekeeping fast-track access to hospital services.\n- Mental Health in Primary Care to enable mild to moderate mental and chronic health conditions to be managed holistically by nearby GPs and polyclinics in less stigmatising settings.\n\nThese programmes aim to promote early identification, integrate health and social care, and strengthen a dementia care network so individuals and caregivers can be well supported where they live.",
+    "eligibility": "Open to individuals in the community with mental health issues or dementia, and their caregivers. Youth experiencing psychological distress can receive support via CREST-Youth. Newly diagnosed persons living with dementia and their caregivers may receive post-diagnostic support (for six months from referral). Urgent/severe cases surfaced by GP partners and COMIT may be triaged by ASCAT psychiatrists for fast-track hospital services. Specific clinical suitability and referrals may be required depending on the programme.",
+    "whoIsItFor": [
+      "Youth",
+      "Elderly",
+      "Elderly with dementia",
+      "Persons with mental health issues",
+      "Caregivers",
+      "General public"
+    ],
+    "whatItGives": [
+      "Counselling",
+      "Emotional care",
+      "Mental health assessment and treatment",
+      "Psychological support/Psychotherapy",
+      "Referral services",
+      "Educational programmes",
+      "Information services"
+    ],
+    "schemeType": [
+      "Youth",
+      "Elderly",
+      "Caregiver Support",
+      "Healthcare",
+      "Mental Health",
+      "Counselling and Emotional Support",
+      "General Public Support"
+    ],
+    "area": {
+      "kind": "islandwide"
+    },
+    "link": "https://www.aic.sg/Partners/Community-Mental-Health-Programmes",
+    "phone": "97937018, 98449465, 88226362, 90843106, 18006506060",
+    "email": "enquiries@aic.sg",
+    "address": "No.5 Maxwell Road, #10-00 Tower Block, MND Complex, Singapore 069110",
+    "lastRefreshed": "2026-10-05"
+  },
+  {
+    "id": "ssg-hnf-crest-hnf-sengkang",
+    "sourceId": "n2wenrATbw1z05RZ8Gpb",
+    "name": "CREST HNF @ Fernvale and Jalan Kayu",
+    "agency": "Home Nursing Foundation",
+    "summary": "Community mental health and dementia outreach service for residents aged 18+ in Fernvale and Jalan Kayu. Offers awareness activities, screenings, emotional support, casework follow-up and service linkage.",
+    "description": "CREST HNF @ Sengkang is a community mental health outreach service by Home Nursing Foundation that supports residents in Fernvale and Jalan Kayu aged 18 and above.\n- Raises awareness of mental health conditions and dementia through community outreach, talks and workshops\n- Promotes early recognition of at-risk individuals and facilitates mood and memory screenings\n- Provides basic emotional support and ongoing casework follow-up, including home visits\n- Links individuals and caregivers to appropriate health and social care services\n- Collaborates with community partners to coordinate mental health and dementia education in the region\n- Promotes Dementia Friendly Initiatives to build an inclusive, supportive environment for persons with dementia and their caregivers",
+    "eligibility": "Residents aged 18 and above living in Fernvale and Jalan Kayu (Sengkang).",
+    "whoIsItFor": [
+      "Elderly with dementia",
+      "Persons with mental health issues",
+      "Caregivers",
+      "General public"
+    ],
+    "whatItGives": [
+      "Casework",
+      "Emotional care",
+      "Mental health assessment and treatment",
+      "Referral services",
+      "Educational programmes",
+      "Information services"
+    ],
+    "schemeType": [
+      "Elderly",
+      "Caregiver Support",
+      "Mental Health",
+      "Counselling and Emotional Support",
+      "General Public Support"
+    ],
+    "area": {
+      "kind": "district",
+      "name": "Fernvale and Jalan Kayu (Sengkang)"
+    },
+    "link": "https://www.hnf.org.sg/crest-hnf-sengkang/",
+    "phone": "68545555, 68545777, 62555774, 68545506",
+    "email": "enquiry@hnf.org.sg, crest.sk@hnf.org.sg, atfundraising@hnf.org.sg",
+    "address": "991B Buangkok Link, #01-251, Singapore 532991 (situated within HNF Wellness@Buangkok)",
+    "lastRefreshed": "2026-10-05"
+  },
+  {
+    "id": "ssg-carecorner-day-care-centres-senior-dementia",
+    "sourceId": "rOQ6toQIRE8bOhlGFB26",
+    "name": "Day Care Centres - Senior and Dementia",
+    "agency": "Care Corner Singapore",
+    "summary": "Day care centres for seniors and dementia care.",
+    "description": "Our day care centres provide a full day programme for seniors who are suitable for centre-based care setting and require supervision while their caregivers are at work or need some time off.Our safe and supportive environment gives caregivers peace of mind knowing that their loved ones are well-taken care of and meaningfully engaged with us during the day.We provide two types of day-care services:- **Senior Day Care: **A safe daytime care centre for seniors with social and recreational activities, meals and transportation (if required)n- **Dementia Day Care**: A daytime custodial care for seniors with dementia with a focus on slowing down the progression of dementia through nutrition, physical exercises, and brain-stimulating activitiesn",
+    "eligibility": "Seniors suitable for centre-based care who require supervision during the day. Dementia Day Care is specifically for seniors with dementia.",
+    "whoIsItFor": [
+      "Elderly",
+      "Elderly with dementia",
+      "Caregivers"
+    ],
+    "whatItGives": [
+      "Day care",
+      "Social and recreational activities",
+      "Meals",
+      "Medication assistance",
+      "Personal care",
+      "Mind-stimulating activities",
+      "Caregiver support",
+      "Transport services (within 5 km)",
+      "Support groups"
+    ],
+    "schemeType": [
+      "Elderly",
+      "Caregiver Support",
+      "Dementia",
+      "Residential Care",
+      "Day Care"
+    ],
+    "area": {
+      "kind": "islandwide"
+    },
+    "link": "https://www.carecorner.org.sg/services/day-care-centres-senior-dementia/",
+    "phone": null,
+    "email": null,
+    "address": null,
+    "lastRefreshed": "2026-10-05"
+  },
+  {
+    "id": "ssg-singhealth-dementia-caregiver-support-group",
+    "sourceId": "TmW9ZKqncGcIIjsIwGiH",
+    "name": "Dementia Caregiver Support Group",
+    "agency": "SingHealth",
+    "summary": "SingHealth’s Dementia Caregiver Support Group offers peer support, education, and resources for caregivers of persons with dementia. It aims to reduce caregiver stress and improve knowledge and confidence in care.",
+    "description": "A Dementia Caregiver Support Group hosted by SingHealth's Memory and Cognitive Disorder Centre provides a safe, peer-led environment for caregivers of persons living with dementia to connect, share experiences, and learn coping strategies.\n\nKey features include:\n- Facilitated support group sessions for mutual sharing and encouragement\n- Practical tips on managing behavioural and care challenges at home\n- Information on dementia care resources and community services\n- Emotional support to reduce caregiver stress and isolation\n- Opportunities to learn from healthcare professionals and peer caregivers",
+    "eligibility": "Caregivers of persons living with dementia.",
+    "whoIsItFor": [
+      "Elderly with dementia",
+      "Caregivers"
+    ],
+    "whatItGives": [
+      "Emotional care",
+      "Respite care/Caregiver support",
+      "Support groups",
+      "Information services"
+    ],
+    "schemeType": [
+      "Caregiver Support",
+      "Mental Health",
+      "Counselling and Emotional Support"
+    ],
+    "area": {
+      "kind": "islandwide"
+    },
+    "link": "https://www.singhealth.com.sg/our-specialties/memory-and-cognitive-disorder-centre/dementia-caregiver-support-group",
+    "phone": "69218966, 60011669",
+    "email": "dementiacare@sgh.com.sg",
+    "address": "10 Hospital Boulevard, #19-01 SingHealth Tower. Singapore 168582",
+    "lastRefreshed": "2026-10-05"
+  },
+  {
+    "id": "ssg-dementia",
+    "sourceId": "u3DwA0dUhZZIoRvuZ1wG",
+    "name": "Dementia Helpline",
+    "agency": "Dementia Singapore",
+    "summary": "The Dementia Helpline by Dementia Singapore provides information, guidance, and referrals for people impacted by dementia and their caregivers. Call 6377 0700 for support and resources in Singapore.",
+    "description": "Dementia Singapore operates a Dementia Helpline to support individuals and families impacted by dementia. The helpline provides timely information and guidance about dementia, available services, and ways to access support across Singapore.\n\n- Offers a single point of contact for questions about dementia, care options, and community resources\n- Supports caregivers seeking advice on managing day-to-day care and navigating support services\n- Provides referrals to appropriate programmes (e.g., caregiver support, day care, training, and resource portals)\n- Aims to improve understanding and promote a dementia-inclusive community by connecting callers with credible information",
+    "eligibility": "Open to anyone in Singapore seeking information, advice, or support related to dementia, including persons living with dementia, caregivers, and the general public.",
+    "whoIsItFor": [
+      "Elderly with dementia",
+      "Caregivers",
+      "General public"
+    ],
+    "whatItGives": [
+      "Helpline services",
+      "Referral services",
+      "Information services"
+    ],
+    "schemeType": [
+      "Elderly",
+      "Caregiver Support",
+      "Healthcare",
+      "Mental Health",
+      "General Public Support"
+    ],
+    "area": {
+      "kind": "islandwide"
+    },
+    "link": "https://www.dementia.org.sg/",
+    "phone": "63770700, 91278133",
+    "email": "giving@dementia.org.sg",
+    "address": null,
+    "lastRefreshed": "2026-10-05"
+  },
+  {
+    "id": "ssg-singhealth-dementia-caregiver-support-group-2",
+    "sourceId": "Z4Qs1QdK2631MgfeZuFf",
+    "name": "Dementia Support Group",
+    "agency": "SingHealth (Singapore Health Services)",
+    "summary": "A SingHealth-facilitated support group that provides peer support, education, and resources for caregivers of persons living with dementia. It helps caregivers cope, learn care strategies, and connect with community supports.",
+    "description": "This service is a Dementia Caregiver Support Group run under SingHealth’s Centre for Memory and Cognitive Disorders. It brings together caregivers of persons living with dementia to share experiences, learn practical coping strategies, and receive encouragement in a safe and moderated setting.\n\nKey features and benefits:\n- Peer support through regular group sessions focused on common caregiving challenges (communication, behaviour changes, safety, daily routines)\n- Facilitated discussions by healthcare professionals with dementia care expertise\n- Practical education on dementia, care techniques, and navigating care resources and services\n- Emotional support and stress management strategies for caregivers\n- Information on community resources, care planning, and where to seek further help\n- Opportunity to build a supportive network with other caregivers in similar situations",
+    "eligibility": null,
+    "whoIsItFor": [
+      "Elderly",
+      "Elderly with dementia",
+      "Persons with mental health issues",
+      "Caregivers"
+    ],
+    "whatItGives": [
+      "Emotional care",
+      "Psychological support/Psychotherapy",
+      "Referral services",
+      "Educational programmes",
+      "Respite care/Caregiver support",
+      "Support groups",
+      "Information services"
+    ],
+    "schemeType": [
+      "Elderly",
+      "Caregiver Support",
+      "Healthcare",
+      "Mental Health",
+      "Counselling and Emotional Support",
+      "General Public Support"
+    ],
+    "area": {
+      "kind": "islandwide"
+    },
+    "link": "https://www.singhealth.com.sg/our-specialties/centre-memory-cognitive-disorders/dementia-caregiver-support-group",
+    "phone": "69218966, 60011669, 94647516",
+    "email": "dementiacare@sgh.com.sg",
+    "address": "10 Hospital Boulevard, #19-01 SingHealth Tower, Singapore 168582",
+    "lastRefreshed": "2026-10-05"
+  },
+  {
+    "id": "ssg-enablingguide-child-adult-care",
+    "sourceId": "yLpsEHsa73tzCs6vWNy1",
+    "name": "Developmental Disabilities Registry Identity (DDRID) Card",
+    "agency": "SG Enable",
+    "summary": "DDRID card offers discounts and facility access.",
+    "description": "The DDRID card offers a benefits scheme that provides cardholders with discounted rates for services and access to various facilities. Cardholders can also enjoy discounted rates for products, services and access to facilities offered by participating companies",
+    "eligibility": null,
+    "whoIsItFor": [
+      "Persons with disabilities (PWDs)",
+      "Caregivers",
+      "Children",
+      "Youth",
+      "Adults",
+      "Elderly",
+      "Low income families"
+    ],
+    "whatItGives": [
+      "Day care",
+      "Residential care/programmes",
+      "Home-based care",
+      "Caregiver training",
+      "Financial assistance (general)",
+      "Legal aid and services",
+      "Referral services",
+      "Educational programmes",
+      "Vocational training",
+      "Employment assistance",
+      "Respite care/Caregiver support",
+      "Home retrofitting and assistive technology",
+      "Information services",
+      "Protection against violence",
+      "Student care",
+      "Tuition/Enrichment programmes",
+      "Food support",
+      "Healthcare (general/basic services)",
+      "Dental services",
+      "Psychological support/Psychotherapy",
+      "Support groups",
+      "Befriending services",
+      "Helpline services"
+    ],
+    "schemeType": [
+      "Persons with Disabilities (PWD)",
+      "Family",
+      "Children",
+      "Youth",
+      "Elderly",
+      "Caregiver Support",
+      "Financial Assistance",
+      "Housing/Shelter",
+      "Education Support",
+      "Employment Support",
+      "Legal Aid",
+      "Counselling and Emotional Support",
+      "Residential Care",
+      "Referral and Information Services",
+      "General Public Support"
+    ],
+    "area": {
+      "kind": "islandwide"
+    },
+    "link": "https://www.enablingguide.sg/im-looking-for-disability-support/child-adult-care",
+    "phone": null,
+    "email": null,
+    "address": null,
+    "lastRefreshed": "2026-10-05"
+  },
+  {
+    "id": "ssg-saac-dignity-of-work",
+    "sourceId": "p10HluCICI3uIsvxXbbg",
+    "name": "Dignity of Work Programme",
+    "agency": "St. Andrew's Autism Centre",
+    "summary": "A sheltered work and supported employment programme for adults with moderate autism, offering vocational tracks in horticulture and baking with job coach support. It provides meaningful engagement for participants and respite for caregivers.",
+    "description": "Dignity of Work (DoW) is a supported employment programme by St. Andrew's Autism Centre that enables adults with moderate autism to contribute meaningfully through structured, sheltered work.\n\nKey features:\n- Sheltered work environment tailored for adults with moderate autism who are work-capable but not yet ready for open employment\n- Two tracks of vocational exposure: horticulture and baking\n- On-the-job support from dedicated job coaches, working with industry partners\n- Meaningful daily engagement that also offers respite for caregivers\n- Person-first approach addressing post-18 transition and employment challenges for persons on the autism spectrum",
+    "eligibility": "Adults with moderate autism who are work-capable and not yet ready for open employment. Participation is open only to selected individuals.",
+    "whoIsItFor": [
+      "Persons with disabilities (PWDs)",
+      "Persons with special needs",
+      "Persons on autism spectrum",
+      "Caregivers"
+    ],
+    "whatItGives": [
+      "Vocational training",
+      "Employment assistance",
+      "Skills training and job matching",
+      "Respite care/Caregiver support"
+    ],
+    "schemeType": [
+      "Caregiver Support",
+      "Persons with Disabilities (PWD)",
+      "Special Needs",
+      "Employment Support",
+      "Vocational Training"
+    ],
+    "area": {
+      "kind": "islandwide"
+    },
+    "link": "https://www.saac.org.sg/dignity-of-work/",
+    "phone": "65173800",
+    "email": "DoW_enquiries@saac.org.sg",
+    "address": null,
+    "lastRefreshed": "2026-10-05"
+  },
+  {
+    "id": "ssg-redcross",
+    "sourceId": "iQeYvdLeM16BmARMQsJA",
+    "name": "ElderAid",
+    "agency": "Singapore Red Cross",
+    "summary": "Befriending and wellness for vulnerable seniors.",
+    "description": "ElderAid is a befriending and wellness programme that reduces vulnerability and enhances resilience, to achieve a community ageing-in-place. Every fortnight, our community volunteers conduct befriending home visits to engage seniors on their needs and to reduce vulnerability. Whenever there are unmet needs, the volunteers will help to direct the seniors to appropriate social services. ElderAid opens doors to various assistance schemes that are already available in the neighbourhood, as well as signature Red Cross services such as Community FirstAid, FoodAid, and TransportAid. In addition, community volunteers conduct regular social calls and recreational wellness activities for seniors living alone.",
+    "eligibility": "Eligibility criteria are not explicitly stated in the provided text.",
+    "whoIsItFor": [
+      "Elderly"
+    ],
+    "whatItGives": [
+      "Befriending services",
+      "Referral services",
+      "Emotional care"
+    ],
+    "schemeType": [
+      "Elderly",
+      "Caregiver Support",
+      "Community Funding"
+    ],
+    "area": {
+      "kind": "islandwide"
+    },
+    "link": "https://www.redcross.sg/",
+    "phone": null,
+    "email": null,
+    "address": null,
+    "lastRefreshed": "2026-10-05"
+  },
+  {
+    "id": "ssg-changecs-seniors",
+    "sourceId": "RWcMU9N1k9wgr1yDIrBh",
+    "name": "Elderly Befriending",
+    "agency": "Change Community Services",
+    "summary": "Communal space for seniors with diverse activities.",
+    "description": "CHANGE Community Services seek to provide targeted social support through befriending to residents having little to no social-emotional support from family or friends. It is through these simple acts of kindness; listening without judgement or prejudice, showing care and concern, and sharing in mutually enjoyable activities that the feelings of loneliness, isolation, feeling of dependence and the feeling of being a burden are elevated.",
+    "eligibility": "Participants must be aged 50 and above. Nursing home residents may also benefit from enrichment and spiritual support programmes.",
+    "whoIsItFor": [
+      "Elderly"
+    ],
+    "whatItGives": [
+      "Befriending services",
+      "Emotional care"
+    ],
+    "schemeType": [
+      "Elderly",
+      "Caregiver Support"
+    ],
+    "area": {
+      "kind": "islandwide"
+    },
+    "link": "https://www.changecs.sg/services/seniors",
+    "phone": null,
+    "email": null,
+    "address": null,
+    "lastRefreshed": "2026-10-05"
+  },
+  {
+    "id": "ssg-fycs",
+    "sourceId": "o937Z2wTY4kn1Js7VH0L",
+    "name": "Fei Yue Community Services",
+    "agency": "Fei Yue Community Services",
+    "summary": "Holistic support for all ages, including mental health.",
+    "description": "Fei Yue provides services including counselling, healthcare, training programs and community outreach for the very young to the elderly. Various community teams provide holistic services for clients with mental health needs, home care, including decluttering of homes, caregiver support and respite services, and advance care planning.",
+    "eligibility": null,
+    "whoIsItFor": [
+      "Children",
+      "Youth",
+      "Families",
+      "Single parents",
+      "Elderly",
+      "Persons with mental health issues",
+      "Inmates",
+      "Families of inmates or ex-offenders",
+      "General public"
+    ],
+    "whatItGives": [
+      "Counselling",
+      "Casework",
+      "Emotional care",
+      "Mental health assessment and treatment",
+      "Psychological support/Psychotherapy",
+      "Befriending services",
+      "Referral services",
+      "Educational programmes",
+      "Vocational training",
+      "Employment assistance",
+      "Skills training and job matching",
+      "Financial assistance (general)",
+      "Food support",
+      "Housing/Shelter",
+      "Respite care/Caregiver support",
+      "Elder sitting and caregiving services",
+      "Child protection services",
+      "Student care",
+      "Tuition/Enrichment programmes",
+      "Healthcare (general/basic services)",
+      "Rehabilitation services (Physiotherapy/Occupational therapy)",
+      "Support groups",
+      "Information services"
+    ],
+    "schemeType": [
+      "Family",
+      "Children",
+      "Youth",
+      "Elderly",
+      "Caregiver Support",
+      "Mental Health",
+      "Ex-offender Support",
+      "Incarcerated/Inmate Family Support",
+      "Education Support",
+      "Student Care Support",
+      "Healthcare",
+      "Food Support",
+      "Housing/Shelter",
+      "Employment Support",
+      "Vocational Training",
+      "Financial Assistance",
+      "Referral and Information Services",
+      "General Public Support"
+    ],
+    "area": {
+      "kind": "islandwide"
+    },
+    "link": "https://www.fycs.org/",
+    "phone": null,
+    "email": null,
+    "address": null,
+    "lastRefreshed": "2026-10-05"
+  },
+  {
+    "id": "ssg-tzuchi-tzu-chi-community-dental-centre",
+    "sourceId": "2YcfmKzcYVDKNt7p20eD",
+    "name": "Free Dental Services (Clinic)",
+    "agency": "Buddhist Compassion Relief Tzu-Chi Foundation (Singapore)",
+    "summary": "Free and accessible dental care for underprivileged elderly.",
+    "description": "Provides free General Medicine, Traditional Chinese medicine (TCM), and dental services mainly to seniors living alone, low-income households, Tzu Chi’s aid beneficiaries as well as migrant workers. The dental team regularly visits institutions such as homes for the mentally handicapped, nursing homes and other institutions to provide on-site dental services.",
+    "eligibility": "Low-income elderly, Pioneer Generation seniors with CHAS Blue cards, individuals with mobility challenges, residents of nursing homes, and referrals from social workers or welfare organisations. Application requires completion of a form and necessary documents.",
+    "whoIsItFor": [
+      "Elderly",
+      "Low income elderly",
+      "Persons with disabilities (PWDs)",
+      "Persons with special needs",
+      "Caregivers",
+      "Students",
+      "Low income"
+    ],
+    "whatItGives": [
+      "Dental services",
+      "Healthcare (general/basic services)",
+      "Preventive oral care",
+      "Patient education",
+      "Home dental services",
+      "Referral services"
+    ],
+    "schemeType": [
+      "Elderly",
+      "Low Income",
+      "Healthcare",
+      "Dental Healthcare",
+      "Persons with Disabilities (PWD)",
+      "Special Needs",
+      "Caregiver Support",
+      "Referral and Information Services"
+    ],
+    "area": {
+      "kind": "islandwide"
+    },
+    "link": "https://www.tzuchi.org.sg/en/our-missions/medicine/tzu-chi-community-dental-centre/",
+    "phone": "6040 7828",
+    "email": "dental@tzuchi.org.sg",
+    "address": "Blk 121 Ang Mo Kio Ave 3 #01-1711, Singapore 560121",
+    "lastRefreshed": "2026-10-05"
+  },
+  {
+    "id": "ssg-sthildascsc",
+    "sourceId": "Ef3wDsH0M5kOBdgpIeBf",
+    "name": "Friends Plus",
+    "agency": "St Hilda's Community Services",
+    "summary": "Day care and activities for seniors aged 55+.",
+    "description": "Step into Friends Plus and encounter an atmosphere where - Every person mattersn- Every day countsn- Every activity is focused at making the most of each person and each daynOur Friends Plus team is our most valuable asset as they ensure that a superior level of care is received by individuals.Excellence at Friends Plus is spelt J – O – Y Who will benefit? - Singapore Citizens or Permanent Residents aged 55 years and aboven- Ambulant and semi-ambulant seniorsn- Seniors who are independent and can largely manage the activities of daily livingn- Seniors whose families need help in looking after them during the day while they are at work.nTo be sure that Seniors who enrol are able to benefit from our programmes, a 3-day trial enrolment is available. Time Schedules Monday to Friday 7.30am – 6.00pm Closed on Saturdays, Sundays and Public Holidays",
+    "eligibility": "Singapore Citizens or Permanent Residents aged 55 years and above. Ambulant and semi-ambulant seniors. Seniors whose families need help in looking after them during the day. 3-day trial enrolment available to assess suitability.",
+    "whoIsItFor": [
+      "Elderly",
+      "Low income elderly",
+      "Caregivers"
+    ],
+    "whatItGives": [
+      "Day care",
+      "Emotional care",
+      "Activities",
+      "Respite care/Caregiver support"
+    ],
+    "schemeType": [
+      "Elderly",
+      "Caregiver Support",
+      "Respite care"
+    ],
+    "area": {
+      "kind": "islandwide"
+    },
+    "link": "https://sthildascsc.org.sg/?page_id=549",
+    "phone": null,
+    "email": null,
+    "address": null,
+    "lastRefreshed": "2026-10-05"
+  },
+  {
+    "id": "ssg-bccs-familyzone",
+    "sourceId": "Sss8NdSTBpSyENQys6H7",
+    "name": "Fun with Seniors",
+    "agency": "Bartley Community Care Services",
+    "summary": "Active ageing and support for vulnerable elderly.",
+    "description": "Fun With Seniors Programme aims to enhance the physical, social and emotional well-being of the lonely and vulnerable elderly residents through active ageing community and social activities, regular visitation, and lunch pack distribution. Activities Active-aging community activities, seniors outings and festive celebrative events.Lunch pack distribution to selected needy elderly. Weekly home visitation. Centre drop-in for social-recreational and senior-centric group activities (JiaLe@Hope Centre) Activities for wheelchair-assisted seniors with their caregivers (Braddell Heights Zone B RC). Venues  Lorong Lew Lian and MacPherson Schedule Saturdays afternoonsJiale@Hope Centre (2nd and 4th Wednesdays afternoons every month)",
+    "eligibility": "Lonely and vulnerable elderly residents. Lunch pack distribution for selected needy elderly. Activities for wheelchair-assisted seniors and their caregivers.",
+    "whoIsItFor": [
+      "Elderly",
+      "Elderly with disabilities",
+      "Caregivers",
+      "Low income elderly"
+    ],
+    "whatItGives": [
+      "Befriending services",
+      "Emotional care",
+      "Food support",
+      "Social-recreational activities",
+      "Respite care/Caregiver support"
+    ],
+    "schemeType": [
+      "Elderly",
+      "Caregiver Support",
+      "Food Support",
+      "Counselling and Emotional Support"
+    ],
+    "area": {
+      "kind": "islandwide"
+    },
+    "link": "https://www.bccs.org.sg/familyzone",
+    "phone": null,
+    "email": null,
+    "address": null,
+    "lastRefreshed": "2026-10-05"
+  },
+  {
+    "id": "ssg-onehopecentre-help-recovery-programmes-gambling-addiction-recovery-pr",
+    "sourceId": "vCtEGfX27yQlkzyjL954",
+    "name": "Gambling Addiction Recovery Programme",
+    "agency": "One Hope Centre",
+    "summary": "Intensive counselling and empowerment programme sessions.",
+    "description": "Discovering freedom through intense counselling sessions and empowerment programmes. **PROGRAMME OVERVIEW**- 6 individual counselling sessionsn- 2 family counselling sessions (optional)n- 6 support group / group work sessionsn**Note:**Duration and number of sessions may be extended where necessary",
+    "eligibility": null,
+    "whoIsItFor": [
+      "Individuals with gambling addiction",
+      "individuals with spending addiction",
+      "individuals with sex addiction",
+      "individuals with pornography addiction",
+      "individuals with love addiction",
+      "families",
+      "caregivers"
+    ],
+    "whatItGives": [
+      "Counselling",
+      "Support groups",
+      "Group therapy",
+      "Emotional care",
+      "Psychological support/Psychotherapy",
+      "Referral services"
+    ],
+    "schemeType": [
+      "Addictions Rehabilitation",
+      "Counselling and Emotional Support",
+      "Family",
+      "Caregiver Support"
+    ],
+    "area": {
+      "kind": "islandwide"
+    },
+    "link": "https://www.onehopecentre.org/help-recovery-programmes",
+    "phone": null,
+    "email": null,
+    "address": null,
+    "lastRefreshed": "2026-10-05"
+  },
+  {
+    "id": "ssg-carecorner-seniors-counselling-mental-health",
+    "sourceId": "XDYlLMqQBIhV8FiI8WkY",
+    "name": "Gerontological Counselling Unit (GCU)",
+    "agency": "Care Corner Singapore",
+    "summary": "Free counselling for elderly facing loss or change.",
+    "description": "\"Gerontological Counselling Unit (GCU) is a programme; serving individuals aged >55; in Singapore; covering the region of Central and North Singapore; specialising in Death of loved ones\nLoss of health, Loss of relationship e.g. dispute, change in place of residence, Loss of mobility/freedom, Loss of job security; offering basic emotional support, mental health screening, counselling intervention, family and caregiver support, outreach talks; Fees: Free; Mental health diagnosis required: No; Note: If client has cognitive impairement or Dementia, GCU doesn't provide counselling.\"",
+    "eligibility": "Individuals aged over 55 living in Central and North Singapore. No mental health diagnosis required. Not eligible if client has cognitive impairment or dementia.",
+    "whoIsItFor": [
+      "Elderly"
+    ],
+    "whatItGives": [
+      "Emotional care",
+      "Mental health assessment and treatment",
+      "Counselling",
+      "Family and caregiver support",
+      "Outreach talks"
+    ],
+    "schemeType": [
+      "Elderly",
+      "Mental Health",
+      "Counselling and Emotional Support",
+      "Caregiver Support"
+    ],
+    "area": {
+      "kind": "district",
+      "name": "Central, North Singapore"
+    },
+    "link": "https://www.carecorner.org.sg/services/seniors-counselling-mental-health/",
+    "phone": null,
+    "email": null,
+    "address": null,
+    "lastRefreshed": "2026-10-05"
+  },
+  {
+    "id": "ssg-sws-home-care-services",
+    "sourceId": "nXLpISg1iMzPFnXjMkDv",
+    "name": "Home Care Services",
+    "agency": "Salem Welfare Services",
+    "summary": "Home visits for elderly emotional and health support.",
+    "description": "Care At Home Volunteers from befriending services make home visitations to help care for the emotional and psychological well-being of the elderly, often assuring them and listening to their concerns and problems.In home visitations, volunteers will also do Health monitoring according to the individual’s care plan; such as monitoring weekly BP, Glucose level checks and more. This includes chaperone assistance to the frail aged and physically challenged.",
+    "eligibility": null,
+    "whoIsItFor": [
+      "Elderly",
+      "Persons with disabilities (PWDs)",
+      "Caregivers"
+    ],
+    "whatItGives": [
+      "Befriending services",
+      "Emotional care",
+      "Healthcare (general/basic services)",
+      "Respite care/Caregiver support"
+    ],
+    "schemeType": [
+      "Elderly",
+      "Caregiver Support",
+      "Healthcare"
+    ],
+    "area": {
+      "kind": "islandwide"
+    },
+    "link": "https://sws.sg/home-care-services/",
+    "phone": null,
+    "email": null,
+    "address": null,
+    "lastRefreshed": "2026-10-05"
+  },
+  {
+    "id": "ssg-reach-hope-scheme",
+    "sourceId": "fgVkulVmnG6x2HjmaWl2",
+    "name": "Home Ownership Plus Education (HOPE) Scheme",
+    "agency": "REACH Community Services",
+    "summary": "Support for young, low-income parents to improve family situation.",
+    "description": "Assistance for young, low-income parent(s) who choose to keep their family small so that they can focus their resources on giving their children a head start, and improve their financial and social situation. Includes grants and support for training, employment, utilities, housing, bursaries, mentoring and family support",
+    "eligibility": "Young, low-income parent(s) who choose to keep their family small.",
+    "whoIsItFor": [
+      "Individuals",
+      "Couples",
+      "Families",
+      "Caregivers",
+      "Persons with mental health issues"
+    ],
+    "whatItGives": [
+      "Counselling",
+      "Psychological support/Psychotherapy",
+      "Support groups",
+      "Mediation",
+      "Educational programmes",
+      "Referral services"
+    ],
+    "schemeType": [
+      "Counselling and Emotional Support",
+      "Mental Health",
+      "Family",
+      "Youth",
+      "Elderly",
+      "Caregiver Support"
+    ],
+    "area": {
+      "kind": "islandwide"
+    },
+    "link": "https://reach.org.sg/services/counselling-service/hope-scheme/",
+    "phone": null,
+    "email": null,
+    "address": null,
+    "lastRefreshed": "2026-10-05"
+  },
+  {
+    "id": "ssg-aic-home-personal-care",
+    "sourceId": "wWwfKAg8yoBOXJWOjrCk",
+    "name": "Home Personal Care",
+    "agency": "AIC",
+    "summary": "Home care for elderly and caregiver support.",
+    "description": "Home Personal Care service is provided by trained care professionals to assist clients and their caregivers with Activities of Daily Living (e.g. baths, light housekeeping), medication, mind stimulating activities, elder-sitting and other care tasks. The average price of the service is about $25 per hour before means-test subsidy. If you require financial assistance for the service, please speak to your service provider or the Medical Social Worker in the hospital or polyclinic.",
+    "eligibility": "Eligibility for financial assistance is determined by means-testing. Clients or caregivers should consult their service provider or Medical Social Worker for assessment.",
+    "whoIsItFor": [
+      "Elderly",
+      "Caregivers"
+    ],
+    "whatItGives": [
+      "Elder sitting and caregiving services",
+      "Respite care/Caregiver support",
+      "Help with Activities of Daily Living",
+      "Medication assistance",
+      "Light housekeeping",
+      "Mind-stimulating activities",
+      "Financial assistance (general)"
+    ],
+    "schemeType": [
+      "Elderly",
+      "Caregiver Support",
+      "Financial Assistance",
+      "Healthcare",
+      "Residential Care"
+    ],
+    "area": {
+      "kind": "islandwide"
+    },
+    "link": "https://www.aic.sg/care-services/home-personal-care",
+    "phone": null,
+    "email": null,
+    "address": null,
+    "lastRefreshed": "2026-10-05"
+  },
+  {
+    "id": "ssg-chcsa-house-of-joy",
+    "sourceId": "i2nPmyHp83YlYUmuAcjd",
+    "name": "House of Joy",
+    "agency": "City Harvest Community Services Association",
+    "summary": "Active Ageing Centre for seniors' wellbeing.",
+    "description": "The COPE programme was initiated by Southeast CDC in 1999 as a befriending programme reaching out to the elderly residing in HDB estates, ensuring that while they are living independently, they are not socially isolated.COPE volunteers reach out to some 500 silvers staying within 21 blocks in Mountbatten estate and 10 blocks in Tampines North.In 2022-2023, we aim to recruit enough volunteers to visit these seniors at least once a month.",
+    "eligibility": "Eligibility criteria not explicitly stated in the provided text.",
+    "whoIsItFor": [
+      "Elderly"
+    ],
+    "whatItGives": [
+      "Befriending services"
+    ],
+    "schemeType": [
+      "Elderly",
+      "Caregiver Support"
+    ],
+    "area": {
+      "kind": "islandwide"
+    },
+    "link": "https://www.chcsa.org.sg/services/house-of-joy",
+    "phone": null,
+    "email": null,
+    "address": null,
+    "lastRefreshed": "2026-10-05"
+  },
+  {
+    "id": "ssg-lionsbefrienders",
+    "sourceId": "6v5TzveG5FUrW6TKwcwH",
+    "name": "Interim Befriending Panel",
+    "agency": "Lions Befrienders Service Association",
+    "summary": "Holistic support and activities for seniors in Singapore.",
+    "description": "Since the new Eldercare model (EC) was implemented by MOH on 3 May 2021, all new Befriending referrals henceforth will need to be centrally submitted through Agency for Integrated Care’s (AIC) Integrated Referral Management System (IRMS). [Click here](https://app.aic.sg/eReg/) to submit a referral.All befriending referrals will be allocated according to the respective Active Ageing Centre’s service boundaries, or Interim Befriending Panel (IBP) like Lions Befrienders, upon your submission via the IRMS system. Your referral will be processed, assessed and its status will be updated by the assigned service provider in the same system as well.For assistance, please email [befriending@lb.org.sg](mailto:befriending@lb.org.sg).Interim Befriending provides social support to seniors through home visits and phone calls, at locations designated by AIC.Programme Objectives</h3>- Reduce the isolation of lonely seniors and improve their well-beingn- Enable lonely seniors to age-in-place with community supportn- Provide seniors with access to contacts and sources of helpn",
+    "eligibility": "Singaporeans or PRs who are 60 years old and above. Vulnerable seniors and their caregivers facing difficulties in managing health and social needs.",
+    "whoIsItFor": [
+      "Elderly"
+    ],
+    "whatItGives": [
+      "Befriending services",
+      "Emotional care"
+    ],
+    "schemeType": [
+      "Elderly",
+      "Caregiver Support"
+    ],
+    "area": {
+      "kind": "islandwide"
+    },
+    "link": "https://www.lionsbefrienders.org.sg",
+    "phone": null,
+    "email": null,
+    "address": null,
+    "lastRefreshed": "2026-10-05"
+  },
+  {
+    "id": "ssg-jiaying",
+    "sourceId": "IJJDUnxemNNssSAU79Ub",
+    "name": "Jia Ying Active Ageing Centre",
+    "agency": "Jia Ying Active Ageing Centre",
+    "summary": "Community service centres in Hougang.",
+    "description": "We operate two centres.  a. JY AAC @ 19 located at Blk 19, Hougang Ave 3 (*since 2004*) b. JY AAC @ 25 (Branch) located at Blk.25, Hougang Avenue 3 (*since 2014*) Our Centre provide activities that promote Active Ageing, Befriending Services and Care &amp; Support.Centre Based Activities includes the following; – Skills development e.g. I.T. class, Smart Phone savvy! – Conversational English class,  – Handicraft sessions e.g Decoupage – Social interaction e.g. karaoke, games time, Lai Lim Kopi sessions – Eat healthy cooking demonstration – Keep fit activities e.g. Morning dance, Fun Fitt, line dancing – Health monitoring e.g. blood pressure reading,  – Outings and festive celebrations – Visitation programme to the “at-risk” elderly",
+    "eligibility": null,
+    "whoIsItFor": [
+      "Elderly",
+      "Elderly with dementia",
+      "Low income elderly"
+    ],
+    "whatItGives": [
+      "Befriending services",
+      "Skills training and job matching",
+      "Educational programmes",
+      "Health monitoring",
+      "Social interaction",
+      "Caregiver support",
+      "Referral services",
+      "Recreational activities"
+    ],
+    "schemeType": [
+      "Elderly",
+      "Caregiver Support",
+      "Counselling and Emotional Support",
+      "Skills Training",
+      "Social Service"
+    ],
+    "area": {
+      "kind": "district",
+      "name": "Hougang"
+    },
+    "link": "https://jiaying.org.sg/?page_id=89",
+    "phone": null,
+    "email": null,
+    "address": [
+      "Blk 19, Hougang Ave 3, Singapore",
+      "Blk 25, Hougang Avenue 3, Singapore"
+    ],
+    "lastRefreshed": "2026-10-05"
+  },
+  {
+    "id": "ssg-lakeside-seniors-services-lakeside-senior-services",
+    "sourceId": "3BY6LmphifCsttSZZyAK",
+    "name": "Lakeside Senior Services",
+    "agency": "Lakeside Senior Services",
+    "summary": "Holistic wellness and community for seniors aged 50+.",
+    "description": "Kaki Kampong Seniors Wellness (KKSW) promotes holistic wellness in seniors aged 50 and above, empowering them to take charge of their lives and well-being. KKSW keeps the kampong spirit alive by encouraging seniors to do good in the community. Active seniors reach out to isolated and vulnerable seniors, strengthening community bonds through peer-to-peer volunteering. Volunteering also helps seniors maintain an active lifestyle and a positive mindset.\nKKSW runs interest groups, and organises outings, events, and celebrations for seniors.",
+    "eligibility": "Seniors aged 50 and above.",
+    "whoIsItFor": [
+      "Elderly"
+    ],
+    "whatItGives": [
+      "Emotional care",
+      "Befriending services",
+      "Educational programmes"
+    ],
+    "schemeType": [
+      "Elderly",
+      "Caregiver Support",
+      "Community Funding"
+    ],
+    "area": {
+      "kind": "district",
+      "name": "Jurong East, Lakeside"
+    },
+    "link": "https://lakeside.org.sg/our-services/seniors-services/",
+    "phone": null,
+    "email": null,
+    "address": [
+      "500 Corporation Road #03-01, Singapore 649808",
+      "Blk 302, Jurong East St 32, #01-22, Singapore 600302"
+    ],
+    "lastRefreshed": "2026-10-05"
+  },
+  {
+    "id": "ssg-allkin-mental-health-service",
+    "sourceId": "azYSheU5HmYKsAWwAVdo",
+    "name": "Mental Health Service",
+    "agency": "Allkin Singapore Ltd",
+    "summary": "Allkin Singapore offers community-based mental health and dementia services, from outreach and early detection to therapy, caregiver education, and support groups. Programmes support persons with mental health challenges and persons living with dementia, as well as their caregivers.",
+    "description": "Community-based mental health and dementia support provided by Allkin Singapore, delivered through multiple teams and programmes that work with healthcare and community partners.\n- Community outreach (CREST): Raises awareness of dementia and mental health, promotes early detection, provides emotional support, conducts preventive and cognitive-stimulating activities, and links people to suitable health and social care services.\n- Post-Diagnostic Support (PDS-Dementia): Six-month support for persons newly diagnosed with dementia and their caregivers, including education on the condition, coordination of community resources, and early planning/management.\n- Meeting Centre Support Programme (MCSP): Facilitated group sessions for persons with mild to early moderate dementia featuring psychosocial, physical, cognitive stimulation, and social activities (meets alternate Monday afternoons).\n- Orientation Programme for Caregivers (OPCG): A 5-session series (twice yearly) covering understanding dementia, caregiving skills, coping strategies, Advance Care Planning and LPA, and community resources.\n- Caregivers Strength Circle (CSC): Ongoing support group for caregivers of persons living with dementia to connect and organise interest-focused activities, with monthly gatherings and an annual celebration.\n- Community Intervention Team (COMIT): Provides assessment, therapy, counselling, psychoeducation, case management, personalised care plans, and caregiver support/training; coordinates closely with polyclinics, GPs and community partners.\n- Part of the national Community Mental Health Masterplan (MOH & AIC), enabling early, accessible care near home and sustained support in the community.",
+    "eligibility": "• Persons with mental health issues and persons living with dementia in the community.\n• MCSP: Persons living with mild to early moderate dementia.\n• OPCG: Any caregivers (primary or secondary) of persons living with dementia in Singapore.\n• CSC: Caregivers of persons living with dementia.\n• Service areas: CREST focuses on Punggol Coast, Punggol Shore, Punggol West SMC, Compassvale, Rivervale, Pasir Ris East, Pasir Ris Central, Pasir Ris West, Teck Ghee, Bishan East, Sin Ming, Kebun Baru SMC, Marymount SMC. COMIT is open to residents in Ang Mo Kio, Sin Ming, Bishan, Hougang, Sengkang and Punggol.",
+    "whoIsItFor": [
+      "Elderly with dementia",
+      "Persons with mental health issues",
+      "Caregivers",
+      "General public"
+    ],
+    "whatItGives": [
+      "Counselling",
+      "Casework",
+      "Emotional care",
+      "Mental health assessment and treatment",
+      "Psychological support/Psychotherapy",
+      "Referral services",
+      "Educational programmes",
+      "Respite care/Caregiver support",
+      "Support groups",
+      "Information services"
+    ],
+    "schemeType": [
+      "Elderly",
+      "Caregiver Support",
+      "Healthcare",
+      "Mental Health",
+      "Counselling and Emotional Support",
+      "General Public Support"
+    ],
+    "area": {
+      "kind": "district",
+      "name": "CREST catchment: Punggol Coast, Punggol Shore, Punggol West SMC, Compassvale, Rivervale, Pasir Ris East, Pasir Ris Central, Pasir Ris West, Teck Ghee, Bishan East, Sin Ming, Kebun Baru SMC, Marymount SMC. COMIT open to residents in: Ang Mo Kio, Sin Ming, Bishan, Hougang, Sengkang, Punggol."
+    },
+    "link": "https://www.allkin.org.sg/services/mental-health-service",
+    "phone": "60384400, 88718230",
+    "email": "mentalhealthservice@allkin.org.sg, media@allkin.org.sg, contact@allkin.org.sg",
+    "address": "CREST & COMIT @ Central (Satellite), 323 Ang Mo Kio Avenue 3, #01-1960, Singapore 560323\nCREST & COMIT @ North-East, 193 Rivervale Drive, #01-787, Singapore 540193",
+    "lastRefreshed": "2026-10-05"
+  },
+  {
+    "id": "ssg-touch-crest",
+    "sourceId": "wm4zZNv9zkmD64xwiSZ5",
+    "name": "Mental Wellness Outreach for Seniors (CREST Programme)",
+    "agency": "Touch Community Services",
+    "summary": "TOUCH’s CREST programme in Cheng San–Seletar provides community-based mental wellness outreach, screening, emotional support, caregiver resources, and referrals for seniors at risk of or living with dementia and other mental health conditions.",
+    "description": "The Community Resource, Engagement & Support Team (CREST) by TOUCH promotes early detection of dementia and mental health conditions for residents in Cheng San–Seletar.\n\nKey features and support include:\n- Community outreach and education to raise awareness of dementia and mental health conditions among seniors\n- Mental health screening to identify at‑risk individuals early\n- Emotional support and a listening ear for persons with or at risk of dementia and mental health issues\n- Guidance and resources for caregivers to navigate support options\n- Preventive, senior-friendly activities (e.g., walks and SilverPad sessions) to support well-being and stimulate cognitive function\n- Linkage and referrals to relevant health and social care services closer to home\n\nDeveloped under the national Community Mental Health Masterplan, the service supports both seniors and their caregivers along the mental wellness journey within their community.",
+    "eligibility": "• Aged 18 and above\n• Resides in the Cheng San–Seletar constituency\n• Diagnosed with dementia, depression, or other mental health issues OR identified to be at risk of developing these conditions",
+    "whoIsItFor": [
+      "Elderly",
+      "Elderly with dementia",
+      "Persons with mental health issues",
+      "Caregivers"
+    ],
+    "whatItGives": [
+      "Emotional care",
+      "Mental health assessment and treatment",
+      "Befriending services",
+      "Referral services",
+      "Educational programmes",
+      "Respite care/Caregiver support",
+      "Information services"
+    ],
+    "schemeType": [
+      "Elderly",
+      "Caregiver Support",
+      "Mental Health",
+      "Counselling and Emotional Support"
+    ],
+    "area": {
+      "kind": "district",
+      "name": "Cheng San–Seletar constituency"
+    },
+    "link": "https://www.touch.org.sg/get-assistance/seniors/crest.html",
+    "phone": "68046563, 63770122",
+    "email": "crest@touch.org.sg, tcs@touch.org.sg",
+    "address": "Blk 162 Bukit Merah Central, #05-3545, Singapore 150162",
+    "lastRefreshed": "2026-10-05"
+  },
+  {
+    "id": "ssg-minds",
+    "sourceId": "zvphu0R4zYvTJJi2GTUd",
+    "name": "MINDS",
+    "agency": "Movement for the Intellectually Disabled of Singapore (MINDS)",
+    "summary": "Empowers special needs individuals through diverse support services.",
+    "description": "MINDS seeks to empower individuals with special needs through social enterprise programmes, advocacy, caregiver respite, therapy, befriending services for social integration, supported employment, home care, decluttering, training and development.",
+    "eligibility": null,
+    "whoIsItFor": [
+      "Persons with disabilities (PWDs)",
+      "Persons with special needs",
+      "Persons on autism spectrum",
+      "Families",
+      "Caregivers",
+      "Children",
+      "Youth",
+      "Elderly"
+    ],
+    "whatItGives": [
+      "Counselling",
+      "Casework",
+      "Emotional care",
+      "Vocational training",
+      "Employment assistance",
+      "Skills training and job matching",
+      "Financial assistance (general)",
+      "Housing/Shelter",
+      "Residential care/programmes",
+      "Befriending services",
+      "Helpline services",
+      "Referral services",
+      "Educational programmes",
+      "Student care",
+      "Respite care/Caregiver support",
+      "Psychological support/Psychotherapy",
+      "Medical services",
+      "Therapy services",
+      "Support groups",
+      "Information services"
+    ],
+    "schemeType": [
+      "Persons with Disabilities (PWD)",
+      "Special Needs",
+      "Family",
+      "Children",
+      "Youth",
+      "Elderly",
+      "Caregiver Support",
+      "Residential Care",
+      "Employment Support",
+      "Education Support",
+      "Counselling and Emotional Support",
+      "Referral and Information Services"
+    ],
+    "area": {
+      "kind": "islandwide"
+    },
+    "link": "https://www.minds.org.sg/",
+    "phone": null,
+    "email": null,
+    "address": null,
+    "lastRefreshed": "2026-10-05"
+  },
+  {
+    "id": "ssg-mylegacy",
+    "sourceId": "RQO6zRu9sWPC3eAO46dz",
+    "name": "My Legacy @LifeSG",
+    "agency": "My Legacy @LifeSG",
+    "summary": "Platform for end-of-life planning and support.",
+    "description": "My Legacy helps you to explore, store and share your end-of-life plans. Protect what matters to you.</h5>[End-of-life planning](https://mylegacy.life.gov.sg/end-of-life-planning/)</h4>How to start planning, write a will, make an advance care plan, get palliative care and caregiver support.Check what you can do to help your loved ones make arrangements according to your wishes when the time comes.[When death happens](https://mylegacy.life.gov.sg/when-death-happens/)</h4>Download death certificate, arrange a funeral, manage the deceased's assets, get counselling and support.[Start Planning With My Legacy Vault](https://mylegacy.life.gov.sg/vault/) Plan, store and share your legal, healthcare and estate matters securely with people you trust.",
+    "eligibility": null,
+    "whoIsItFor": [
+      "Families",
+      "Elderly",
+      "Individuals facing end of life",
+      "Caregivers"
+    ],
+    "whatItGives": [
+      "End-of-life care",
+      "Bereavement support",
+      "Legal aid and services",
+      "Emotional care"
+    ],
+    "schemeType": [
+      "End-of-Life/Palliative Care",
+      "Family",
+      "Caregiver Support"
+    ],
+    "area": {
+      "kind": "islandwide"
+    },
+    "link": "https://mylegacy.life.gov.sg/",
+    "phone": null,
+    "email": null,
+    "address": null,
+    "lastRefreshed": "2026-10-05"
+  },
+  {
+    "id": "ssg-bcf-positive-appearance-scheme",
+    "sourceId": "S1t2iXNLvqcJ26oupTHy",
+    "name": "Positive Appearance Scheme",
+    "agency": "Breast Cancer Foundation",
+    "summary": "Breast Cancer Foundation offers support groups, befriender services, a helpline, and educational resources to support breast cancer patients, caregivers, and the public. It also runs community events to promote screening and awareness.",
+    "description": "- Breast Cancer Foundation (BCF) provides community-based support for individuals affected by breast cancer and those seeking to improve their breast health.\n- Key offerings highlighted include:\n  - Support groups where breast cancer patients and caregivers can share experiences in a private, encouraging environment.\n  - Befriender services connecting individuals with trained volunteers who have lived experience and can offer peer support.\n  - A 24/7 helpline and WhatsApp line to provide immediate information and support.\n  - Guidance content covering diagnosis, treatment, post-treatment care, palliative care, caregiving, and breast cancer risk.\n  - Educational resources such as guides, videos, and family-oriented materials to improve understanding and encourage screening.\n  - Community events and awareness campaigns that bring screening and education into the community and foster connection.\n- The services aim to reduce isolation, provide emotional support, and empower patients, caregivers, and the general public with reliable information about breast health and breast cancer.",
+    "eligibility": "Open to breast cancer patients, caregivers, and members of the public seeking breast health information and support. Specific eligibility for individual programmes (e.g., support groups) may vary; contact BCF for details.",
+    "whoIsItFor": [
+      "Women",
+      "Persons with chronic or terminal illnesses",
+      "Caregivers",
+      "General public"
+    ],
+    "whatItGives": [
+      "Emotional care",
+      "Befriending services",
+      "Helpline services",
+      "Educational programmes",
+      "Support groups",
+      "Information services"
+    ],
+    "schemeType": [
+      "Women",
+      "Caregiver Support",
+      "Healthcare",
+      "Counselling and Emotional Support",
+      "General Public Support"
+    ],
+    "area": {
+      "kind": "islandwide"
+    },
+    "link": "https://bcf.org.sg/programmes/positive-appearance-scheme/",
+    "phone": "63526560, 63560123, 96953264",
+    "email": "enquiries@bcf.org.sg",
+    "address": null,
+    "lastRefreshed": "2026-10-05"
+  },
+  {
+    "id": "ssg-sws-senior-services",
+    "sourceId": "ELFtkzKbfnpERzlWLprE",
+    "name": "Project Dementia and Caregiver care services (Meeting Centre Support Programme)",
+    "agency": "Salem Welfare Services Ltd",
+    "summary": "A Dementia Care programme offering meaningful activities and support for seniors with dementia and their families, delivered in partnership with Dementia Singapore.",
+    "description": "- Dementia Care service providing meaningful, structured activities for seniors living with dementia\n- Meeting Centre Support Programme run in partnership with Dementia Singapore, aimed at supporting persons living with dementia and their families",
+    "eligibility": "Persons living with dementia and their families.",
+    "whoIsItFor": [
+      "Elderly",
+      "Elderly with dementia",
+      "Caregivers"
+    ],
+    "whatItGives": [
+      "Respite care/Caregiver support"
+    ],
+    "schemeType": [
+      "Elderly",
+      "Caregiver Support",
+      "Mental Health"
+    ],
+    "area": {
+      "kind": "islandwide"
+    },
+    "link": "https://sws.sg/senior-services/",
+    "phone": "62496515",
+    "email": "admin@sws.sg",
+    "address": "1 Thomson Hills Drive,\nSingapore 574746",
+    "lastRefreshed": "2026-10-05"
+  },
+  {
+    "id": "ssg-hca-psychosocial-services",
+    "sourceId": "cMPn6h9x0bQSmxcuXVga",
+    "name": "Psychosocial Services",
+    "agency": "HCA Hospice Care",
+    "summary": "Psychosocial support for palliative and end-of-life care.",
+    "description": "Our Psychosocial Services team is dedicated to applying social work knowledge and skills in palliative and end-of-life care to improve the quality of life for our patients, their families and caregivers. Besides case management and providing individual and family counselling, the team actively connects with other social service agencies to holistically support patients and their families.",
+    "eligibility": null,
+    "whoIsItFor": [
+      "Families",
+      "Caregivers",
+      "Pregnant individuals in distress",
+      "Persons with chronic or terminal illnesses",
+      "Persons with mental health issues"
+    ],
+    "whatItGives": [
+      "Counselling",
+      "Casework",
+      "Emotional care",
+      "Psychological support/Psychotherapy",
+      "Bereavement support"
+    ],
+    "schemeType": [
+      "End-of-Life/Palliative Care",
+      "Mental Health",
+      "Family",
+      "Caregiver Support",
+      "Chronic or Terminal Illness Support"
+    ],
+    "area": {
+      "kind": "islandwide"
+    },
+    "link": "https://www.hca.org.sg/psychosocial-services/",
+    "phone": null,
+    "email": null,
+    "address": null,
+    "lastRefreshed": "2026-10-05"
+  },
+  {
+    "id": "ssg-reach-crest",
+    "sourceId": "xmFGtjESaMkg3MadhKef",
+    "name": "REACH Community Mental Health Team",
+    "agency": "REACH Community Services Ltd",
+    "summary": "REACH Community Services’ community mental health team provides free, confidential support, outreach, psychosocial interventions, and case management for adults in Bukit Gombak and Hong Kah North, plus a caregiver support group for dementia caregivers.",
+    "description": "A community-based mental health service run by REACH Community Services that acts as a first-stop, in-person support for residents in Bukit Gombak and Hong Kah North (aged 18 and above).\n- Early identification of signs and symptoms of mental health conditions and dementia\n- Targeted outreach and education to improve mental health and dementia literacy for residents and caregivers\n- Psychosocial interventions and techniques to reduce escalation of mental health needs\n- Case management to coordinate care with health and community partners\n- Collaboration with stakeholders to support persons with mental health conditions and dementia in the community\n- Caregiver Support Group for caregivers of persons with dementia (English sessions, Friday afternoons once every two months; complementary elder-sitting may be arranged)\n- Confidential support with no out-of-pocket cost",
+    "eligibility": "Residents aged 18 and above living in Bukit Gombak and Hong Kah North. Caregiver Support Group is for caregivers of persons with dementia (sessions conducted in English). No out-of-pocket cost.",
+    "whoIsItFor": [
+      "Young adults",
+      "Elderly",
+      "Elderly with dementia",
+      "Persons with mental health issues",
+      "Caregivers",
+      "General public"
+    ],
+    "whatItGives": [
+      "Counselling",
+      "Casework",
+      "Emotional care",
+      "Psychological support/Psychotherapy",
+      "Referral services",
+      "Educational programmes",
+      "Respite care/Caregiver support",
+      "Support groups",
+      "Information services"
+    ],
+    "schemeType": [
+      "Caregiver Support",
+      "Mental Health",
+      "Counselling and Emotional Support",
+      "General Public Support"
+    ],
+    "area": {
+      "kind": "district",
+      "name": "Bukit Gombak and Hong Kah North"
+    },
+    "link": "https://reach.org.sg/services/counselling-service/crest/",
+    "phone": "68010878",
+    "email": "crest-ss@reach.org.sg",
+    "address": null,
+    "lastRefreshed": "2026-10-05"
+  },
+  {
+    "id": "ssg-able-sg",
+    "sourceId": "C1rsf3bum4DKqCjkUkAw",
+    "name": "Rehabilitation Centre and Respite Centre",
+    "agency": "Abilities Beyond Limitations and Expectations (ABLE)",
+    "summary": "ABLE supports physically challenged and their caregivers.",
+    "description": "Provides Occupational Therapy, Physiotherapy and Pilates rehabilitation, with the goal of working towards integrating persons with physical disability back to work and society. Training courses to equip clients with the relevant skills to enhance their employability. Respite for Family Caregivers provides centre and home based respite services to help family caregivers of the physically challenged care recipients. Wheelchair-accessible vans to provide transport at reasonable rates.",
+    "eligibility": "Persons with physical challenges and their family caregivers. No specific eligibility documents mentioned.",
+    "whoIsItFor": [
+      "Persons with disabilities (PWDs)",
+      "Caregivers"
+    ],
+    "whatItGives": [
+      "Rehabilitation services (Physiotherapy/Occupational therapy)",
+      "Vocational training",
+      "Employment assistance",
+      "Respite care/Caregiver support",
+      "Transport subsidies"
+    ],
+    "schemeType": [
+      "Persons with Disabilities (PWD)",
+      "Caregiver Support",
+      "Vocational Training",
+      "Employment Support",
+      "Rehabilitation services",
+      "Transport Support"
+    ],
+    "area": {
+      "kind": "islandwide"
+    },
+    "link": "https://www.able-sg.org/",
+    "phone": null,
+    "email": null,
+    "address": null,
+    "lastRefreshed": "2026-10-05"
+  },
+  {
+    "id": "ssg-lovingheart-services-1",
+    "sourceId": "h5n931RC3T7jcKWEkMQx",
+    "name": "Respite Care",
+    "agency": "Loving Heart Multi Service Centre",
+    "summary": "Respite care and befriending for caregivers.",
+    "description": "We provide respite care for caregivers to take time-off for self-care. Our befrienders will engage the care recipient loved ones meaningfully by focusing on stimulating their minds and building cognitive capacity.",
+    "eligibility": null,
+    "whoIsItFor": [
+      "Caregivers",
+      "Persons with disabilities (PWDs)",
+      "Elderly"
+    ],
+    "whatItGives": [
+      "Respite care/Caregiver support",
+      "Befriending services"
+    ],
+    "schemeType": [
+      "Caregiver Support",
+      "Elderly"
+    ],
+    "area": {
+      "kind": "islandwide"
+    },
+    "link": "https://www.lovingheart.org.sg/services-1",
+    "phone": null,
+    "email": null,
+    "address": null,
+    "lastRefreshed": "2026-10-05"
+  },
+  {
+    "id": "ssg-healthhub-respite-care",
+    "sourceId": "uPySB8l6Q0gCMXknLbjT",
+    "name": "Respite Care Services (Eldercare)",
+    "agency": "Islandwide senior care centres run by various providers (see link on HealthHub)",
+    "summary": "Senior Care Centres provide short-term daytime care for elderly.",
+    "description": "Caregivers can tap on Senior Care Centres for short-term care options, such as when they need to take short breaks from caregiving on an ad-hoc basis during the day.\n\n Short-term care options at Senior Care Centres are also suitable if caregivers need additional assistance when the foreign domestic worker is not available.",
+    "eligibility": "Caregivers of elderly individuals who require short-term care during the day, especially when the caregiver needs a break or when a foreign domestic worker is not available.",
+    "whoIsItFor": [
+      "Caregivers",
+      "Elderly"
+    ],
+    "whatItGives": [
+      "Respite care/Caregiver support",
+      "Assistance with activities of daily living",
+      "Social activities",
+      "Meals"
+    ],
+    "schemeType": [
+      "Caregiver Support",
+      "Elderly",
+      "Respite Care"
+    ],
+    "area": {
+      "kind": "islandwide"
+    },
+    "link": "https://www.healthhub.sg/a-z/medical-and-care-facilities/12/respite_care",
+    "phone": null,
+    "email": null,
+    "address": null,
+    "lastRefreshed": "2026-10-05"
+  },
+  {
+    "id": "ssg-sasco-our-services-sasco-westcoast-aac",
+    "sourceId": "HAq0CSR1WTRflzMniPnh",
+    "name": "SASCO@WestCoast AAC",
+    "agency": "Care",
+    "summary": "Seven centres provide care and support for elderly.",
+    "description": "**As of 1st April 2023 SASCO@WestCoast is AAC (Care)**, this centre is a Senior Care Centre and Active Ageing Centre combined, Active Ageing Centre (Care), or AAC (Care), provides AAC services and additional care services, such as day care and community rehabilitation, in separate facilities nearby. [https://www.aic.sg/care-services/active-ageing-centre](https://www.aic.sg/care-services/active-ageing-centre).</h6>",
+    "eligibility": "Seniors aged 60 years and above, especially those who are frail, destitute, facing financial or family challenges, or living with dementia.",
+    "whoIsItFor": [
+      "Elderly"
+    ],
+    "whatItGives": [
+      "Day care",
+      "Rehabilitation services (Physiotherapy/Occupational therapy)",
+      "Active ageing programmes"
+    ],
+    "schemeType": [
+      "Elderly",
+      "Caregiver Support",
+      "Rehabilitation services (Physiotherapy/Occupational therapy)"
+    ],
+    "area": {
+      "kind": "islandwide"
+    },
+    "link": "https://sasco.org.sg/our-services/",
+    "phone": null,
+    "email": null,
+    "address": [
+      "30 Hong San Terrace, Singapore 688246",
+      "Blk 704, #01-431, West Coast Road, Singapore 120704",
+      "Blk 337, #01-06, Bukit Batok St 34, Singapore 650337",
+      "Blk 715, #01-47, Jurong West St 71, Singapore 640715",
+      "BlK30, #01-316, Telok Blangah Rise, Singapore 090030",
+      "Blk 813, #01-01, Yishun Ring Road, Singapore 760813",
+      "Blk 274B/C, #01-521/509, Compassvale Bow, Singapore 543274"
+    ],
+    "lastRefreshed": "2026-10-05"
+  },
+  {
+    "id": "ssg-pcs-senior-care-centre",
+    "sourceId": "zvNg8Sb0YwTpLeFghiQC",
+    "name": "Senior Care Centres",
+    "agency": "Presbyterian Community Services",
+    "summary": "PCS Senior Care Centres offer full-day care programmes for seniors aged 60 and above, focusing on mental and physical well-being, social interaction, and support for caregivers. They provide meals, transport options, and a secure environment to promote dignified ageing in place.",
+    "description": "PCS Senior Care Centres (SSC) provide full-day care programmes for Singaporeans and Permanent Residents aged 60 and above, aiming to promote ageing in place. The centres offer a secure environment with activities designed to enhance memory, social interaction, music engagement, and maintenance of daily living activities. Using the PCS MDC Individualised Care Plan, the centres provide maintenance exercises and regimental activities to stimulate mental and physical health, helping to prevent or delay cognitive decline. The centres also support frail and/or physically disabled seniors, improve their general well-being, and provide respite and support to their families and caregivers. Meals and transport (with additional charges) are provided at various locations operating Monday to Friday, with some centres open on Saturdays.",
+    "eligibility": "Singaporeans and Permanent Residents aged 60 years and above.",
+    "whoIsItFor": [
+      "Elderly",
+      "Elderly with dementia",
+      "Persons with disabilities (PWDs)"
+    ],
+    "whatItGives": [
+      "Emotional care",
+      "Referral services",
+      "Educational programmes",
+      "Financial assistance for daily living expenses"
+    ],
+    "schemeType": [
+      "Elderly",
+      "Caregiver Support",
+      "Persons with Disabilities (PWD)"
+    ],
+    "area": {
+      "kind": "islandwide"
+    },
+    "link": "https://pcs.org.sg/services/seniors/senior-care-centre/",
+    "phone": null,
+    "email": null,
+    "address": "533 Geylang Road, Singapore 389489",
+    "lastRefreshed": "2026-10-05"
+  },
+  {
+    "id": "ssg-hopecentre-seniors-programme",
+    "sourceId": "mNq06HX9FSELxyCjvkG1",
+    "name": "Seniors Drop-In",
+    "agency": "Hope Center Singapore",
+    "summary": "Drop-in social programme for King George’s Avenue seniors.",
+    "description": "We aim to hinder the trend of senior isolation in Singapore by reaching out to the seniors living in King George’s Avenue. Our seniors drop-in programme provides a platform for these seniors to socialise with other seniors in the area to form closer relationships with their neighbours.",
+    "eligibility": "Seniors living in King George’s Avenue.",
+    "whoIsItFor": [
+      "Elderly"
+    ],
+    "whatItGives": [
+      "Befriending services",
+      "Emotional care"
+    ],
+    "schemeType": [
+      "Elderly",
+      "Caregiver Support"
+    ],
+    "area": {
+      "kind": "district",
+      "name": "King George’s Avenue"
+    },
+    "link": "https://hopecentre.org.sg/our-services/seniors-programme",
+    "phone": null,
+    "email": null,
+    "address": "King George’s Avenue, Singapore",
+    "lastRefreshed": "2026-10-05"
+  },
+  {
+    "id": "ssg-bizlink-programmes",
+    "sourceId": "BAq7hSTAeL0CViBCrluC",
+    "name": "Sheltered Workshop Programme",
+    "agency": "Bizlink Centre Singapore Ltd",
+    "summary": "Bizlink provides vocational training and work therapy programmes for Persons with Disabilities to develop skills and prepare them for employment, alongside caregiver support and vocational assessments.",
+    "description": "Bizlink Centre Singapore Ltd offers a range of programmes designed to support Persons with Disabilities (PWDs) through vocational training, work therapy, day care activities, and employability support. Their services include sheltered workshop programmes, hydroponics work therapy, vocational assessments, and caregiver support, all aimed at developing work and social skills, promoting independence, and facilitating gradual transition into employment within a supportive environment.",
+    "eligibility": "Applicants must be Persons with Disabilities, including physical, intellectual, developmental, hearing, or visual impairments, aged 18 years and above. Some programmes require basic work capability or independence in activities of daily living. Permanent Residents must have at least one immediate family member who is a Singapore Citizen. Eligibility and suitability are assessed via vocational assessment.",
+    "whoIsItFor": [
+      "Persons with disabilities (PWDs)",
+      "Caregivers"
+    ],
+    "whatItGives": [
+      "Psychological support/Psychotherapy",
+      "Educational programmes",
+      "Vocational training",
+      "Employment assistance",
+      "Skills training and job matching"
+    ],
+    "schemeType": [
+      "Caregiver Support",
+      "Persons with Disabilities (PWD)"
+    ],
+    "area": {
+      "kind": "islandwide"
+    },
+    "link": "https://www.bizlink.org.sg/programmes",
+    "phone": "64495652, 64495694",
+    "email": "vad@bizlink.org.sg, wtp@bizlink.org.sg, info@bizlink.org.sg",
+    "address": "Blk 512 #01-09, Chai Chee Lane Mapletree Industrial Estate, Singapore 469028",
+    "lastRefreshed": "2026-10-05"
+  },
+  {
+    "id": "ssg-shenghong-active-ageing",
+    "sourceId": "KvgBAfg30uueH9pCcIse",
+    "name": "Sheng Hong Active Ageing Centre (Care)@Sennett",
+    "agency": "Society of Sheng Hong Welfare Services",
+    "summary": "Sheng Hong Active Ageing Centre (CARE) @ Sennett provides Active Ageing activities, Day Rehabilitation, and Day Care & Dementia Day Care for seniors. It helps older adults stay healthy and socially connected while offering respite for caregivers.",
+    "description": "- Community-based eldercare at Sheng Hong Active Ageing Centre (CARE) @ Sennett supporting seniors' health, independence and social well-being\n- Active Ageing Programmes: group activities and courses designed to promote social interaction, mental stimulation and physical wellness so seniors can stay engaged and independent\n- Day Rehabilitation: therapy-led sessions to help regain or maintain strength, mobility and functional abilities, guided by trained staff and personalised exercises\n- Day Care & Dementia Day Care: structured daytime supervision and activities tailored to individual cognitive, physical and emotional needs, providing a safe, stimulating environment and easing caregiving load for families\n- Mission-driven, holistic approach intended to value, support and empower seniors with dignity, purpose and joy",
+    "eligibility": "Seniors/older adults who would benefit from active ageing activities, day rehabilitation, or structured day care (including those living with dementia) and who require daytime supervision or support.",
+    "whoIsItFor": [
+      "Elderly",
+      "Elderly with dementia"
+    ],
+    "whatItGives": [
+      "Educational programmes",
+      "Respite care/Caregiver support",
+      "Rehabilitation services"
+    ],
+    "schemeType": [
+      "Elderly",
+      "Caregiver Support"
+    ],
+    "area": {
+      "kind": "islandwide"
+    },
+    "link": "https://shenghong.org.sg/active-ageing/",
+    "phone": "6239 0930",
+    "email": "aac@shenghong.org.sg",
+    "address": "175 MacPherson Road, S348537",
+    "lastRefreshed": "2026-10-05"
+  },
+  {
+    "id": "ssg-sntc-special-needs-savings-scheme-snss",
+    "sourceId": "AXdKSo1KFzlWjtPnMUP6",
+    "name": "Special Needs Savings Scheme",
+    "agency": "Special Needs Trust Company (SNTC)",
+    "summary": "A non-profit trustee and care planning service that helps families and caregivers secure long-term support for persons with disabilities and special needs. It manages funds, guides care planning, and offers savings and sponsorship schemes.",
+    "description": "- Special Needs Trust Company (SNTC) is a non-profit service that helps families and caregivers plan for the long-term financial and care needs of persons with disabilities and special needs.\n- It provides professional trustee services to hold, manage, and disburse funds prudently for beneficiaries' future needs, ensuring continuity of support even when caregivers are no longer able to provide care.\n- SNTC offers care planning and guidance to caregivers, aligning disbursements with beneficiaries' daily living, education, healthcare, and other needs.\n- It features complementary programmes such as the Special Needs Savings Scheme (SNSS) and sponsorship schemes (e.g., GOAL/GOAL+) that help reduce the cost burden of setting up and maintaining plans.\n- The service is designed to give families peace of mind by safeguarding resources, promoting responsible management, and ensuring consistent support throughout the beneficiary’s life.",
+    "eligibility": "SNSS is open to all persons with disabilities who:\nAttend or have attended a Special Education (SPED) school\nHave a permanent disability based on any one of the following:\nPhysical Disability: Requires some assistance with at least 1 of the 6 Activities of Daily Living due to physical impairment\nModerate visual impairment or worst in the better eye\nModerate hearing loss or worse in the better ear\nIntellectual disability\nAutism\n\nProof of disability must be provided using the Disability Verification Form (DVF) completed by a relevant registered Healthcare Professional.",
+    "whoIsItFor": [
+      "Persons with disabilities (PWDs)",
+      "Persons with special needs",
+      "Caregivers"
+    ],
+    "whatItGives": [
+      "Legal aid and services",
+      "Information services",
+      "Casework"
+    ],
+    "schemeType": [
+      "Caregiver Support",
+      "Persons with Disabilities (PWD)",
+      "Special Needs",
+      "Financial Assistance"
+    ],
+    "area": {
+      "kind": "islandwide"
+    },
+    "link": "https://www.sntc.org.sg/services/special-needs-savings-scheme-(snss)",
+    "phone": "6278 9598",
+    "email": "futurecareplanning@sgenable.sg",
+    "address": null,
+    "lastRefreshed": "2026-10-05"
+  },
+  {
+    "id": "ssg-sgenable-special-needs-trust",
+    "sourceId": "bhx2w1ZpCoVvzzuC4CJ7",
+    "name": "Special Needs Trust Company",
+    "agency": "Special Needs Trust Company (SNTC)",
+    "summary": "Special Needs Trust Company (SNTC) provides trust and future care planning services for persons with disabilities and special needs, supporting caregivers with structured financial arrangements and case-managed care plans. It helps ensure continuity of care and responsible disbursement of funds for beneficiaries’ long-term needs.",
+    "description": "- Non-profit trust service dedicated to safeguarding the long-term welfare of persons with disabilities and special needs in Singapore\n- Supports caregivers and families to plan for the future through professional care planning and trust administration\n- Key offerings include:\n  - Special Needs Trust: Setting up and managing trust accounts to provide structured, needs-based disbursements for beneficiaries with special needs\n  - Special Needs Savings Scheme: Facilitates CPF nominations to provide regular payouts for the beneficiary’s care after the caregiver’s passing\n  - Case management and care planning: Dedicated case managers work with caregivers to develop a comprehensive care plan that guides future support and fund disbursement\n  - Education and guidance for caregivers on future care planning and how to coordinate services across community resources\n- Aims to give peace of mind to caregivers by ensuring continuity of care and prudent use of funds for their loved ones",
+    "eligibility": null,
+    "whoIsItFor": [
+      "Families",
+      "Persons with disabilities (PWDs)",
+      "Persons with special needs",
+      "Caregivers"
+    ],
+    "whatItGives": [
+      "Casework",
+      "Referral services",
+      "Information services"
+    ],
+    "schemeType": [
+      "Caregiver Support",
+      "Persons with Disabilities (PWD)",
+      "Special Needs",
+      "General Public Support"
+    ],
+    "area": {
+      "kind": "islandwide"
+    },
+    "link": "https://www.sgenable.sg/your-first-stop/disability-support/special-needs-trust",
+    "phone": "6278 9598",
+    "email": "futurecareplanning@sgenable.sg",
+    "address": null,
+    "lastRefreshed": "2026-10-05"
+  },
+  {
+    "id": "ssg-snsa-strokeconnect",
+    "sourceId": "Gks3xm718Ij9xFaRxYsl",
+    "name": "StrokeConnect",
+    "agency": "Singapore National Stroke Association (SNSA)",
+    "summary": "StrokeConnect is a peer-led helpline by the Singapore National Stroke Association that provides emotional support, information, and referrals to stroke survivors and caregivers. Trained befrienders with lived experience guide callers to suitable SNSA programmes and community resources.",
+    "description": "- A helpline that connects stroke survivors and caregivers with trained peer befrienders who are themselves stroke survivors\n- Provides survivor-to-survivor listening, understanding, and emotional support based on lived experience\n- Helps callers understand available SNSA programmes and links them to the most suitable options\n- Guides users to relevant community resources and the next steps in their recovery or caregiving journey\n- Non-clinical, non-medical support; focuses on sharing experiences, practical guidance, and referrals\n- Operating hours: Monday to Friday, 09:00–18:00\n- Brochures available in English and Chinese",
+    "eligibility": "Intended for stroke survivors and caregivers seeking non-clinical peer support, information, or guidance on recovery resources. Not a medical or clinical advice service.",
+    "whoIsItFor": [
+      "Persons with chronic or terminal illnesses",
+      "Caregivers"
+    ],
+    "whatItGives": [
+      "Emotional care",
+      "Befriending services",
+      "Helpline services",
+      "Referral services",
+      "Information services"
+    ],
+    "schemeType": [
+      "Caregiver Support",
+      "Healthcare",
+      "Counselling and Emotional Support"
+    ],
+    "area": {
+      "kind": "islandwide"
+    },
+    "link": "https://www.snsa.org.sg/strokeconnect",
+    "phone": "69073092",
+    "email": "contact@snsa.org.sg",
+    "address": "254 Kim Keat Avenue #01-110, Singapore 310254",
+    "lastRefreshed": "2026-10-05"
+  },
+  {
+    "id": "ssg-shanyou-shan-you-counselling-centre",
+    "sourceId": "cacjnKLn7hpbfHrcFOF6",
+    "name": "Subsidized counselling and psychotherapy",
+    "agency": "Shan You Counselling Centre",
+    "summary": "Subsidized counselling and psychotherapy services offered.",
+    "description": "Subsidized face-to-face counselling and psychotherapy for individuals, couples and families.",
+    "eligibility": null,
+    "whoIsItFor": [
+      "General public",
+      "Families",
+      "Caregivers",
+      "Persons with mental health issues",
+      "Low income"
+    ],
+    "whatItGives": [
+      "Counselling",
+      "Psychological support/Psychotherapy",
+      "Emotional care",
+      "Mental health assessment and treatment",
+      "Educational programmes",
+      "Support groups",
+      "Referral services",
+      "Helpline services"
+    ],
+    "schemeType": [
+      "Counselling and Emotional Support",
+      "Mental Health",
+      "Family",
+      "Low Income",
+      "Caregiver Support",
+      "General Public Support"
+    ],
+    "area": {
+      "kind": "islandwide"
+    },
+    "link": "https://www.shanyou.org.sg/our-services/shan-you-counselling-centre/",
+    "phone": null,
+    "email": null,
+    "address": null,
+    "lastRefreshed": "2026-10-05"
+  },
+  {
+    "id": "ssg-onehopecentre-help-recovery-programmes-supporters-self-care-programme",
+    "sourceId": "nSrVs6Y5p5ejHx2EtyAn",
+    "name": "Supporters Self-Care Programme",
+    "agency": "One Hope Centre",
+    "summary": "Counselling and support for addiction caregivers.",
+    "description": "FOR FAMILY &amp; CAREGIVERS OF PERSONS STRUGGLING WITH ADDICTIONHelping family members &amp; caregivers exercise self-care and provide appropriate support to loved ones struggling with addiction. **PROGRAMME OVERVIEW**- 6 individual counselling sessionsn- 6 support group / group work sessionsn​**Note:**Duration and number of sessions may be extended where necessary",
+    "eligibility": "Family members and caregivers of persons struggling with addiction.",
+    "whoIsItFor": [
+      "Individuals with gambling addiction",
+      "individuals with spending addiction",
+      "individuals with sex addiction",
+      "individuals with pornography addiction",
+      "individuals with love addiction",
+      "families",
+      "caregivers"
+    ],
+    "whatItGives": [
+      "Counselling",
+      "Support groups",
+      "Group therapy",
+      "Emotional care",
+      "Psychological support/Psychotherapy",
+      "Referral services"
+    ],
+    "schemeType": [
+      "Addictions Rehabilitation",
+      "Counselling and Emotional Support",
+      "Family",
+      "Caregiver Support"
+    ],
+    "area": {
+      "kind": "islandwide"
+    },
+    "link": "https://www.onehopecentre.org/help-recovery-programmes",
+    "phone": null,
+    "email": null,
+    "address": null,
+    "lastRefreshed": "2026-10-05"
+  },
+  {
+    "id": "ssg-tcn-what-we-do",
+    "sourceId": "LJpeo2hSu3mAcdM0OqfT",
+    "name": "The Compassionate Network",
+    "agency": "The Compassionate Network",
+    "summary": "Support for caregivers of people nearing end-of-life.",
+    "description": "The Compassionate Network (TCN) is a charity in Singapore dedicated to supporting caregivers of patients with advanced illnesses.Established in July 2023, TCN is the first and only charity dedicated to supporting caregivers of patients with advanced illnesses using lay helpers to form circles of care, to oﬀer companionship, guidance, grief education and more – ensuring they are not alone in their journey. **What We Do** TCN hopes to create a compassionate community by rallying volunteers, corporates, and community partners to form circles of care around caregivers of people nearing life's end. We recognise that family caregivers are themselves care recipients too – they deserve attention and support as much as those they care for. By nurturing the wellbeing of caregivers, we honour their dignity in caring for their loved ones in life's final chapter. We tailor our support according to the different needs of the caregivers - some prefer to focus on their personal well-being while others request assistance with various caregiving activities. Beyond the caregiving period, TCN supports caregivers into their bereavement phase and facilitate their transitions to a physical world without their loved ones.",
+    "eligibility": "Open to volunteers, corporates, and community partners interested in supporting caregivers of people nearing end-of-life. No specific eligibility criteria for caregivers mentioned.",
+    "whoIsItFor": [
+      "Caregivers",
+      "Persons with chronic or terminal illnesses",
+      "Individuals struggling with loss"
+    ],
+    "whatItGives": [
+      "Emotional care",
+      "Bereavement support",
+      "Counselling",
+      "Psychological support/Psychotherapy",
+      "Respite care/Caregiver support"
+    ],
+    "schemeType": [
+      "Caregiver Support",
+      "End-of-Life/Palliative Care",
+      "Chronic or Terminal Illness Support"
+    ],
+    "area": {
+      "kind": "islandwide"
+    },
+    "link": "https://www.tcn.sg/what-we-do",
+    "phone": null,
+    "email": null,
+    "address": null,
+    "lastRefreshed": "2026-10-05"
+  },
+  {
+    "id": "ssg-touch-touch-caregivers-support-homepage",
+    "sourceId": "VtPfls03nudIeFT6v3mg",
+    "name": "TOUCH Caregivers Support",
+    "agency": "Touch Community Services",
+    "summary": "Support and advice for elder caregiving at home.",
+    "description": "Provide support and advice for caregiving of elders at home to support ageing in place. Care Line at 6804 6555.",
+    "eligibility": null,
+    "whoIsItFor": [
+      "Elderly",
+      "Caregivers"
+    ],
+    "whatItGives": [
+      "Counselling",
+      "Helpline services",
+      "Referral services"
+    ],
+    "schemeType": [
+      "Elderly",
+      "Caregiver Support",
+      "Counselling and Emotional Support"
+    ],
+    "area": {
+      "kind": "islandwide"
+    },
+    "link": "https://www.touch.org.sg/about-touch/our-services/touch-caregivers-support-homepage",
+    "phone": "6804 6555",
+    "email": null,
+    "address": null,
+    "lastRefreshed": "2026-10-05"
+  },
+  {
+    "id": "ssg-touch-touch-ubi-hostel-homepage",
+    "sourceId": "jzOWA5C4sOoYwkGDNPkD",
+    "name": "TOUCH Ubi Hostel (TUH)",
+    "agency": "Touch Community Services",
+    "summary": "Residential programme for adults with mild intellectual disabilities.",
+    "description": "TOUCH Ubi Hostel (TUH) offers a stay-in residential programme for adults with mild intellectual disabilities. Located in a housing estate, it provides an excellent training ground for the trainees to experience communal living with a flat-mate in a simulated environment.",
+    "eligibility": "Adults with mild intellectual disabilities.",
+    "whoIsItFor": [
+      "Persons with disabilities (PWDs)",
+      "Caregivers"
+    ],
+    "whatItGives": [
+      "Residential care/programmes",
+      "Competency-based training",
+      "Employment assistance",
+      "Casework",
+      "Emotional care",
+      "Enrichment and recreational activities",
+      "Caregiver support",
+      "Respite care/Caregiver support",
+      "Social-emotional support",
+      "Long-term care planning"
+    ],
+    "schemeType": [
+      "Persons with Disabilities (PWD)",
+      "Residential Care",
+      "Caregiver Support",
+      "Employment Support",
+      "Counselling and Emotional Support"
+    ],
+    "area": {
+      "kind": "islandwide"
+    },
+    "link": "https://www.touch.org.sg/about-touch/our-services/touch-ubi-hostel-homepage",
+    "phone": null,
+    "email": null,
+    "address": null,
+    "lastRefreshed": "2026-10-05"
+  },
+  {
+    "id": "ssg-trans-seniors",
+    "sourceId": "ESkFg9BNa2emqHYV3a9h",
+    "name": "TRANS FOCUS Active Ageing Centre",
+    "agency": "TRANS FOCUS Active Ageing Centre",
+    "summary": "Active Ageing Centre for seniors' well-being and support.",
+    "description": "TRANS FOCUS Active Ageing Centre strongly believes in the possibility of seniors ageing successfully in a neighbourhood in which they are familiar with. As such we create opportunities for seniors aged 50 years and above to lead active and fulfilling lives.Active LearningWe create opportunities for seniors to continue to learn new skills and knowledge so as to promote lifelong learning.Active VolunteerismWe encourage seniors to develop talents and strengths and share them with fellow seniors. This can take the form of leading an activity, imparting skills to other seniors and visiting other charitable organisations.Community Mental Health ServiceWe provide mental health education and conduct screening for our seniors to detect early signs of depression or dementia.Caregiver Resource and SupportWe provide information and referral service to caregivers to support them in their caregiving journey.",
+    "eligibility": "Older adults and seniors in the neighbourhood. No specific eligibility criteria mentioned.",
+    "whoIsItFor": [
+      "Elderly",
+      "Caregivers"
+    ],
+    "whatItGives": [
+      "Educational programmes",
+      "Befriending services",
+      "Mental health assessment and treatment",
+      "Referral services"
+    ],
+    "schemeType": [
+      "Elderly",
+      "Caregiver Support",
+      "Mental Health",
+      "Education Support"
+    ],
+    "area": {
+      "kind": "islandwide"
+    },
+    "link": "https://www.trans.org.sg/services/seniors/#active-aging-centre",
+    "phone": "+65 6467 8191",
+    "email": "transfocus@trans.org.sg",
+    "address": "Blk 3 Toh Yi Drive #01-189 Singapore 590003",
+    "lastRefreshed": "2026-10-05"
+  },
+  {
+    "id": "ssg-fycs-family",
+    "sourceId": "rCWgF4B65MCBsvt7JHSI",
+    "name": "Transnational Family Support Centre (Project Family)",
+    "agency": "Fei Yue Community Services",
+    "summary": "Supports couples with marriage preparation and social activities.",
+    "description": "Project FAMILY works together with community partners and volunteers to serve these couples through provision of marital preparation programmes, as well as workshops and social activities to help connect and build social support for the couples. Together, Project FAMILY works towards incurring positive life transformation couples as they embark on their new marriage journey.",
+    "eligibility": null,
+    "whoIsItFor": [
+      "Children",
+      "Youth",
+      "Young adults",
+      "Families",
+      "Single parents",
+      "Elderly",
+      "Caregivers",
+      "Persons with mental health issues",
+      "Families of inmates or ex-offenders",
+      "General public"
+    ],
+    "whatItGives": [
+      "Counselling",
+      "Casework",
+      "Emotional care",
+      "Mental health assessment and treatment",
+      "Psychological support/Psychotherapy",
+      "Referral services",
+      "Educational programmes",
+      "Support groups",
+      "Family life programmes",
+      "Parenting support"
+    ],
+    "schemeType": [
+      "Family",
+      "Children",
+      "Youth",
+      "Elderly",
+      "Caregiver Support",
+      "Mental Health",
+      "Counselling and Emotional Support",
+      "Education Support",
+      "Incarcerated/Inmate Family Support"
+    ],
+    "area": {
+      "kind": "islandwide"
+    },
+    "link": "https://fycs.org/family/",
+    "phone": null,
+    "email": null,
+    "address": null,
+    "lastRefreshed": "2026-10-05"
+  },
+  {
+    "id": "ssg-tzuchi-tzu-chi-renal-dialysis-centre",
+    "sourceId": "5iY61qRR6ljEuik6XmIC",
+    "name": "Tzu Chi Renal Dialysis Centre",
+    "agency": "Tzu Chi Singapore",
+    "summary": "Affordable, holistic dialysis care for referred renal patients.",
+    "description": "A non-profit dialysis center in Buangkok, Singapore, providing affordable and compassionate renal care for underprivileged kidney patients. The center offers holistic support, emotional well-being programs, and partners with the National Kidney Foundation to ensure high standards of care and community impact.",
+    "eligibility": "Patients must be referred from restructured hospitals. No other eligibility criteria specified.",
+    "whoIsItFor": [
+      "Persons with chronic or terminal illnesses",
+      "Elderly",
+      "Low income",
+      "Caregivers"
+    ],
+    "whatItGives": [
+      "Healthcare (general/basic services)",
+      "Rehabilitation services (Physiotherapy/Occupational therapy)",
+      "Financial assistance for healthcare",
+      "Emotional care",
+      "Befriending services",
+      "Food support"
+    ],
+    "schemeType": [
+      "Healthcare",
+      "Chronic or Terminal Illness Support",
+      "Elderly",
+      "Financial Assistance",
+      "Caregiver Support",
+      "Food Support",
+      "Rehabilitation services",
+      "Counselling and Emotional Support"
+    ],
+    "area": {
+      "kind": "district",
+      "name": "Northeastern Singapore"
+    },
+    "link": "https://www.tzuchi.org.sg/en/our-missions/medicine/tzu-chi-renal-dialysis-centre/",
+    "phone": "6378 0394 (General line/Reception/Enquiry for dialysis schedule), 6378 0393 (Nurse counter), 6378 0392 (Office)",
+    "email": "rdc@tzuchi.org.sg (General enquiries/Enquiry for dialysis schedule), rdc_clinical@tzuchi.org.sg (Clinical matters), rdc_socialservice@tzuchi.org.sg (Referral, Admission, Social service, and Programmes), rdc_operation@tzuchi.org.sg (Operations, Finance, Procurement, Facilities)",
+    "address": null,
+    "lastRefreshed": "2026-10-05"
+  },
+  {
+    "id": "ssg-activeglobalcaregiver",
+    "sourceId": "dlrgPRSTzXNjfmoHnvex",
+    "name": "Various services",
+    "agency": "Active Global Home and Community Care",
+    "summary": "Subsidized home and community care for frail elderly.",
+    "description": "Provides long-term, subsidized home-based care and/or community-based care and healthcare services to support frail and home-bound elderly.",
+    "eligibility": "Frail and home-bound elderly who require long-term care and support.",
+    "whoIsItFor": [
+      "Elderly",
+      "Persons with chronic or terminal illnesses",
+      "Persons with disabilities (PWDs)",
+      "Caregivers",
+      "Families"
+    ],
+    "whatItGives": [
+      "Home care",
+      "Live-in caregivers",
+      "Private nursing",
+      "Home medical",
+      "Home dialysis",
+      "Physiotherapy",
+      "Speech therapy",
+      "Subsidised care",
+      "Senior care centres",
+      "Respite care/Caregiver support"
+    ],
+    "schemeType": [
+      "Elderly",
+      "Caregiver Support",
+      "Healthcare",
+      "Persons with Disabilities (PWD)",
+      "Chronic or Terminal Illness Support",
+      "Residential Care"
+    ],
+    "area": {
+      "kind": "islandwide"
+    },
+    "link": "https://www.activeglobalcaregiver.sg/",
+    "phone": null,
+    "email": null,
+    "address": null,
+    "lastRefreshed": "2026-10-05"
+  },
+  {
+    "id": "ssg-montfortcare-seniors",
+    "sourceId": "QTDquikyN9TXEBls8nTL",
+    "name": "Various services (community kitchen, Active Ageing Centre, personalised care for seniors)",
+    "agency": "Goodlife!",
+    "summary": "Holistic active ageing programmes for seniors in Singapore.",
+    "description": "Network for people with dementia and depression, as well as caregivers who need the additional support to care for their loved ones. Provides appropriate mental health care and social support networks through outreach and education. A dedicated team of social workers assess the needs of the elderly and link senior citizens or caregivers to the relevant community resources. Care Closer to Home (CACHE) provides support and guidance for elderly aged 50 years old and above, diagnosed with one or more chronic illnesses. Elderly clients' health conditions are monitored on a regular basis and the clients are taught to manage their medication and wellbeing. Befriending services: regular home visits to seniors and caregivers who need assistance and support.",
+    "eligibility": "Eligibility is primarily for seniors, including frail elderly, those with complex needs, bedbound seniors, seniors with dementia or depression, and their caregivers. No specific age or residency requirements stated.",
+    "whoIsItFor": [
+      "Elderly",
+      "Elderly with dementia",
+      "Persons with mental health issues",
+      "Caregivers"
+    ],
+    "whatItGives": [
+      "Mental health assessment and treatment",
+      "Psychological support/Psychotherapy",
+      "Befriending services",
+      "Referral services",
+      "Emotional care"
+    ],
+    "schemeType": [
+      "Elderly",
+      "Mental Health",
+      "Caregiver Support",
+      "Chronic or Terminal Illness Support",
+      "Counselling and Emotional Support"
+    ],
+    "area": {
+      "kind": "islandwide"
+    },
+    "link": "https://montfortcare.org.sg/services/seniors/",
+    "phone": null,
+    "email": null,
+    "address": [
+      "Marine Parade, Singapore",
+      "Singapore (multiple locations, details not specified)"
+    ],
+    "lastRefreshed": "2026-10-05"
+  }
+]

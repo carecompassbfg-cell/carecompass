@@ -1,0 +1,131 @@
+import { describe, expect, it } from "vitest";
+import { CatalogScheme, PayForCategory } from "@/types/scheme";
+import {
+  Citizenship,
+  Relationship,
+  Residence,
+  UserDataFull,
+} from "@/types/user";
+import {
+  capitalise,
+  getProfileFacts,
+  getRecipientName,
+  getRecipientNameAtStart,
+  getRecipientPossessive,
+  getRecipientTitleName,
+  possessive,
+} from "@/util/recipient";
+import {
+  getLastChecked,
+  getLastCheckedText,
+  getSourceLine,
+} from "@/util/schemeCatalog";
+
+const user: UserDataFull = {
+  citizenship: Citizenship.CITIZEN,
+  care_recipient_age: 78,
+  care_recipient_citizenship: Citizenship.CITIZEN,
+  care_recipient_residence: Residence.HOME,
+  care_recipient_relationship: Relationship.PARENT,
+  household_size: 2,
+  total_monthly_household_income: 2000,
+  annual_property_value: 10000,
+  monthly_pchi: 1000,
+};
+
+describe("recipient names", () => {
+  it("uses a title form for headings and a sentence form for body text", () => {
+    expect(getRecipientTitleName(user)).toBe("you and your loved one");
+    expect(getRecipientName(user)).toBe("your loved one");
+    expect(capitalise(getRecipientName(user))).toBe("Your loved one");
+  });
+
+  it("uses the saved name as typed, without capitalising it", () => {
+    const named = { ...user, care_recipient_name: "  ah ma " };
+    expect(getRecipientName(named)).toBe("ah ma");
+    expect(getRecipientTitleName(named)).toBe("ah ma");
+    expect(getRecipientNameAtStart(named)).toBe("ah ma");
+    expect(getRecipientTitleName({ ...user, care_recipient_name: "Mum" })).toBe(
+      "Mum",
+    );
+  });
+
+  it("falls back when there's no name, or only spaces", () => {
+    for (const care_recipient_name of [null, undefined, "", "   "]) {
+      const unnamed = { ...user, care_recipient_name };
+      expect(getRecipientName(unnamed)).toBe("your loved one");
+      expect(getRecipientTitleName(unnamed)).toBe("you and your loved one");
+      expect(getRecipientNameAtStart(unnamed)).toBe("Your loved one");
+    }
+    expect(getRecipientName(null)).toBe("your loved one");
+  });
+
+  it("makes possessives", () => {
+    expect(possessive("Mum")).toBe("Mum's");
+    expect(
+      getRecipientPossessive({ ...user, care_recipient_name: "Mr Tan" }),
+    ).toBe("Mr Tan's");
+    expect(getRecipientPossessive(user)).toBe("your loved one's");
+  });
+});
+
+describe("getProfileFacts", () => {
+  it("lists age, citizenship and where they live", () => {
+    expect(getProfileFacts(user)).toEqual([
+      "Aged 78",
+      "Singapore Citizen",
+      "Lives at home",
+    ]);
+  });
+
+  it("leaves out an age of 0 or null", () => {
+    expect(getProfileFacts({ ...user, care_recipient_age: 0 })).toEqual([
+      "Singapore Citizen",
+      "Lives at home",
+    ]);
+    expect(
+      getProfileFacts({
+        ...user,
+        care_recipient_age: null as unknown as number,
+      }),
+    ).not.toContain("Aged 0");
+  });
+});
+
+const scheme = (tier: 1 | 2): CatalogScheme => ({
+  id: "x",
+  source: tier === 1 ? "carecompass" : "schemes_sg",
+  sourceId: null,
+  tier,
+  name: "X",
+  agency: "AIC",
+  summary: "",
+  description: "",
+  whatYouGet: [],
+  payFor: PayForCategory.CARE_SERVICES,
+  area: { kind: "islandwide" },
+  link: "https://example.com",
+  sources: [],
+  ...(tier === 1
+    ? { lastChecked: "2026-09-30" }
+    : { lastRefreshed: "2026-09-29" }),
+});
+
+describe("getSourceLine", () => {
+  it("puts the agency first", () => {
+    expect(getSourceLine(scheme(1))).toBe("AIC · Reviewed by CareCompass");
+    expect(getSourceLine(scheme(2))).toBe("AIC · From Schemes.sg");
+  });
+});
+
+describe("getLastChecked", () => {
+  it("uses lastChecked for Tier 1 and lastRefreshed for Tier 2", () => {
+    expect(getLastChecked(scheme(1))).toBe("2026-09-30");
+    expect(getLastChecked(scheme(2))).toBe("2026-09-29");
+  });
+
+  it('says "Last checked" for both tiers', () => {
+    expect(getLastCheckedText(scheme(1))).toBe("Last checked 30 Sept 2026");
+    expect(getLastCheckedText(scheme(2))).toBe("Last checked 29 Sept 2026");
+  });
+});

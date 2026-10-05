@@ -1,225 +1,349 @@
 "use client";
 
-import { api } from "@/api";
-import { PCHIDrawer } from "@/components/PCHIDrawer";
-import { SchemeData, SubsidyInfo } from "@/types/scheme";
-import { UserData } from "@/types/user";
+import { Suspense, useState } from "react";
+import Link from "next/link";
+import { useSearchParams } from "next/navigation";
+import { SignInButton } from "@clerk/nextjs";
+import QuestionSheet from "@/components/schemes/QuestionSheet";
+import SchemeIcon, { FOCUS_RING } from "@/components/schemes/SchemeIcon";
+import StatusPill from "@/components/schemes/StatusPill";
+import { ProfileQuestionId } from "@/types/scheme";
 import { BackButton } from "@/ui/button";
 import CustomMarkdown from "@/ui/CustomMarkdown";
 import LoadingSpinner from "@/ui/loading";
-import { checkAllSchemesEligibility } from "@/util/eligibilityChecker";
-import { useAuthStore } from "@/stores/auth";
-import { useSearchParams } from "next/navigation";
-import { useState, useEffect, Suspense } from "react";
-import { toast } from "sonner";
+import useSchemeCatalog from "@/util/hooks/useSchemeCatalog";
+import { getRecipientName } from "@/util/recipient";
+import {
+  isSheetQuestion,
+  PAY_FOR_META,
+  QUESTION_META,
+  getLastCheckedText,
+  getSourceLine,
+  SOURCE_LABELS,
+} from "@/util/schemeCatalog";
 
-function SupportDetails() {
-  const param = useSearchParams();
-  const [scheme, setScheme] = useState<SchemeData>();
-  const [subsidyInfo, setSubsidyInfo] = useState<SubsidyInfo>();
-  const isSignedIn = useAuthStore((state) => state.isSignedIn);
-  const userId = useAuthStore((state) => state.userId);
-  const [user, setUser] = useState<UserData>();
-  const [userLoadError, setUserLoadError] = useState(false);
+// Collapsible eligibility text. Tier 2 text comes from Schemes.sg, so it
+// carries a note saying so.
+function FullEligibility({
+  content,
+  note,
+}: {
+  content: string;
+  note?: string;
+}) {
+  return (
+    <details className="group border-t border-gray-200 pt-3">
+      <summary
+        className={`flex min-h-11 cursor-pointer list-none items-center text-sm font-semibold text-interaction-links-default [&::-webkit-details-marker]:hidden ${FOCUS_RING}`}
+      >
+        <span className="flex-1">Full eligibility</span>
+        <SchemeIcon
+          name="chevron-link"
+          size={16}
+          className="transition-transform group-open:rotate-90"
+        />
+      </summary>
+      {note && <p className="pb-2 text-xs text-gray-600">{note}</p>}
+      <CustomMarkdown content={content} />
+    </details>
+  );
+}
 
-  useEffect(() => {
-    fetch("/data/schemes.json")
-      .then((response) => response.json() as Promise<SchemeData[]>)
-      .then((json) => {
-        setScheme(json.find((scheme) => scheme.id === param.get("id")));
-      });
-  }, [param]);
+function ChecklistRow({
+  icon,
+  title,
+  hint,
+  action,
+}: {
+  icon: string;
+  title: string;
+  hint?: string;
+  action?: React.ReactNode;
+}) {
+  return (
+    <li className="flex items-start gap-2.5">
+      <SchemeIcon name={icon} size={22} />
+      <div className="flex flex-1 flex-col gap-0.5">
+        {/* Reasons can hold a link, e.g. to ElderFund */}
+        <CustomMarkdown
+          content={title}
+          className="text-[15px] leading-[21px] text-gray-800 prose-p:my-0"
+        />
+        {hint && (
+          <span className="text-[13px] leading-[18px] text-gray-600">
+            {hint}
+          </span>
+        )}
+      </div>
+      {action}
+    </li>
+  );
+}
 
-  // We fetch from backend instead of store for now because store
-  // is currently not persisted across refreshes
-  useEffect(() => {
-    if (isSignedIn && !user && userId) {
-      api
-        .get<UserData>("/users/me")
-        .then((response) => setUser(response.data))
-        .catch((error) => {
-          console.error(error);
-          setUserLoadError(true);
-          toast.error("Failed to fetch user data");
-        });
-    }
-  }, [isSignedIn, userId, user]);
+function SchemeDetail() {
+  const params = useSearchParams();
+  const id = params.get("id");
+  const {
+    items,
+    user,
+    isSignedIn,
+    isLoading,
+    userLoadError,
+    refreshUser,
+    saveAnswers,
+  } = useSchemeCatalog();
+  const [sheetStart, setSheetStart] = useState<ProfileQuestionId>();
 
-  // Super hacky need to fix ASAP
-  useEffect(() => {
-    if (
-      scheme &&
-      scheme.id === "MOH-NR-LTC-SUBSIDY" &&
-      isSignedIn &&
-      !subsidyInfo &&
-      userId
-    ) {
-      api
-        .post<SubsidyInfo>("/subsidies/moh-nrltc", { id: userId })
-        .then((response) => setSubsidyInfo(response.data))
-        .catch((error) => {
-          console.error(error);
-          toast.error("Failed to fetch subsidy info");
-        });
-    }
-  }, [isSignedIn, userId, scheme, subsidyInfo]);
-
-  if (!scheme) {
+  if (isLoading) {
     return <LoadingSpinner />;
   }
 
-  const eligibilityResults = user ? checkAllSchemesEligibility(user) : [];
-  const schemeHere = user
-    ? eligibilityResults.find((result) => result.schemeId === scheme.id)
-    : undefined;
+  const item = items.find(({ scheme }) => scheme.id === id);
+  if (!item) {
+    return (
+      <div className="flex w-full flex-col gap-4 py-6">
+        <BackButton />
+        <p className="text-gray-800">We couldn&apos;t find that scheme.</p>
+        <Link
+          href="/dashboard"
+          className={`font-semibold text-interaction-links-default ${FOCUS_RING}`}
+        >
+          See all financial schemes
+        </Link>
+      </div>
+    );
+  }
+
+  const { scheme, status } = item;
+  const name = getRecipientName(user);
+  const category = PAY_FOR_META[scheme.payFor];
 
   return (
-    <div className="flex h-full w-full flex-col gap-4 py-6">
+    <div className="flex w-full flex-col gap-4 py-6">
       <BackButton />
-      <section className="flex flex-col gap-2">
-        <h3 className="text-xl font-semibold">{scheme.name}</h3>
-        <div className="flex place-content-start place-items-start gap-2 rounded-md border border-gray-200 bg-white p-4 text-left">
-          <div className="flex flex-col gap-2">
-            <span className="text-lg font-semibold">Overview</span>
-            <CustomMarkdown content={scheme.description} />
-            <span className="text-lg font-semibold">Benefits</span>
-            <CustomMarkdown content={scheme.benefits} />
-          </div>
-        </div>
-      </section>
-      <section className="flex flex-col gap-2">
-        <h3 className="text-lg font-semibold">Eligibility</h3>
-        {isSignedIn &&
-          scheme.pchiRequired &&
-          user &&
-          user.monthly_pchi === null && (
-            <section className="flex flex-col gap-4 rounded border border-brand-primary-300 bg-brand-primary-100 p-4">
-              <p className="text-brand-primary-900">
-                Share your household information to see how much subsidy you may
-                be eligible for
-              </p>
-              <PCHIDrawer />
-            </section>
+
+      <header className="flex flex-col gap-2">
+        <h1 className="text-[26px] font-bold leading-8 text-gray-800">
+          {scheme.name}
+        </h1>
+        <div className="flex flex-wrap gap-3 text-xs leading-4 text-gray-600">
+          <span className="flex items-center gap-1">
+            <SchemeIcon name={category.icon} size={13} />
+            {category.label}
+          </span>
+          {scheme.area.kind === "district" && (
+            <span className="flex items-center gap-1">
+              <SchemeIcon name="pin-meta" size={13} />
+              {scheme.area.name}
+            </span>
           )}
-        {subsidyInfo && (
-          <section className="flex flex-col gap-4 rounded border border-brand-primary-300 bg-brand-primary-100 p-4">
-            <p className="text-brand-primary-900">
-              You may qualify for <b>{subsidyInfo.subsidyLevel}%</b> subsidy!
-            </p>
-            <p className="text-sm leading-tight text-brand-primary-900">
-              *Based on an estimated per capita monthly household income
-              of&nbsp;
-              <b>
-                {subsidyInfo.monthlyPchi.toLocaleString("en-SG", {
-                  style: "currency",
-                  currency: "SGD",
-                })}
-              </b>
-              {subsidyInfo.monthlyPchi === 0 &&
-                subsidyInfo.annualPropertyValue !== null &&
-                ` (and Annual Property Value of ${subsidyInfo.annualPropertyValue.toLocaleString(
-                  "en-SG",
-                  {
-                    style: "currency",
-                    currency: "SGD",
-                  },
-                )})`}
-            </p>
-          </section>
+          <span className="flex items-center gap-1">
+            <SchemeIcon name="info-meta" size={13} />
+            {getSourceLine(scheme)}
+          </span>
+        </div>
+      </header>
+
+      <section
+        aria-labelledby="what-you-get"
+        className="flex flex-col gap-2.5 rounded-xl border border-gray-200 bg-white p-4"
+      >
+        <h2 id="what-you-get" className="text-base font-bold text-gray-800">
+          What you get
+        </h2>
+        <CustomMarkdown content={scheme.description} />
+        {scheme.whatYouGet.length > 0 && (
+          <ul className="flex list-disc flex-col gap-1 pl-5 text-[15px] text-gray-800">
+            {scheme.whatYouGet.map((entry) => (
+              <li key={entry}>
+                <CustomMarkdown content={entry} />
+              </li>
+            ))}
+          </ul>
         )}
-        <div className="flex flex-col place-content-start place-items-start gap-3 rounded-md border border-gray-200 bg-white p-4 text-left">
-          <div className="w-full">
-            {isSignedIn && userLoadError && (
-              <p className="text-sm text-gray-500">
-                Could not load your profile data. Your personalised eligibility
-                assessment is unavailable — please try again later.
-              </p>
+      </section>
+
+      <section
+        aria-labelledby="can-get"
+        className="flex flex-col gap-3.5 rounded-xl border border-gray-200 bg-white p-4"
+      >
+        <div className="flex flex-wrap items-center justify-between gap-2">
+          <h2 id="can-get" className="text-base font-bold text-gray-800">
+            Can {name} get this?
+          </h2>
+          <StatusPill status={status} />
+        </div>
+
+        {isSignedIn && userLoadError && (
+          <p className="text-sm text-gray-600">
+            We couldn&apos;t load your profile, so we can&apos;t check this for{" "}
+            {name} yet. Please try again later.
+          </p>
+        )}
+
+        {scheme.tier === 2 ? (
+          <>
+            <p className="text-sm leading-5 text-gray-600">
+              Check eligibility on the official website.
+            </p>
+            <a
+              href={scheme.link}
+              target="_blank"
+              rel="noreferrer"
+              className={`flex min-h-11 items-center gap-2.5 text-[15px] font-semibold text-interaction-links-default ${FOCUS_RING}`}
+            >
+              <SchemeIcon name="external" size={18} />
+              Check the official page
+              <span className="sr-only">(opens in a new tab)</span>
+            </a>
+            {scheme.eligibility && (
+              <FullEligibility
+                content={scheme.eligibility}
+                note="Eligibility as described by Schemes.sg"
+              />
             )}
-            <div className="flex flex-col gap-4">
-              {schemeHere?.eligibleReasons.map((message, index) => (
-                <div key={index} className="flex items-start gap-3">
-                  <svg
-                    className="mt-0.5 h-6 w-6 flex-shrink-0"
-                    viewBox="0 0 22 22"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M11 0.5C5.20156 0.5 0.5 5.20156 0.5 11C0.5 16.7984 5.20156 21.5 11 21.5C16.7984 21.5 21.5 16.7984 21.5 11C21.5 5.20156 16.7984 0.5 11 0.5ZM15.5352 7.57109L10.5992 14.4148C10.5302 14.5111 10.4393 14.5896 10.3339 14.6437C10.2286 14.6978 10.1118 14.7261 9.99336 14.7261C9.87491 14.7261 9.75816 14.6978 9.6528 14.6437C9.54743 14.5896 9.45649 14.5111 9.3875 14.4148L6.46484 10.3648C6.37578 10.2406 6.46484 10.0672 6.61719 10.0672H7.71641C7.95547 10.0672 8.18281 10.182 8.32344 10.3789L9.99219 12.6945L13.6766 7.58516C13.8172 7.39062 14.0422 7.27344 14.2836 7.27344H15.3828C15.5352 7.27344 15.6242 7.44688 15.5352 7.57109V7.57109Z"
-                      fill="#059669"
-                    />
-                  </svg>
-                  <span className="text-md">{message}</span>
-                </div>
+          </>
+        ) : (
+          <>
+            <ul className="flex flex-col gap-3.5">
+              {status.reasonsMet.map((reason) => (
+                <ChecklistRow key={reason} icon="row-check" title={reason} />
               ))}
-              {schemeHere?.additionalVerificationDetails &&
-                schemeHere.additionalVerificationDetails.map(
-                  (message, index) => (
-                    <div key={index} className="flex items-start gap-3">
-                      <svg
-                        className="mt-0.5 h-6 w-6 flex-shrink-0"
-                        viewBox="0 0 22 22"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
+              {status.reasonsNotMet.map((reason) => (
+                <ChecklistRow key={reason} icon="row-cross" title={reason} />
+              ))}
+              {status.questionsToAsk.map((question) => (
+                <ChecklistRow
+                  key={question}
+                  icon="row-question"
+                  title={QUESTION_META[question].rowTitle}
+                  hint={QUESTION_META[question].rowHint}
+                  action={
+                    isSignedIn && isSheetQuestion(question) ? (
+                      <button
+                        type="button"
+                        onClick={() => setSheetStart(question)}
+                        className={`min-h-11 rounded-lg border border-interaction-main-default px-3 text-sm font-semibold text-interaction-links-default ${FOCUS_RING}`}
                       >
-                        <path
-                          d="M11 0.5C5.20156 0.5 0.5 5.20156 0.5 11C0.5 16.7984 5.20156 21.5 11 21.5C16.7984 21.5 21.5 16.7984 21.5 11C21.5 5.20156 16.7984 0.5 11 0.5ZM15.5352 7.57109L10.5992 14.4148C10.5302 14.5111 10.4393 14.5896 10.3339 14.6437C10.2286 14.6978 10.1118 14.7261 9.99336 14.7261C9.87491 14.7261 9.75816 14.6978 9.6528 14.6437C9.54743 14.5896 9.45649 14.5111 9.3875 14.4148L6.46484 10.3648C6.37578 10.2406 6.46484 10.0672 6.61719 10.0672H7.71641C7.95547 10.0672 8.18281 10.182 8.32344 10.3789L9.99219 12.6945L13.6766 7.58516C13.8172 7.39062 14.0422 7.27344 14.2836 7.27344H15.3828C15.5352 7.27344 15.6242 7.44688 15.5352 7.57109V7.57109Z"
-                          fill="#d9dbda"
-                        />
-                      </svg>
-                      <span className="text-md">{message}</span>
-                    </div>
-                  ),
-                )}
-              {schemeHere?.ineligibleReasons &&
-                schemeHere.ineligibleReasons.map((message, index) => (
-                  <div key={index} className="flex items-start gap-3">
-                    <svg
-                      className="mt-0.5 h-6 w-6 flex-shrink-0"
-                      viewBox="0 0 22 22"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <g transform="translate(0.5 0.5)">
-                        <circle cx="10.5" cy="10.5" r="10.5" fill="#c03434" />
-                        <g
-                          stroke="#FFFFFF"
-                          strokeWidth="1.5"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
+                        Answer
+                        <span className="sr-only">
+                          : {QUESTION_META[question].rowTitle}
+                        </span>
+                      </button>
+                    ) : isSignedIn ? (
+                      // Profile fields (e.g. where they live) are changed on
+                      // the profile page, not in the question sheet
+                      <Link
+                        href={`/profile/care-recipient-info/edit?returnTo=${encodeURIComponent(
+                          `/dashboard/schemes?id=${scheme.id}`,
+                        )}`}
+                        className={`flex min-h-11 items-center rounded-lg border border-interaction-main-default px-3 text-sm font-semibold text-interaction-links-default ${FOCUS_RING}`}
+                      >
+                        Update profile
+                      </Link>
+                    ) : !isSignedIn ? (
+                      <SignInButton>
+                        <button
+                          type="button"
+                          className={`min-h-11 rounded-lg border border-interaction-main-default px-3 text-sm font-semibold text-interaction-links-default ${FOCUS_RING}`}
                         >
-                          <path d="m6.5 14.5 8-8" />
-                          <path d="m6.5 6.5 8 8" />
-                        </g>
-                      </g>
-                    </svg>
-                    <span className="text-md">{message}</span>
-                  </div>
-                ))}
-              {schemeHere?.otherDetails &&
-                schemeHere.eligibleReasons.length > 0 &&
-                schemeHere.otherDetails.map((message, index) => (
-                  <div key={index} className="flex items-start gap-3">
-                    <span className="text-md">{message}</span>
-                  </div>
-                ))}
-            </div>
-          </div>
-        </div>
+                          Sign in
+                        </button>
+                      </SignInButton>
+                    ) : undefined
+                  }
+                />
+              ))}
+            </ul>
+
+            {status.agencyWillCheck.length > 0 && (
+              <div className="flex flex-col gap-3 border-t border-gray-200 pt-3.5">
+                <h3 className="text-sm font-semibold text-gray-800">
+                  The agency will also check
+                </h3>
+                <ul className="flex flex-col gap-3.5">
+                  {status.agencyWillCheck.map((check) => (
+                    <ChecklistRow key={check} icon="row-info" title={check} />
+                  ))}
+                </ul>
+              </div>
+            )}
+
+            {scheme.eligibility && (
+              <FullEligibility content={scheme.eligibility} />
+            )}
+          </>
+        )}
       </section>
-      <section className="flex flex-col gap-2 pb-6">
-        <h3 className="text-lg font-semibold">Next steps</h3>
-        <div className="flex flex-col place-content-start place-items-start gap-2 rounded-md border border-gray-200 bg-white p-4 text-left">
-          <CustomMarkdown content={scheme.nextSteps} />
-        </div>
+
+      <section
+        aria-labelledby="next-steps"
+        className="flex flex-col gap-3 rounded-xl border border-gray-200 bg-white p-4"
+      >
+        <h2 id="next-steps" className="text-base font-bold text-gray-800">
+          Next steps
+        </h2>
+        {scheme.nextSteps && <CustomMarkdown content={scheme.nextSteps} />}
+        <a
+          href={scheme.link}
+          target="_blank"
+          rel="noreferrer"
+          className={`flex min-h-11 items-center gap-2.5 text-[15px] font-semibold text-interaction-links-default ${FOCUS_RING}`}
+        >
+          <SchemeIcon name="external" size={18} />
+          Read more on the official website
+          <span className="sr-only">(opens in a new tab)</span>
+        </a>
       </section>
+
+      <p className="pb-4 text-xs text-gray-600">
+        {getLastCheckedText(scheme)} ·{" "}
+        {scheme.tier === 1 ? (
+          <>
+            Sources:{" "}
+            {scheme.sources.map((source, index) => (
+              <span key={source.url}>
+                {index > 0 && ", "}
+                <a
+                  href={source.url}
+                  target="_blank"
+                  rel="noreferrer"
+                  className={`underline ${FOCUS_RING}`}
+                >
+                  {source.name}
+                  <span className="sr-only"> (opens in a new tab)</span>
+                </a>
+              </span>
+            ))}
+          </>
+        ) : (
+          `From ${SOURCE_LABELS[scheme.source]}`
+        )}
+      </p>
+
+      {sheetStart && (
+        <QuestionSheet
+          isOpen
+          onClose={() => {
+            setSheetStart(undefined);
+            saveAnswers();
+          }}
+          scopeSchemeId={scheme.id}
+          startAt={sheetStart}
+          items={items}
+          recipientName={name}
+          isSignedIn={isSignedIn}
+          onIncomeSaved={refreshUser}
+        />
+      )}
     </div>
   );
 }
 
-export default function SupportDetailsWithSuspense() {
+export default function SchemeDetailWithSuspense() {
   return (
     <Suspense fallback={<LoadingSpinner />}>
-      <SupportDetails />
+      <SchemeDetail />
     </Suspense>
   );
 }

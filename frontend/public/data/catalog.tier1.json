@@ -1,0 +1,269 @@
+[
+  {
+    "id": "PARENT-RELIEF",
+    "source": "carecompass",
+    "sourceId": null,
+    "tier": 1,
+    "name": "Parent Relief",
+    "agency": "IRAS",
+    "summary": "Income tax relief if you support a parent, grandparent or in-law.",
+    "description": "Income tax relief if you support a parent, grandparent or in-law.",
+    "whatYouGet": [
+      "Living with you: $9,000 per dependant, or $14,000 under Parent Relief (Disability)",
+      "Not living with you (you spent $2,000 or more supporting them): $5,500, or $10,000 under Parent Relief (Disability)",
+      "Claim for up to 2 dependants. Siblings can share the relief for the same parent"
+    ],
+    "valueText": "Up to $9,000 tax relief ($14,000 if they have a disability)",
+    "payFor": "tax_cpf",
+    "area": {
+      "kind": "islandwide"
+    },
+    "link": "https://www.iras.gov.sg/taxes/individual-income-tax/basics-of-individual-income-tax/tax-reliefs-rebates-and-deductions/tax-reliefs/parent-relief-parent-relief-(disability)",
+    "sources": [
+      {
+        "name": "IRAS: Parent Relief/Parent Relief (Disability)",
+        "url": "https://www.iras.gov.sg/taxes/individual-income-tax/basics-of-individual-income-tax/tax-reliefs-rebates-and-deductions/tax-reliefs/parent-relief-parent-relief-(disability)"
+      }
+    ],
+    "lastChecked": "2026-09-30",
+    "checkerId": "PARENT-RELIEF",
+    "eligibility": "- Your parent, grandparent or in-law\n- Aged 55 or older, or needs help with at least one daily activity (Parent Relief (Disability))\n- If they don't live with you, you spent $2,000 or more supporting them\n- Their income last year was $8,000 or less (2025, for the Year of Assessment 2026)\n- No one else has claimed Spouse Relief or another relief on the same person\n- For Parent Relief (Disability): a doctor's or disability association's document if IRAS asks",
+    "nextSteps": "1. Log in to myTax Portal with Singpass when you file your tax return.\n2. Go to \"4. Deductions, Tax Reliefs and Rebates\" > \"Add New\" > \"Parent\".\n3. If you claimed last year, it is pre-filled automatically."
+  },
+  {
+    "id": "CAREGIVERS-TRAINING-GRANT",
+    "source": "carecompass",
+    "sourceId": null,
+    "tier": 1,
+    "name": "Caregivers Training Grant",
+    "agency": "AIC",
+    "summary": "Pays for caregiving courses for you or your helper.",
+    "description": "Pays for caregiving courses for you or your helper.",
+    "whatYouGet": [
+      "$400 in the first year, then a $200 top-up each financial year. Unused balance carries over, capped at $400",
+      "Applied directly to course fees. You pay at least $10 per course",
+      "Family members and a migrant domestic worker can all use it if they are main caregivers; they share one balance"
+    ],
+    "valueText": "$400 in the first year, then $200 a year",
+    "payFor": "caregiver_courses",
+    "area": {
+      "kind": "islandwide"
+    },
+    "link": "https://www.aic.sg/financial-assistance/caregivers-training-grant-ctg/",
+    "sources": [
+      {
+        "name": "AIC: Caregivers Training Grant",
+        "url": "https://www.aic.sg/financial-assistance/caregivers-training-grant-ctg/"
+      }
+    ],
+    "lastChecked": "2026-10-05",
+    "checkerId": "CAREGIVERS-TRAINING-GRANT",
+    "eligibility": "- Your loved one is a Singapore Citizen or PR\n- Aged 65 or older, or needs help with at least one daily activity (the need must be permanent; needs a Functional Assessment Report unless already on a scheme such as CareShield Life or ElderFund)\n- You are a main caregiver\n- The course is on the approved list\n- The grant has not already been used up by another caregiver",
+    "nextSteps": "1. Pick a course from the [Caregivers Training Catalogue](https://training-healthcare.vertis.digital/).\n2. Tell the training provider you will use the grant at least 2 weeks before the course, and fill in the [CTG application form](https://edge.sitecorecloud.io/agencyforinb6cc-agencyforin73f5-production08ac-d178/media/agency-for-integrated-care/Files/Financial-Assistance/CTG-Application-form.pdf) they give you.\n3. If your loved one is under 65, you'll also need a [Functional Assessment Report](https://edge.sitecorecloud.io/agencyforinb6cc-agencyforin73f5-production08ac-d178/media/agency-for-integrated-care/Files/Financial-Assistance/Functional-Assessment-Report.pdf)."
+  },
+  {
+    "id": "HOME-CAREGIVING-GRANT",
+    "source": "carecompass",
+    "sourceId": null,
+    "tier": 1,
+    "name": "Home Caregiving Grant",
+    "agency": "AIC",
+    "summary": "Monthly cash to help with the cost of caring for your loved one at home.",
+    "description": "Monthly cash to help with the cost of caring for your loved one at home.",
+    "whatYouGet": [
+      "$600 a month if household income per person is $1,500 or less (or no income and home Annual Value $21,000 or less)",
+      "$400 a month if $1,501 to $3,600",
+      "$200 a month if $3,601 to $4,800",
+      "Households that own more than one property get $200"
+    ],
+    "valueText": "Up to $600 a month",
+    "payFor": "monthly_payouts",
+    "area": {
+      "kind": "islandwide"
+    },
+    "link": "https://www.aic.sg/financial-assistance/home-caregiving-grant/",
+    "sources": [
+      {
+        "name": "AIC: Home Caregiving Grant",
+        "url": "https://www.aic.sg/financial-assistance/home-caregiving-grant/"
+      }
+    ],
+    "lastChecked": "2026-10-05",
+    "checkerId": "HOME-CAREGIVING-GRANT",
+    "eligibility": "- Your loved one is a Singapore Citizen, or a PR with a living Singapore Citizen parent, child or spouse\n- Not living in a nursing home\n- Household income per person of $4,800 or less (or no income and home Annual Value $21,000 or less)\n- Needs help with at least 3 daily activities, confirmed as permanent by a Functional Assessment Report",
+    "nextSteps": "1. Get a Functional Assessment Report from an approved doctor, nurse or therapist.\n2. Apply on [AIC eFASS](https://www.aic.sg/financial-assistance/home-caregiving-grant/) with Singpass (it checks your household income for you). Or email apply@aic.sg or visit an AIC Link.\n3. Approval takes up to 4 weeks."
+  },
+  {
+    "id": "MIGRANT-DOMESTIC-WORKER-LEVY",
+    "source": "carecompass",
+    "sourceId": null,
+    "tier": 1,
+    "name": "Migrant Domestic Worker Levy Concession",
+    "agency": "MOM",
+    "summary": "Pay a lower monthly levy for a helper who cares for your loved one.",
+    "description": "Pay a lower monthly levy for a helper who cares for your loved one.",
+    "whatYouGet": [
+      "Levy drops to $60 a month",
+      "One helper per eligible person, up to 2 per household"
+    ],
+    "valueText": "$60 a month levy",
+    "payFor": "helper_costs",
+    "area": {
+      "kind": "islandwide"
+    },
+    "link": "https://www.mom.gov.sg/passes-and-permits/work-permit-for-foreign-domestic-worker/foreign-domestic-worker-levy/levy-concession",
+    "sources": [
+      {
+        "name": "MOM: Levy concession",
+        "url": "https://www.mom.gov.sg/passes-and-permits/work-permit-for-foreign-domestic-worker/foreign-domestic-worker-levy/levy-concession"
+      }
+    ],
+    "lastChecked": "2026-10-05",
+    "checkerId": "MIGRANT-DOMESTIC-WORKER-LEVY",
+    "eligibility": "- Your loved one lives with you (same address on NRIC)\n- Aged 67 or older and a Singapore Citizen, or a PR where you or your spouse is a Singapore Citizen\n- Or needs help with at least one daily activity and is a Singapore Citizen, or a PR with a Singapore Citizen parent, spouse or child (needs an AIC recommendation letter)\n- The helper is registered to your household, and your loved one is listed as a household member on the FDW eService",
+    "nextSteps": "- Aged 67+: usually applied automatically when the address and household details match. [Check if it has been applied](https://go.gov.sg/check-lc-elderly-pwd).\n- Disability route: apply to AIC for a recommendation letter first, then MOM applies the concession.\n- The concession shows within your next 2 levy bills and is backdated to when you completed the steps."
+  },
+  {
+    "id": "MOH-NR-LTC-SUBSIDY",
+    "source": "carecompass",
+    "sourceId": null,
+    "tier": 1,
+    "name": "Subsidies for day care and home care",
+    "agency": "MOH",
+    "summary": "Pays up to 95% of fees at government-funded day care, home care and home personal care.",
+    "description": "Pays up to 95% of fees at government-funded day care, home care and home personal care.",
+    "whatYouGet": [
+      "Covers: dementia day care, maintenance day care, home personal care, home nursing, home medical, home therapy, rehabilitation, centre-based nursing, meals on wheels, medical escort and transport, psychiatric day rehabilitation, maintenance exercise",
+      "Subsidy by household income per person (from 1 Jul 2026):\n\n| Income per person | SC born 1969 or earlier | SC born after 1969 | PR |\n|---|---|---|---|\n| No income, AV ≤ $21,000 | 95% | 80% | 55% |\n| $1,500 or less | 95% | 80% | 55% |\n| $1,501–$2,300 | 85% | 70% | 45% |\n| $2,301–$2,600 | 75% | 60% | 35% |\n| $2,601–$3,600 | 55% | 40% | 20% |\n| $3,601–$4,800 | 35% | 20% | 10% |\n| Above $4,800, or no income with AV > $21,000 | 0% | 0% | 0% |"
+    ],
+    "valueText": "Up to 95% off fees",
+    "payFor": "care_services",
+    "area": {
+      "kind": "islandwide"
+    },
+    "link": "https://www.moh.gov.sg/managing-expenses/schemes-and-subsidies/subsidy-framework-for-non-residential-long-term-care-services",
+    "sources": [
+      {
+        "name": "MOH: Subsidies for non-residential long-term care services",
+        "url": "https://www.moh.gov.sg/managing-expenses/schemes-and-subsidies/subsidy-framework-for-non-residential-long-term-care-services"
+      },
+      {
+        "name": "AIC: Enhanced Home Personal Care",
+        "url": "https://www.aic.sg/Care-Services/Enhanced-Home-Personal-Care"
+      }
+    ],
+    "lastChecked": "2026-10-05",
+    "checkerId": "MOH-NR-LTC-SUBSIDY",
+    "eligibility": "- Your loved one is a Singapore Citizen or PR\n- For care at home or at a centre, not in a nursing home\n- Household income per person of $4,800 or less (or no income and home Annual Value $21,000 or less)\n- Singapore Citizens born 1969 or earlier get the highest rates\n- The provider is government-funded, with a referral from a doctor or AIC",
+    "nextSteps": "1. Ask your loved one's doctor at the hospital or polyclinic, or AIC, to refer you to a subsidised service.\n2. The subsidy is applied to the provider's bill.\n3. Compare day care and home care providers in Care services."
+  },
+  {
+    "id": "SENIORS-MOBILITY-ENABLING-FUND",
+    "source": "carecompass",
+    "sourceId": null,
+    "tier": 1,
+    "name": "Seniors' Mobility and Enabling Fund",
+    "agency": "AIC",
+    "summary": "Pays for wheelchairs, walking aids, hospital beds and home care items like adult diapers and milk supplements.",
+    "description": "Pays for wheelchairs, walking aids, hospital beds and home care items like adult diapers and milk supplements.",
+    "whatYouGet": [
+      "Mobility and assistive devices: walking sticks, wheelchairs, commodes, hospital beds, pressure-relief cushions, hearing aids, spectacles and more. Up to 90% of the cost or the device cap, whichever is lower",
+      "Home healthcare items: adult diapers, milk supplements, thickeners, catheters, nasal tubing, wound dressings",
+      "Assessment fee between $10 and $180, depending on subsidy tier"
+    ],
+    "valueText": "Up to 90% off",
+    "payFor": "equipment_home",
+    "area": {
+      "kind": "islandwide"
+    },
+    "link": "https://www.aic.sg/financial-assistance/seniors-mobility-and-enabling-fund/",
+    "sources": [
+      {
+        "name": "AIC: Seniors' Mobility and Enabling Fund",
+        "url": "https://www.aic.sg/financial-assistance/seniors-mobility-and-enabling-fund/"
+      }
+    ],
+    "lastChecked": "2026-10-05",
+    "checkerId": "SENIORS-MOBILITY-ENABLING-FUND",
+    "eligibility": "- Your loved one is a Singapore Citizen or PR\n- Aged 60 or older\n- Not living in a nursing home\n- Household income per person of $4,800 or less (or no income and home Annual Value $21,000 or less)\n- An approved health professional assesses that the item is needed\n- Extra conditions apply for motorised devices",
+    "nextSteps": "1. Don't buy the item first: purchases made in advance can't be reimbursed.\n2. Ask a therapist or medical social worker at the hospital or senior care centre to assess and apply for you, or apply online with Singpass on the AIC page, or at an AIC Link. Approval takes up to 15 working days."
+  },
+  {
+    "id": "MEDISAVE-CARE",
+    "source": "carecompass",
+    "sourceId": null,
+    "tier": 1,
+    "name": "MediSave Care",
+    "agency": "AIC / CPF",
+    "summary": "Monthly cash from MediSave (your loved one's or their spouse's) for someone with severe disability.",
+    "description": "Monthly cash from MediSave (your loved one's or their spouse's) for someone with severe disability.",
+    "whatYouGet": [
+      "$200 a month with $20,000+ in MediSave; $150 with $15,000+; $100 with $10,000+; $50 with $5,000+",
+      "Can draw from their own and their spouse's MediSave (combined max $200). $5,000 stays in each account"
+    ],
+    "valueText": "Up to $200 a month",
+    "payFor": "monthly_payouts",
+    "area": {
+      "kind": "islandwide"
+    },
+    "link": "https://aic.sg/Financial-Assistance/MediSave-Care",
+    "sources": [
+      {
+        "name": "AIC: MediSave Care",
+        "url": "https://aic.sg/Financial-Assistance/MediSave-Care"
+      },
+      {
+        "name": "CPF: What is MediSave Care?",
+        "url": "https://www.cpf.gov.sg/service/article/what-is-medisave-care"
+      }
+    ],
+    "lastChecked": "2026-09-30",
+    "checkerId": "MEDISAVE-CARE",
+    "eligibility": "- Your loved one is a Singapore Citizen or PR\n- Aged 30 or older\n- Severe disability: needs full help with at least 3 daily activities, assessed by an MOH-accredited assessor\n- MediSave balance of at least $5,000",
+    "nextSteps": "1. Book a severe disability assessment with an MOH-accredited assessor. You pay $100–$250 upfront, refunded if approved.\n2. Apply on AIC eFASS with Singpass (recommended) or through the nursing home. Or get a hardcopy form by emailing apply@aic.sg or at an AIC Link. Approval takes up to 4 weeks."
+  },
+  {
+    "id": "CARESHIELD-ELDERSHIELD-CLAIM",
+    "source": "carecompass",
+    "sourceId": null,
+    "tier": 1,
+    "name": "CareShield Life and ElderShield payouts",
+    "agency": "AIC",
+    "summary": "Monthly cash from long-term care insurance if your loved one becomes severely disabled.",
+    "description": "Monthly cash from long-term care insurance if your loved one becomes severely disabled.",
+    "whatYouGet": [
+      "**CareShield Life**: monthly payouts for life while severely disabled. The starting payout is $689 a month in 2026 and rises each year until age 67 or a claim. People born in 1954 or earlier who joined at 67 or above get a fixed $612 a month",
+      "**ElderShield 400** (joined Sep 2007 to Dec 2019): $400 a month for up to 72 months",
+      "**ElderShield 300** (joined Sep 2002 to Sep 2007): $300 a month for up to 60 months",
+      "Private supplements to these plans pay extra; check the policy"
+    ],
+    "valueText": "$300 to $689+ a month, depending on the plan",
+    "payFor": "monthly_payouts",
+    "area": {
+      "kind": "islandwide"
+    },
+    "link": "https://www.cpf.gov.sg/member/healthcare-financing/careshield-life",
+    "sources": [
+      {
+        "name": "CPF: CareShield Life",
+        "url": "https://www.cpf.gov.sg/member/healthcare-financing/careshield-life"
+      },
+      {
+        "name": "CPF: CareShield Life monthly payout",
+        "url": "https://www.cpf.gov.sg/service/article/what-is-the-monthly-payout-amount-for-careshield-life"
+      },
+      {
+        "name": "AIC: CareShield Life",
+        "url": "https://www.aic.sg/financial-assistance/careshield-life"
+      },
+      {
+        "name": "AIC: ElderShield",
+        "url": "https://aic.sg/Financial-Assistance/ElderShield"
+      }
+    ],
+    "lastChecked": "2026-10-05",
+    "checkerId": "CARESHIELD-ELDERSHIELD-CLAIM",
+    "eligibility": "- Covered by CareShield Life or ElderShield\n- Everyone born in 1980 or later is covered automatically, from age 30. People born 1970–1979 with ElderShield 400 were moved to CareShield Life in Dec 2021. People born in 1979 or earlier could choose to join. ElderShield closed to new members on 1 Jan 2020\n- Severe disability: unable to do at least 3 daily activities, assessed by an MOH-accredited assessor\n- The policy is active",
+    "nextSteps": "1. Book a severe disability assessment with an MOH-accredited assessor. For CareShield Life the first assessment is free; for ElderShield it costs $100 (clinic) to $250 (home visit), refunded if the claim succeeds.\n2. Apply on AIC eFASS with Singpass, or through the nursing home, or with a hardcopy form from an AIC Link.\n3. Approval takes up to 4 weeks.\n4. If not covered by either, see [ElderFund](/dashboard/schemes?id=ssg-aic-elderfund) (in the catalogue)."
+  }
+]

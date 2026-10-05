@@ -12,7 +12,6 @@ interface PCHIFormProps {
 }
 
 export function PCHIForm({ data, callbackFn }: PCHIFormProps) {
-  console.log(data);
   const [pchi, setPchi] = useState<PCHIFormData>({
     householdSize: null,
     totalMonthlyHouseholdIncome: null,
@@ -20,7 +19,6 @@ export function PCHIForm({ data, callbackFn }: PCHIFormProps) {
     monthlyPchi: 0,
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
-  console.log(pchi);
 
   useEffect(() => {
     if (data) {

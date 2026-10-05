@@ -1,0 +1,211 @@
+{
+  "_help": "Hand-edited. Matches use the official link and/or scheme name (normalised), never Schemes.sg IDs, because IDs differ between dev and prod. Scheme overrides match on name and link together. See README.md.",
+  "agency_short_names": {
+    "Agency for Integrated Care": "AIC",
+    "Agency for Integrated Care (AIC)": "AIC",
+    "Ministry of Health": "MOH",
+    "Ministry of Health (MOH)": "MOH",
+    "Ministry of Social and Family Development": "MSF",
+    "Ministry of Social and Family Development (MSF)": "MSF",
+    "Central Provident Fund": "CPF Board",
+    "Central Provident Fund (CPF)": "CPF Board",
+    "Central Provident Fund Board": "CPF Board",
+    "Inland Revenue Authority of Singapore": "IRAS",
+    "Inland Revenue Authority of Singapore (IRAS)": "IRAS",
+    "Ministry of Manpower": "MOM",
+    "Ministry of Manpower (MOM)": "MOM",
+    "Housing & Development Board": "HDB",
+    "Housing and Development Board": "HDB",
+    "Housing & Development Board (HDB)": "HDB",
+    "South West District CDC": "South West CDC",
+    "Singapore Red Cross": "Singapore Red Cross",
+    "Infocomm Media Development Authority": "IMDA",
+    "Infocomm Media Development Authority (IMDA)": "IMDA",
+    "Housing and Development Board (HDB)": "HDB",
+    "South West Community Development Council": "South West CDC",
+    "South West Community Development Council (South West CDC)": "South West CDC"
+  },
+  "tier1_matches": [
+    {
+      "tier1_id": "HOME-CAREGIVING-GRANT",
+      "name": "Home Caregiving Grant (HCG)",
+      "link": "https://www.aic.sg/financial-assistance/home-caregiving-grant"
+    },
+    {
+      "tier1_id": "CAREGIVERS-TRAINING-GRANT",
+      "name": "Caregivers Training Grant (CTG)",
+      "link": "https://aic.sg/financial-assistance/caregivers-training-grant"
+    },
+    {
+      "tier1_id": "MIGRANT-DOMESTIC-WORKER-LEVY",
+      "name": "Migrant Domestic Worker (MDW) Levy Concession For Persons With Disabilities",
+      "link": "https://www.aic.sg/financial-assistance/foreign-domestic-worker-levy-concession"
+    },
+    {
+      "tier1_id": "MOH-NR-LTC-SUBSIDY",
+      "name": "Subsidies for Government-Funded Intermediate and Long Term Care (ILTC) Services",
+      "link": "https://www.moh.gov.sg/seeking-healthcare/find-a-facility-or-service/mental-health-services/intermediate-and-long-term-care-services"
+    },
+    {
+      "tier1_id": "SENIORS-MOBILITY-ENABLING-FUND",
+      "name": "Seniors' Mobility and Enabling Fund (SMF)",
+      "link": "https://www.aic.sg/financial-assistance/seniors-mobility-enabling-fund"
+    },
+    {
+      "tier1_id": "MEDISAVE-CARE",
+      "name": "Medisave Care",
+      "link": "https://www.cpf.gov.sg/member/healthcare-financing/medisave-care-for-long-term-care-needs"
+    },
+    {
+      "tier1_id": "CARESHIELD-ELDERSHIELD-CLAIM",
+      "name": "CareShield Life",
+      "link": "https://www.aic.sg/financial-assistance/careshield-life"
+    }
+  ],
+  "schemes": [
+    {
+      "match": {
+        "name": "South West Caregiver Support Fund",
+        "link": "https://southwest.cdc.gov.sg/what-we-do/for-caregivers/south-west-caregiver-support-fund/"
+      },
+      "action": "include",
+      "payFor": "monthly_payouts",
+      "area": {
+        "kind": "district",
+        "name": "South West District"
+      },
+      "reason": "Production Schemes.sg now says $1,000 (description), matching the official South West CDC page (updated 27 Aug 2026), but its summary and description describe the CDC's caregiver page rather than the fund, and it has no payFor. We keep our summary, \"$1,000 one-off\" and payFor. Dev said $800 (summary) and $500 (description).",
+      "summary": "One-off cash to help caregivers in the South West District with caregiving costs.",
+      "valueText": "$1,000 one-off",
+      "description": "It gives a one-off $1,000 to help with self-care and caregiving expenses.",
+      "checked_on": "2026-10-05"
+    },
+    {
+      "match": {
+        "name": "Mobile Access for Seniors",
+        "link": "https://www.imda.gov.sg/programme-listing/Mobile-Access-for-Seniors"
+      },
+      "action": "exclude",
+      "reason": "Subsidised phone plans and devices, not caregiving costs"
+    },
+    {
+      "match": {
+        "name": "Financial Assistance Schemes & Food Vouchers",
+        "link": "https://www.eurasians.sg/families"
+      },
+      "action": "exclude",
+      "reason": "General cash and food aid (Eurasian Association), not specific to caregiving"
+    },
+    {
+      "match": {
+        "name": "Financial Assistance and Food Relief",
+        "link": "https://catholicwelfare.org.sg/our-programmes-services/"
+      },
+      "action": "exclude",
+      "reason": "General cash and food aid (Catholic Welfare Services), not specific to caregiving"
+    },
+    {
+      "match": {
+        "name": "Financial and Food Rations assistance (Temporary)",
+        "link": "https://www.bethelcs.org.sg/social-services/community-support"
+      },
+      "action": "exclude",
+      "reason": "General cash and food aid (Bethel Community Services), not specific to caregiving"
+    },
+    {
+      "match": {
+        "name": "Enhancement for Active Seniors (EASE)",
+        "link": "https://www.hdb.gov.sg/residential/living-in-an-hdb-flat/for-our-seniors/ease"
+      },
+      "action": "exclude",
+      "reason": "Duplicate on production Schemes.sg (three EASE entries); we publish the HDB entry at hdb.gov.sg/managing-my-home/upgrading-and-redevelopment/enhancement-for-active-seniors-ease"
+    },
+    {
+      "match": {
+        "name": "Enhancement for Active Seniors (EASE)",
+        "link": "https://www.aic.sg/financial-assistance/enhancement-for-active-seniors-ease/"
+      },
+      "action": "exclude",
+      "reason": "Duplicate on production Schemes.sg (three EASE entries); we publish the HDB entry at hdb.gov.sg/managing-my-home/upgrading-and-redevelopment/enhancement-for-active-seniors-ease"
+    },
+    {
+      "match": {
+        "name": "Silver Housing Bonus",
+        "link": "https://www.hdb.gov.sg/managing-my-home/retirement-planning/monetising-flat-for-retirement/silver-housing-bonus"
+      },
+      "action": "exclude",
+      "reason": "Housing: a bonus for moving to a smaller flat, not a care cost"
+    },
+    {
+      "match": {
+        "name": "Lease Buyback Scheme",
+        "link": "https://www.hdb.gov.sg/residential/living-in-an-hdb-flat/for-our-seniors/monetising-your-flat-for-retirement/lease-buyback-scheme"
+      },
+      "action": "exclude",
+      "reason": "Housing: retirement income from the flat lease, not a care cost"
+    },
+    {
+      "match": {
+        "name": "Care & Assistance",
+        "link": "https://www.yong-en.org.sg/care-assistance/"
+      },
+      "action": "exclude",
+      "reason": "General food and cash relief by social-worker referral (Outram area), not specific to caregiving"
+    },
+    {
+      "match": {
+        "name": "Caregiving @ South West",
+        "link": "https://southwest.cdc.gov.sg/what-we-do/for-caregivers/caregiving-sw/"
+      },
+      "action": "exclude",
+      "reason": "South West CDC's caregiver hub page; its fund is published separately as the South West Caregiver Support Fund"
+    },
+    {
+      "match": {
+        "name": "KampungSpirit",
+        "link": "https://www.kampungspirit.gov.sg/"
+      },
+      "action": "exclude",
+      "reason": "Donor platform used by social workers for households; caregivers can't apply"
+    },
+    {
+      "match": {
+        "name": "Ray of Hope",
+        "link": "https://rayofhope.sg/"
+      },
+      "action": "exclude",
+      "reason": "General crowdfunding for any need, not a caregiving scheme"
+    },
+    {
+      "match": {
+        "name": "Silver is Gold",
+        "link": "https://www.majurity.sg/funds-and-grants/silverisgold/"
+      },
+      "action": "exclude",
+      "reason": "Grants for organisations running dementia programmes, not for individuals"
+    },
+    {
+      "match": {
+        "name": "South West Community Caring Fund",
+        "link": "https://southwest.cdc.gov.sg/what-we-do/for-assistance/sw-community-caring-fund/"
+      },
+      "action": "include",
+      "payFor": "monthly_payouts",
+      "area": {
+        "kind": "district",
+        "name": "South West District"
+      },
+      "valueText": "$250 one-time",
+      "reason": "official page checked 5 Oct 2026",
+      "checked_on": "2026-10-05"
+    }
+  ],
+  "extra_includes": [
+    {
+      "name": "Medifund",
+      "agency": "Agency for Integrated Care",
+      "payFor": "medical_bills",
+      "reason": "Safety net for medical bills; listed outside Seniors & Caregiving"
+    }
+  ]
+}

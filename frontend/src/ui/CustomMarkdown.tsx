@@ -19,7 +19,8 @@ export default function CustomMarkdown(props: {
           <a
             {...props}
             className="text-brand-primary-500 underline"
-            target="_blank"
+            // Links within CareCompass stay in the same tab
+            target={props.href?.startsWith("/") ? undefined : "_blank"}
           />
         ),
       }}

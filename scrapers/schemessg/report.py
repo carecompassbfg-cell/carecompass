@@ -1,0 +1,440 @@
+"""Render the human review report (data/report.md) and API feedback."""
+
+from collections import Counter
+from typing import Dict, List, Optional
+
+import catalog as cat
+import classify as c
+
+PAY_FOR_LABELS = {
+    "care_services": "Care services",
+    "monthly_payouts": "Cash support",
+    "helper_costs": "Helper costs",
+    "caregiver_courses": "Caregiver courses",
+    "equipment_home": "Equipment and home",
+    "transport": "Transport",
+    "medical_bills": "Medical bills",
+    "tax_cpf": "Tax and CPF",
+}
+
+# Behaviour we noticed that can't be measured from a single run's data.
+STATIC_FEEDBACK = [
+    "In a category-filtered list, `scheme_type` only contains that category's "
+    "types, so every scheme needs a detail call to get its full `scheme_type`.",
+    "`service_area` is free text: islandwide shows up as both "
+    '"No Service Boundaries" and "Singapore", and districts mix CDC districts, '
+    "town names, street names and block ranges. A controlled list (islandwide, "
+    "CDC district, planning areas) would make it usable for filtering.",
+    "Only one filter can be used per request, so we can't ask for "
+    '"Seniors & Caregiving" and "Financial Assistance" together.',
+]
+
+
+def _area_text(area: Optional[dict]) -> str:
+    if not area:
+        return "-"
+    return "Islandwide" if area.get("kind") == "islandwide" else area.get("name", "-")
+
+
+def _md(text: Optional[str]) -> str:
+    """Keep table cells on one line."""
+    return (text or "").replace("|", "\\|").replace("\n", " ").strip()
+
+
+def _quote(text: Optional[str]) -> str:
+    if not text:
+        return "> _(empty)_"
+    return "\n".join(f"> {line}" if line else ">" for line in text.split("\n"))
+
+
+def api_feedback(raw_details: List[dict], raw_listed: List[dict]) -> List[str]:
+    """Observations measured from this run's raw responses."""
+    notes: List[str] = []
+    total = len(raw_details)
+    if not total:
+        return notes
+
+    eligibility = sum(1 for d in raw_details if d.get("eligibility"))
+    if eligibility:
+        notes.append(
+            f"`eligibility` is filled in for {eligibility} of {total} schemes, "
+            "although it was described as null everywhere. We don't publish it yet."
+        )
+    null_status = sum(1 for d in raw_details if d.get("status") is None)
+    if null_status:
+        statuses = Counter(d.get("status") for d in raw_details if d.get("status"))
+        notes.append(
+            f"`status` is null for {null_status} of {total} schemes "
+            f"(other values: {dict(statuses) or 'none'}). Is null the same as active?"
+        )
+    list_only_null = [
+        field
+        for field in ("service_area", "phone", "email", "address", "eligibility")
+        if raw_listed
+        and field in raw_listed[0]
+        and not any(d.get(field) for d in raw_listed)
+        and any(d.get(field) for d in raw_details)
+    ]
+    if list_only_null:
+        notes.append(
+            "List responses include "
+            + ", ".join(f"`{f}`" for f in list_only_null)
+            + ", but they are always null there; the values only appear in "
+            "detail responses, so every scheme needs a detail call."
+        )
+    # Same name and same (first) agency but different links: a duplicate
+    # entry, not two operators sharing a generic name
+    def duplicate_key(d: dict) -> tuple:
+        return (
+            c.normalise_name(d.get("scheme")),
+            c.normalise_name(cat.first_agency(d.get("agency"))),
+        )
+
+    links_by_key: Dict[tuple, set] = {}
+    for d in raw_details:
+        links_by_key.setdefault(duplicate_key(d), set()).add(c.normalise_link(d.get("link")))
+    duplicates = sorted(
+        {d.get("scheme") for d in raw_details if len(links_by_key[duplicate_key(d)]) > 1}
+    )
+    if duplicates:
+        notes.append(
+            "The same scheme from the same agency is listed more than once with "
+            "different official links, which looks like duplicate entries: "
+            + ", ".join(duplicates)
+            + "."
+        )
+    split = [
+        d.get("scheme")
+        for d in raw_details
+        if len(c.fix_split_items(d.get("what_it_gives")))
+        != len([x for x in d.get("what_it_gives") or [] if x.strip()])
+    ]
+    if split:
+        notes.append(
+            f"`what_it_gives` has items split inside parentheses for {len(split)} "
+            'scheme(s), e.g. "Benefits and perks for PWDs (transport", "discounts", '
+            f'"facilities)". We rejoin them. Affected: {", ".join(sorted(split))}.'
+        )
+    replacement = sorted(
+        {
+            d.get("scheme")
+            for d in raw_details
+            for field in ("scheme", "agency", "service_area", "description", "summary")
+            if "\ufffd" in (d.get(field) or "")
+        }
+    )
+    if replacement:
+        notes.append(
+            "Some text has U+FFFD replacement characters where an apostrophe or dash "
+            f"was lost (encoding issue upstream). Affected: {', '.join(replacement)}."
+        )
+    links = Counter(c.normalise_link(d.get("link")) for d in raw_details if d.get("link"))
+    shared = sorted(link for link, n in links.items() if n > 1)
+    if shared:
+        notes.append(
+            f"{len(shared)} official link(s) are shared by more than one scheme "
+            "(usually an agency's general services page), so a link alone can't "
+            "identify a scheme. Shared: " + ", ".join(shared) + "."
+        )
+    names = Counter(d.get("scheme") for d in raw_details)
+    repeated = sorted(n for n, k in names.items() if k > 1)
+    if repeated:
+        notes.append(
+            "Several schemes share a generic name ("
+            + ", ".join(f'"{n}" x{names[n]}' for n in repeated)
+            + "); including the operator in the name would help users."
+        )
+    phone_types = Counter(type(d.get("phone")).__name__ for d in raw_details)
+    if len(phone_types) > 1:
+        notes.append(
+            f"`phone` has mixed types ({dict(phone_types)}): sometimes a string, "
+            "sometimes a list."
+        )
+    who = Counter(w for d in raw_details for w in d.get("who_is_it_for") or [])
+    by_lower: Dict[str, set] = {}
+    for value in who:
+        by_lower.setdefault(value.lower(), set()).add(value)
+    variants = sorted(v for vals in by_lower.values() if len(vals) > 1 for v in vals)
+    if variants:
+        notes.append(
+            "`who_is_it_for` values differ only by case: " + ", ".join(variants) + "."
+        )
+    agencies = {}
+    for d in raw_details:
+        name = (d.get("agency") or "").strip()
+        agencies.setdefault(c.normalise_name(name), set()).add(name)
+    agency_variants = sorted(
+        " / ".join(sorted(v)) for v in agencies.values() if len(v) > 1
+    )
+    if agency_variants:
+        notes.append(
+            "The same agency is written in different ways: "
+            + "; ".join(agency_variants)
+            + "."
+        )
+    return notes
+
+
+def render_report(
+    *,
+    synced_on: str,
+    env: str,
+    records: List[dict],
+    retired: List[dict],
+    diff: Optional[dict],
+    tier1_changes: List[dict],
+    feedback: List[str],
+    previous_env: Optional[str] = None,
+    has_changes: bool = True,
+    unmatched: Optional[Dict[str, List[dict]]] = None,
+    extra_includes: Optional[List[dict]] = None,
+    extra_missing: Optional[List[dict]] = None,
+    overrides_to_review: Optional[List[dict]] = None,
+    source_watch_lines: Optional[List[str]] = None,
+) -> str:
+    by_status = Counter(r["status"] for r in records)
+    fetched = len(records) + len(retired)
+    lines: List[str] = [
+        "# Schemes.sg sync report",
+        "",
+        f"Synced on {synced_on} from the **{env}** environment, category "
+        '"Seniors & Caregiving".',
+        "",
+        (
+            "**Content changes to review** (see below)."
+            if has_changes
+            else "**No content changes.** Only dates moved forward, so this can be "
+            "merged after a quick look."
+        ),
+        "",
+        "## Counts",
+        "",
+        "| | Count |",
+        "|---|---:|",
+        f"| Fetched | {fetched} |",
+        f"| Published (money, Tier 2) | {by_status[cat.PUBLISHED]} |",
+        f"| Other services and programmes (`other.json`) | {by_status[cat.OTHER]} |",
+        f"| Excluded | {by_status[cat.EXCLUDED]} |",
+        f"| Unclassified money (not published) | {by_status[cat.UNCLASSIFIED]} |",
+        f"| Tier 1 matches (ours, not published) | {by_status[cat.TIER1]} |",
+        f"| Retired or not found | {len(retired)} |",
+        "",
+    ]
+
+    # Matches and overrides that found nothing
+    unmatched = unmatched or {"tier1": [], "schemes": []}
+    if unmatched["tier1"] or unmatched["schemes"]:
+        lines += [
+            "## Matches that found nothing",
+            "",
+            "These overrides.json entries matched no scheme this run (by name "
+            "and link, never by Schemes.sg ID). Check whether Schemes.sg renamed "
+            "the scheme or changed its link, and update overrides.json.",
+            "",
+        ]
+        lines += [
+            f"- Tier 1 match {m['tier1_id']}: {m.get('name')} ({m.get('link')})"
+            for m in unmatched["tier1"]
+        ]
+        lines += [
+            f"- Override: {o['match'].get('name')}"
+            + (f" ({o['match']['link']})" if o["match"].get("link") else "")
+            for o in unmatched["schemes"]
+        ]
+        lines.append("")
+
+    # Changes since last run
+    lines += ["## Changes since the last run", ""]
+    if previous_env and previous_env != env:
+        lines += [
+            f"Compared with the last run from the **{previous_env}** environment.",
+            "",
+        ]
+    if diff is None:
+        lines += ["First run: nothing to compare against.", ""]
+    elif not (diff["added"] or diff["removed"] or diff["changed"]):
+        lines += ["No changes.", ""]
+    else:
+        for title, items in (("Added", diff["added"]), ("Removed", diff["removed"])):
+            if items:
+                lines += [f"### {title} ({len(items)})", ""]
+                lines += [
+                    f"- {r['name']} ({r['status']}"
+                    + (f", {r['payFor']}" if r.get("payFor") else "")
+                    + ")"
+                    for r in items
+                ]
+                lines.append("")
+        if diff["changed"]:
+            lines += [f"### Changed ({len(diff['changed'])})", ""]
+            for change in diff["changed"]:
+                after = change["after"]
+                lines.append(f"- **{after['name']}**: {', '.join(change['fields'])}")
+                for field in change["fields"]:
+                    if field in ("status", "payFor", "kind", "link"):
+                        lines.append(
+                            f"  - {field}: `{change['before'].get(field)}` → "
+                            f"`{after.get(field)}`"
+                        )
+            lines.append("")
+
+    # Text overrides
+    to_review = overrides_to_review or []
+    if to_review:
+        flagged = [o for o in to_review if o["sourceChanged"]]
+        lines += [
+            "## Overrides to review",
+            "",
+            "Text we override by hand in overrides.json. When Schemes.sg changes "
+            "the text we replaced, re-check the override and update `checked_on`.",
+            "",
+        ]
+        if not flagged:
+            lines += ["No Schemes.sg text behind an override changed.", ""]
+        for item in to_review:
+            override = item["override"]
+            if item["sourceChanged"]:
+                state = (
+                    "**Schemes.sg text changed since the last run: review this override** "
+                    f"({', '.join(item['changedFields'])})"
+                )
+            elif item["hasBaseline"]:
+                state = "Schemes.sg text unchanged"
+            else:
+                state = "Baseline recorded this run; changes are tracked from the next run"
+            lines += [
+                f"### {item['name']}",
+                "",
+                f"- Overrides: {', '.join(override['fields'])}",
+                f"- Reason: {override.get('reason')}",
+                f"- Checked on: {override.get('checkedOn')}",
+                f"- Status: {state}",
+                "",
+            ]
+            for field in item["changedFields"]:
+                key = "sourceSummary" if field == "summary" else "sourceDescription"
+                lines += [
+                    f"Schemes.sg {field} before:",
+                    "",
+                    _quote(item["before"].get(key)),
+                    "",
+                    f"Schemes.sg {field} now:",
+                    "",
+                    _quote(item["after"].get(key)),
+                    "",
+                ]
+
+    # Tier 1
+    lines += [
+        "## Tier 1 matches",
+        "",
+        "These are our own schemes. The sync never publishes or overwrites them; "
+        "check whether our copy needs updating when the Schemes.sg text changes.",
+        "",
+    ]
+    if not tier1_changes:
+        lines += ["No Tier 1 matches found.", ""]
+    for match in tier1_changes:
+        state = (
+            "first seen this run"
+            if match["firstSeen"]
+            else ("**description changed**" if match["changed"] else "no change")
+        )
+        lines += [
+            f"### {match['tier1Id']}: {match['name']}",
+            "",
+            f"{match['link']} ({state})",
+            "",
+        ]
+        if match["changed"]:
+            lines += ["Old:", "", _quote(match["old"]), "", "New:", "", _quote(match["new"]), ""]
+
+    # Extra includes
+    if extra_includes:
+        missing_names = {e.get("name") or e.get("link") for e in extra_missing or []}
+        lines += [
+            "## Extra includes from the full catalogue",
+            "",
+            "Schemes outside the category that overrides.json asks for.",
+            "",
+        ]
+        for entry in extra_includes:
+            label = entry.get("name") or entry.get("link")
+            found = [r for r in records if cat.extra_include_matches(entry, r)]
+            if label in missing_names or not found:
+                lines.append(f"- {label}: **not found** in the full catalogue")
+            else:
+                lines += [f"- {label}: {r['name']} ({r['status']})" for r in found]
+        lines.append("")
+
+    # Published
+    published = [r for r in records if r["status"] == cat.PUBLISHED]
+    lines += [f"## Published schemes ({len(published)})", ""]
+    for key, label in PAY_FOR_LABELS.items():
+        group = sorted(
+            (r for r in published if r["payFor"] == key), key=lambda r: r["normName"]
+        )
+        if not group:
+            continue
+        lines += [f"### {label} ({len(group)})", "", "| Scheme | Agency | Area |", "|---|---|---|"]
+        lines += [
+            f"| [{_md(r['name'])}]({r['link']}) | {_md(r['agency'])} | {_md(_area_text(r['area']))} |"
+            for r in group
+        ]
+        lines.append("")
+
+    # Unclassified
+    unclassified = sorted(
+        (r for r in records if r["status"] == cat.UNCLASSIFIED), key=lambda r: r["normName"]
+    )
+    lines += [
+        f"## Unclassified money schemes ({len(unclassified)})",
+        "",
+        "Financial help that doesn't map cleanly to one category, so it is not "
+        "published. Set `payFor` in overrides.json to publish one.",
+        "",
+    ]
+    if unclassified:
+        lines += ["| Scheme | Agency | What it gives | Scores |", "|---|---|---|---|"]
+        lines += [
+            f"| [{_md(r['name'])}]({r['link']}) | {_md(r['agency'])} | "
+            f"{_md(', '.join(r['whatItGives']))} | {_md(str(r['payForScores']) if r['payForScores'] else '-')} |"
+            for r in unclassified
+        ]
+        lines.append("")
+
+    # Excluded
+    excluded = sorted(
+        (r for r in records if r["status"] == cat.EXCLUDED),
+        key=lambda r: (r["reason"], r["normName"]),
+    )
+    lines += [f"## Excluded ({len(excluded)})", ""]
+    if excluded:
+        lines += ["| Scheme | Agency | Kind | Reason |", "|---|---|---|---|"]
+        lines += [
+            f"| {_md(r['name'])} | {_md(r['agency'])} | {r['kind']} | {_md(r['reason'])} |"
+            for r in excluded
+        ]
+        lines.append("")
+
+    # Retired
+    lines += [f"## Retired or not found ({len(retired)})", ""]
+    if retired:
+        lines += [
+            f"- {r.get('scheme') or r['scheme_id']} ({r['outcome']}"
+            + (f", merged into {r['merged_into']}" if r.get("merged_into") else "")
+            + ")"
+            for r in retired
+        ]
+    else:
+        lines.append("None.")
+    lines.append("")
+
+    # Tier 1 source pages (watch_sources.py)
+    lines += source_watch_lines or []
+
+    # Feedback
+    lines += ["## Feedback for Schemes.sg", ""]
+    lines += [f"- {note}" for note in feedback + STATIC_FEEDBACK]
+    lines.append("")
+    return "\n".join(lines)
