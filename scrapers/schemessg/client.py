@@ -11,9 +11,9 @@ import urllib.parse
 import urllib.request
 from typing import Callable, Dict, Iterator, List, Optional, Tuple
 
-DEFAULT_BASE_URL = (
-    "https://asia-southeast1-schemessg-v3-dev.cloudfunctions.net/partner_api"
-)
+# Production, per schemes.sg/developers. Production is the source of truth;
+# the dev environment is outdated. Paths below add /v1 themselves.
+DEFAULT_BASE_URL = "https://asia-southeast1-schemessg.cloudfunctions.net/partner_api"
 CATEGORY = "Seniors & Caregiving"
 PAGE_SIZE = 50
 REQUEST_DELAY_SECONDS = 0.15  # well under the 600 requests/minute limit
@@ -35,7 +35,7 @@ class SchemesSgClient:
         if not api_key:
             raise ValueError("SCHEMESSG_API_KEY is not set")
         self._api_key = api_key
-        self._base_url = base_url.rstrip("/")
+        self._base_url = normalise_base_url(base_url)
         self._sleep = sleep
 
     def _request(self, path: str) -> Tuple[int, Optional[dict]]:
@@ -97,6 +97,15 @@ class SchemesSgClient:
                 return "retired", body
             return "not_found", body or {}
         raise ApiError(f"Fetching scheme {scheme_id} failed with HTTP {status}")
+
+
+def normalise_base_url(base_url: str) -> str:
+    """Accept the base URL with or without the trailing /v1 that the
+    official docs include, since every path here starts with /v1."""
+    base = base_url.strip().rstrip("/")
+    if base.endswith("/v1"):
+        base = base[: -len("/v1")]
+    return base
 
 
 def _error_code(body: dict) -> Optional[str]:

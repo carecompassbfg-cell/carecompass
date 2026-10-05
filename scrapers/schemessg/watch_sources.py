@@ -1,22 +1,32 @@
 """Watch the official pages behind our Tier 1 schemes.
 
-For each source URL in frontend/public/data/catalog.tier1.json: fetch the
+For each source URL in frontend/public/data/catalog.tier1.json: read the
 page, keep only its visible text, hash it and compare with the last run
-(data/tier1_sources.json). A changed hash means docs/schemes/tier1-schemes.md
-should be re-checked by hand. Pages that come back without real content
-(rendered with JavaScript, blocked, not HTML) can't be watched this way and
-are listed for a manual check instead. Nothing here fails the sync.
+(data/tier1_sources.json).
 
-Standard library only.
+- Pages are fetched plainly first. A page that comes back without real
+  content (rendered with JavaScript, like IRAS and some CPF articles) is
+  loaded again in a headless browser (Playwright with Chromium), when one is
+  available, and compared the same way.
+- Each page ends up "changed", "unchanged", "new" (read for the first time,
+  nothing to compare yet) or "unreadable" (couldn't read this week). Not
+  being able to read a page is never the same as it being unchanged, and
+  never fails the sync.
+- A Tier 1 scheme's lastChecked moves to the run date only when every one of
+  its sources was read and is unchanged. docs/schemes/tier1-schemes.md is
+  never edited here: a person updates it after reviewing a change.
+
+Standard library only, apart from the optional browser (Playwright).
 """
 
+import contextlib
 import hashlib
 import re
 import time
 import urllib.error
 import urllib.request
 from html.parser import HTMLParser
-from typing import Callable, Dict, List, Optional, Tuple
+from typing import Callable, Dict, Iterator, List, Optional, Tuple
 
 # Below this much visible text a page is treated as an empty shell
 MIN_CONTENT_CHARS = 400
@@ -29,6 +39,19 @@ _JS_SHELL = re.compile(
     re.IGNORECASE,
 )
 
+# Browser loading: wait for the DOM, then poll once a second until the visible
+# text has real content and stopped changing. Analytics on these sites keep
+# the network busy, so waiting for the network to go quiet never finishes.
+BROWSER_GOTO_TIMEOUT_MS = 45_000
+BROWSER_MAX_POLLS = 20
+
+CHANGED = "changed"
+UNCHANGED = "unchanged"
+NEW = "new"
+UNREADABLE = "unreadable"
+
+Fetch = Callable[[str], Tuple[Optional[str], str]]
+
 # Elements whose text is never visible
 _SKIP_TAGS = {
     "script",
@@ -38,8 +61,24 @@ _SKIP_TAGS = {
     "svg",
     "head",
     "title",
-    "meta",
     "iframe",
+}
+# Void elements never get an end tag (a browser writes <meta ...> without a
+# closing slash), so they must not open a skipped region
+_VOID_TAGS = {
+    "area",
+    "base",
+    "br",
+    "col",
+    "embed",
+    "hr",
+    "img",
+    "input",
+    "link",
+    "meta",
+    "source",
+    "track",
+    "wbr",
 }
 # Page furniture that changes without the scheme changing
 _FURNITURE_TAGS = {"nav", "header", "footer"}
@@ -55,6 +94,8 @@ class _VisibleText(HTMLParser):
         self.main_text: List[str] = []
 
     def handle_starttag(self, tag: str, attrs) -> None:
+        if tag in _VOID_TAGS:
+            return
         if tag in _SKIP_TAGS:
             self._skip_depth += 1
         elif tag in _FURNITURE_TAGS:
@@ -99,8 +140,14 @@ def text_hash(text: str) -> str:
     return hashlib.sha256(text.encode("utf-8")).hexdigest()
 
 
+# ---------------------------------------------------------------------------
+# Fetching
+# ---------------------------------------------------------------------------
+
+
 def fetch_page(url: str, sleep: Callable[[float], None] = time.sleep) -> Tuple[Optional[str], str]:
-    """Returns (html, note). html is None when the page can't be read."""
+    """Plain HTTP fetch. Returns (html, note); html is None when the page
+    can't be read."""
     request = urllib.request.Request(
         url, headers={"User-Agent": USER_AGENT, "Accept": "text/html"}
     )
@@ -125,17 +172,90 @@ def fetch_page(url: str, sleep: Callable[[float], None] = time.sleep) -> Tuple[O
     return None, "could not fetch"  # pragma: no cover
 
 
+@contextlib.contextmanager
+def browser_fetcher() -> Iterator[Optional[Fetch]]:
+    """A headless Chromium page loader, or None when Playwright or the
+    browser isn't installed. Never raises."""
+    try:
+        from playwright.sync_api import sync_playwright
+    except ImportError:
+        yield None
+        return
+    try:
+        manager = sync_playwright().start()
+    except Exception:  # noqa: BLE001 - the browser is optional
+        yield None
+        return
+    browser = None
+    try:
+        try:
+            browser = manager.chromium.launch()
+        except Exception:  # noqa: BLE001
+            yield None
+            return
+
+        def render(url: str) -> Tuple[Optional[str], str]:
+            context = browser.new_context()
+            try:
+                page = context.new_page()
+                response = page.goto(
+                    url, wait_until="domcontentloaded", timeout=BROWSER_GOTO_TIMEOUT_MS
+                )
+                if response is not None and response.status >= 400:
+                    return None, f"HTTP {response.status} in the browser"
+                last = None
+                for _ in range(BROWSER_MAX_POLLS):
+                    page.wait_for_timeout(1000)
+                    html = page.content()
+                    text = visible_text(html)
+                    if has_real_content(text) and text == last:
+                        return html, "ok"
+                    last = text
+                return None, "no real content, even in a browser"
+            except Exception as error:  # noqa: BLE001
+                return None, f"the browser couldn't load it ({type(error).__name__})"
+            finally:
+                context.close()
+
+        yield render
+    finally:
+        if browser is not None:
+            with contextlib.suppress(Exception):
+                browser.close()
+        with contextlib.suppress(Exception):
+            manager.stop()
+
+
+# ---------------------------------------------------------------------------
+# Watching
+# ---------------------------------------------------------------------------
+
+
 def check_page(html: Optional[str], note: str) -> Dict[str, object]:
-    """Classify one fetched page: watchable with a hash, or not."""
+    """One fetched page: read (with a hash of its visible text), or not."""
     if html is None:
-        return {"watchable": False, "note": note}
+        return {"read": False, "note": note}
     text = visible_text(html)
     if not has_real_content(text):
-        return {
-            "watchable": False,
-            "note": "no real content without JavaScript",
-        }
-    return {"watchable": True, "hash": text_hash(text), "chars": len(text)}
+        return {"read": False, "note": "no real content without JavaScript"}
+    return {"read": True, "hash": text_hash(text), "chars": len(text)}
+
+
+def read_page(url: str, fetch: Fetch, render: Optional[Fetch]) -> Dict[str, object]:
+    """Plain fetch first; a headless browser only for pages that need one."""
+    page = check_page(*fetch(url))
+    if page["read"]:
+        page["via"] = "fetch"
+        return page
+    if render is None:
+        if page["note"] == "no real content without JavaScript":
+            page["note"] += "; no browser available"
+        return page
+    rendered = check_page(*render(url))
+    if rendered["read"]:
+        rendered["via"] = "browser"
+        return rendered
+    return {"read": False, "note": f"{page['note']}; in a browser: {rendered['note']}"}
 
 
 def tier1_source_urls(catalog: List[dict]) -> List[Tuple[str, str]]:
@@ -151,66 +271,150 @@ def tier1_source_urls(catalog: List[dict]) -> List[Tuple[str, str]]:
     return urls
 
 
-def compare(
-    previous: Dict[str, dict], current: Dict[str, dict]
-) -> Dict[str, List[dict]]:
-    """Changed, unwatchable and newly watched pages between two runs."""
-    changed, unwatchable, new = [], [], []
+def page_status(before: Optional[dict], page: dict) -> str:
+    if not page["read"]:
+        return UNREADABLE
+    if not before or not before.get("hash"):
+        return NEW
+    return UNCHANGED if before["hash"] == page["hash"] else CHANGED
+
+
+def compare(previous: Dict[str, dict], current: Dict[str, dict]) -> Dict[str, List[dict]]:
+    """Pages grouped by status between two runs."""
+    groups: Dict[str, List[dict]] = {CHANGED: [], UNCHANGED: [], NEW: [], UNREADABLE: []}
     for url, page in current.items():
-        if not page["watchable"]:
-            unwatchable.append({"url": url, **page})
-            continue
-        before = previous.get(url)
-        if not before or not before.get("hash"):
-            new.append({"url": url, **page})
-        elif before["hash"] != page["hash"]:
-            changed.append({"url": url, **page})
-    return {"changed": changed, "unwatchable": unwatchable, "new": new}
+        groups[page_status(previous.get(url), page)].append({"url": url, **page})
+    return groups
 
 
 def watch(
     catalog: List[dict],
     previous: Dict[str, dict],
     checked_on: str,
-    fetch: Callable[[str], Tuple[Optional[str], str]] = fetch_page,
+    fetch: Fetch = fetch_page,
+    render: Optional[Fetch] = None,
 ) -> Tuple[Dict[str, dict], Dict[str, List[dict]]]:
-    """Fetch every Tier 1 source. Returns (new state, comparison)."""
+    """Read every Tier 1 source. Returns (new state, pages by status)."""
     current: Dict[str, dict] = {}
     for url, scheme_name in tier1_source_urls(catalog):
-        html, note = fetch(url)
-        page = check_page(html, note)
+        page = read_page(url, fetch, render)
         page["scheme"] = scheme_name
-        # Keep the last good hash for a page we couldn't read this time, so
-        # a temporary failure doesn't look like a change next week
-        if not page["watchable"] and previous.get(url, {}).get("hash"):
-            page["hash"] = previous[url]["hash"]
-            page["lastWatchedOn"] = previous[url].get("lastWatchedOn")
-        if page["watchable"]:
-            page["lastWatchedOn"] = checked_on
+        before = previous.get(url, {})
+        if page["read"]:
+            page["lastReadOn"] = checked_on
+        elif before.get("hash"):
+            # Keep the last good copy, so a page we couldn't read this week
+            # is compared against it next week rather than looking new
+            page["hash"] = before["hash"]
+            page["lastReadOn"] = before.get("lastReadOn") or before.get("lastWatchedOn")
         current[url] = page
     return current, compare(previous, current)
 
 
-def render_section(result: Dict[str, List[dict]]) -> List[str]:
+# ---------------------------------------------------------------------------
+# Tier 1 "Last checked" dates
+# ---------------------------------------------------------------------------
+
+_REASONS = {
+    CHANGED: "changed",
+    UNREADABLE: "couldn't read this week",
+    NEW: "read for the first time, nothing to compare with yet",
+}
+
+
+def update_last_checked(
+    catalog: List[dict], groups: Dict[str, List[dict]], run_date: str
+) -> Tuple[List[dict], List[dict], List[dict]]:
+    """Move lastChecked to run_date for every Tier 1 scheme whose sources were
+    all read and unchanged. Returns (new catalog, moved, to re-check).
+
+    The catalog is copied, never edited in place, and a date never moves
+    backwards.
+    """
+    status_by_url = {
+        page["url"]: status for status, pages in groups.items() for page in pages
+    }
+    notes = {page["url"]: page.get("note") for page in groups.get(UNREADABLE, [])}
+    updated, moved, recheck = [], [], []
+    for scheme in catalog:
+        scheme = dict(scheme)
+        urls = [s["url"] for s in scheme.get("sources", []) if s.get("url")]
+        problems = [
+            {
+                "url": url,
+                "status": status_by_url.get(url, UNREADABLE),
+                "reason": _REASONS[status_by_url.get(url, UNREADABLE)],
+                "note": notes.get(url),
+            }
+            for url in urls
+            if status_by_url.get(url, UNREADABLE) != UNCHANGED
+        ]
+        if urls and not problems:
+            if (scheme.get("lastChecked") or "") < run_date:
+                moved.append({"name": scheme.get("name"), "from": scheme.get("lastChecked")})
+                scheme["lastChecked"] = run_date
+        else:
+            recheck.append(
+                {
+                    "name": scheme.get("name"),
+                    "lastChecked": scheme.get("lastChecked"),
+                    "problems": problems,
+                }
+            )
+        updated.append(scheme)
+    return updated, moved, recheck
+
+
+# ---------------------------------------------------------------------------
+# Report
+# ---------------------------------------------------------------------------
+
+
+def render_section(
+    groups: Dict[str, List[dict]],
+    moved: List[dict],
+    recheck: List[dict],
+    run_date: str,
+) -> List[str]:
     """Markdown for the sync report (and so the sync PR body)."""
-    lines = ["## Tier 1 sources that changed. Re-check docs/schemes/tier1-schemes.md", ""]
-    if result["changed"]:
-        lines += [f"- {p['url']} ({p['scheme']})" for p in result["changed"]]
+    total = sum(len(pages) for pages in groups.values())
+    via_browser = sum(
+        1 for status in (CHANGED, UNCHANGED, NEW) for p in groups[status] if p.get("via") == "browser"
+    )
+    lines = [
+        "## Tier 1 official pages",
+        "",
+        f"Read {total} official pages behind our core schemes: "
+        f"{len(groups[UNCHANGED])} unchanged, {len(groups[CHANGED])} changed, "
+        f"{len(groups[NEW])} read for the first time, "
+        f"{len(groups[UNREADABLE])} couldn't be read. "
+        f"{via_browser} needed a headless browser.",
+        "",
+        "### Changed. Re-check docs/schemes/tier1-schemes.md",
+        "",
+    ]
+    lines += [f"- {p['url']} ({p['scheme']})" for p in groups[CHANGED]] or ["None."]
+    lines += [
+        "",
+        "### Couldn't read this week",
+        "",
+        "Not the same as unchanged: these pages weren't compared, so their "
+        "schemes' dates don't move.",
+        "",
+    ]
+    lines += [
+        f"- {p['url']} ({p['scheme']}): {p.get('note')}" for p in groups[UNREADABLE]
+    ] or ["None."]
+    lines += ["", "### Re-check before the date can move", ""]
+    if recheck:
+        for item in recheck:
+            lines.append(f"- **{item['name']}** (last checked {item['lastChecked']})")
+            lines += [f"  - {p['url']}: {p['reason']}" for p in item["problems"]]
     else:
         lines.append("None.")
-    lines.append("")
-    if result["new"]:
-        lines += [
-            "Started watching (no earlier copy to compare): "
-            + ", ".join(p["url"] for p in result["new"]),
-            "",
-        ]
-    lines += ["## Can't watch automatically. Check by hand twice a year", ""]
-    if result["unwatchable"]:
-        lines += [
-            f"- {p['url']} ({p['scheme']}): {p['note']}" for p in result["unwatchable"]
-        ]
-    else:
-        lines.append("None.")
+    lines += ["", f"### Last checked moved to {run_date}", ""]
+    lines += [
+        f"- {m['name']} (was {m['from']})" for m in moved
+    ] or ["None."]
     lines.append("")
     return lines

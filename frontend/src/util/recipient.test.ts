@@ -15,7 +15,11 @@ import {
   getRecipientTitleName,
   possessive,
 } from "@/util/recipient";
-import { getLastUpdated, getSourceLine } from "@/util/schemeCatalog";
+import {
+  getLastChecked,
+  getLastCheckedText,
+  getSourceLine,
+} from "@/util/schemeCatalog";
 
 const user: UserDataFull = {
   citizenship: Citizenship.CITIZEN,
@@ -114,9 +118,14 @@ describe("getSourceLine", () => {
   });
 });
 
-describe("getLastUpdated", () => {
+describe("getLastChecked", () => {
   it("uses lastChecked for Tier 1 and lastRefreshed for Tier 2", () => {
-    expect(getLastUpdated(scheme(1))).toBe("2026-09-30");
-    expect(getLastUpdated(scheme(2))).toBe("2026-09-29");
+    expect(getLastChecked(scheme(1))).toBe("2026-09-30");
+    expect(getLastChecked(scheme(2))).toBe("2026-09-29");
+  });
+
+  it('says "Last checked" for both tiers', () => {
+    expect(getLastCheckedText(scheme(1))).toBe("Last checked 30 Sept 2026");
+    expect(getLastCheckedText(scheme(2))).toBe("Last checked 29 Sept 2026");
   });
 });

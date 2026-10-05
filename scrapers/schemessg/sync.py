@@ -1,15 +1,19 @@
-"""Weekly sync of Tier 2 schemes from the Schemes.sg partner API.
+"""Weekly sync of Tier 2 schemes from the Schemes.sg partner API, and the
+weekly check of the official pages behind our Tier 1 schemes.
 
 Usage:
-    python sync.py            # fetch, classify and write outputs
-    python sync.py --force    # write outputs even if nothing changed
+    python sync.py
 
 Reads SCHEMESSG_API_KEY, SCHEMESSG_BASE_URL and SCHEMESSG_ENV from the
 environment, falling back to scrapers/schemessg/.env. The API key is only
 sent in the X-API-Key header and is never printed or written anywhere.
+
+Every run rewrites the outputs: Tier 2 dates follow the sync date, and a
+Tier 1 scheme's lastChecked moves when all its official pages were read and
+unchanged. A run with nothing new apart from those dates gets the PR title
+"Schemes.sg weekly sync: no content changes (dates only)".
 """
 
-import argparse
 import json
 import os
 import sys
@@ -36,6 +40,9 @@ TIER1_SOURCES_FILE = DATA_DIR / "tier1_sources.json"
 
 SINGAPORE = timezone(timedelta(hours=8))
 
+TITLE_CHANGES = "Schemes.sg weekly sync: changes to review"
+TITLE_DATES_ONLY = "Schemes.sg weekly sync: no content changes (dates only)"
+
 
 def read_env_file(path: Path) -> Dict[str, str]:
     values: Dict[str, str] = {}
@@ -59,7 +66,7 @@ def load_settings() -> Dict[str, str]:
     return {
         "api_key": setting("SCHEMESSG_API_KEY"),
         "base_url": setting("SCHEMESSG_BASE_URL", api.DEFAULT_BASE_URL),
-        "env": setting("SCHEMESSG_ENV", "dev").lower(),
+        "env": setting("SCHEMESSG_ENV", "prod").lower(),
     }
 
 
@@ -89,9 +96,13 @@ def run(
     synced_on: str,
     env: str,
     extra_missing: Optional[List[dict]] = None,
-    source_watch: Optional[Dict[str, List[dict]]] = None,
+    source_watch: Optional[dict] = None,
 ) -> dict:
-    """Classify and build every output. Pure apart from its inputs."""
+    """Classify and build every output. Pure apart from its inputs.
+
+    source_watch, when given, is {"groups", "moved", "recheck"} from
+    watch_sources (pages by status, Tier 1 dates moved, schemes to re-check).
+    """
     problems = cat.validate_overrides(overrides)
     if problems:
         raise ValueError("overrides.json is invalid: " + "; ".join(problems))
@@ -107,12 +118,15 @@ def run(
     diff = cat.diff_runs(previous_records, state_records) if previous_state else None
     tier1 = cat.tier1_description_changes(previous_records, state_records)
     to_review = cat.overrides_to_review(previous_records, state_records)
+    unmatched = cat.unmatched_overrides(overrides, records)
+    groups = (source_watch or {}).get("groups") or {}
     has_changes = (
         previous_state is None
         or bool(diff and (diff["added"] or diff["removed"] or diff["changed"]))
         or any(m["changed"] for m in tier1)
         or any(o["sourceChanged"] for o in to_review)
-        or bool(source_watch and source_watch["changed"])
+        or bool(groups.get(watch_sources.CHANGED))
+        or (previous_state or {}).get("env") != env
     )
     report_md = report.render_report(
         synced_on=synced_on,
@@ -120,10 +134,17 @@ def run(
         records=records,
         retired=retired,
         diff=diff,
+        previous_env=(previous_state or {}).get("env"),
+        has_changes=has_changes,
         tier1_changes=tier1,
         overrides_to_review=to_review,
+        unmatched=unmatched,
         source_watch_lines=(
-            watch_sources.render_section(source_watch) if source_watch else None
+            watch_sources.render_section(
+                groups, source_watch["moved"], source_watch["recheck"], synced_on
+            )
+            if source_watch
+            else None
         ),
         extra_includes=overrides.get("extra_includes", []),
         extra_missing=extra_missing or [],
@@ -136,18 +157,44 @@ def run(
         "state": {"syncedOn": synced_on, "env": env, "records": state_records},
         "report": report_md,
         "has_changes": has_changes,
+        "title": TITLE_CHANGES if has_changes else TITLE_DATES_ONLY,
+    }
+
+
+def watch_tier1_sources(synced_on: str) -> Optional[dict]:
+    """Read the Tier 1 official pages and work out which dates can move.
+    Best effort: never fails the sync."""
+    try:
+        tier1_catalog = read_json(TIER1_CATALOG_FILE, [])
+        previous = read_json(TIER1_SOURCES_FILE, {})
+        with watch_sources.browser_fetcher() as render:
+            if render is None:
+                print("No headless browser available; JavaScript pages can't be read.")
+            state, groups = watch_sources.watch(
+                tier1_catalog, previous, synced_on, render=render
+            )
+        updated, moved, recheck = watch_sources.update_last_checked(
+            tier1_catalog, groups, synced_on
+        )
+    except Exception as error:  # noqa: BLE001 - watching is best effort
+        print(f"Tier 1 source watch skipped: {type(error).__name__}")
+        return None
+    print(
+        "Tier 1 pages: "
+        + ", ".join(f"{len(pages)} {status}" for status, pages in groups.items())
+        + f"; {len(moved)} date(s) moved."
+    )
+    return {
+        "state": state,
+        "groups": groups,
+        "moved": moved,
+        "recheck": recheck,
+        "catalog": updated,
+        "catalog_changed": updated != tier1_catalog,
     }
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description=__doc__.split("\n")[0])
-    parser.add_argument(
-        "--force",
-        action="store_true",
-        help="write outputs even when nothing changed since the last run",
-    )
-    args = parser.parse_args()
-
     settings = load_settings()
     if not settings["api_key"]:
         print("SCHEMESSG_API_KEY is not set (environment or .env).", file=sys.stderr)
@@ -176,20 +223,7 @@ def main() -> int:
     print(f"Fetched {len(raw_details) + len(retired)} schemes ({len(retired)} retired or missing).")
 
     synced_on = datetime.now(SINGAPORE).date().isoformat()
-
-    # Watch the official pages behind Tier 1. Never fails the sync.
-    source_state, source_watch = None, None
-    try:
-        tier1_catalog = read_json(TIER1_CATALOG_FILE, [])
-        source_state, source_watch = watch_sources.watch(
-            tier1_catalog, read_json(TIER1_SOURCES_FILE, {}), synced_on
-        )
-        print(
-            f"Tier 1 sources: {len(source_watch['changed'])} changed, "
-            f"{len(source_watch['unwatchable'])} can't be watched."
-        )
-    except Exception as error:  # noqa: BLE001 - watching is best effort
-        print(f"Tier 1 source watch skipped: {type(error).__name__}")
+    source_watch = watch_tier1_sources(synced_on)
 
     result = run(
         raw_details=raw_details,
@@ -203,22 +237,29 @@ def main() -> int:
         env=settings["env"],
     )
 
-    if not result["has_changes"] and not args.force:
-        # Leave every file untouched so the weekly job opens no PR.
-        print("No changes since the last run; outputs left as they are.")
-        return 0
-
+    # Always written: dates move every week. When nothing at all differs
+    # (a second run on the same day), the files come out identical and the
+    # workflow opens no PR.
     write_json(CATALOG_FILE, result["catalog"])
     write_json(OTHER_FILE, result["other"])
     write_json(STATE_FILE, result["state"])
-    if source_state is not None:
-        write_json(TIER1_SOURCES_FILE, source_state)
+    if source_watch is not None:
+        write_json(TIER1_SOURCES_FILE, source_watch["state"])
+        if source_watch["catalog_changed"]:
+            write_json(TIER1_CATALOG_FILE, source_watch["catalog"])
     write_text(REPORT_FILE, result["report"])
+
+    # The workflow uses this as the sync PR's title
+    github_output = os.environ.get("GITHUB_OUTPUT")
+    if github_output:
+        with open(github_output, "a", encoding="utf-8") as file:
+            file.write(f"title={result['title']}\n")
 
     statuses: Dict[str, int] = {}
     for record in result["records"]:
         statuses[record["status"]] = statuses.get(record["status"], 0) + 1
     print(f"Wrote {len(result['catalog'])} published schemes; counts: {statuses}")
+    print(f"PR title: {result['title']}")
     return 0
 
 

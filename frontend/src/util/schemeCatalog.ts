@@ -266,7 +266,25 @@ export const getSourceLine = (scheme: CatalogScheme): string =>
     ? `${scheme.agency} · Reviewed by CareCompass`
     : `${scheme.agency} · From ${SOURCE_LABELS[scheme.source]}`;
 
-// When we last checked a Tier 1 scheme against official sources, or when the
-// weekly sync last refreshed a Tier 2 scheme
-export const getLastUpdated = (scheme: CatalogScheme): string | undefined =>
+// When we last checked a scheme: for Tier 1, the last time every official
+// source was read and unchanged (moved by the weekly job); for Tier 2, the
+// last weekly Schemes.sg sync
+export const getLastChecked = (scheme: CatalogScheme): string | undefined =>
   scheme.tier === 1 ? scheme.lastChecked : scheme.lastRefreshed;
+
+// "30 Sep 2026"; anything that isn't a date is shown as it is
+export const formatSchemeDate = (iso: string): string => {
+  const date = new Date(iso);
+  return isNaN(date.getTime())
+    ? iso
+    : date.toLocaleDateString("en-SG", {
+        day: "numeric",
+        month: "short",
+        year: "numeric",
+      });
+};
+
+// Start of the grey line at the foot of the detail page, followed by
+// "· Sources: …" (Tier 1) or "· From Schemes.sg" (Tier 2)
+export const getLastCheckedText = (scheme: CatalogScheme): string =>
+  `Last checked ${formatSchemeDate(getLastChecked(scheme) ?? "")}`;

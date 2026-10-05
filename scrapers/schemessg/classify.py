@@ -23,7 +23,7 @@ PAY_FOR_CATEGORIES = [
     "tax_cpf",
 ]
 
-ISLANDWIDE_AREAS = {"", "no service boundaries", "singapore"}
+ISLANDWIDE_AREAS = {"", "no service boundaries", "singapore", "nationwide"}
 
 # ---------------------------------------------------------------------------
 # Normalisation
@@ -299,13 +299,18 @@ def _readable_area(text: str) -> str:
 
 
 def classify_area(record: dict) -> dict:
-    """Where the scheme applies. planning_area is the agency's office and is
-    ignored on purpose."""
-    agency = record.get("agency") or ""
-    cdc = re.search(r"([A-Za-z ]+?)\s+CDC\b", agency)
-    if cdc:
-        return {"kind": "district", "name": cdc.group(1).strip()}
-    service_area = (record.get("service_area") or "").strip()
-    if service_area.lower() in ISLANDWIDE_AREAS:
+    """Where the scheme applies, from service_area only.
+
+    planning_area is the agency's own location (by design, per Schemes.sg),
+    and the agency's name says nothing about coverage either, so neither is
+    used. service_area is usually a comma-separated string, sometimes a list.
+    A "Singapore" part ("South West District, Singapore") is dropped.
+    Corrections go in overrides.json.
+    """
+    service_area = record.get("service_area")
+    values = service_area if isinstance(service_area, list) else [service_area or ""]
+    parts = [part for value in values for part in _readable_area(str(value)).split(", ") if part]
+    places = [part for part in parts if part.lower() not in ISLANDWIDE_AREAS]
+    if not places:
         return {"kind": "islandwide"}
-    return {"kind": "district", "name": _readable_area(service_area)}
+    return {"kind": "district", "name": ", ".join(places)}

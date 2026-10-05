@@ -23,9 +23,13 @@
       {
         "name": "Ministry of Social and Family Development (MSF)",
         "url": "https://supportgowhere.life.gov.sg/schemes/COMCARE-LTA/comcare-long-term-assistance-lta"
+      },
+      {
+        "name": "Schemes.sg",
+        "url": "https://schemes.sg/schemes/IhKLeOTlBTc8tSkAgKEP"
       }
     ],
-    "lastRefreshed": "2026-10-01"
+    "lastRefreshed": "2026-10-05"
   },
   {
     "id": "ssg-aic-elderfund",
@@ -49,9 +53,13 @@
       {
         "name": "Ministry of Health (MOH), Central Provident Fund (CPF), Agency for Integrated Care (AIC)",
         "url": "https://www.aic.sg/financial-assistance/elderfund"
+      },
+      {
+        "name": "Schemes.sg",
+        "url": "https://schemes.sg/schemes/sSpXwuKcdNRPtqEZHI4i"
       }
     ],
-    "lastRefreshed": "2026-10-01"
+    "lastRefreshed": "2026-10-05"
   },
   {
     "id": "ssg-moh-interim-disability-assistance-programme-for-the-elderly",
@@ -75,9 +83,13 @@
       {
         "name": "Ministry of Health (MOH)",
         "url": "https://www.moh.gov.sg/managing-expenses/schemes-and-subsidies/interim-disability-assistance-programme-for-the-elderly"
+      },
+      {
+        "name": "Schemes.sg",
+        "url": "https://schemes.sg/schemes/n1JVQhzmWsrqRAxg93nA"
       }
     ],
-    "lastRefreshed": "2026-10-01"
+    "lastRefreshed": "2026-10-05"
   },
   {
     "id": "ssg-aic-pioneer-generation-disability-assistance-scheme",
@@ -101,9 +113,13 @@
       {
         "name": "Agency for Integrated Care",
         "url": "https://www.aic.sg/financial-assistance/pioneer-generation-disability-assistance-scheme"
+      },
+      {
+        "name": "Schemes.sg",
+        "url": "https://schemes.sg/schemes/2rK9LebmNpOVhNuJhpZc"
       }
     ],
-    "lastRefreshed": "2026-10-01"
+    "lastRefreshed": "2026-10-05"
   },
   {
     "id": "ssg-sbws-public-assistance-programme",
@@ -129,9 +145,13 @@
       {
         "name": "Singapore Buddhist Welfare Service",
         "url": "https://sbws.org.sg/en/services-affiliates/social-welfare-and-community-services/public-assistance-programme/"
+      },
+      {
+        "name": "Schemes.sg",
+        "url": "https://schemes.sg/schemes/QMeMEyQ79DmOcbtN2ucH"
       }
     ],
-    "lastRefreshed": "2026-10-01"
+    "lastRefreshed": "2026-10-05"
   },
   {
     "id": "ssg-southwest-csf",
@@ -142,22 +162,28 @@
     "agency": "South West CDC",
     "summary": "One-off cash to help caregivers in the South West District with caregiving costs.",
     "description": "It gives a one-off $1,000 to help with self-care and caregiving expenses.",
-    "eligibility": "- Resident of South West District\n- Applicant or immediate family member is a Singapore Citizen\n- Per Capita Household Income (PCHI) of $1,500 and below\n- Caregiver and Care Recipient must reside in the same household\n- Care Recipient requires assistance with at least 3 Activities of Daily Living (ADL): washing, feeding, dressing, toileting, moving",
+    "eligibility": "- Resident of South West District\n- Applicant or care recipient must be Singaporean;\n- Per capita household income ≤ $1,500 or blue CHAS card holder;\n- Caregiver and care recipient must reside in the same household; and\n- Care recipient requires assistance with min. 3 activities of daily living (ADLs): washing / feeding / dressing / toileting / mobility; OR\n- Care recipient has a certified permanent disability: physical / visual / hearing / intellectual / autism / others.",
     "valueText": "$1,000 one-off",
-    "whatYouGet": [],
+    "whatYouGet": [
+      "Respite care/Caregiver support"
+    ],
     "payFor": "monthly_payouts",
     "area": {
       "kind": "district",
       "name": "South West District"
     },
-    "link": "https://southwest.cdc.gov.sg/what-we-do/for-caregivers/csf/",
+    "link": "https://southwest.cdc.gov.sg/what-we-do/for-caregivers/south-west-caregiver-support-fund/",
     "sources": [
       {
-        "name": "South West District CDC",
-        "url": "https://southwest.cdc.gov.sg/what-we-do/for-caregivers/csf/"
+        "name": "South West Community Development Council (South West CDC)",
+        "url": "https://southwest.cdc.gov.sg/what-we-do/for-caregivers/south-west-caregiver-support-fund/"
+      },
+      {
+        "name": "Schemes.sg",
+        "url": "https://schemes.sg/schemes/0IfTwD0f8BbxmpxapZQ2"
       }
     ],
-    "lastRefreshed": "2026-10-01"
+    "lastRefreshed": "2026-10-05"
   },
   {
     "id": "ssg-hdb-enhancement-for-active-seniors-ease",
@@ -166,9 +192,9 @@
     "tier": 2,
     "name": "Enhancement for Active Seniors (EASE)",
     "agency": "HDB",
-    "summary": "HDB’s EASE programme subsidises home safety and accessibility upgrades—such as grab bars, slip‑resistant flooring, ramps, and HFADs—for HDB flats to support seniors’ mobility and safety. It can be applied for directly if not covered under HIP or if earlier installation is preferred.",
-    "description": "Enhancement for Active Seniors (EASE) is an HDB programme that subsidises the installation of safety and mobility features in HDB flats to make homes safer and more accessible for seniors and those with mobility needs. It can be taken up on its own as a Direct Application, or as part of the Home Improvement Programme (HIP).\n\nKey features offered (installed where technically feasible and with a 1‑year warranty):\n- Fall prevention and support: grab bars (various profiles), slip‑resistant floor treatment for bathrooms, lowering of bathroom entrance kerbs, wall‑mounted foldable shower seat, and a handrail at the main entrance step(s)\n- Wheelchair/commode accessibility: single‑step, portable multi‑step and customised ramps, toilet entrance widening, and wheelchair lifter (where ramp solutions are not feasible)\n- Safety and convenience enhancements: bidet sprays, rocker light switches, and a Home Fire Alarm Device (HFAD) (2 for Executive Maisonettes)\n\nCost sharing and maintenance:\n- Highly subsidised by the Government, with residents’ co‑payment amounts varying by flat type and selected items\n- Certain works may require additional subsidised costs (e.g., wash basin relocation, temporary toilet, electrical wire replacement, RCCB replacement)\n- Wheelchair lifter requires regular paid maintenance after the warranty period\n\nWho it helps:\n- Seniors needing safer, more accessible homes, and wheelchair users who require ramps or lifters for home access\n\nAdditional notes:\n- Items are determined based on site conditions and functional needs; HDB’s appointed contractors assess feasibility and may recommend alternatives\n- HFADs enhance early fire detection and are encouraged for seniors and vulnerable households",
-    "eligibility": "Singapore Citizen households (sold flats) and Registered Tenants (rental flats) may qualify if a family member is: (a) aged 65 years and above; or (b) aged 60–64 years and requires assistance with at least one Activity of Daily Living (e.g., washing/bathing, dressing, feeding, toileting, mobility, transferring).",
+    "summary": "HDB’s EASE programme subsidises the installation of safety and accessibility features in HDB flats to help seniors and residents with mobility needs live safely at home. It provides items like grab bars, ramps, door widening, slip-resistant treatment, shower seats, and HFADs at subsidised rates.",
+    "description": "- Government-subsidised home modifications to improve safety and accessibility in HDB flats for seniors and those with mobility needs.\n- Offered as part of the Home Improvement Programme (HIP) or via EASE (Direct Application) if the block is not due for HIP or if earlier installation is desired.\n- Key improvements include:\n  - Fall prevention and support: grab bars (various types), slip-resistant floor treatment, lowering of bathroom kerbs, wall-mounted foldable shower seat, handrail at main entrance.\n  - Accessibility for wheelchair/commode users: single-step and multi-step ramps (portable or customised), wheelchair lifter (when ramps are not feasible), widening of toilet/bathroom entrances.\n  - Safety and convenience: bidet spray, set of rocker light switches, Home Fire Alarm Device (HFAD).\n- Highly subsidised costs with residents’ co-payment varying by flat type; items come with a 1-year warranty.\n- Solutions are installed only where technically feasible; site assessments determine suitable items and any ancillary works (e.g., wash basin relocation, electrical upgrades).",
+    "eligibility": "Singapore Citizen households (sold flats) and Registered Tenants (rental flats) may apply for EASE (Direct Application) if the household has a family member who is either: (1) aged 65 years and above; or (2) aged 60–64 years and requires assistance with at least one Activity of Daily Living (e.g., washing/bathing, dressing, feeding, toileting, mobility, transferring). Items are installed only where technically feasible.",
     "whatYouGet": [
       "Financial assistance for housing",
       "Technology assistance"
@@ -182,9 +208,43 @@
       {
         "name": "Housing & Development Board",
         "url": "https://www.hdb.gov.sg/managing-my-home/upgrading-and-redevelopment/enhancement-for-active-seniors-ease"
+      },
+      {
+        "name": "Schemes.sg",
+        "url": "https://schemes.sg/schemes/0TXzL4HkLRQF3NuUqHZA"
       }
     ],
-    "lastRefreshed": "2026-10-01"
+    "lastRefreshed": "2026-10-05"
+  },
+  {
+    "id": "ssg-hdb-silver-housing-bonus",
+    "source": "schemes_sg",
+    "sourceId": "lx0b7thMMg7jU0qtoWqo",
+    "tier": 2,
+    "name": "Silver Housing Bonus",
+    "agency": "HDB",
+    "summary": "Cash bonus for seniors who right-size to a 3-room or smaller HDB flat and commit to increasing their CPF RA for CPF LIFE payouts. Provides up to $40,000 per household depending on flat type and RA commitment.",
+    "description": "• The Silver Housing Bonus (SHB) is a cash bonus to help seniors who right-size to a 3-room or smaller HDB flat increase their retirement income.\n• Seniors receive up to $30,000 when they commit up to $60,000 net increase to their CPF Retirement Account (RA) for CPF LIFE payouts after selling their existing home and buying a smaller flat.\n• An additional $10,000 cash bonus is given when right-sizing to a 2-room or smaller flat, including a Community Care Apartment—bringing the maximum to $40,000 per household for eligible HDB owners, or up to $20,000 for eligible private property owners with AV between $21,000 and $31,000.\n• The bonus is pro-rated based on how much is committed to the CPF RA, and can be fulfilled using CPF housing refunds (without cash top-ups if sufficient).\n• It supports seniors to unlock housing equity, lower housing costs, and boost lifelong retirement payouts via CPF LIFE.",
+    "eligibility": "• Household: At least one owner is a Singapore Citizen aged 55 or above; gross monthly household income ≤ $14,000.\n• Existing property: HDB flat (met MOP for resale) or private residential property with Annual Value (AV) up to $31,000.\n• Property ownership limits: Must not concurrently own/hold interest in a private residential property, or own/hold interest in more than one non-residential property.\n• Next property: Buying a 3-room (excluding 3-room terrace), 2-room or smaller HDB flat, or a Community Care Apartment.\n• Net sale proceeds: Must be positive after accounting for outstanding loan, purchase price of next flat, resale levy (if applicable), and subsidy recovery (if applicable for Plus/Prime/PLH flats).\n• Transaction timing: Book/buy the next flat before selling the existing property, or within 12 months after completing the sale.\n• SHB commitment: Commit a net increase in CPF RA (capped at $60,000 and by the prevailing Full Retirement Sum) after right-sizing; funds may come from CPF housing refunds.\n• HDB Flat Eligibility: Must meet HDB flat purchase eligibility and hold a valid HFE letter.\n• Application window: SHB application within 1 year from the legal completion date of the second housing transaction; eligibility assessed at point of SHB application.",
+    "whatYouGet": [
+      "Financial assistance for housing"
+    ],
+    "payFor": "equipment_home",
+    "area": {
+      "kind": "islandwide"
+    },
+    "link": "https://www.hdb.gov.sg/managing-my-home/retirement-planning/monetising-flat-for-retirement/silver-housing-bonus",
+    "sources": [
+      {
+        "name": "Housing & Development Board (HDB)",
+        "url": "https://www.hdb.gov.sg/managing-my-home/retirement-planning/monetising-flat-for-retirement/silver-housing-bonus"
+      },
+      {
+        "name": "Schemes.sg",
+        "url": "https://schemes.sg/schemes/lx0b7thMMg7jU0qtoWqo"
+      }
+    ],
+    "lastRefreshed": "2026-10-05"
   },
   {
     "id": "ssg-redcross-transportaid",
@@ -209,9 +269,13 @@
       {
         "name": "Singapore Red Cross",
         "url": "https://www.redcross.sg/get-assistance/transportaid.html"
+      },
+      {
+        "name": "Schemes.sg",
+        "url": "https://schemes.sg/schemes/wlHkIcBIE3uzOr1PVJlv"
       }
     ],
-    "lastRefreshed": "2026-10-01"
+    "lastRefreshed": "2026-10-05"
   },
   {
     "id": "ssg-chas",
@@ -238,9 +302,13 @@
       {
         "name": "Ministry of Health (MOH)",
         "url": "https://www.chas.sg/"
+      },
+      {
+        "name": "Schemes.sg",
+        "url": "https://schemes.sg/schemes/zaLdcbwlK49THVXQbtBi"
       }
     ],
-    "lastRefreshed": "2026-10-01"
+    "lastRefreshed": "2026-10-05"
   },
   {
     "id": "ssg-tzuchi-medical-assistance",
@@ -267,9 +335,13 @@
       {
         "name": "Buddhist Compassion Relief Tzu-Chi Foundation (Singapore)",
         "url": "https://www.tzuchi.org.sg/en/our-missions/charity/medical-assistance/"
+      },
+      {
+        "name": "Schemes.sg",
+        "url": "https://schemes.sg/schemes/LeAXbtvj4oK3nhH4FrBo"
       }
     ],
-    "lastRefreshed": "2026-10-01"
+    "lastRefreshed": "2026-10-05"
   },
   {
     "id": "ssg-aic-medical-fee-exemption-card-mfec",
@@ -293,9 +365,13 @@
       {
         "name": "Ministry of Social and Family Development (MSF), Ministry of Health (MOH), Agency for Integrated Care (AIC)",
         "url": "https://www.aic.sg/financial-assistance/medical-fee-exemption-card-mfec/"
+      },
+      {
+        "name": "Schemes.sg",
+        "url": "https://schemes.sg/schemes/g46qLiec2dbf0M9GCash"
       }
     ],
-    "lastRefreshed": "2026-10-01"
+    "lastRefreshed": "2026-10-05"
   },
   {
     "id": "ssg-aic-medifund",
@@ -320,9 +396,13 @@
       {
         "name": "Agency for Integrated Care",
         "url": "https://www.aic.sg/financial-assistance/medifund"
+      },
+      {
+        "name": "Schemes.sg",
+        "url": "https://schemes.sg/schemes/VHMs8PD8AxFHFCMSds8x"
       }
     ],
-    "lastRefreshed": "2026-10-01"
+    "lastRefreshed": "2026-10-05"
   },
   {
     "id": "ssg-moh-merdeka-generation-package",
@@ -349,9 +429,13 @@
       {
         "name": "Ministry of Health (MOH)",
         "url": "https://www.moh.gov.sg/managing-expenses/schemes-and-subsidies/merdeka-generation-package"
+      },
+      {
+        "name": "Schemes.sg",
+        "url": "https://schemes.sg/schemes/qA6GtDXuV49biV9ER6qX"
       }
     ],
-    "lastRefreshed": "2026-10-01"
+    "lastRefreshed": "2026-10-05"
   },
   {
     "id": "ssg-moh-pioneer-generation-package",
@@ -378,9 +462,13 @@
       {
         "name": "Ministry of Health (MOH)",
         "url": "https://www.moh.gov.sg/cost-financing/healthcare-schemes-subsidies/pioneer-generation-package"
+      },
+      {
+        "name": "Schemes.sg",
+        "url": "https://schemes.sg/schemes/iol6ea7rylJvuK14byGY"
       }
     ],
-    "lastRefreshed": "2026-10-01"
+    "lastRefreshed": "2026-10-05"
   },
   {
     "id": "ssg-viriya-seniors",
@@ -409,9 +497,13 @@
       {
         "name": "Viriya Community Services",
         "url": "https://viriya.org.sg/service/seniors/"
+      },
+      {
+        "name": "Schemes.sg",
+        "url": "https://schemes.sg/schemes/TWb6eDtDEYY3jPzTblbO"
       }
     ],
-    "lastRefreshed": "2026-10-01"
+    "lastRefreshed": "2026-10-05"
   },
   {
     "id": "ssg-cpf-matching-grant-for-seniors-who-top-up",
@@ -435,8 +527,12 @@
       {
         "name": "Central Provident Fund (CPF)",
         "url": "https://www.cpf.gov.sg/member/growing-your-savings/saving-more-with-cpf/matching-grant-for-seniors-who-top-up"
+      },
+      {
+        "name": "Schemes.sg",
+        "url": "https://schemes.sg/schemes/LEA1pvdnUM7vVlYVSZKg"
       }
     ],
-    "lastRefreshed": "2026-10-01"
+    "lastRefreshed": "2026-10-05"
   }
 ]

@@ -218,13 +218,15 @@ describe("catalog files", () => {
 });
 
 describe("Tier 1 content from docs/schemes/tier1-schemes.md", () => {
+  // The weekly job moves lastChecked forward when every official page behind a
+  // scheme is unchanged, so the exact dates aren't fixed
   it("records when each scheme was last checked", () => {
+    const today = new Date().toISOString().slice(0, 10);
     for (const scheme of TIER1) {
-      expect(scheme.lastChecked).toBe(
-        scheme.id === "CARESHIELD-ELDERSHIELD-CLAIM"
-          ? "2026-10-01"
-          : "2026-09-30",
-      );
+      expect(scheme.lastChecked).toMatch(/^\d{4}-\d{2}-\d{2}$/);
+      // Not before the first full research of the schemes
+      expect(scheme.lastChecked! >= "2026-09-30").toBe(true);
+      expect(scheme.lastChecked! <= today).toBe(true);
     }
   });
 

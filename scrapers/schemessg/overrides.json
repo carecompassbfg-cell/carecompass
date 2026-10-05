@@ -1,5 +1,5 @@
 {
-  "_help": "Hand-edited. Matches use the official link and/or scheme name (normalised), never Schemes.sg IDs, because IDs differ between dev and prod. See README.md.",
+  "_help": "Hand-edited. Matches use the official link and/or scheme name (normalised), never Schemes.sg IDs, because IDs differ between dev and prod. Scheme overrides match on name and link together. See README.md.",
   "agency_short_names": {
     "Agency for Integrated Care": "AIC",
     "Agency for Integrated Care (AIC)": "AIC",
@@ -20,7 +20,10 @@
     "South West District CDC": "South West CDC",
     "Singapore Red Cross": "Singapore Red Cross",
     "Infocomm Media Development Authority": "IMDA",
-    "Infocomm Media Development Authority (IMDA)": "IMDA"
+    "Infocomm Media Development Authority (IMDA)": "IMDA",
+    "Housing and Development Board (HDB)": "HDB",
+    "South West Community Development Council": "South West CDC",
+    "South West Community Development Council (South West CDC)": "South West CDC"
   },
   "tier1_matches": [
     {
@@ -62,7 +65,8 @@
   "schemes": [
     {
       "match": {
-        "name": "South West Caregiver Support Fund"
+        "name": "South West Caregiver Support Fund",
+        "link": "https://southwest.cdc.gov.sg/what-we-do/for-caregivers/south-west-caregiver-support-fund/"
       },
       "action": "include",
       "payFor": "monthly_payouts",
@@ -70,39 +74,59 @@
         "kind": "district",
         "name": "South West District"
       },
-      "reason": "Schemes.sg says $800 (summary) and $500 (description); official South West CDC page says $1,000",
+      "reason": "Production Schemes.sg now says $1,000 (description), matching the official South West CDC page (updated 27 Aug 2026), but its summary and description describe the CDC's caregiver page rather than the fund, and it has no payFor. We keep our summary, \"$1,000 one-off\" and payFor. Dev said $800 (summary) and $500 (description).",
       "summary": "One-off cash to help caregivers in the South West District with caregiving costs.",
       "valueText": "$1,000 one-off",
       "description": "It gives a one-off $1,000 to help with self-care and caregiving expenses.",
-      "checked_on": "2026-09-29"
+      "checked_on": "2026-10-05"
     },
     {
       "match": {
-        "name": "Mobile Access for Seniors"
+        "name": "Mobile Access for Seniors",
+        "link": "https://www.imda.gov.sg/programme-listing/Mobile-Access-for-Seniors"
       },
       "action": "exclude",
       "reason": "Subsidised phone plans and devices, not caregiving costs"
     },
     {
       "match": {
-        "name": "Financial Assistance Schemes & Food Vouchers"
+        "name": "Financial Assistance Schemes & Food Vouchers",
+        "link": "https://www.eurasians.sg/families"
       },
       "action": "exclude",
       "reason": "General cash and food aid (Eurasian Association), not specific to caregiving"
     },
     {
       "match": {
-        "name": "Financial Assistance and Food Relief"
+        "name": "Financial Assistance and Food Relief",
+        "link": "https://catholicwelfare.org.sg/our-programmes-services/"
       },
       "action": "exclude",
       "reason": "General cash and food aid (Catholic Welfare Services), not specific to caregiving"
     },
     {
       "match": {
-        "name": "Financial and Food Rations assistance (Temporary)"
+        "name": "Financial and Food Rations assistance (Temporary)",
+        "link": "https://www.bethelcs.org.sg/social-services/community-support"
       },
       "action": "exclude",
       "reason": "General cash and food aid (Bethel Community Services), not specific to caregiving"
+    },
+    {
+      "match": {
+        "name": "Enhancement for Active Seniors (EASE)",
+        "link": "https://www.hdb.gov.sg/residential/living-in-an-hdb-flat/for-our-seniors/ease"
+      },
+      "action": "exclude",
+      "reason": "Duplicate on production Schemes.sg (three EASE entries); we publish the HDB entry at hdb.gov.sg/managing-my-home/upgrading-and-redevelopment/enhancement-for-active-seniors-ease"
+    },
+    {
+      "match": {
+        "name": "Enhancement for Active Seniors (EASE)",
+        "link": "https://www.aic.sg/financial-assistance/enhancement-for-active-seniors-ease/"
+      },
+      "action": "exclude",
+      "reason": "Duplicate on production Schemes.sg (three EASE entries); we publish the HDB entry at hdb.gov.sg/managing-my-home/upgrading-and-redevelopment/enhancement-for-active-seniors-ease"
     }
   ],
   "extra_includes": [
