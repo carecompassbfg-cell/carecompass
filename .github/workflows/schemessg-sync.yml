@@ -51,7 +51,7 @@ jobs:
         run: python -m pytest -q
 
       # Headless Chromium for the Tier 1 pages that only render with
-      # JavaScript (IRAS Parent Relief, two CPF articles). Cached by
+      # JavaScript (two CPF articles at the moment). Cached by
       # Playwright version. If it can't be installed, those pages are listed
       # as "couldn't read this week" and the sync still runs.
       - name: Get Playwright version

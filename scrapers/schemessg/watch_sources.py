@@ -5,7 +5,7 @@ page, keep only its visible text, hash it and compare with the last run
 (data/tier1_sources.json).
 
 - Pages are fetched plainly first. A page that comes back without real
-  content (rendered with JavaScript, like IRAS and some CPF articles) is
+  content (rendered with JavaScript, like some CPF articles) is
   loaded again in a headless browser (Playwright with Chromium), when one is
   available, and compared the same way.
 - Each page ends up "changed", "unchanged", "new" (read for the first time,

@@ -61,7 +61,7 @@ A second run on the same day produces identical files, so no PR is opened.
 
 `watch_sources.py` (run by `sync.py`) reads every source URL in `frontend/public/data/catalog.tier1.json`, keeps only the visible text (the `<main>` element when there is one; scripts, styles, menus and footers are dropped), hashes it and compares with `data/tier1_sources.json`.
 
-- Pages are fetched plainly. A page that comes back without real content (IRAS Parent Relief and two CPF articles render with JavaScript) is loaded again in headless Chromium (Playwright) and compared the same way. The workflow caches the browser.
+- Pages are fetched plainly. A page that comes back without real content (at the moment, two CPF articles that only render with JavaScript) is loaded again in headless Chromium (Playwright) and compared the same way. The workflow caches the browser.
 - Each page is **changed**, **unchanged**, **read for the first time** (nothing to compare yet) or **couldn't read this week**. Not being able to read a page is never treated as unchanged, and never fails the run; the page keeps its last good hash for next week.
 - A changed page is listed under "Changed. Re-check docs/schemes/tier1-schemes.md" and makes the PR a "changes to review" week.
 
