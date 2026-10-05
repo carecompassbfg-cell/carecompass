@@ -214,7 +214,10 @@ export default function HowItWorksSheet({
   // Shown on the last step, e.g. "Set up care monitoring"
   finalAction?: { label: string; onClick: () => void };
 }) {
-  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: false });
+  const [emblaRef, emblaApi] = useEmblaCarousel({
+    loop: false,
+    align: "start",
+  });
   const [index, setIndex] = useState(0);
 
   const onSelect = useCallback(() => {
@@ -271,14 +274,14 @@ export default function HowItWorksSheet({
 
             {/* data-vaul-no-drag: horizontal swipes move the steps, not the sheet */}
             <div className="overflow-hidden" ref={emblaRef} data-vaul-no-drag>
-              <div className="flex">
+              <div className="-ml-4 flex">
                 {STEPS.map((step, i) => (
                   <section
                     key={step.title}
                     aria-roledescription="slide"
                     aria-label={`Step ${i + 1} of ${STEPS.length}`}
                     aria-hidden={i !== index}
-                    className="flex min-w-0 flex-[0_0_100%] flex-col gap-3 pr-1"
+                    className="flex min-w-0 flex-[0_0_100%] flex-col gap-3 pl-4"
                   >
                     {step.visual}
                     <div className="flex flex-col gap-1">

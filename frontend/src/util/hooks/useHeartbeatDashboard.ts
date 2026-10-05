@@ -1,7 +1,7 @@
 "use client";
 
 import { useAuth } from "@clerk/nextjs";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { HEARTBEAT_API_URL, HeartbeatPerson } from "@/util/heartbeat";
 
 // Read-only: this hook only signs in to HeartBeat and reads the caregiver's
@@ -67,6 +67,10 @@ export default function useHeartbeatDashboard({
   });
   const [attempt, setAttempt] = useState(0);
   const retry = useCallback(() => setAttempt((n) => n + 1), []);
+  // Kept in a ref: Clerk may hand back a new getToken function on each
+  // render, which would otherwise restart the load in a loop
+  const getTokenRef = useRef(getToken);
+  getTokenRef.current = getToken;
 
   useEffect(() => {
     if (!enabled || !isLoaded) return;
@@ -80,7 +84,7 @@ export default function useHeartbeatDashboard({
 
     const load = async () => {
       const freshToken = async () => {
-        const clerkToken = await getToken();
+        const clerkToken = await getTokenRef.current();
         if (!clerkToken) throw new Error("No CareCompass session");
         const token = await signInToHeartbeat(clerkToken);
         saveToken(userId, token);
@@ -110,7 +114,7 @@ export default function useHeartbeatDashboard({
     return () => {
       cancelled = true;
     };
-  }, [enabled, isLoaded, isSignedIn, userId, getToken, attempt]);
+  }, [enabled, isLoaded, isSignedIn, userId, attempt]);
 
   return { ...state, retry };
 }
