@@ -196,7 +196,7 @@ That leaves 7 schemes, plus **CareShield Life / ElderShield claims** as the 8th 
   2. Apply on AIC eFASS with Singpass, or through the nursing home, or with a hardcopy form from an AIC Link.
   3. Approval takes up to 4 weeks.
   4. If not covered by either, see ElderFund (in the catalogue).
-- **Sources**: [CPF: CareShield Life](https://www.cpf.gov.sg/member/healthcare-financing/careshield-life) (updated 24 Sep 2026), [CPF: CareShield Life monthly payout](https://www.cpf.gov.sg/service/article/what-is-the-monthly-payout-amount-for-careshield-life), [AIC: CareShield Life](https://www.aic.sg/financial-assistance/careshield-life), [AIC: ElderShield](https://aic.sg/Financial-Assistance/ElderShield), checked 1 Oct 2026
+- **Sources**: [CPF: CareShield Life](https://www.cpf.gov.sg/member/healthcare-financing/careshield-life) (updated 24 Sep 2026), [CPF: CareShield Life monthly payout](https://www.cpf.gov.sg/service/article/what-is-the-monthly-payout-amount-for-careshield-life), [AIC: CareShield Life](https://www.aic.sg/financial-assistance/careshield-life), [AIC: ElderShield](https://aic.sg/Financial-Assistance/ElderShield), checked 1 Oct 2026; CPF CareShield Life page re-checked 5 Oct 2026, no change
 
 ---
 
@@ -223,7 +223,7 @@ That leaves 7 schemes, plus **CareShield Life / ElderShield claims** as the 8th 
 
 ## Showing when each scheme was last checked
 
-Every Tier 1 entry has `lastChecked` (the date we last checked it against its sources): 30 Sep 2026 for schemes 1–7 and 1 Oct 2026 for scheme 8. On the scheme's detail page, at the very bottom, show one small grey line: "Last updated 30 Sep 2026 · Sources: AIC" (each source name a link). Tier 2 shows "Last updated {sync date} · From Schemes.sg". Not on the cards or list pages.
+Every Tier 1 entry has lastChecked: the date its content was last confirmed against its official sources. The weekly job moves it forward automatically only when every official page for that scheme was read successfully and is unchanged. If any page changed or couldn't be read, the date stays put, and the scheme is listed in the weekly PR under 'Re-check before the date can move' until a person reviews it, updates this file if needed, and adds a Change log row. The scheme's detail page shows one small grey line at the bottom: 'Last checked {date} · Sources: …' (Tier 1) or 'Last checked {date} · From Schemes.sg' (Tier 2, the date of the last merged weekly sync). Not shown on cards or lists.
 
 ## Change log
 
