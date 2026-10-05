@@ -1,8 +1,12 @@
 name: Schemes.sg - Weekly sync
 
-# Pulls Tier 2 schemes from the Schemes.sg partner API and checks the official
-# pages behind our Tier 1 schemes. When anything changed, opens or updates a
-# PR into staging. Never pushes to staging or main.
+# Pulls Tier 2 schemes from the production Schemes.sg partner API and reads
+# the official pages behind our Tier 1 schemes (with a headless browser for
+# the ones that need JavaScript). Opens or updates one PR into main on
+# branch bot/schemessg-sync. Never pushes to main itself.
+#
+# Scheduled runs and the "Run workflow" button use the copy of this file on
+# the default branch (main).
 
 on:
   schedule:
@@ -21,46 +25,77 @@ concurrency:
 jobs:
   sync:
     runs-on: ubuntu-latest
+    timeout-minutes: 30
 
     defaults:
       run:
         working-directory: ./scrapers/schemessg
 
     steps:
-      - name: Checkout staging
+      - name: Checkout main
         uses: actions/checkout@v4
         with:
-          ref: staging
+          ref: main
 
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.11"
+          cache: pip
+          cache-dependency-path: scrapers/schemessg/requirements.txt
+
+      - name: Install packages
+        run: python -m pip install --quiet -r requirements.txt pytest
 
       - name: Run tests
-        run: |
-          python -m pip install --quiet pytest
-          python -m pytest -q
+        run: python -m pytest -q
+
+      # Headless Chromium for the Tier 1 pages that only render with
+      # JavaScript (two CPF articles at the moment). Cached by
+      # Playwright version. If it can't be installed, those pages are listed
+      # as "couldn't read this week" and the sync still runs.
+      - name: Get Playwright version
+        id: playwright
+        run: echo "version=$(python -c 'import importlib.metadata as m; print(m.version("playwright"))')" >> "$GITHUB_OUTPUT"
+
+      - name: Cache headless Chromium
+        id: browser-cache
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-${{ runner.os }}-${{ steps.playwright.outputs.version }}-chromium-headless-shell
+
+      - name: Install headless Chromium
+        if: steps.browser-cache.outputs.cache-hit != 'true'
+        continue-on-error: true
+        run: python -m playwright install --with-deps --only-shell chromium
+
+      - name: Install Chromium system libraries
+        if: steps.browser-cache.outputs.cache-hit == 'true'
+        continue-on-error: true
+        run: python -m playwright install-deps chromium
 
       - name: Sync from Schemes.sg
+        id: sync
         env:
           SCHEMESSG_API_KEY: ${{ secrets.SCHEMESSG_API_KEY }}
-          SCHEMESSG_BASE_URL: ${{ secrets.SCHEMESSG_BASE_URL || vars.SCHEMESSG_BASE_URL }}
-          SCHEMESSG_ENV: ${{ secrets.SCHEMESSG_ENV || vars.SCHEMESSG_ENV || 'dev' }}
+          SCHEMESSG_BASE_URL: ${{ secrets.SCHEMESSG_BASE_URL }}
+          SCHEMESSG_ENV: ${{ secrets.SCHEMESSG_ENV || 'prod' }}
         run: python sync.py
 
-      - name: Open or update PR into staging
+      - name: Open or update PR into main
         uses: peter-evans/create-pull-request@v7
         with:
-          base: staging
+          base: main
           branch: bot/schemessg-sync
           delete-branch: true
           add-paths: |
             frontend/public/data/catalog.schemessg.json
+            frontend/public/data/catalog.tier1.json
             scrapers/schemessg/data/other.json
             scrapers/schemessg/data/report.md
             scrapers/schemessg/data/state.json
             scrapers/schemessg/data/tier1_sources.json
           commit-message: "chore: weekly Schemes.sg sync"
-          title: "Schemes.sg weekly sync"
+          title: ${{ steps.sync.outputs.title || 'Schemes.sg weekly sync' }}
           body-path: scrapers/schemessg/data/report.md

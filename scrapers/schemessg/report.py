@@ -21,8 +21,6 @@ PAY_FOR_LABELS = {
 STATIC_FEEDBACK = [
     "In a category-filtered list, `scheme_type` only contains that category's "
     "types, so every scheme needs a detail call to get its full `scheme_type`.",
-    "`planning_area` is the agency's office rather than where the scheme applies, "
-    "which is easy to misread. A separate field, or documentation, would help.",
     "`service_area` is free text: islandwide shows up as both "
     '"No Service Boundaries" and "Singapore", and districts mix CDC districts, '
     "town names, street names and block ranges. A controlled list (islandwide, "
@@ -69,11 +67,41 @@ def api_feedback(raw_details: List[dict], raw_listed: List[dict]) -> List[str]:
             f"`status` is null for {null_status} of {total} schemes "
             f"(other values: {dict(statuses) or 'none'}). Is null the same as active?"
         )
-    listed_areas = sum(1 for d in raw_listed if d.get("service_area"))
-    if raw_listed and "service_area" in raw_listed[0] and not listed_areas:
+    list_only_null = [
+        field
+        for field in ("service_area", "phone", "email", "address", "eligibility")
+        if raw_listed
+        and field in raw_listed[0]
+        and not any(d.get(field) for d in raw_listed)
+        and any(d.get(field) for d in raw_details)
+    ]
+    if list_only_null:
         notes.append(
-            "List responses include a `service_area` key, but it is always null; "
-            "the value only appears in detail responses."
+            "List responses include "
+            + ", ".join(f"`{f}`" for f in list_only_null)
+            + ", but they are always null there; the values only appear in "
+            "detail responses, so every scheme needs a detail call."
+        )
+    # Same name and same (first) agency but different links: a duplicate
+    # entry, not two operators sharing a generic name
+    def duplicate_key(d: dict) -> tuple:
+        return (
+            c.normalise_name(d.get("scheme")),
+            c.normalise_name(cat.first_agency(d.get("agency"))),
+        )
+
+    links_by_key: Dict[tuple, set] = {}
+    for d in raw_details:
+        links_by_key.setdefault(duplicate_key(d), set()).add(c.normalise_link(d.get("link")))
+    duplicates = sorted(
+        {d.get("scheme") for d in raw_details if len(links_by_key[duplicate_key(d)]) > 1}
+    )
+    if duplicates:
+        notes.append(
+            "The same scheme from the same agency is listed more than once with "
+            "different official links, which looks like duplicate entries: "
+            + ", ".join(duplicates)
+            + "."
         )
     split = [
         d.get("scheme")
@@ -156,6 +184,9 @@ def render_report(
     diff: Optional[dict],
     tier1_changes: List[dict],
     feedback: List[str],
+    previous_env: Optional[str] = None,
+    has_changes: bool = True,
+    unmatched: Optional[Dict[str, List[dict]]] = None,
     extra_includes: Optional[List[dict]] = None,
     extra_missing: Optional[List[dict]] = None,
     overrides_to_review: Optional[List[dict]] = None,
@@ -168,6 +199,13 @@ def render_report(
         "",
         f"Synced on {synced_on} from the **{env}** environment, category "
         '"Seniors & Caregiving".',
+        "",
+        (
+            "**Content changes to review** (see below)."
+            if has_changes
+            else "**No content changes.** Only dates moved forward, so this can be "
+            "merged after a quick look."
+        ),
         "",
         "## Counts",
         "",
@@ -183,8 +221,35 @@ def render_report(
         "",
     ]
 
+    # Matches and overrides that found nothing
+    unmatched = unmatched or {"tier1": [], "schemes": []}
+    if unmatched["tier1"] or unmatched["schemes"]:
+        lines += [
+            "## Matches that found nothing",
+            "",
+            "These overrides.json entries matched no scheme this run (by name "
+            "and link, never by Schemes.sg ID). Check whether Schemes.sg renamed "
+            "the scheme or changed its link, and update overrides.json.",
+            "",
+        ]
+        lines += [
+            f"- Tier 1 match {m['tier1_id']}: {m.get('name')} ({m.get('link')})"
+            for m in unmatched["tier1"]
+        ]
+        lines += [
+            f"- Override: {o['match'].get('name')}"
+            + (f" ({o['match']['link']})" if o["match"].get("link") else "")
+            for o in unmatched["schemes"]
+        ]
+        lines.append("")
+
     # Changes since last run
     lines += ["## Changes since the last run", ""]
+    if previous_env and previous_env != env:
+        lines += [
+            f"Compared with the last run from the **{previous_env}** environment.",
+            "",
+        ]
     if diff is None:
         lines += ["First run: nothing to compare against.", ""]
     elif not (diff["added"] or diff["removed"] or diff["changed"]):

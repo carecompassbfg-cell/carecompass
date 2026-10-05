@@ -168,7 +168,7 @@ def test_pay_for_unclassified_when_two_categories_tie(raw):
 
 
 def test_area_islandwide_values(raw):
-    for value in (None, "", "No Service Boundaries", "Singapore"):
+    for value in (None, "", "No Service Boundaries", "Singapore", "Nationwide", []):
         assert c.classify_area(raw(service_area=value)) == {"kind": "islandwide"}
 
 
@@ -179,10 +179,29 @@ def test_area_district_is_readable(raw):
     }
 
 
-def test_area_cdc_agency_is_district(raw):
+def test_area_drops_a_singapore_part(raw):
+    assert c.classify_area(raw(service_area="South West District, Singapore")) == {
+        "kind": "district",
+        "name": "South West District",
+    }
+
+
+def test_area_accepts_a_list(raw):
+    assert c.classify_area(raw(service_area=["Jurong East", "Bukit Batok"])) == {
+        "kind": "district",
+        "name": "Jurong East, Bukit Batok",
+    }
+
+
+def test_area_comes_from_service_area_only(raw):
+    # A CDC agency name doesn't make a scheme local
     record = raw(agency="South West District CDC", service_area="No Service Boundaries")
-    assert c.classify_area(record) == {"kind": "district", "name": "South West District"}
-
-
-def test_area_ignores_planning_area(raw):
-    assert c.classify_area(raw(planning_area="Toa Payoh")) == {"kind": "islandwide"}
+    assert c.classify_area(record) == {"kind": "islandwide"}
+    # planning_area is the agency's own location, never where it applies
+    for planning_area in ("Toa Payoh", ["BEDOK", "TAMPINES"]):
+        assert c.classify_area(
+            raw(planning_area=planning_area, service_area="No Service Boundaries")
+        ) == {"kind": "islandwide"}
+    assert c.classify_area(
+        raw(planning_area="Bedok", service_area="Toa Payoh")
+    ) == {"kind": "district", "name": "Toa Payoh"}

@@ -17,7 +17,7 @@ import {
   isSheetQuestion,
   PAY_FOR_META,
   QUESTION_META,
-  getLastUpdated,
+  getLastCheckedText,
   getSourceLine,
   SOURCE_LABELS,
 } from "@/util/schemeCatalog";
@@ -79,17 +79,6 @@ function ChecklistRow({
     </li>
   );
 }
-
-const formatDate = (iso: string): string => {
-  const date = new Date(iso);
-  return isNaN(date.getTime())
-    ? iso
-    : date.toLocaleDateString("en-SG", {
-        day: "numeric",
-        month: "short",
-        year: "numeric",
-      });
-};
 
 function SchemeDetail() {
   const params = useSearchParams();
@@ -308,7 +297,7 @@ function SchemeDetail() {
       </section>
 
       <p className="pb-4 text-xs text-gray-600">
-        Last updated {formatDate(getLastUpdated(scheme) ?? "")} ·{" "}
+        {getLastCheckedText(scheme)} ·{" "}
         {scheme.tier === 1 ? (
           <>
             Sources:{" "}

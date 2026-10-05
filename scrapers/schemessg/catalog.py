@@ -195,6 +195,24 @@ def find_tier1_match(overrides: dict, record: dict) -> Optional[str]:
     return None
 
 
+def unmatched_overrides(overrides: dict, records: List[dict]) -> Dict[str, List[dict]]:
+    """Tier 1 matches and scheme overrides that matched no scheme this run,
+    e.g. because Schemes.sg renamed a scheme or changed its link. They are
+    reported rather than guessed."""
+    return {
+        "tier1": [
+            m
+            for m in overrides.get("tier1_matches", [])
+            if not any(_matches(m, r, require_all=False) for r in records)
+        ],
+        "schemes": [
+            o
+            for o in overrides.get("schemes", [])
+            if not any(_matches(o.get("match", {}), r, require_all=True) for r in records)
+        ],
+    }
+
+
 # ---------------------------------------------------------------------------
 # Classification pipeline
 # ---------------------------------------------------------------------------

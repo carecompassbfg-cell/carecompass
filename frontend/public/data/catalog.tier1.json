@@ -56,7 +56,7 @@
         "url": "https://www.aic.sg/financial-assistance/caregivers-training-grant-ctg/"
       }
     ],
-    "lastChecked": "2026-09-30",
+    "lastChecked": "2026-10-05",
     "checkerId": "CAREGIVERS-TRAINING-GRANT",
     "eligibility": "- Your loved one is a Singapore Citizen or PR\n- Aged 65 or older, or needs help with at least one daily activity (the need must be permanent; needs a Functional Assessment Report unless already on a scheme such as CareShield Life or ElderFund)\n- You are a main caregiver\n- The course is on the approved list\n- The grant has not already been used up by another caregiver",
     "nextSteps": "1. Pick a course from the [Caregivers Training Catalogue](https://training-healthcare.vertis.digital/).\n2. Tell the training provider you will use the grant at least 2 weeks before the course, and fill in the [CTG application form](https://edge.sitecorecloud.io/agencyforinb6cc-agencyforin73f5-production08ac-d178/media/agency-for-integrated-care/Files/Financial-Assistance/CTG-Application-form.pdf) they give you.\n3. If your loved one is under 65, you'll also need a [Functional Assessment Report](https://edge.sitecorecloud.io/agencyforinb6cc-agencyforin73f5-production08ac-d178/media/agency-for-integrated-care/Files/Financial-Assistance/Functional-Assessment-Report.pdf)."
@@ -88,7 +88,7 @@
         "url": "https://www.aic.sg/financial-assistance/home-caregiving-grant/"
       }
     ],
-    "lastChecked": "2026-09-30",
+    "lastChecked": "2026-10-05",
     "checkerId": "HOME-CAREGIVING-GRANT",
     "eligibility": "- Your loved one is a Singapore Citizen, or a PR with a living Singapore Citizen parent, child or spouse\n- Not living in a nursing home\n- Household income per person of $4,800 or less (or no income and home Annual Value $21,000 or less)\n- Needs help with at least 3 daily activities, confirmed as permanent by a Functional Assessment Report",
     "nextSteps": "1. Get a Functional Assessment Report from an approved doctor, nurse or therapist.\n2. Apply on [AIC eFASS](https://www.aic.sg/financial-assistance/home-caregiving-grant/) with Singpass (it checks your household income for you). Or email apply@aic.sg or visit an AIC Link.\n3. Approval takes up to 4 weeks."
@@ -118,7 +118,7 @@
         "url": "https://www.mom.gov.sg/passes-and-permits/work-permit-for-foreign-domestic-worker/foreign-domestic-worker-levy/levy-concession"
       }
     ],
-    "lastChecked": "2026-09-30",
+    "lastChecked": "2026-10-05",
     "checkerId": "MIGRANT-DOMESTIC-WORKER-LEVY",
     "eligibility": "- Your loved one lives with you (same address on NRIC)\n- Aged 67 or older and a Singapore Citizen, or a PR where you or your spouse is a Singapore Citizen\n- Or needs help with at least one daily activity and is a Singapore Citizen, or a PR with a Singapore Citizen parent, spouse or child (needs an AIC recommendation letter)\n- The helper is registered to your household, and your loved one is listed as a household member on the FDW eService",
     "nextSteps": "- Aged 67+: usually applied automatically when the address and household details match. [Check if it has been applied](https://go.gov.sg/check-lc-elderly-pwd).\n- Disability route: apply to AIC for a recommendation letter first, then MOM applies the concession.\n- The concession shows within your next 2 levy bills and is backdated to when you completed the steps."
@@ -152,7 +152,7 @@
         "url": "https://www.aic.sg/Care-Services/Enhanced-Home-Personal-Care"
       }
     ],
-    "lastChecked": "2026-09-30",
+    "lastChecked": "2026-10-05",
     "checkerId": "MOH-NR-LTC-SUBSIDY",
     "eligibility": "- Your loved one is a Singapore Citizen or PR\n- For care at home or at a centre, not in a nursing home\n- Household income per person of $4,800 or less (or no income and home Annual Value $21,000 or less)\n- Singapore Citizens born 1969 or earlier get the highest rates\n- The provider is government-funded, with a referral from a doctor or AIC",
     "nextSteps": "1. Ask your loved one's doctor at the hospital or polyclinic, or AIC, to refer you to a subsidised service.\n2. The subsidy is applied to the provider's bill.\n3. Compare day care and home care providers in Care services."
@@ -183,7 +183,7 @@
         "url": "https://www.aic.sg/financial-assistance/seniors-mobility-and-enabling-fund/"
       }
     ],
-    "lastChecked": "2026-09-30",
+    "lastChecked": "2026-10-05",
     "checkerId": "SENIORS-MOBILITY-ENABLING-FUND",
     "eligibility": "- Your loved one is a Singapore Citizen or PR\n- Aged 60 or older\n- Not living in a nursing home\n- Household income per person of $4,800 or less (or no income and home Annual Value $21,000 or less)\n- An approved health professional assesses that the item is needed\n- Extra conditions apply for motorised devices",
     "nextSteps": "1. Don't buy the item first: purchases made in advance can't be reimbursed.\n2. Ask a therapist or medical social worker at the hospital or senior care centre to assess and apply for you, or apply online with Singpass on the AIC page, or at an AIC Link. Approval takes up to 15 working days."
@@ -261,7 +261,7 @@
         "url": "https://aic.sg/Financial-Assistance/ElderShield"
       }
     ],
-    "lastChecked": "2026-10-01",
+    "lastChecked": "2026-10-05",
     "checkerId": "CARESHIELD-ELDERSHIELD-CLAIM",
     "eligibility": "- Covered by CareShield Life or ElderShield\n- Everyone born in 1980 or later is covered automatically, from age 30. People born 1970–1979 with ElderShield 400 were moved to CareShield Life in Dec 2021. People born in 1979 or earlier could choose to join. ElderShield closed to new members on 1 Jan 2020\n- Severe disability: unable to do at least 3 daily activities, assessed by an MOH-accredited assessor\n- The policy is active",
     "nextSteps": "1. Book a severe disability assessment with an MOH-accredited assessor. For CareShield Life the first assessment is free; for ElderShield it costs $100 (clinic) to $250 (home visit), refunded if the claim succeeds.\n2. Apply on AIC eFASS with Singpass, or through the nursing home, or with a hardcopy form from an AIC Link.\n3. Approval takes up to 4 weeks.\n4. If not covered by either, see [ElderFund](/dashboard/schemes?id=ssg-aic-elderfund) (in the catalogue)."
