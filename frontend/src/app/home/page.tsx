@@ -3,7 +3,14 @@
 import { useAuthStore } from "@/stores/auth";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { ReactElement, ReactNode, useEffect, useMemo } from "react";
+import { ReactElement, ReactNode, useEffect, useMemo, useState } from "react";
+import CareMonitoringTab from "@/components/home/CareMonitoringTab";
+import HomeTabs, {
+  HomeTab,
+  readSavedTab,
+  saveTab,
+} from "@/components/home/HomeTabs";
+import LanguagePill from "@/components/home/LanguagePill";
 import HomeSchemesStatusLine from "@/components/schemes/HomeSchemesStatusLine";
 import ResumeStrip from "@/components/schemes/ResumeStrip";
 import { useSchemeAnswersStore, isAnswered } from "@/stores/schemeAnswers";
@@ -182,13 +189,47 @@ export default function Home() {
     router.prefetch("/help");
   }, [router]);
 
+  // Care assistance by default; remembers the last tab for this session
+  const [tab, setTab] = useState<HomeTab>("assistance");
+  useEffect(() => setTab(readSavedTab() ?? "assistance"), []);
+  const changeTab = (next: HomeTab) => {
+    setTab(next);
+    saveTab(next);
+  };
+
   return (
-    <div className="flex h-full w-full flex-col place-content-start place-items-start pt-8">
-      <div className="flex h-full max-h-[512px] w-full flex-col place-content-between">
-        <div className="mb-6 flex flex-col gap-1">
-          <h1 className="text-3xl font-bold text-brand-primary-500">
-            What do you need help with today?
+    <div className="flex h-full w-full flex-col place-content-start place-items-start pt-2">
+      <div className="flex w-full flex-col">
+        <div className="mb-3 flex w-full items-center justify-between gap-3">
+          <h1 className="min-w-0 text-xl font-bold text-gray-900">
+            Welcome to CareCompass
           </h1>
+          <LanguagePill />
+        </div>
+        <HomeTabs value={tab} onChange={changeTab} />
+      </div>
+
+      <div
+        role="tabpanel"
+        id="home-panel-monitoring"
+        aria-labelledby="home-tab-monitoring"
+        hidden={tab !== "monitoring"}
+        className="w-full pb-8 pt-5"
+      >
+        {tab === "monitoring" && <CareMonitoringTab isSignedIn={isSignedIn} />}
+      </div>
+
+      <div
+        role="tabpanel"
+        id="home-panel-assistance"
+        aria-labelledby="home-tab-assistance"
+        hidden={tab !== "assistance"}
+        className="flex w-full flex-col pt-5"
+      >
+        <div className="mb-6 flex flex-col gap-1">
+          <h2 className="text-3xl font-bold text-brand-primary-500">
+            What do you need help with today?
+          </h2>
           <span className="text-xl font-bold text-[rgb(128,128,128,0.55)]">
             See what other caregivers are asking
           </span>
