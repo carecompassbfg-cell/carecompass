@@ -4,24 +4,27 @@ import LoadingSpinner from "@/ui/loading";
 import { useChatQuery } from "@/util/hooks/useChatQuery";
 import { useRouter } from "next/navigation";
 import { Suspense } from "react";
+import { t } from "@/i18n";
 
 type ChatPrompt = {
   label: string;
   query: string;
 };
 
-const chatPrompts: ChatPrompt[] = [
+// The query is sent to the assistant as the user's message, in the
+// language the app is shown in
+const getChatPrompts = (): ChatPrompt[] => [
   {
-    label: "🏥 What caregiving options do I have?",
-    query: "What caregiving options do I have?",
+    label: `🏥 ${t("chat.prompts.options")}`,
+    query: t("chat.prompts.options"),
   },
   {
-    label: "💵 What support might I be eligible for?",
-    query: "What support might I be eligible for?",
+    label: `💵 ${t("chat.prompts.eligible")}`,
+    query: t("chat.prompts.eligible"),
   },
   {
-    label: "🙌 Where can I go for help and support?",
-    query: "Where can I go for help and support?",
+    label: `🙌 ${t("chat.prompts.help")}`,
+    query: t("chat.prompts.help"),
   },
 ];
 
@@ -40,11 +43,9 @@ function ChatIntro() {
 
   return (
     <div className="flex h-full w-full flex-col place-content-end place-items-center gap-4">
-      <span className="w-full text-left font-semibold">
-        How can I help you today?
-      </span>
-      <div className="flex w-full flex-col gap-2 sm:flex-row sm:gap-4">
-        {chatPrompts.map((chatPrompt, index) => (
+      <span className="w-full text-left font-semibold">{t("chat.intro")}</span>
+      <div className="flex w-full flex-col gap-2">
+        {getChatPrompts().map((chatPrompt, index) => (
           <form
             key={index}
             className="w-full"

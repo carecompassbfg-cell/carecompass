@@ -1,5 +1,6 @@
 import { getRatingColor } from "@/util/helper";
 import { Rating } from "@smastrom/react-rating";
+import { t } from "@/i18n";
 
 function ReviewScore({
   rating,
@@ -17,12 +18,12 @@ function ReviewScore({
             backgroundColor: getRatingColor(rating),
           }}
         >
-          {rating?.toFixed(1) || "N/A"}
+          {rating?.toFixed(1) || t("provider.notAvailable")}
         </div>
       </div>
       <div className="flex flex-col">
         <Rating readOnly value={rating} className="max-w-24" />
-        <span>(from {reviewCount} reviews)</span>
+        <span>{t("provider.fromReviews", { count: reviewCount })}</span>
       </div>
     </div>
   );

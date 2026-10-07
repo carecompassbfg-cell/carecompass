@@ -15,16 +15,17 @@ import { usePathname, useRouter } from "next/navigation";
 import { parse } from "partial-json";
 import CustomMarkdown from "../CustomMarkdown";
 import { Fragment } from "react";
+import { t } from "@/i18n";
 
 export default function ChatMessage({ message }: { message: Message }) {
   return (
-    <div className="flex place-items-start gap-2 md:gap-4">
+    <div className="flex place-items-start gap-2">
       {message.role === MessageRole.User ? (
         <Avatar className="sticky mt-2" colorScheme="sub" size="xs" />
       ) : (
         <Avatar className="sticky mt-2" src="/img/logo.svg" size="xs" />
       )}
-      <div className="flex w-[calc(100%-40px)] flex-col rounded-lg border bg-white p-4 md:w-[calc(100%-48px)]">
+      <div className="flex w-[calc(100%-40px)] flex-col rounded-lg border bg-white p-4">
         {message.role === MessageRole.User ? (
           <UserMessage content={message.content} />
         ) : (
@@ -196,7 +197,7 @@ function parseActionMarkup(action: string, router: AppRouterInstance) {
           className="text-blue-500 underline"
           onClick={() => router.push(actionVal)}
         >
-          Click to learn more
+          {t("chat.message.learnMore")}
         </button>
       );
     } else if (actionType === BotResponseCardAction.Phone) {
@@ -205,7 +206,7 @@ function parseActionMarkup(action: string, router: AppRouterInstance) {
           href={`tel:${actionVal}`}
           className="text-sm text-blue-500 underline"
         >
-          Call {actionVal}
+          {t("chat.message.call", { number: actionVal })}
         </a>
       );
     }

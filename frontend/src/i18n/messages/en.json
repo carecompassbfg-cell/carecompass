@@ -1,0 +1,1012 @@
+{
+  "language": {
+    "changeLabel": "Language: {language}. Change language",
+    "menuLabel": "Language"
+  },
+  "home": {
+    "welcome": "Welcome to CareCompass",
+    "tabs": {
+      "label": "Home sections",
+      "monitoring": "Care monitoring",
+      "assistance": "Care assistance"
+    },
+    "assistance": {
+      "title": "What do you need help with today?",
+      "subtitle": "See what other caregivers are asking"
+    },
+    "signInRequired": "Sign-In Required",
+    "cards": {
+      "services": "What <hl>caregiving services</hl> are available?",
+      "servicesPlain": "What caregiving services are available?",
+      "servicesSub": "Day care, home care, nursing homes, respite",
+      "financial": "What <hl>financial support</hl> might <name>{recipient}</name> and I be eligible for?",
+      "financialPlain": "What financial support might {recipient} and I be eligible for?",
+      "myLovedOne": "my loved one",
+      "help": "Where can I go for <hl>help and support</hl>?",
+      "helpPlain": "Where can I go for help and support?",
+      "helpSub": "Courses, support groups, hotlines",
+      "monitor": "How can I <hl>monitor</hl> my <hl>loved one's mental state</hl>?",
+      "monitorPlain": "How can I monitor my loved one's mental state?",
+      "monitorSub": "Daily updates on your loved one's mood",
+      "plan": "How can I <hl>plan ahead</hl> with my loved one for <hl>end-of-life</hl>?",
+      "planPlain": "How can I plan ahead with my loved one for end-of-life?",
+      "planSub": "LPA and advance care planning"
+    },
+    "resume": {
+      "title": "Pick up where you left off",
+      "subtitle": "{questions, plural, one {# quick question} other {# quick questions}} to check {schemes, plural, one {# more scheme} other {# more schemes}} for {name}",
+      "hide": "Hide for now"
+    },
+    "statusLine": {
+      "label": "Schemes: ",
+      "likely": "{count} likely",
+      "toCheck": "{count} to check"
+    }
+  },
+  "monitoring": {
+    "title": "Care monitoring",
+    "help": "How care monitoring works",
+    "subtitleSetUp": "How the people you care for are doing this week",
+    "subtitle": "A daily one-tap check-in, so you know your loved one is okay",
+    "loading": "Loading care monitoring",
+    "error": "We couldn't load your care monitoring summary right now. You can still open HeartBeat to see everything.",
+    "viewDashboard": "View Full Dashboard",
+    "tryAgain": "Try again",
+    "personsICareFor": "Persons I care for",
+    "addPerson": "Add another person",
+    "setUp": "Set up care monitoring",
+    "setUpTitle": "Set up care monitoring for your loved one",
+    "setUpBody": "Your loved one taps once a day to share how they're feeling. If they miss a day, we'll message you on WhatsApp so you can step in early.",
+    "signInToSetUp": "Sign in to set up care monitoring.",
+    "howDoesItWork": "How does it work?"
+  },
+  "mood": {
+    "days": {
+      "today": "Today",
+      "1": "1d ago",
+      "2": "2d ago",
+      "3": "3d ago"
+    },
+    "happy": "Good",
+    "ok": "Okay",
+    "sad": "Not great",
+    "missed": "Missed check-in",
+    "notYet": "Not checked in yet",
+    "poor": "In poor mental state",
+    "unresponsive": "Unresponsive",
+    "tableLabel": "Mood snapshot for the last 4 days",
+    "name": "Name",
+    "snapshot": "Mood snapshot"
+  },
+  "howItWorks": {
+    "title": "How care monitoring works",
+    "description": "{count} steps explaining care monitoring with HeartBeat",
+    "close": "Close",
+    "step": "Step {n} of {total}",
+    "back": "Back",
+    "next": "Next",
+    "gotIt": "Got it",
+    "tap": "Tap",
+    "exampleName": "Mei Ling",
+    "fieldName": "Name",
+    "fieldMobile": "Mobile number",
+    "loginLink": "{name}'s login link",
+    "copyLink": "Copy link",
+    "affirmation": "Your resilience is your power.",
+    "missedTile": "Missed a check-in",
+    "poorTile": "In poor mental state",
+    "missedAlert": "{name} missed yesterday's check-in",
+    "waAlert": "Alert",
+    "waBody": "{name} has missed their check-in. Please verify their well-being as soon as possible.",
+    "waButton": "View Mood Dashboard",
+    "steps": {
+      "1": {
+        "title": "Add your loved one",
+        "body": "Enter their name, mobile number and address so we know who to check in on."
+      },
+      "2": {
+        "title": "Send them their personal link",
+        "body": "We create a login link just for them — no password needed. Copy it and send it on WhatsApp or SMS."
+      },
+      "3": {
+        "title": "They check in with one tap",
+        "body": "Each day, your loved one opens their link and taps how they're feeling. They'll see an encouraging message after."
+      },
+      "4": {
+        "title": "See how they're doing at a glance",
+        "body": "Your dashboard shows everyone's latest check-in and mood, so you can spot when something's off."
+      },
+      "5": {
+        "title": "Get a WhatsApp alert if they miss a day",
+        "body": "If your loved one misses a day, HeartBeat messages you on WhatsApp straight away, using the number on your CareCompass account."
+      }
+    }
+  },
+  "desktop": {
+    "title": "CareCompass works best on your phone",
+    "body": "You can keep using it here on your computer. For the full experience, open <b>my.carecompass.sg</b> on your phone and add it to your home screen.",
+    "continue": "Continue on this computer"
+  },
+  "common": {
+    "close": "Close",
+    "dateLocale": "en-SG",
+    "signIn": "Sign in",
+    "opensInNewTab": "(opens in a new tab)",
+    "cancel": "Cancel"
+  },
+  "recipient": {
+    "fallback": "your loved one",
+    "titleFallback": "you and your loved one",
+    "possessive": "{name}'s",
+    "citizenship": {
+      "CITIZEN": "Singapore Citizen",
+      "PR": "Permanent Resident",
+      "OTHER": "Not a Singapore Citizen or PR"
+    },
+    "residence": {
+      "HOME": "Lives at home",
+      "NURSING_HOME_LTCF": "Lives in a nursing home",
+      "OTHER": "Lives elsewhere"
+    },
+    "aged": "Aged {age}"
+  },
+  "elig": {
+    "s01": "Your parent",
+    "s02": "A family member",
+    "s03": "Must be your parent, grandparent or in-law",
+    "s04": "For parents, grandparents and in-laws",
+    "s05": "Aged 55 or older",
+    "s06": "Needs help with at least one daily activity, so Parent Relief (Disability) may apply",
+    "s07": "Aged 55 or older, or needs help with at least one daily activity",
+    "s08": "$9,000 (living with you)",
+    "s09": "$5,500 if you spent $2,000 or more supporting them",
+    "s10": "May qualify for Parent Relief (Disability): $14,000 / $10,000",
+    "s11": "No one else has claimed Spouse Relief or another relief on the same person",
+    "s12": "For the disability version, a doctor's or disability association's document if IRAS asks",
+    "s13": "Singapore Citizen or PR",
+    "s14": "For Singapore Citizens and PRs",
+    "s15": "Aged 65 or older",
+    "s16": "Needs help with at least one daily activity",
+    "s17": "The need is permanent: a Functional Assessment Report, unless already on a scheme such as CareShield Life or ElderFund",
+    "s18": "For someone 65 or older, or who needs help with at least one daily activity",
+    "s19": "You are a main caregiver",
+    "s20": "The course is on the approved list",
+    "s21": "The grant has not already been used up by another caregiver",
+    "s22": "Singapore Citizen",
+    "s23": "Permanent Resident",
+    "s24": "PRs qualify only if a parent, child or spouse is a Singapore Citizen",
+    "s25": "Not for someone living in a nursing home",
+    "s26": "Lives at home",
+    "s27": "$600 a month (no income and home Annual Value $21,000 or less)",
+    "s28": "No household income and home Annual Value above $21,000",
+    "s29": "$600 a month (household income per person $1,500 or less)",
+    "s30": "$400 a month (household income per person $1,501 to $3,600)",
+    "s31": "$200 a month (household income per person $3,601 to $4,800)",
+    "s32": "Household income per person is above $4,800",
+    "s33": "Needs help with at least 3 daily activities",
+    "s34": "A Functional Assessment Report confirming the daily-activity needs are permanent",
+    "s35": "Property ownership: households that own more than one property get $200",
+    "s36": "For someone 67 or older, or who needs help with at least one daily activity",
+    "s37": "Lives with you",
+    "s38": "Must live with you at the same address",
+    "s39": "Singapore Citizen aged 67 or older",
+    "s40": "Permanent Resident aged 67 or older",
+    "s41": "You or your spouse must be a Singapore Citizen",
+    "s42": "An AIC recommendation letter",
+    "s43": "The helper is registered to your household",
+    "s44": "Your loved one is listed as a household member on the FDW eService",
+    "s45": "For care at home or at a centre",
+    "s46": "Could be higher if born in 1969",
+    "s47": "The provider is government-funded",
+    "s48": "The doctor or AIC referral",
+    "s49": "Aged 60 or older",
+    "s50": "For seniors aged 60 or older",
+    "s51": "No household income and home Annual Value $21,000 or less",
+    "s52": "Household income per person of $4,800 or less",
+    "s53": "An assessment by an approved health professional says the item is needed",
+    "s54": "Extra conditions for motorised devices",
+    "s55": "Needs full help with at least 3 daily activities",
+    "s56": "For severe disability: needs full help with at least 3 daily activities",
+    "s57": "The severe disability assessment decides",
+    "s58": "For people aged 30 or older",
+    "s59": "Severe disability assessment by an MOH-accredited assessor",
+    "s60": "MediSave balance of at least $5,000",
+    "s61": "CareShield Life: monthly payouts for life while severely disabled. The starting payout is $689 a month in 2026 and rises each year until age 67 or a claim. People born in 1954 or earlier who joined at 67 or above get a fixed $612 a month",
+    "s62": "ElderShield 400 (joined Sep 2007 to Dec 2019): $400 a month for up to 72 months",
+    "s63": "ElderShield 300 (joined Sep 2002 to Sep 2007): $300 a month for up to 60 months",
+    "s64": "For severe disability: unable to do at least 3 daily activities",
+    "s65": "Covered by CareShield Life (everyone born in 1980 or later)",
+    "s66": "Covered by CareShield Life",
+    "s67": "Covered by ElderShield",
+    "s68": "Only if covered by CareShield Life or ElderShield. See [ElderFund](/dashboard/schemes?id=ssg-aic-elderfund) instead",
+    "s69": "A severe disability assessment by an MOH-accredited assessor",
+    "s70": "The policy is active",
+    "ltc": {
+      "column": {
+        "sc1969": "Singapore Citizen born 1969 or earlier",
+        "scAfter1969": "Singapore Citizen born after 1969",
+        "pr": "Permanent Resident"
+      },
+      "band": {
+        "b1": "$1,500 or less",
+        "b2": "$1,501–$2,300",
+        "b3": "$2,301–$2,600",
+        "b4": "$2,601–$3,600",
+        "b5": "$3,601–$4,800"
+      },
+      "bandIncome": "household income per person {band}",
+      "bandNoIncome": "no income, Annual Value $21,000 or less",
+      "rate": "{rate}% off fees ({column}, {band})"
+    },
+    "parentRelief": {
+      "dependantIncome": "Dependant's income in {year} was $8,000 or less"
+    }
+  },
+  "schemes": {
+    "payFor": {
+      "CARE_SERVICES": {
+        "label": "Care services",
+        "description": "Day care, home care, nursing home fees",
+        "title": "Paying for care services",
+        "pageDescription": "Subsidies for day care, home care and nursing homes"
+      },
+      "MONTHLY_PAYOUTS": {
+        "label": "Cash support",
+        "description": "Monthly or one-off cash for caregiving costs",
+        "title": "Cash support",
+        "pageDescription": "Monthly or one-off cash for caregiving costs"
+      },
+      "HELPER_COSTS": {
+        "label": "Helper costs",
+        "description": "Levy and hiring support",
+        "title": "Paying for a helper",
+        "pageDescription": "Levy concessions and support for hiring a helper"
+      },
+      "CAREGIVER_COURSES": {
+        "label": "Caregiver courses",
+        "description": "Training fees",
+        "title": "Caregiver courses",
+        "pageDescription": "Help with fees for caregiving training"
+      },
+      "EQUIPMENT_HOME": {
+        "label": "Equipment and home",
+        "description": "Mobility aids, home changes",
+        "title": "Equipment and home changes",
+        "pageDescription": "Mobility aids, assistive devices and home modifications"
+      },
+      "TRANSPORT": {
+        "label": "Transport",
+        "description": "Taxi and transport help",
+        "title": "Transport",
+        "pageDescription": "Help getting to appointments and care"
+      },
+      "MEDICAL_BILLS": {
+        "label": "Medical bills",
+        "description": "Hospital, clinic, MediSave",
+        "title": "Paying medical bills",
+        "pageDescription": "Help with hospital and clinic bills"
+      },
+      "TAX_CPF": {
+        "label": "Tax and CPF",
+        "description": "Reliefs and top-ups",
+        "title": "Tax and CPF",
+        "pageDescription": "Tax reliefs and CPF top-ups for caregivers"
+      }
+    },
+    "question": {
+      "HOUSEHOLD_INCOME": {
+        "pillLabel": "Share income to see your subsidy",
+        "rowTitle": "Household income",
+        "rowHint": "Subsidy levels depend on household income per person.",
+        "summary": "What is your household income?"
+      },
+      "ADL_NEEDS": {
+        "pillLabel": "Confirm daily-activity needs",
+        "rowTitle": "Help needed with daily activities",
+        "rowHint": "Such as bathing, dressing or moving around.",
+        "summary": "Which daily activities need help?"
+      },
+      "ADL_FULL_HELP": {
+        "pillLabel": "Confirm how much help is needed",
+        "rowTitle": "Full help with daily activities",
+        "rowHint": "Whether someone needs to do at least 3 of them fully.",
+        "summary": "Is full help needed?"
+      },
+      "HAS_FAR": {
+        "pillLabel": "Confirm assessment report",
+        "rowTitle": "Functional Assessment Report",
+        "rowHint": "A report from a doctor or therapist on daily-activity needs.",
+        "summary": "Is there a Functional Assessment Report?"
+      },
+      "HOUSING_TYPE": {
+        "pillLabel": "Share your housing type",
+        "rowTitle": "Housing type",
+        "rowHint": "Some schemes depend on the type of home.",
+        "summary": "What type of home is it?"
+      },
+      "LTC_INSURANCE": {
+        "pillLabel": "Share insurance cover",
+        "rowTitle": "Long-term care insurance",
+        "rowHint": "CareShield Life or ElderShield cover.",
+        "summary": "Is there CareShield Life or ElderShield cover?"
+      },
+      "CARE_RECIPIENT_AGE": {
+        "pillLabel": "Share their age to check",
+        "rowTitle": "Age",
+        "rowHint": "Some schemes depend on age.",
+        "summary": "How old are they?"
+      },
+      "CARE_RECIPIENT_CITIZENSHIP": {
+        "pillLabel": "Sign in to check",
+        "rowTitle": "Citizenship",
+        "rowHint": "Sign in and complete the profile to check this.",
+        "summary": "What is their citizenship?"
+      },
+      "CARE_RECIPIENT_RESIDENCE": {
+        "pillLabel": "Confirm where they live",
+        "rowTitle": "Where they live",
+        "rowHint": "Update your loved one's profile to check this.",
+        "summary": "Where do they live?"
+      },
+      "CAREGIVER_CITIZENSHIP": {
+        "pillLabel": "Sign in to check",
+        "rowTitle": "Your citizenship",
+        "rowHint": "Sign in and complete the profile to check this.",
+        "summary": "What is your citizenship?"
+      }
+    },
+    "sourceLine": {
+      "reviewed": "{agency} · Reviewed by CareCompass",
+      "from": "{agency} · From {source}"
+    },
+    "lastChecked": "Last checked {date}",
+    "status": {
+      "likely": "Likely eligible",
+      "needs_answers": "Need answers",
+      "provider_decides": "Check with agency",
+      "not_a_match": "Not a fit",
+      "notAMatch": "Not a match",
+      "signInToCheck": "Sign in to check"
+    },
+    "filters": {
+      "status": "Status",
+      "payFor": "Helps pay for",
+      "area": "Area"
+    },
+    "about": {
+      "title": "About these results",
+      "intro": "These schemes are recommended based on the information in your profile. They are offered by government agencies, charities and community organisations. Please use this list as a guide. The organisation offering each scheme will determine final eligibility.",
+      "sourcesHeading": "Where the information comes from",
+      "sources": {
+        "carecompass": {
+          "title": "Reviewed by CareCompass",
+          "body": "Key schemes we write and check ourselves against official sources such as AIC, MOH and MOM."
+        },
+        "schemessg": {
+          "title": "Schemes.sg",
+          "body": "A community-run directory of government and charity schemes."
+        }
+      },
+      "labelsHeading": "What the labels mean",
+      "labels": {
+        "likely": "Matches everything we can check from the profile.",
+        "needs_answers": "One or two answers from you would let us check.",
+        "provider_decides": "Please check eligibility on the agency's official website."
+      },
+      "button": "See all caregiving schemes"
+    }
+  },
+  "profile": {
+    "errors": {
+      "age": "Enter an age from {min} to {max}",
+      "nameLength": "Use {max} characters or fewer",
+      "nameChars": "Use letters, numbers and spaces only",
+      "postalCode": "Enter a 6-digit postal code"
+    }
+  },
+  "dashboard": {
+    "signInPrompt": "Sign in to get personalized recommendations",
+    "title": "Financial schemes for {name}",
+    "edit": "Edit",
+    "editProfileSr": " profile",
+    "catalogError": "We couldn't load the list of schemes. Please try again later.",
+    "profileError": "We couldn't load your profile, so these results are not personalised yet. Please try again later.",
+    "summary": "Summary",
+    "checked": "We checked <b>{count}</b> grants, subsidies and reliefs.",
+    "checkedAgainst": "We checked <b>{count}</b> grants, subsidies and reliefs against {name} profile.",
+    "aboutResults": "About these results",
+    "tileAria": "{count} {status}, see the list",
+    "notAFit": "{count, plural, one {# doesn't look like a fit} other {# don't look like a fit}} for {name}",
+    "answerToCheck": "Answer {questions, plural, one {# question} other {# questions}} to check {schemes} more",
+    "aboutOneMinute": "About 1 minute.",
+    "answerNow": "Answer now",
+    "signInToCheck": "Sign in and tell us about {name} to check {count} of these against their profile.",
+    "bestMatches": "Best matches",
+    "bestMatchesHint": "Likely eligible first, then schemes that need a few answers",
+    "seeAllMatches": "See all {count} matches",
+    "searchAll": "Search all caregiving schemes",
+    "searchAllHint": "Filter by what the schemes pay for.",
+    "browse": "Browse by what it helps pay for",
+    "schemeCount": "{count, plural, one {# scheme} other {# schemes}}",
+    "elsewhere": "Not a scheme? These live elsewhere in CareCompass",
+    "elsewhereLinks": {
+      "care": {
+        "title": "Care services",
+        "description": "Day care, home care, nursing homes, respite"
+      },
+      "help": {
+        "title": "Help and support",
+        "description": "Courses, support groups, hotlines, counselling"
+      },
+      "plan": {
+        "title": "Plan ahead",
+        "description": "LPA, advance care planning, deputyship"
+      }
+    },
+    "footer": "Information from Schemes.sg and CareCompass, refreshed weekly. ‘Likely eligible’ is a guide based on your profile. The agency makes the final decision."
+  },
+  "allSchemes": {
+    "clearFilter": "Clear filter: {label}",
+    "title": "All caregiving schemes",
+    "showing": "Showing {count} of {total}",
+    "subtitle": "{total} grants, subsidies and reliefs. Sorted by best match for {name}.",
+    "searchLabel": "Search schemes",
+    "searchPlaceholder": "Search by name, e.g. transport, MediSave",
+    "clearSearch": "Clear search",
+    "filters": "Filters",
+    "clearAll": "Clear all",
+    "noMatch": "No schemes match. Try fewer filters or a different word.",
+    "results": "Results",
+    "alsoMatching": "Also matching \"{q}\"",
+    "notInFilter": "Not in your \"{status}\" filter",
+    "answerToCheckThese": "Answer {count, plural, one {# question} other {# questions}} to check these",
+    "checkOfficial": "Check eligibility on the official website.",
+    "probablyNot": "Probably not for {name}",
+    "tapToSeeWhy": "{count, plural, one {# scheme} other {# schemes}}. Tap to see why.",
+    "profileOutOfDate": "Profile out of date?",
+    "editDetails": "Edit {name} details",
+    "cantFind": "Can't find a scheme? <link>Tell us</link> and we'll look into adding it.",
+    "telegramSr": " on Telegram (opens in a new tab)"
+  },
+  "questions": {
+    "adl": {
+      "bathing": "Bathing",
+      "dressing": "Dressing",
+      "eating": "Eating",
+      "toilet": "Using the toilet",
+      "moving": "Moving around or getting in and out of bed",
+      "continence": "Continence"
+    },
+    "yes": "Yes",
+    "no": "No",
+    "notSure": "Not sure",
+    "notSureYet": "Not sure yet",
+    "careShieldLife": "CareShield Life",
+    "elderShield": "ElderShield",
+    "neither": "Neither",
+    "prompt": {
+      "age": "How old is {name}?",
+      "adl": "Which of these does {name} need help with?",
+      "fullHelp": "For at least 3 of these, do they need someone to do it fully for them?",
+      "income": "What is {name} household income?",
+      "ltc": "Is {name} covered by CareShield Life or ElderShield?"
+    },
+    "age": "Age",
+    "noneOfThese": "None of these",
+    "signInForIncome": "Sign in to share household income. It is saved to your profile so you only need to tell us once.",
+    "ltcHint": "Check on the CPF website or app under Healthcare.",
+    "progress": "Question {n} of {total}",
+    "progressLabel": "Progress",
+    "skip": "Skip",
+    "pickAll": "Pick all that apply. ",
+    "letsUsCheck": "This lets us check {count, plural, one {# more scheme} other {# more schemes}}, like {example}.",
+    "noDocsNeeded": "You don't need documents now. Some schemes confirm this later with a Functional Assessment Report from a doctor or therapist.",
+    "continue": "Continue"
+  },
+  "answers": {
+    "cleared": "Your answers were cleared",
+    "clearError": "Couldn't clear your answers. Please try again.",
+    "title": "Your answers",
+    "editSr": " your answers",
+    "none": "No answers saved yet. They help us check schemes that need more than the profile.",
+    "clear": "Clear my answers",
+    "confirm": "Clear all your answers? Schemes that need them will ask again.",
+    "yesClear": "Yes, clear them",
+    "value": {
+      "yes": "yes",
+      "no": "no",
+      "notSure": "not sure",
+      "neither": "neither"
+    },
+    "line": {
+      "adlNotSure": "Daily activities: not sure",
+      "adlNone": "Daily activities: no help needed",
+      "adlCount": "Daily activities: needs help with {count}",
+      "fullHelp": "Full help: {value}",
+      "insurance": "Insurance: {value}",
+      "far": "Functional Assessment Report: {value}",
+      "ageNotSure": "Age: not sure"
+    }
+  },
+  "filters": {
+    "description": "Filter the list of caregiving schemes",
+    "showAll": "Show all {count}",
+    "showResults": "Show {count, plural, one {# scheme} other {# schemes}}",
+    "islandwide": "Islandwide",
+    "all": "All",
+    "byEligibility": "Filter by eligibility",
+    "noneWithStatus": "No schemes with this status.",
+    "hidden": "{count} hidden: doesn't match {name} profile"
+  },
+  "category": {
+    "notFound": "We couldn't find that category.",
+    "seeAll": "See all financial schemes",
+    "compare": "Still choosing a day care or home care provider? <b>Compare them in Care services</b>"
+  },
+  "scheme": {
+    "fullEligibility": "Full eligibility",
+    "notFound": "We couldn't find that scheme.",
+    "whatYouGet": "What you get",
+    "canGet": "Can {name} get this?",
+    "profileLoadError": "We couldn't load your profile, so we can't check this for {name} yet. Please try again later.",
+    "checkOfficialPage": "Check the official page",
+    "eligibilityNote": "Eligibility as described by Schemes.sg",
+    "answer": "Answer",
+    "answerFor": ": {question}",
+    "updateProfile": "Update profile",
+    "agencyWillCheck": "The agency will also check",
+    "nextSteps": "Next steps",
+    "readMoreOfficial": "Read more on the official website",
+    "sources": "Sources:",
+    "fromSource": "From {source}"
+  },
+  "careservice": {
+    "overview": {
+      "title": "Let me know which caregiving option you'd like to get started with"
+    },
+    "service": {
+      "daycare": {
+        "title": "Daycare Services",
+        "description": "Full day programmes offered by centres for seniors with dementia. This could be useful if your loved one requires supervision during the day."
+      },
+      "homecare": {
+        "title": "Home Care Services",
+        "description": "Assistance with day-to-day care tasks and medical services at your home."
+      },
+      "fdw": {
+        "title": "Hire a Foreign Domestic Worker",
+        "description": "Pre-trained in eldercare, they will have basic skills to care for your loved one."
+      },
+      "nursingHome": {
+        "title": "Engage a Nursing Home",
+        "description": "Residential care facility that would assist with your loved one's activities of daily living and nursing care needs."
+      }
+    },
+    "badge": {
+      "subsidies": "$ May be eligible for subsidies",
+      "signInRequired": "Sign-in required"
+    },
+    "notAvailable": "This recommender is not yet available",
+    "location": {
+      "intro": "I see that you're looking out for daycare services for your loved one.",
+      "question": "Could you provide me your postal code to assist you better?",
+      "placeholder": "e.g. 310149"
+    },
+    "skip": "Skip",
+    "next": "Next",
+    "other": {
+      "intro": "Got it.",
+      "question": "Are there any other information you'd like us to be mindful of?"
+    },
+    "recommendations": {
+      "intro": "Thank you.",
+      "title": "Based on your inputs, here are the recommended daycare centres",
+      "showAll": "Show me the full list of centres"
+    },
+    "card": {
+      "km": "{km}km",
+      "minutes": "{minutes} min",
+      "awayFromHome": "({distance} away from home)",
+      "travel": "<b>{car}</b> by car, or <b>{transit}</b> by bus/MRT"
+    },
+    "sgw": {
+      "poweredBy": "Powered by",
+      "agencyWebsite": "a Singapore Government Agency Website"
+    }
+  },
+  "daycare": {
+    "list": {
+      "title": "Dementia Day Care Centres",
+      "searchPlaceholder": "Search for a centre"
+    },
+    "detail": {
+      "userLoadError": "Failed to fetch user data",
+      "subsidyLoadError": "Failed to fetch subsidy info",
+      "notFound": "Centre not found",
+      "howToApply": "How to apply?",
+      "howToApplyDetails": "- You will need to get a referral from a hospital, polyclinic or GP who is familiar with your loved ones’ condition and needs. You may also contact the service provider for a discussion. \n\n - For further assistance, contact the Agency for Integrated Care (AIC) at [1800 650 6060](tel:18006506060), email [enquiries@aic.sg](mailto:enquiries@aic.sg) or walk in to a nearby [AIC Link](https://www.aic.sg/about-us/aic-link-locations/).",
+      "fees": "Fees",
+      "subsidyPrompt": "This service is eligible for MOH Non-Residential Long-Term Care Subsidy. Share your household information to see how much subsidy you may be eligible for.",
+      "subsidyQualify": "You may qualify for <b>{level}%</b> subsidy from the MOH Non-Residential Long-Term Care Subsidy!",
+      "basedOnIncome": "*Based on an estimated per capita monthly household income of",
+      "andAnnualValue": " (and Annual Property Value of {value})",
+      "learnMore": "Learn more",
+      "operatingHours": "Operating hours",
+      "contactDetails": "Contact Details",
+      "phone": "Phone: ",
+      "email": "Email: ",
+      "website": "Website: ",
+      "address": "Address"
+    },
+    "review": {
+      "leave": "Leave a review",
+      "thanks": "Thank you for helping other caregivers by sharing your experiences. We ask that you declare below that you have indeed used the daycare service, as we value genuine reviews only.",
+      "declaration": "I declare that I have used this service and my review is based on my actual experiences.",
+      "rating": "Rating",
+      "whyRating": "Please share more about why you chose this rating",
+      "placeholder": "Share your experience with us",
+      "share": "Share",
+      "closeDrawer": "Close drawer",
+      "back": "Back",
+      "reviewBy": "Review by {name}",
+      "reviewFrom": "Review from {name}",
+      "title": "Reviews",
+      "subtitle": "See what other caregivers are saying",
+      "signInToReview": "Sign in to leave a review",
+      "fromSource": "This review is from {source}"
+    },
+    "support": {
+      "title": "Financial Support",
+      "subtitle": "Get the support you and loved ones need",
+      "viewDetails": "View details",
+      "nrLtc": {
+        "name": "MOH Non-Residential Long-Term Care Subsidy",
+        "description": "Defrays cost of long-term care services for persons living in the community"
+      },
+      "hcg": {
+        "name": "Home Caregiving Grant",
+        "description": "Defrays caregiving costs for eligible individuals with permanent moderate disability living in the community."
+      }
+    }
+  },
+  "provider": {
+    "viewDetails": "View Details",
+    "servicesOffered": "Services Offered",
+    "notAvailable": "N/A",
+    "fromReviews": "(from {count} reviews)",
+    "photoAlt": "photo"
+  },
+  "price": {
+    "notAvailable": "Price not available",
+    "fromPerMonth": "From {price}/month",
+    "fromPerMonthPreSubsidy": "From {price}/month (pre-subsidy)",
+    "fromEstPerMonth": "From est. {price}/month",
+    "beforeSubsidy": "Before subsidy: ",
+    "afterSubsidy": "After subsidy: "
+  },
+  "homecare": {
+    "list": {
+      "title": "Home Care Services",
+      "subtitle": "Find suitable home care centres providers.",
+      "showTop3": "Show me just the top 3 providers",
+      "showAll": "Show all"
+    },
+    "picker": {
+      "title": "What kind of home care services are you considering for your loved one?",
+      "pickOne": "Pick at least 1 to continue.",
+      "proceed": "Proceed"
+    },
+    "services": {
+      "homeMedical": {
+        "label": "Home Medical",
+        "description": "Provides medical services  in the home such as physical examinations and prescriptions."
+      },
+      "homeNursing": {
+        "label": "Home Nursing",
+        "description": "Provides nursing care at home such as wound dressing and changing of feeding tubes."
+      },
+      "homeTherapy": {
+        "label": "Home Therapy",
+        "description": "Home-based rehabilitation, including physiotherapy, occupational therapy and speech therapy."
+      },
+      "homePersonalCare": {
+        "label": "Home Personal Care",
+        "description": "Provides personal care services such as bathing, dressing and grooming."
+      },
+      "medicalEscort": {
+        "label": "Medical Escort",
+        "description": "Provides transportation and/or someone to accompany those who are unable to travel independently to their medical appointments."
+      },
+      "dementiaEnrichment": {
+        "label": "Dementia Enrichment",
+        "description": "Specialised activities targeting cognitive, emotional and/or physical health of dementia patients."
+      }
+    },
+    "detail": {
+      "notAvailable": "N/A",
+      "fromReviews": "(from {count} reviews)",
+      "address": "Address",
+      "contactDetails": "Contact Details",
+      "operatingHours": "Operating Hours"
+    },
+    "support": {
+      "title": "Recommended Support & Subsidies",
+      "subtitle": "Find out what assistance you may be eligible for.",
+      "viewDetails": "View details",
+      "ltc": {
+        "name": "Non-Residential Long-Term Care (LTC) Services Subsidy",
+        "description": "Singapore Citizens and Permanent Residents can receive up to 80% and 55% subsidies for Non-Residential LTC services respectively."
+      },
+      "hcg": {
+        "name": "Home Caregiving Grant",
+        "description": "Defrays caregiving costs for eligible individuals with permanent moderate disability living in the community."
+      }
+    }
+  },
+  "share": {
+    "copiedToast": "Link copied to clipboard!",
+    "sharePage": "Share this page",
+    "share": "Share",
+    "shareLink": "Share this link",
+    "copied": "Copied!",
+    "copy": "Copy",
+    "shareVia": "Share via"
+  },
+  "bookmark": {
+    "added": "Added to saved searches",
+    "removed": "Removed from saved searches",
+    "removeLabel": "Remove from saved searches",
+    "savePage": "Save this page",
+    "saved": "Saved",
+    "save": "Save"
+  },
+  "review": {
+    "leaveReview": "Leave a review",
+    "declarationIntro": "Thank you for helping other caregivers by sharing your experiences. We ask that you declare below that you have indeed used the {type, select, daycare {daycare} other {homecare}} service, as we value genuine reviews only.",
+    "declaration": "I declare that I have used this service and my review is based on my actual experiences.",
+    "rating": "Rating",
+    "whyRating": "Please share more about why you chose this rating",
+    "placeholder": "Share your experience with us",
+    "submit": "Share",
+    "closeDrawer": "Close drawer",
+    "back": "Back",
+    "reviewBy": "Review by {name}",
+    "reviewFrom": "Review from {name}",
+    "title": "Reviews",
+    "signInToReview": "Sign in to leave a review",
+    "showingRecentGoogle": "Showing 5 most recent Google reviews",
+    "fromSource": "This review is from {source}",
+    "source": {
+      "google": "Google",
+      "inApp": "In-app"
+    },
+    "targetType": {
+      "dayCare": "Day Care",
+      "homeCare": "Home Care"
+    }
+  },
+  "pchi": {
+    "householdSize": "How many people live with your loved one?",
+    "householdSizeHint": "E.g. if your loved one lives alone, type ‘0’. If one other person lives with your loved one, type ’1’",
+    "income": "What is the total monthly household income of everyone living with your loved one?",
+    "incomeHint": "Include your loved one’s income as well",
+    "annualValue": "What is the Annual Value of your residential property?",
+    "annualValueTooltip": "Annual Value is the estimated gross annual rent of a property if it were to be rented out, excluding furnishings and maintenance fees. It is determined by IRAS, and may be checked via IRAS website. Subsidy levels in 2024 will be determined using 2023 Annual Values",
+    "annualValueCheck": "Check your property's Annual Value on [IRAS](https://mytax.iras.gov.sg/ESVWeb/default.aspx)",
+    "save": "Save",
+    "checkSubsidy": "Check subsidy level"
+  },
+  "profilePage": {
+    "title": "My Profile",
+    "savedSearches": "Saved Searches",
+    "logOut": "Log out",
+    "signIn": "Sign In",
+    "guest": "Guest",
+    "notSet": "Not set",
+    "fieldLabel": "{label}: ",
+    "fields": {
+      "citizenship": "Citizenship",
+      "contactNumber": "Contact Number",
+      "nameOrNickname": "Name or nickname",
+      "relationship": "Relationship to caregiver",
+      "age": "Age",
+      "stayingAt": "Staying at",
+      "postalCode": "Postal code",
+      "householdSize": "Household size",
+      "totalMonthlyIncome": "Total monthly household income",
+      "annualPropertyValue": "Annual property value",
+      "monthlyPchi": "Monthly PCHI*"
+    },
+    "personalDetails": "Personal Details",
+    "caregiverInfo": "Caregiver Information",
+    "careRecipientInfo": "Care Recipient Information",
+    "householdIncome": "Household Income",
+    "pchiNote": "*PCHI is the Per Capita Household Income.",
+    "edit": "Edit",
+    "genericError": "Something went wrong. Please try again later.",
+    "selectOption": "Select an option",
+    "submitting": "Submitting",
+    "save": "Save",
+    "caregiverEdit": {
+      "title": "Edit Caregiver Info",
+      "updated": "Caregiver info updated successfully",
+      "citizenshipStatus": "Citizenship Status",
+      "contactNumber": "Contact Number",
+      "contactPlaceholder": "8-digit Singapore Phone Number",
+      "contactError": "Must either be 8 digits or empty"
+    },
+    "recipientEdit": {
+      "title": "Edit Care Recipient Info",
+      "updated": "Care recipient info updated successfully"
+    },
+    "incomeEdit": {
+      "title": "Edit Household Income",
+      "updated": "Household income updated",
+      "fetchError": "Failed to fetch user data"
+    },
+    "saved": {
+      "filterBy": "Filter by",
+      "filterByType": "Filter by type"
+    }
+  },
+  "onboarding": {
+    "title": "Get Started",
+    "intro": "Could you tell us a little more about yourself and your loved one?",
+    "yourCitizenship": "Your citizenship status",
+    "caringFor": "I am caring for my",
+    "recipientCitizenship": "Loved one’s citizenship status",
+    "recipientAge": "Loved one’s age",
+    "agePlaceholder": "Age",
+    "recipientResidence": "Loved one’s residential status",
+    "residence": {
+      "HOME": "My loved one stays with me",
+      "NURSING_HOME_LTCF": "My loved one stays in a nursing home or residential long-term care facility",
+      "OTHER": "Others"
+    },
+    "next": "Next",
+    "nameLabel": "What do you call your loved one? (optional)",
+    "nameHint": "A name or nickname, e.g. Mum, Ah Ma, Mr Tan",
+    "postalLabel": "Postal code where your loved one lives (optional)",
+    "postalHint": "Helps us show services and schemes near them"
+  },
+  "userProp": {
+    "residence": {
+      "HOME": "Home",
+      "NURSING_HOME_LTCF": "Nursing home / Residential Long-Term Care (LTC) facility",
+      "OTHER": "Other"
+    },
+    "citizenship": {
+      "CITIZEN": "Singapore Citizen",
+      "PR": "Permanent Resident",
+      "OTHER": "Other"
+    },
+    "relationship": {
+      "PARENT": "Parent",
+      "SPOUSE": "Spouse",
+      "OTHER_FAMILY": "Other family",
+      "NON_FAMILY": "Non-family member"
+    }
+  },
+  "a2hs": {
+    "ios": "<hl>If you're on iOS, on Safari or Chrome:</hl> select ''<b>Share</b>'' and choose ''<b>Add to Home Screen</b>'' to access CareCompass quickly from your phone.",
+    "android": "<hl>If you're on Android, on Chrome:</hl> select the <b>three-dots</b> and choose ''<b>Add to Home Screen</b>'' to access CareCompass quickly from your phone.",
+    "imageAlt": "add to homescreen",
+    "title": "Welcome to the <br></br> CareCompass Community",
+    "intro": "Before you proceed, follow the steps below. This helps add CareCompass to your phone’s homescreen for quicker access.",
+    "done": "Okay, I have done so"
+  },
+  "singpass": {
+    "myInfoAlert": "Singpass integration is not available in this demo.\n\nPreloaded data will be used instead.",
+    "scanNricAlert": "This option allows caregivers to scan the care recipient's NRIC to retrieve basic information such as name, age, and address.\n\nThis feature is not available yet and preloaded data will be used instead.",
+    "question": "Would you like to share your care recipient’s details for a more personalised experience?",
+    "explainer": "This information will be used to recommend any subsidies or services that may be useful to you.",
+    "authorizeMyInfo": "Yes, Authorize MyInfo",
+    "scanNric": "Yes, scan NRIC",
+    "skip": "Skip for now"
+  },
+  "signIn": {
+    "title": "Welcome to CareCompass",
+    "intro": "We are a care recommender that provides personalized recommendations based on your caregiving needs.",
+    "signIn": "Sign In",
+    "guest": "Try as a Guest"
+  },
+  "help": {
+    "title": "Let me know which help and support options you’d like to get started with",
+    "options": {
+      "education": {
+        "title": "I’d like to learn how to care for my loved one and myself.",
+        "subtitle": "Educational Resources"
+      },
+      "hotline": {
+        "title": "I’d like to speak to someone.",
+        "subtitle": "Hotline"
+      },
+      "community": {
+        "title": "I’d like to connect with other caregivers and/or join a community",
+        "subtitle": "Community Support"
+      }
+    },
+    "community": {
+      "intro": "I see that you would like to connect with likeminded caregivers.",
+      "title": "Here are some resources and communities where you may find support and shared experiences",
+      "dementiaSg": {
+        "name": "Dementia Singapore Caregiver Support & Network",
+        "description": "Promotes self-care by providing a platform for caregivers to nurture interests, learn skills, and connect with other caregivers.",
+        "cta": "Learn More"
+      },
+      "carecompass": {
+        "name": "CareCompass User Community",
+        "description": "Join our community of caregivers on Telegram to exchange advice and provide feedback on what you’d like to see on the app!",
+        "cta": "Join Now"
+      }
+    },
+    "hotline": {
+      "intro": "I see that you wish to speak to a professional for help.",
+      "title": "Here are some agencies with qualified professionals you can speak to",
+      "dementia": {
+        "name": "Dementia Helpline",
+        "description": "Provides information and service linkages on dementia care. Operated by Dementia Singapore, Singapore’s leading Social Service Agency (SSA) in specialised dementia care."
+      },
+      "touch": {
+        "name": "Caregiver Services Support Care Line",
+        "description": "Speak with trained care coordinators to brainstorm practical solutions. Operated by TOUCH Community Services, a not-for-profit charitable organisation."
+      }
+    },
+    "education": {
+      "intro": "I see that you’re looking for support to better care for your loved one and yourself.",
+      "title": "Here are some programmes that may help",
+      "programmes": "Educational Programmes",
+      "events": "Educational Events",
+      "learnMore": "Learn more",
+      "overview": "Overview",
+      "nextSteps": "Next steps"
+    }
+  },
+  "chat": {
+    "intro": "How can I help you today?",
+    "prompts": {
+      "options": "What caregiving options do I have?",
+      "eligible": "What support might I be eligible for?",
+      "help": "Where can I go for help and support?"
+    },
+    "newChat": "New Chat",
+    "newChatAria": "Support Dashboard",
+    "menu": "Menu button",
+    "open": "Open",
+    "history": {
+      "title": "Chat History",
+      "unavailable": "Chat History is not available",
+      "untitled": "Untitled - {id}"
+    },
+    "message": {
+      "learnMore": "Click to learn more",
+      "call": "Call {number}"
+    }
+  },
+  "search": {
+    "placeholder": "Message",
+    "send": "Search"
+  },
+  "nav": {
+    "home": "Home",
+    "chat": "Chat",
+    "askAnything": "Ask Anything",
+    "profile": "Profile",
+    "askCareCompass": "Ask CareCompass",
+    "ask": "Ask",
+    "back": "Back"
+  },
+  "heartbeat": {
+    "phoneRequired": "Phone number is required for this function"
+  },
+  "errors": {
+    "global": "Application error: a client-side exception has occurred (see the browser console for more information)"
+  },
+  "toast": {
+    "signInRequired": "Please sign in to use this feature!",
+    "saveAnswersFailed": "Couldn't save your answers. They'll stay for this visit."
+  },
+  "misc": {
+    "logo": "Logo"
+  }
+}

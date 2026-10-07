@@ -1,7 +1,5 @@
 "use client";
 
-import Image from "next/image";
-import { AddIcon } from "@chakra-ui/icons";
 import Search from "@/ui/Search";
 import { redirect, useParams, useRouter } from "next/navigation";
 import { useLayoutEffect, useRef } from "react";
@@ -18,6 +16,7 @@ import { MenuIcon, SquarePenIcon } from "lucide-react";
 import { useAuthStore } from "@/stores/auth";
 import LoadingSpinner from "@/ui/loading";
 import BottomNav from "@/ui/layouts/BottomNav";
+import { t } from "@/i18n";
 
 export default function ChatLayout({
   children,
@@ -48,34 +47,21 @@ export default function ChatLayout({
   }
 
   return (
-    <div className="flex h-dvh max-h-dvh flex-col md:flex-row">
-      <section className="hidden w-64 min-w-64 bg-white bg-cover px-4 py-8 shadow-md md:block">
-        <div className="flex flex-col place-items-center gap-8">
-          <Image src="/img/logo.svg" alt="Logo" width={64} height={64} />
-          <button
-            className="flex place-items-center gap-2 rounded-full border border-gray-100 bg-white px-4 py-2 text-black duration-200 ease-in-out hover:bg-gray-200"
-            onClick={handleNewThread}
-          >
-            <AddIcon />
-            <span>New thread</span>
-          </button>
-          <ChatHistory router={router} />
-        </div>
-      </section>
-      <header className="flex h-16 w-full place-content-between place-items-center bg-brand-primary-500 px-4 text-white md:hidden">
+    <div className="flex h-dvh max-h-dvh flex-col">
+      <header className="flex h-16 w-full place-content-between place-items-center bg-brand-primary-500 px-4 text-white">
         <LeftDrawer />
         <Button
           colorScheme="white"
           variant="clear"
-          aria-label="Support Dashboard"
+          aria-label={t("chat.newChatAria")}
           rightIcon={<SquarePenIcon />}
           size="sm"
           onClick={handleNewThread}
         >
-          New Chat
+          {t("chat.newChat")}
         </Button>
       </header>
-      <main className="flex h-full w-full flex-col place-content-between overflow-hidden bg-gray-100 px-6 pt-6 md:p-8">
+      <main className="flex h-full w-full flex-col place-content-between overflow-hidden bg-gray-100 px-6 pt-6">
         <section className="flex h-full w-full place-content-center place-items-center">
           {children}
         </section>
@@ -100,10 +86,10 @@ function LeftDrawer() {
         colorScheme="white"
         variant="clear"
         onClick={onOpen}
-        aria-label="Menu button"
+        aria-label={t("chat.menu")}
         icon={<MenuIcon />}
       >
-        Open
+        {t("chat.open")}
       </IconButton>
       <Drawer
         isOpen={isOpen}

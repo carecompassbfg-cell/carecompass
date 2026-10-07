@@ -1,36 +1,29 @@
 "use client";
 
+import { t } from "@/i18n";
 import Carousel from "@/ui/carousel/Carousel";
 import { Button } from "@opengovsg/design-system-react";
 import { CircleAlert } from "lucide-react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { ReactNode, useEffect } from "react";
+import { isDesktopWidth } from "@/components/DesktopNotice";
 
-const slidesInfoList = [
+const richTags = {
+  hl: (chunks: ReactNode) => (
+    <span className="font-bold text-brand-primary-500">{chunks}</span>
+  ),
+  b: (chunks: ReactNode) => <span className="font-bold">{chunks}</span>,
+};
+
+// A function, not a constant, so the text follows the chosen language
+const getSlidesInfoList = () => [
   {
-    instruction: (
-      <>
-        <span className="font-bold text-brand-primary-500">
-          If you&apos;re on iOS, on Safari or Chrome:
-        </span>{" "}
-        select &apos;<span className="font-bold">Share</span>&apos; and choose
-        &apos;<span className="font-bold">Add to Home Screen</span>&apos; to
-        access CareCompass quickly from your phone.
-      </>
-    ),
+    instruction: t.rich("a2hs.ios", richTags),
     imageUrl: "/img/add-to-home-ios.png",
   },
   {
-    instruction: (
-      <>
-        <span className="font-bold text-brand-primary-500">
-          If you&apos;re on Android, on Chrome:
-        </span>{" "}
-        select the <span className="font-bold">three-dots</span> and choose
-        &apos;<span className="font-bold">Add to Home Screen</span>&apos; to
-        access CareCompass quickly from your phone.
-      </>
-    ),
+    instruction: t.rich("a2hs.android", richTags),
     imageUrl: "/img/add-to-home-android.png",
   },
 ];
@@ -38,7 +31,7 @@ const slidesInfoList = [
 function AddToHomeScreenCarousel() {
   return (
     <Carousel
-      slides={slidesInfoList.map((info, i) => (
+      slides={getSlidesInfoList().map((info, i) => (
         <div
           key={i}
           className="border-gray-[rgb(204,204,204)] w-full flex-[0_0_98%] rounded-xl border p-4 text-sm shadow"
@@ -49,7 +42,7 @@ function AddToHomeScreenCarousel() {
           </section>
           <Image
             src={info.imageUrl}
-            alt="add to homescreen"
+            alt={t("a2hs.imageAlt")}
             width={100}
             height={100}
             className="w-full"
@@ -68,25 +61,32 @@ export default function AddToHomeScreen() {
     router.push("/home");
   };
 
+  // On a computer there's no home screen to add to, so go straight on
+  useEffect(() => {
+    if (isDesktopWidth()) {
+      localStorage.setItem("cc_add_to_homescreen_prompted", "true");
+      router.replace("/home");
+    }
+  }, [router]);
+
   return (
     <div className="flex h-full flex-col place-items-center gap-4 overflow-y-auto p-8">
       <Image
         src="img/shield-with-tick.svg"
-        alt="add to homescreen"
+        alt={t("a2hs.imageAlt")}
         width={256}
         height={256}
         className="h-64 w-64"
       />
       <h1 className="text-center text-2xl font-bold text-gray-500">
-        Welcome to the <br /> CareCompass Community
+        {t.rich("a2hs.title", { br: () => <br /> })}
       </h1>
       <h3 className="text-center font-semibold text-brand-primary-500">
-        Before you proceed, follow the steps below. This helps add CareCompass
-        to your phone’s homescreen for quicker access.
+        {t("a2hs.intro")}
       </h3>
       <AddToHomeScreenCarousel />
       <Button className="mt-auto w-full" onClick={handleClick}>
-        Okay, I have done so
+        {t("a2hs.done")}
       </Button>
     </div>
   );

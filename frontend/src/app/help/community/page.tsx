@@ -3,6 +3,7 @@
 import { Button } from "@chakra-ui/react";
 import { BackButton } from "@/ui/button";
 import { COMMUNITY_TELEGRAM_URL } from "@/util/links";
+import { t } from "@/i18n";
 
 type PartnerData = {
   name: string;
@@ -11,20 +12,18 @@ type PartnerData = {
   cta: string;
 };
 
-const PARTNERS: PartnerData[] = [
+const getPartners = (): PartnerData[] => [
   {
-    name: "Dementia Singapore Caregiver Support & Network",
-    description:
-      "Promotes self-care by providing a platform for caregivers to nurture interests, learn skills, and connect with other caregivers.",
+    name: t("help.community.dementiaSg.name"),
+    description: t("help.community.dementiaSg.description"),
     link: "https://dementia.org.sg/csn",
-    cta: "Learn More",
+    cta: t("help.community.dementiaSg.cta"),
   },
   {
-    name: "CareCompass User Community",
-    description:
-      "Join our community of caregivers on Telegram to exchange advice and provide feedback on what you’d like to see on the app!",
+    name: t("help.community.carecompass.name"),
+    description: t("help.community.carecompass.description"),
     link: COMMUNITY_TELEGRAM_URL,
-    cta: "Join Now",
+    cta: t("help.community.carecompass.cta"),
   },
 ];
 
@@ -33,14 +32,13 @@ export default function Page() {
     <div className="flex h-full w-full flex-col gap-4">
       <BackButton />
       <h3 className="text-lg font-semibold leading-tight text-gray-500">
-        I see that you would like to connect with likeminded caregivers.
+        {t("help.community.intro")}
       </h3>
       <h1 className="mb-4 text-2xl font-semibold leading-tight text-brand-primary-500">
-        Here are some resources and communities where you may find support and
-        shared experiences
+        {t("help.community.title")}
       </h1>
       <section className="flex flex-col gap-2 pb-8">
-        {PARTNERS.map((partner, index) => (
+        {getPartners().map((partner, index) => (
           <PartnerCard key={index} partner={partner} />
         ))}
       </section>

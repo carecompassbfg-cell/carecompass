@@ -1,6 +1,7 @@
 import { Button } from "@opengovsg/design-system-react";
 import { ArrowLeftIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { t } from "@/i18n";
 
 export default function BackButton() {
   const router = useRouter();
@@ -10,10 +11,10 @@ export default function BackButton() {
       variant="link"
       color="secondary"
       leftIcon={<ArrowLeftIcon size={16} />}
-      aria-label="Back"
+      aria-label={t("nav.back")}
       onClick={() => router.back()}
     >
-      Back
+      {t("nav.back")}
     </Button>
   );
 }

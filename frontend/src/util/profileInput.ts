@@ -1,3 +1,5 @@
+import { t } from "@/i18n";
+
 export const MIN_AGE = 1;
 export const MAX_AGE = 120;
 
@@ -20,7 +22,8 @@ export const parseAge = (
   return isKnownAge(age) ? age : null;
 };
 
-export const AGE_ERROR = `Enter an age from ${MIN_AGE} to ${MAX_AGE}`;
+export const getAgeError = (): string =>
+  t("profile.errors.age", { min: MIN_AGE, max: MAX_AGE });
 
 // Only same-site paths like "/dashboard". Rejects "//host", "/\host" and
 // absolute URLs so returnTo can't send people to another site.
@@ -39,7 +42,8 @@ export const safeReturnTo = (
 // Care recipient's name or nickname: trimmed, empty means null, at most 40
 // characters, no control characters (matches the backend's rules)
 export const RECIPIENT_NAME_MAX_LENGTH = 40;
-export const RECIPIENT_NAME_ERROR = `Use ${RECIPIENT_NAME_MAX_LENGTH} characters or fewer`;
+export const getRecipientNameError = (): string =>
+  t("profile.errors.nameLength", { max: RECIPIENT_NAME_MAX_LENGTH });
 
 export const parseRecipientName = (
   value: string | null | undefined,
@@ -47,19 +51,19 @@ export const parseRecipientName = (
   const name = (value ?? "").trim();
   if (!name) return { value: null };
   if (name.length > RECIPIENT_NAME_MAX_LENGTH) {
-    return { value: null, error: RECIPIENT_NAME_ERROR };
+    return { value: null, error: getRecipientNameError() };
   }
   for (let i = 0; i < name.length; i += 1) {
     const code = name.charCodeAt(i);
     if (code < 32 || code === 127) {
-      return { value: null, error: "Use letters, numbers and spaces only" };
+      return { value: null, error: t("profile.errors.nameChars") };
     }
   }
   return { value: name };
 };
 
 // Postal code: spaces removed, empty means null, otherwise exactly 6 digits
-export const POSTAL_CODE_ERROR = "Enter a 6-digit postal code";
+export const getPostalCodeError = (): string => t("profile.errors.postalCode");
 
 export const parsePostalCode = (
   value: string | null | undefined,
@@ -67,7 +71,7 @@ export const parsePostalCode = (
   const postalCode = (value ?? "").replace(/\s+/g, "");
   if (!postalCode) return { value: null };
   if (!/^[0-9]{6}$/.test(postalCode)) {
-    return { value: null, error: POSTAL_CODE_ERROR };
+    return { value: null, error: getPostalCodeError() };
   }
   return { value: postalCode };
 };

@@ -1,5 +1,6 @@
 "use client";
 
+import { t } from "@/i18n";
 import { CaregiverData, Citizenship, UserData } from "@/types/user";
 import LoadingSpinner from "@/ui/loading";
 import { FormControl, Stack } from "@chakra-ui/react";
@@ -15,14 +16,8 @@ import { toast } from "sonner";
 import { BackButton } from "@/ui/button";
 import { useAuthStore } from "@/stores/auth";
 import { api } from "@/api";
-import { userCitizenshipMapping } from "@/util/userPropMapping";
-import { getRecordKeys } from "@/util/types";
+import { getCitizenshipOptions } from "@/util/userPropMapping";
 import useInitialUserData from "@/util/hooks/useInitialUserData";
-
-const citizenshipOptions = getRecordKeys(userCitizenshipMapping).map((key) => ({
-  label: userCitizenshipMapping[key],
-  value: key,
-}));
 
 function isInvalidCaregiverContactNumber(caregiverData: CaregiverData) {
   const contact_number_str = String(caregiverData?.contact_number ?? "");
@@ -64,9 +59,9 @@ function CaregiverDetailsForm() {
     try {
       const res = await api.patch<UserData>("/users/me", formData);
       setUserData(true, res.data);
-      toast.success("Caregiver info updated successfully");
+      toast.success(t("profilePage.caregiverEdit.updated"));
     } catch (e) {
-      toast.error("Something went wrong. Please try again later.");
+      toast.error(t("profilePage.genericError"));
     } finally {
       setIsSubmitting(false);
     }
@@ -79,13 +74,15 @@ function CaregiverDetailsForm() {
   return (
     <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
       <Stack gap={0} spacing={0}>
-        <FormLabel isRequired>Citizenship Status</FormLabel>
+        <FormLabel isRequired>
+          {t("profilePage.caregiverEdit.citizenshipStatus")}
+        </FormLabel>
         <SingleSelect
           isClearable={false}
-          placeholder="Select an option"
+          placeholder={t("profilePage.selectOption")}
           value={formData.citizenship}
           name="citizenship"
-          items={citizenshipOptions}
+          items={getCitizenshipOptions()}
           onChange={(e) =>
             setFormData({
               ...formData,
@@ -96,25 +93,27 @@ function CaregiverDetailsForm() {
       </Stack>
       <Stack gap={0} spacing={0}>
         <FormControl isInvalid={isInvalidCaregiverContactNumber(formData)}>
-          <FormLabel>Contact Number</FormLabel>
+          <FormLabel>{t("profilePage.caregiverEdit.contactNumber")}</FormLabel>
           <NumberInput
             showSteppers={false}
-            placeholder="8-digit Singapore Phone Number"
+            placeholder={t("profilePage.caregiverEdit.contactPlaceholder")}
             value={formData.contact_number ?? ""}
             name="contact_number"
             onChange={handleContactNumberChange}
             isInvalid={isInvalidCaregiverContactNumber(formData)}
           />
-          <FormErrorMessage>Must either be 8 digits or empty</FormErrorMessage>
+          <FormErrorMessage>
+            {t("profilePage.caregiverEdit.contactError")}
+          </FormErrorMessage>
         </FormControl>
       </Stack>
       <Button
         isLoading={isSubmitting}
-        loadingText="Submitting"
+        loadingText={t("profilePage.submitting")}
         variant="solid"
         type="submit"
       >
-        Save
+        {t("profilePage.save")}
       </Button>
     </form>
   );
@@ -124,7 +123,9 @@ export default function EditCaregiverInfo() {
   return (
     <div className="flex h-full w-full flex-col gap-4">
       <BackButton />
-      <h1 className="text-2xl font-semibold">Edit Caregiver Info</h1>
+      <h1 className="text-2xl font-semibold">
+        {t("profilePage.caregiverEdit.title")}
+      </h1>
       <CaregiverDetailsForm />
     </div>
   );

@@ -191,6 +191,7 @@ def render_report(
     extra_missing: Optional[List[dict]] = None,
     overrides_to_review: Optional[List[dict]] = None,
     source_watch_lines: Optional[List[str]] = None,
+    zh_lines: Optional[List[str]] = None,
 ) -> str:
     by_status = Counter(r["status"] for r in records)
     fetched = len(records) + len(retired)
@@ -432,6 +433,9 @@ def render_report(
 
     # Tier 1 source pages (watch_sources.py)
     lines += source_watch_lines or []
+
+    # Chinese translations (zh_status.py)
+    lines += zh_lines or []
 
     # Feedback
     lines += ["## Feedback for Schemes.sg", ""]

@@ -11,6 +11,7 @@ import { useEffect, useId, useRef, useState } from "react";
 import { AnimatePresence, motion, MotionConfig } from "motion/react";
 import useClickOutside from "@/util/hooks/useClickOutside";
 import { IconButton } from "@opengovsg/design-system-react";
+import { t } from "@/i18n";
 
 export default function BottomNav() {
   const dialog = useRef<HTMLDialogElement>(null);
@@ -43,7 +44,7 @@ export default function BottomNav() {
   return (
     <section className="relative grid h-16 max-h-16 min-h-16 w-full grid-cols-3 place-content-center place-items-center border-t border-gray-200 shadow-[0px_0px_4px_-1px_rgba(0,0,0,0.1)]">
       <button
-        aria-label="Home"
+        aria-label={t("nav.home")}
         className="mx-2 flex flex-col place-content-center place-items-center"
         onClick={() => router.push("/home")}
       >
@@ -53,24 +54,26 @@ export default function BottomNav() {
         <span
           className={`text-xs font-semibold ${pathname.includes("/home") ? "text-brand-primary-500" : ""}`}
         >
-          Home
+          {t("nav.home")}
         </span>
       </button>
       {pathname.includes("/chat") ? (
         <div className="mx-2 flex flex-col place-content-center place-items-center">
           <MessageCircleIcon className="text-brand-primary-500" />
           <div className="text-xs font-semibold text-brand-primary-500">
-            Chat
+            {t("nav.chat")}
           </div>
         </div>
       ) : (
         <>
           <ChatPopover />
-          <div className="self-end text-xs font-semibold">Ask Anything</div>
+          <div className="self-end text-xs font-semibold">
+            {t("nav.askAnything")}
+          </div>
         </>
       )}
       <button
-        aria-label="Profile"
+        aria-label={t("nav.profile")}
         className="mx-2 flex flex-col place-content-center place-items-center"
         onClick={() => router.push("/profile")}
       >
@@ -80,7 +83,7 @@ export default function BottomNav() {
         <span
           className={`text-xs font-semibold ${pathname.includes("/profile") ? "text-brand-primary-500" : ""}`}
         >
-          Profile
+          {t("nav.profile")}
         </span>
       </button>
       <AnimatePresence>
@@ -91,7 +94,7 @@ export default function BottomNav() {
           <textarea
             rows={3}
             wrap="hard"
-            placeholder="Ask CareCompass"
+            placeholder={t("nav.askCareCompass")}
             className="h-full w-full resize-none border-none align-top text-lg outline-none"
           />
         </dialog>
@@ -173,7 +176,7 @@ function ChatPopover() {
                   }}
                   className="absolute left-4 top-3 select-none text-lg text-zinc-500 dark:text-zinc-400"
                 >
-                  Ask CareCompass
+                  {t("nav.askCareCompass")}
                 </motion.span>
                 <textarea
                   className="h-full w-full resize-none rounded-md bg-transparent px-4 py-3 text-lg outline-none"
@@ -183,13 +186,13 @@ function ChatPopover() {
                 <div key="close" className="flex justify-between px-4 py-3">
                   <div></div>
                   <IconButton
-                    aria-label="Ask"
+                    aria-label={t("nav.ask")}
                     type="submit"
                     isLoading={isSending}
                     isDisabled={prompt.trim().length === 0}
                     icon={<SendHorizontalIcon />}
                   >
-                    Ask
+                    {t("nav.ask")}
                   </IconButton>
                 </div>
               </form>

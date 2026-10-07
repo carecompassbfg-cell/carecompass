@@ -5,6 +5,7 @@ import { CreateThreadResponse, MessageRole } from "@/types/chat";
 import { useAuthStore } from "@/stores/auth";
 import useSignInOnlyFeaturePrompt from "./useSignInOnlyFeaturePrompt";
 import { api, fetchApi } from "@/api";
+import { useLocaleStore } from "@/stores/locale";
 
 export function useChatQuery(currentChatId?: string) {
   const router = useRouter();
@@ -114,7 +115,7 @@ async function getResponse({
 
   const response = await fetchApi(`/threads/${threadId}/messages`, {
     method: "POST",
-    body: JSON.stringify({ query }),
+    body: JSON.stringify({ query, locale: useLocaleStore.getState().locale }),
     _noTimeout: true,
   });
   let combined = "";

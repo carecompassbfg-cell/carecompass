@@ -10,7 +10,7 @@ import {
 } from "@/stores/schemeAnswers";
 import { ProfileQuestionId } from "@/types/scheme";
 import { AdlFullHelp, LtcPlan } from "@/util/eligibilityChecker";
-import { AGE_ERROR, isKnownAge, parseAge } from "@/util/profileInput";
+import { getAgeError, isKnownAge, parseAge } from "@/util/profileInput";
 import { possessive } from "@/util/recipient";
 import {
   getOpenSheetQuestions,
@@ -18,13 +18,15 @@ import {
   SHEET_QUESTIONS,
 } from "@/util/schemeCatalog";
 import SchemeIcon, { FOCUS_RING } from "./SchemeIcon";
+import { t } from "@/i18n";
 
 interface Option<T extends string> {
   value: T;
   label: string;
 }
 
-// Wording from docs/schemes/tier1-schemes.md, "Questions the sheet needs"
+// Wording from docs/schemes/tier1-schemes.md, "Questions the sheet needs".
+// The English names are the stored values; the label shown is translated.
 const ADL_OPTIONS = [
   "Bathing",
   "Dressing",
@@ -34,31 +36,41 @@ const ADL_OPTIONS = [
   "Continence",
 ];
 
-const FULL_HELP_OPTIONS: Option<AdlFullHelp>[] = [
-  { value: "yes", label: "Yes" },
-  { value: "no", label: "No" },
-  { value: NOT_SURE, label: "Not sure" },
+const ADL_KEYS: Record<string, string> = {
+  Bathing: "questions.adl.bathing",
+  Dressing: "questions.adl.dressing",
+  Eating: "questions.adl.eating",
+  "Using the toilet": "questions.adl.toilet",
+  "Moving around or getting in and out of bed": "questions.adl.moving",
+  Continence: "questions.adl.continence",
+};
+
+// Built when shown, so the labels follow the chosen language
+const getFullHelpOptions = (): Option<AdlFullHelp>[] => [
+  { value: "yes", label: t("questions.yes") },
+  { value: "no", label: t("questions.no") },
+  { value: NOT_SURE, label: t("questions.notSure") },
 ];
 
-const LTC_OPTIONS: Option<LtcPlan>[] = [
-  { value: "careshield_life", label: "CareShield Life" },
-  { value: "eldershield", label: "ElderShield" },
-  { value: "neither", label: "Neither" },
-  { value: NOT_SURE, label: "Not sure" },
+const getLtcOptions = (): Option<LtcPlan>[] => [
+  { value: "careshield_life", label: t("questions.careShieldLife") },
+  { value: "eldershield", label: t("questions.elderShield") },
+  { value: "neither", label: t("questions.neither") },
+  { value: NOT_SURE, label: t("questions.notSure") },
 ];
 
 const getPrompt = (id: ProfileQuestionId, name: string): string => {
   switch (id) {
     case ProfileQuestionId.CARE_RECIPIENT_AGE:
-      return `How old is ${name}?`;
+      return t("questions.prompt.age", { name });
     case ProfileQuestionId.ADL_NEEDS:
-      return `Which of these does ${name} need help with?`;
+      return t("questions.prompt.adl", { name });
     case ProfileQuestionId.ADL_FULL_HELP:
-      return "For at least 3 of these, do they need someone to do it fully for them?";
+      return t("questions.prompt.fullHelp");
     case ProfileQuestionId.HOUSEHOLD_INCOME:
-      return `What is ${possessive(name)} household income?`;
+      return t("questions.prompt.income", { name: possessive(name) });
     case ProfileQuestionId.LTC_INSURANCE:
-      return `Is ${name} covered by CareShield Life or ElderShield?`;
+      return t("questions.prompt.ltc", { name });
     default:
       return "";
   }
@@ -293,7 +305,7 @@ export default function QuestionSheet({
               htmlFor="sheet-age"
               className="text-sm font-semibold text-gray-800"
             >
-              Age
+              {t("questions.age")}
             </label>
             <input
               id="sheet-age"
@@ -311,7 +323,7 @@ export default function QuestionSheet({
             />
             {showAgeError && (
               <p id="sheet-age-error" className="text-sm text-red-600">
-                {AGE_ERROR}
+                {getAgeError()}
               </p>
             )}
           </div>
@@ -322,7 +334,7 @@ export default function QuestionSheet({
             {ADL_OPTIONS.map((label) => (
               <CheckboxOption
                 key={label}
-                label={label}
+                label={t(ADL_KEYS[label])}
                 checked={adlSelected.includes(label)}
                 onChange={(checked) => {
                   setNoneOfThese(false);
@@ -335,7 +347,7 @@ export default function QuestionSheet({
               />
             ))}
             <CheckboxOption
-              label="None of these"
+              label={t("questions.noneOfThese")}
               checked={noneOfThese}
               onChange={(checked) => {
                 setNoneOfThese(checked);
@@ -348,7 +360,7 @@ export default function QuestionSheet({
         return (
           <RadioOptions
             name="adl_full_help"
-            options={FULL_HELP_OPTIONS}
+            options={getFullHelpOptions()}
             value={fullHelp}
             onChange={setFullHelp}
           />
@@ -365,11 +377,10 @@ export default function QuestionSheet({
         ) : (
           <div className="flex flex-col gap-3">
             <p className="text-sm text-gray-600">
-              Sign in to share household income. It is saved to your profile so
-              you only need to tell us once.
+              {t("questions.signInForIncome")}
             </p>
             <SignInButton>
-              <Button className="w-full">Sign in</Button>
+              <Button className="w-full">{t("common.signIn")}</Button>
             </SignInButton>
           </div>
         );
@@ -378,12 +389,12 @@ export default function QuestionSheet({
           <div className="flex flex-col gap-2.5">
             <RadioOptions
               name="ltc_insurance"
-              options={LTC_OPTIONS}
+              options={getLtcOptions()}
               value={ltc}
               onChange={setLtc}
             />
             <p className="text-[13px] leading-[18px] text-gray-600">
-              Check on the CPF website or app under Healthcare.
+              {t("questions.ltcHint")}
             </p>
           </div>
         );
@@ -411,19 +422,22 @@ export default function QuestionSheet({
           <div className="flex flex-col gap-4 overflow-y-auto px-5 pb-6 pt-2">
             <div className="flex items-center justify-between">
               <p className="text-[13px] font-semibold text-gray-600">
-                Question {done.length + 1} of {steps.length}
+                {t("questions.progress", {
+                  n: done.length + 1,
+                  total: steps.length,
+                })}
               </p>
               <button
                 type="button"
                 onClick={() => finish(current)}
                 className={`min-h-11 px-2 text-sm font-semibold text-interaction-links-default ${FOCUS_RING}`}
               >
-                Skip
+                {t("questions.skip")}
               </button>
             </div>
             <div
               role="progressbar"
-              aria-label="Progress"
+              aria-label={t("questions.progressLabel")}
               aria-valuemin={1}
               aria-valuemax={steps.length}
               aria-valuenow={done.length + 1}
@@ -446,10 +460,11 @@ export default function QuestionSheet({
             {schemesAffected.length > 0 && (
               <Drawer.Description className="text-sm leading-5 text-gray-600">
                 {current === ProfileQuestionId.ADL_NEEDS &&
-                  "Pick all that apply. "}
-                This lets us check {schemesAffected.length} more{" "}
-                {schemesAffected.length === 1 ? "scheme" : "schemes"}, like{" "}
-                {schemesAffected[0].scheme.name}.
+                  t("questions.pickAll")}
+                {t("questions.letsUsCheck", {
+                  count: schemesAffected.length,
+                  example: schemesAffected[0].scheme.name,
+                })}
               </Drawer.Description>
             )}
 
@@ -469,19 +484,15 @@ export default function QuestionSheet({
                   className="size-5 shrink-0 rounded border border-gray-400 bg-white"
                 />
                 {current === ProfileQuestionId.ADL_NEEDS
-                  ? "Not sure"
-                  : "Not sure yet"}
+                  ? t("questions.notSure")
+                  : t("questions.notSureYet")}
               </button>
             )}
 
             {current === ProfileQuestionId.ADL_NEEDS && (
               <div className="flex items-start gap-2 rounded-[10px] bg-blue-50 p-3 text-[13px] leading-[18px] text-gray-600">
                 <SchemeIcon name="info-sheet" size={16} />
-                <p>
-                  You don&apos;t need documents now. Some schemes confirm this
-                  later with a Functional Assessment Report from a doctor or
-                  therapist.
-                </p>
+                <p>{t("questions.noDocsNeeded")}</p>
               </div>
             )}
 
@@ -491,7 +502,7 @@ export default function QuestionSheet({
                 isDisabled={!canContinue}
                 onClick={save}
               >
-                Continue
+                {t("questions.continue")}
               </Button>
             )}
           </div>

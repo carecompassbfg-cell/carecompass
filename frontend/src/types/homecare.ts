@@ -1,3 +1,4 @@
+import { t } from "@/i18n";
 import { Review, ReviewSource, ReviewTargetType } from "./review";
 
 export interface HomeCareDetail {
@@ -35,6 +36,26 @@ export const SERVICE_ID_TO_LABEL: { [key: string]: string } = {
   "medical-escort": "Medical Escort",
   "dementia-enrichment": "Dementia Enrichment",
 };
+
+// SERVICE_ID_TO_LABEL holds the English labels used in the provider data, so
+// filtering stays in English. Use getServiceLabel to show a label on screen.
+const SERVICE_ID_TO_KEY: { [key: string]: string } = {
+  "home-medical": "homeMedical",
+  "home-nursing": "homeNursing",
+  "home-therapy": "homeTherapy",
+  "home-personal-care": "homePersonalCare",
+  "medical-escort": "medicalEscort",
+  "dementia-enrichment": "dementiaEnrichment",
+};
+
+export function getServiceLabel(id: string): string {
+  const key = SERVICE_ID_TO_KEY[id];
+  return key ? t(`homecare.services.${key}.label`) : SERVICE_ID_TO_LABEL[id];
+}
+
+export function getServiceDescription(id: string): string {
+  return t(`homecare.services.${SERVICE_ID_TO_KEY[id]}.description`);
+}
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function transformHomeCareData(data: any[]): HomeCareDetail[] {

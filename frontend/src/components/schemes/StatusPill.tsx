@@ -1,6 +1,7 @@
 import { SchemeStatus, SchemeStatusKind } from "@/types/scheme";
 import { QUESTION_META } from "@/util/schemeCatalog";
 import SchemeIcon from "./SchemeIcon";
+import { t } from "@/i18n";
 
 // Text colour per status, shared with the home page status line dots
 export const STATUS_TEXT_CLASS: Record<SchemeStatusKind, string> = {
@@ -17,28 +18,36 @@ const PILL_STYLES: Record<
   likely: {
     className: `bg-green-100 ${STATUS_TEXT_CLASS.likely}`,
     icon: "check-pill",
-    label: "Likely eligible",
+    get label() {
+      return t("schemes.status.likely");
+    },
   },
   needs_answers: {
     className: `bg-yellow-50 ${STATUS_TEXT_CLASS.needs_answers}`,
     icon: "question-pill",
-    label: "Need answers",
+    get label() {
+      return t("schemes.status.needs_answers");
+    },
   },
   provider_decides: {
     className: `bg-gray-100 ${STATUS_TEXT_CLASS.provider_decides}`,
     icon: "info-pill",
-    label: "Check with agency",
+    get label() {
+      return t("schemes.status.provider_decides");
+    },
   },
   not_a_match: {
     className: `bg-red-100 ${STATUS_TEXT_CLASS.not_a_match}`,
     icon: "cross-pill",
-    label: "Not a match",
+    get label() {
+      return t("schemes.status.notAMatch");
+    },
   },
 };
 
 export const getStatusLabel = (status: SchemeStatus): string => {
   if (status.status === "needs_answers" && status.requiresSignIn) {
-    return "Sign in to check";
+    return t("schemes.status.signInToCheck");
   }
   if (status.status === "needs_answers" && status.questionsToAsk.length > 0) {
     return QUESTION_META[status.questionsToAsk[0]].pillLabel;

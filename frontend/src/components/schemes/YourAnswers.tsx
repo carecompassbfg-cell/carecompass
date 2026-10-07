@@ -11,6 +11,7 @@ import { summariseAnswers } from "@/util/schemeAnswersAdapter";
 import { EMPTY_FINGERPRINT } from "@/util/schemeAnswersSync";
 import QuestionSheet from "./QuestionSheet";
 import { FOCUS_RING } from "./SchemeIcon";
+import { t } from "@/i18n";
 
 // Read-only summary of the saved schemes answers on the profile page, with
 // Edit (opens the question sheet) and Clear (with a confirm step in the page)
@@ -36,9 +37,9 @@ export default function YourAnswers({ user }: { user: UserData }) {
         .loadAnswers({}, user.id, EMPTY_FINGERPRINT);
       if (response.data) setUserData(true, response.data);
       setIsConfirming(false);
-      toast.success("Your answers were cleared");
+      toast.success(t("answers.cleared"));
     } catch {
-      toast.error("Couldn't clear your answers. Please try again.");
+      toast.error(t("answers.clearError"));
     } finally {
       setIsClearing(false);
     }
@@ -52,20 +53,19 @@ export default function YourAnswers({ user }: { user: UserData }) {
     >
       <div className="flex items-center justify-between gap-2">
         <h4 id="your-answers" className="font-semibold">
-          Your answers
+          {t("answers.title")}
         </h4>
         <button
           type="button"
           onClick={() => setIsSheetOpen(true)}
           className={`min-h-11 px-2 text-sm font-semibold text-interaction-links-default ${FOCUS_RING}`}
         >
-          Edit<span className="sr-only"> your answers</span>
+          {t("dashboard.edit")}
+          <span className="sr-only">{t("answers.editSr")}</span>
         </button>
       </div>
       <p className="text-sm text-gray-600">
-        {lines.length > 0
-          ? lines.join(" · ")
-          : "No answers saved yet. They help us check schemes that need more than the profile."}
+        {lines.length > 0 ? lines.join(" · ") : t("answers.none")}
       </p>
 
       {lines.length > 0 && !isConfirming && (
@@ -75,7 +75,7 @@ export default function YourAnswers({ user }: { user: UserData }) {
           onClick={() => setIsConfirming(true)}
           className={`min-h-11 self-start text-sm font-semibold text-red-600 ${FOCUS_RING}`}
         >
-          Clear my answers
+          {t("answers.clear")}
         </button>
       )}
       {isConfirming && (
@@ -85,7 +85,7 @@ export default function YourAnswers({ user }: { user: UserData }) {
           className="flex flex-col gap-2 rounded-lg border border-red-200 bg-red-50 p-3"
         >
           <p id="clear-answers-question" className="text-sm text-gray-800">
-            Clear all your answers? Schemes that need them will ask again.
+            {t("answers.confirm")}
           </p>
           <div className="flex gap-2">
             <Button
@@ -94,7 +94,7 @@ export default function YourAnswers({ user }: { user: UserData }) {
               isLoading={isClearing}
               onClick={clearAnswers}
             >
-              Yes, clear them
+              {t("answers.yesClear")}
             </Button>
             <Button
               size="sm"
@@ -104,7 +104,7 @@ export default function YourAnswers({ user }: { user: UserData }) {
                 clearButtonRef.current?.focus();
               }}
             >
-              Cancel
+              {t("common.cancel")}
             </Button>
           </div>
         </div>

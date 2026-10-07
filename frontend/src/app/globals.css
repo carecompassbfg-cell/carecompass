@@ -16,6 +16,38 @@ body {
   overflow: hidden;
 }
 
+/* Desktop: show the app as a phone-width column, like the browser's mobile
+   view. The transform makes the body the containing block for everything
+   position: fixed (bottom sheets, pop-ups, toasts), so they stay inside the
+   column too. Phones are unaffected. */
+@media (min-width: 640px) {
+  html {
+    background: #d9dce3;
+    overflow: hidden;
+  }
+  /* "html body" and !important: the UI library's own reset (Chakra) sets
+     body { margin: 0 } after this file loads */
+  html body {
+    max-width: 480px;
+    margin: 0 auto !important;
+    height: 100dvh;
+    transform: translateZ(0);
+    box-shadow: 0 0 24px rgba(0, 0, 0, 0.12);
+  }
+  /* Bottom sheets lock scrolling by turning the body's side margins into
+     padding; keep the column centred and unpadded while one is open */
+  html body[data-scroll-locked] {
+    margin: 0 auto !important;
+    padding: 0 !important;
+  }
+  /* Chakra modals and drawers size themselves to the window (100vw); keep
+     them to the column */
+  .chakra-modal__overlay,
+  .chakra-modal__content-container {
+    width: 100% !important;
+  }
+}
+
 .markdown > * {
   all: revert;
 }

@@ -2,9 +2,10 @@ import { RefObject } from "react";
 import Link from "next/link";
 import { Drawer } from "vaul";
 import { Globe, Search, ShieldCheck, X } from "lucide-react";
-import { ABOUT_COPY } from "./aboutCopy";
+import { getAboutCopy } from "./aboutCopy";
 import { FOCUS_RING } from "./SchemeIcon";
 import StatusPill from "./StatusPill";
+import { t } from "@/i18n";
 
 const SOURCE_ICONS = { shield: ShieldCheck, globe: Globe };
 
@@ -22,6 +23,7 @@ export default function AboutPanel({
   recipientName: string;
   returnFocusRef: RefObject<HTMLElement>;
 }) {
+  const ABOUT_COPY = getAboutCopy();
   return (
     <Drawer.Root open={isOpen} onOpenChange={(open) => !open && onClose()}>
       <Drawer.Portal>
@@ -42,7 +44,7 @@ export default function AboutPanel({
               <button
                 type="button"
                 onClick={onClose}
-                aria-label="Close"
+                aria-label={t("common.close")}
                 className={`flex size-11 items-center justify-center rounded-full text-gray-600 hover:bg-gray-100 ${FOCUS_RING}`}
               >
                 <X aria-hidden size={22} />

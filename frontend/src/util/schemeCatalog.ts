@@ -5,6 +5,7 @@ import {
   SchemeStatus,
   SchemeStatusKind,
 } from "@/types/scheme";
+import { t } from "@/i18n";
 
 export interface SchemeWithStatus {
   scheme: CatalogScheme;
@@ -22,59 +23,123 @@ interface PayForMeta {
 // Icons live in public/icons/schemes (exported from the Figma design)
 export const PAY_FOR_META: Record<PayForCategory, PayForMeta> = {
   [PayForCategory.CARE_SERVICES]: {
-    label: "Care services",
-    description: "Day care, home care, nursing home fees",
-    title: "Paying for care services",
-    pageDescription: "Subsidies for day care, home care and nursing homes",
+    get label() {
+      return t("schemes.payFor.CARE_SERVICES.label");
+    },
+    get description() {
+      return t("schemes.payFor.CARE_SERVICES.description");
+    },
+    get title() {
+      return t("schemes.payFor.CARE_SERVICES.title");
+    },
+    get pageDescription() {
+      return t("schemes.payFor.CARE_SERVICES.pageDescription");
+    },
     icon: "cat-care-services",
   },
   [PayForCategory.MONTHLY_PAYOUTS]: {
-    label: "Cash support",
-    description: "Monthly or one-off cash for caregiving costs",
-    title: "Cash support",
-    pageDescription: "Monthly or one-off cash for caregiving costs",
+    get label() {
+      return t("schemes.payFor.MONTHLY_PAYOUTS.label");
+    },
+    get description() {
+      return t("schemes.payFor.MONTHLY_PAYOUTS.description");
+    },
+    get title() {
+      return t("schemes.payFor.MONTHLY_PAYOUTS.title");
+    },
+    get pageDescription() {
+      return t("schemes.payFor.MONTHLY_PAYOUTS.pageDescription");
+    },
     icon: "cat-monthly-payouts",
   },
   [PayForCategory.HELPER_COSTS]: {
-    label: "Helper costs",
-    description: "Levy and hiring support",
-    title: "Paying for a helper",
-    pageDescription: "Levy concessions and support for hiring a helper",
+    get label() {
+      return t("schemes.payFor.HELPER_COSTS.label");
+    },
+    get description() {
+      return t("schemes.payFor.HELPER_COSTS.description");
+    },
+    get title() {
+      return t("schemes.payFor.HELPER_COSTS.title");
+    },
+    get pageDescription() {
+      return t("schemes.payFor.HELPER_COSTS.pageDescription");
+    },
     icon: "cat-helper-costs",
   },
   [PayForCategory.CAREGIVER_COURSES]: {
-    label: "Caregiver courses",
-    description: "Training fees",
-    title: "Caregiver courses",
-    pageDescription: "Help with fees for caregiving training",
+    get label() {
+      return t("schemes.payFor.CAREGIVER_COURSES.label");
+    },
+    get description() {
+      return t("schemes.payFor.CAREGIVER_COURSES.description");
+    },
+    get title() {
+      return t("schemes.payFor.CAREGIVER_COURSES.title");
+    },
+    get pageDescription() {
+      return t("schemes.payFor.CAREGIVER_COURSES.pageDescription");
+    },
     icon: "cat-caregiver-courses",
   },
   [PayForCategory.EQUIPMENT_HOME]: {
-    label: "Equipment and home",
-    description: "Mobility aids, home changes",
-    title: "Equipment and home changes",
-    pageDescription: "Mobility aids, assistive devices and home modifications",
+    get label() {
+      return t("schemes.payFor.EQUIPMENT_HOME.label");
+    },
+    get description() {
+      return t("schemes.payFor.EQUIPMENT_HOME.description");
+    },
+    get title() {
+      return t("schemes.payFor.EQUIPMENT_HOME.title");
+    },
+    get pageDescription() {
+      return t("schemes.payFor.EQUIPMENT_HOME.pageDescription");
+    },
     icon: "cat-equipment-home",
   },
   [PayForCategory.TRANSPORT]: {
-    label: "Transport",
-    description: "Taxi and transport help",
-    title: "Transport",
-    pageDescription: "Help getting to appointments and care",
+    get label() {
+      return t("schemes.payFor.TRANSPORT.label");
+    },
+    get description() {
+      return t("schemes.payFor.TRANSPORT.description");
+    },
+    get title() {
+      return t("schemes.payFor.TRANSPORT.title");
+    },
+    get pageDescription() {
+      return t("schemes.payFor.TRANSPORT.pageDescription");
+    },
     icon: "cat-transport",
   },
   [PayForCategory.MEDICAL_BILLS]: {
-    label: "Medical bills",
-    description: "Hospital, clinic, MediSave",
-    title: "Paying medical bills",
-    pageDescription: "Help with hospital and clinic bills",
+    get label() {
+      return t("schemes.payFor.MEDICAL_BILLS.label");
+    },
+    get description() {
+      return t("schemes.payFor.MEDICAL_BILLS.description");
+    },
+    get title() {
+      return t("schemes.payFor.MEDICAL_BILLS.title");
+    },
+    get pageDescription() {
+      return t("schemes.payFor.MEDICAL_BILLS.pageDescription");
+    },
     icon: "cat-medical-bills",
   },
   [PayForCategory.TAX_CPF]: {
-    label: "Tax and CPF",
-    description: "Reliefs and top-ups",
-    title: "Tax and CPF",
-    pageDescription: "Tax reliefs and CPF top-ups for caregivers",
+    get label() {
+      return t("schemes.payFor.TAX_CPF.label");
+    },
+    get description() {
+      return t("schemes.payFor.TAX_CPF.description");
+    },
+    get title() {
+      return t("schemes.payFor.TAX_CPF.title");
+    },
+    get pageDescription() {
+      return t("schemes.payFor.TAX_CPF.pageDescription");
+    },
     icon: "cat-tax-cpf",
   },
 };
@@ -113,64 +178,144 @@ interface QuestionMeta {
 
 export const QUESTION_META: Record<ProfileQuestionId, QuestionMeta> = {
   [ProfileQuestionId.HOUSEHOLD_INCOME]: {
-    pillLabel: "Share income to see your subsidy",
-    rowTitle: "Household income",
-    rowHint: "Subsidy levels depend on household income per person.",
-    summary: "What is your household income?",
+    get pillLabel() {
+      return t("schemes.question.HOUSEHOLD_INCOME.pillLabel");
+    },
+    get rowTitle() {
+      return t("schemes.question.HOUSEHOLD_INCOME.rowTitle");
+    },
+    get rowHint() {
+      return t("schemes.question.HOUSEHOLD_INCOME.rowHint");
+    },
+    get summary() {
+      return t("schemes.question.HOUSEHOLD_INCOME.summary");
+    },
   },
   [ProfileQuestionId.ADL_NEEDS]: {
-    pillLabel: "Confirm daily-activity needs",
-    rowTitle: "Help needed with daily activities",
-    rowHint: "Such as bathing, dressing or moving around.",
-    summary: "Which daily activities need help?",
+    get pillLabel() {
+      return t("schemes.question.ADL_NEEDS.pillLabel");
+    },
+    get rowTitle() {
+      return t("schemes.question.ADL_NEEDS.rowTitle");
+    },
+    get rowHint() {
+      return t("schemes.question.ADL_NEEDS.rowHint");
+    },
+    get summary() {
+      return t("schemes.question.ADL_NEEDS.summary");
+    },
   },
   [ProfileQuestionId.ADL_FULL_HELP]: {
-    pillLabel: "Confirm how much help is needed",
-    rowTitle: "Full help with daily activities",
-    rowHint: "Whether someone needs to do at least 3 of them fully.",
-    summary: "Is full help needed?",
+    get pillLabel() {
+      return t("schemes.question.ADL_FULL_HELP.pillLabel");
+    },
+    get rowTitle() {
+      return t("schemes.question.ADL_FULL_HELP.rowTitle");
+    },
+    get rowHint() {
+      return t("schemes.question.ADL_FULL_HELP.rowHint");
+    },
+    get summary() {
+      return t("schemes.question.ADL_FULL_HELP.summary");
+    },
   },
   [ProfileQuestionId.HAS_FAR]: {
-    pillLabel: "Confirm assessment report",
-    rowTitle: "Functional Assessment Report",
-    rowHint: "A report from a doctor or therapist on daily-activity needs.",
-    summary: "Is there a Functional Assessment Report?",
+    get pillLabel() {
+      return t("schemes.question.HAS_FAR.pillLabel");
+    },
+    get rowTitle() {
+      return t("schemes.question.HAS_FAR.rowTitle");
+    },
+    get rowHint() {
+      return t("schemes.question.HAS_FAR.rowHint");
+    },
+    get summary() {
+      return t("schemes.question.HAS_FAR.summary");
+    },
   },
   [ProfileQuestionId.HOUSING_TYPE]: {
-    pillLabel: "Share your housing type",
-    rowTitle: "Housing type",
-    rowHint: "Some schemes depend on the type of home.",
-    summary: "What type of home is it?",
+    get pillLabel() {
+      return t("schemes.question.HOUSING_TYPE.pillLabel");
+    },
+    get rowTitle() {
+      return t("schemes.question.HOUSING_TYPE.rowTitle");
+    },
+    get rowHint() {
+      return t("schemes.question.HOUSING_TYPE.rowHint");
+    },
+    get summary() {
+      return t("schemes.question.HOUSING_TYPE.summary");
+    },
   },
   [ProfileQuestionId.LTC_INSURANCE]: {
-    pillLabel: "Share insurance cover",
-    rowTitle: "Long-term care insurance",
-    rowHint: "CareShield Life or ElderShield cover.",
-    summary: "Is there CareShield Life or ElderShield cover?",
+    get pillLabel() {
+      return t("schemes.question.LTC_INSURANCE.pillLabel");
+    },
+    get rowTitle() {
+      return t("schemes.question.LTC_INSURANCE.rowTitle");
+    },
+    get rowHint() {
+      return t("schemes.question.LTC_INSURANCE.rowHint");
+    },
+    get summary() {
+      return t("schemes.question.LTC_INSURANCE.summary");
+    },
   },
   [ProfileQuestionId.CARE_RECIPIENT_AGE]: {
-    pillLabel: "Share their age to check",
-    rowTitle: "Age",
-    rowHint: "Some schemes depend on age.",
-    summary: "How old are they?",
+    get pillLabel() {
+      return t("schemes.question.CARE_RECIPIENT_AGE.pillLabel");
+    },
+    get rowTitle() {
+      return t("schemes.question.CARE_RECIPIENT_AGE.rowTitle");
+    },
+    get rowHint() {
+      return t("schemes.question.CARE_RECIPIENT_AGE.rowHint");
+    },
+    get summary() {
+      return t("schemes.question.CARE_RECIPIENT_AGE.summary");
+    },
   },
   [ProfileQuestionId.CARE_RECIPIENT_CITIZENSHIP]: {
-    pillLabel: "Sign in to check",
-    rowTitle: "Citizenship",
-    rowHint: "Sign in and complete the profile to check this.",
-    summary: "What is their citizenship?",
+    get pillLabel() {
+      return t("schemes.question.CARE_RECIPIENT_CITIZENSHIP.pillLabel");
+    },
+    get rowTitle() {
+      return t("schemes.question.CARE_RECIPIENT_CITIZENSHIP.rowTitle");
+    },
+    get rowHint() {
+      return t("schemes.question.CARE_RECIPIENT_CITIZENSHIP.rowHint");
+    },
+    get summary() {
+      return t("schemes.question.CARE_RECIPIENT_CITIZENSHIP.summary");
+    },
   },
   [ProfileQuestionId.CARE_RECIPIENT_RESIDENCE]: {
-    pillLabel: "Confirm where they live",
-    rowTitle: "Where they live",
-    rowHint: "Update your loved one's profile to check this.",
-    summary: "Where do they live?",
+    get pillLabel() {
+      return t("schemes.question.CARE_RECIPIENT_RESIDENCE.pillLabel");
+    },
+    get rowTitle() {
+      return t("schemes.question.CARE_RECIPIENT_RESIDENCE.rowTitle");
+    },
+    get rowHint() {
+      return t("schemes.question.CARE_RECIPIENT_RESIDENCE.rowHint");
+    },
+    get summary() {
+      return t("schemes.question.CARE_RECIPIENT_RESIDENCE.summary");
+    },
   },
   [ProfileQuestionId.CAREGIVER_CITIZENSHIP]: {
-    pillLabel: "Sign in to check",
-    rowTitle: "Your citizenship",
-    rowHint: "Sign in and complete the profile to check this.",
-    summary: "What is your citizenship?",
+    get pillLabel() {
+      return t("schemes.question.CAREGIVER_CITIZENSHIP.pillLabel");
+    },
+    get rowTitle() {
+      return t("schemes.question.CAREGIVER_CITIZENSHIP.rowTitle");
+    },
+    get rowHint() {
+      return t("schemes.question.CAREGIVER_CITIZENSHIP.rowHint");
+    },
+    get summary() {
+      return t("schemes.question.CAREGIVER_CITIZENSHIP.summary");
+    },
   },
 };
 
@@ -263,8 +408,11 @@ export const SOURCE_LABELS: Record<CatalogScheme["source"], string> = {
 // information comes from
 export const getSourceLine = (scheme: CatalogScheme): string =>
   scheme.source === "carecompass"
-    ? `${scheme.agency} · Reviewed by CareCompass`
-    : `${scheme.agency} · From ${SOURCE_LABELS[scheme.source]}`;
+    ? t("schemes.sourceLine.reviewed", { agency: scheme.agency })
+    : t("schemes.sourceLine.from", {
+        agency: scheme.agency,
+        source: SOURCE_LABELS[scheme.source],
+      });
 
 // When we last checked a scheme: for Tier 1, the last time every official
 // source was read and unchanged (moved by the weekly job); for Tier 2, the
@@ -277,7 +425,7 @@ export const formatSchemeDate = (iso: string): string => {
   const date = new Date(iso);
   return isNaN(date.getTime())
     ? iso
-    : date.toLocaleDateString("en-SG", {
+    : date.toLocaleDateString(t("common.dateLocale"), {
         day: "numeric",
         month: "short",
         year: "numeric",
@@ -287,4 +435,6 @@ export const formatSchemeDate = (iso: string): string => {
 // Start of the grey line at the foot of the detail page, followed by
 // "· Sources: …" (Tier 1) or "· From Schemes.sg" (Tier 2)
 export const getLastCheckedText = (scheme: CatalogScheme): string =>
-  `Last checked ${formatSchemeDate(getLastChecked(scheme) ?? "")}`;
+  t("schemes.lastChecked", {
+    date: formatSchemeDate(getLastChecked(scheme) ?? ""),
+  });

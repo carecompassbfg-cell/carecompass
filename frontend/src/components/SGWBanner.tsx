@@ -1,11 +1,12 @@
 import { SquareArrowOutUpRight } from "lucide-react";
+import { t } from "@/i18n";
 
 export default function SGWBanner() {
   return (
     <section className="flex flex-col place-content-center place-items-center">
       <div className="flex place-content-center place-items-center">
         <span className="whitespace-pre-line text-center text-sm leading-tight text-gray-500">
-          Powered by&nbsp;
+          {t("careservice.sgw.poweredBy")}&nbsp;
         </span>
         <div className="flex cursor-pointer place-items-center text-sm text-gray-500 underline">
           <a
@@ -19,7 +20,7 @@ export default function SGWBanner() {
         </div>
       </div>
       <span className="whitespace-pre-line text-center text-sm leading-tight text-gray-500">
-        a Singapore Government Agency Website
+        {t("careservice.sgw.agencyWebsite")}
       </span>
     </section>
   );

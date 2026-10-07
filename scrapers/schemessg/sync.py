@@ -25,6 +25,7 @@ import catalog as cat
 import client as api
 import report
 import watch_sources
+import zh_status
 
 HERE = Path(__file__).resolve().parent
 REPO_ROOT = HERE.parent.parent
@@ -37,6 +38,9 @@ REPORT_FILE = DATA_DIR / "report.md"
 CATALOG_FILE = REPO_ROOT / "frontend" / "public" / "data" / "catalog.schemessg.json"
 TIER1_CATALOG_FILE = REPO_ROOT / "frontend" / "public" / "data" / "catalog.tier1.json"
 TIER1_SOURCES_FILE = DATA_DIR / "tier1_sources.json"
+# Chinese translations of the catalogs (see zh_status.py). Read only.
+TIER1_ZH_FILE = TIER1_CATALOG_FILE.with_name("catalog.tier1.zh.json")
+CATALOG_ZH_FILE = CATALOG_FILE.with_name("catalog.schemessg.zh.json")
 
 SINGAPORE = timezone(timedelta(hours=8))
 
@@ -97,11 +101,18 @@ def run(
     env: str,
     extra_missing: Optional[List[dict]] = None,
     source_watch: Optional[dict] = None,
+    zh_overlays: Optional[dict] = None,
 ) -> dict:
     """Classify and build every output. Pure apart from its inputs.
 
     source_watch, when given, is {"groups", "moved", "recheck"} from
     watch_sources (pages by status, Tier 1 dates moved, schemes to re-check).
+
+    zh_overlays, when given, is {"tier1_catalog", "tier1", "schemessg"}: the
+    Tier 1 catalog and the two Chinese overlays (None when one couldn't be
+    read). The report then lists missing and stale translations; they never
+    change the PR title, since stale ones follow from English changes that
+    are already flagged.
     """
     problems = cat.validate_overrides(overrides)
     if problems:
@@ -120,6 +131,7 @@ def run(
     to_review = cat.overrides_to_review(previous_records, state_records)
     unmatched = cat.unmatched_overrides(overrides, records)
     groups = (source_watch or {}).get("groups") or {}
+    zh_lines = zh_report_lines(catalog_items, zh_overlays)
     has_changes = (
         previous_state is None
         or bool(diff and (diff["added"] or diff["removed"] or diff["changed"]))
@@ -149,6 +161,7 @@ def run(
         extra_includes=overrides.get("extra_includes", []),
         extra_missing=extra_missing or [],
         feedback=report.api_feedback(raw_details, raw_listed),
+        zh_lines=zh_lines,
     )
     return {
         "records": records,
@@ -158,6 +171,41 @@ def run(
         "report": report_md,
         "has_changes": has_changes,
         "title": TITLE_CHANGES if has_changes else TITLE_DATES_ONLY,
+        "zh_lines": zh_lines,
+    }
+
+
+def zh_report_lines(catalog_items: List[dict], zh_overlays: Optional[dict]) -> Optional[List[str]]:
+    """The report's "Chinese translations" section. Best effort: never fails
+    the sync."""
+    if zh_overlays is None:
+        return None
+
+    def checked(catalog, overlay):
+        return None if overlay is None else zh_status.check(catalog, overlay)
+
+    try:
+        return zh_status.render_section([
+            ("Tier 1", checked(zh_overlays.get("tier1_catalog") or [], zh_overlays.get("tier1"))),
+            ("Schemes.sg", checked(catalog_items, zh_overlays.get("schemessg"))),
+        ])
+    except Exception as error:  # noqa: BLE001 - translations are best effort
+        print(f"Chinese translation check skipped: {type(error).__name__}")
+        return None
+
+
+def read_zh_overlays() -> dict:
+    def read(path: Path) -> Optional[dict]:
+        try:
+            return read_json(path, {})
+        except (OSError, ValueError) as error:
+            print(f"Couldn't read {path.name}: {type(error).__name__}")
+            return None
+
+    return {
+        "tier1_catalog": read_json(TIER1_CATALOG_FILE, []),
+        "tier1": read(TIER1_ZH_FILE),
+        "schemessg": read(CATALOG_ZH_FILE),
     }
 
 
@@ -232,6 +280,7 @@ def main() -> int:
         overrides=overrides,
         extra_missing=extra_missing,
         source_watch=source_watch,
+        zh_overlays=read_zh_overlays(),
         previous_state=read_json(STATE_FILE, None),
         synced_on=synced_on,
         env=settings["env"],
@@ -254,6 +303,13 @@ def main() -> int:
     if github_output:
         with open(github_output, "a", encoding="utf-8") as file:
             file.write(f"title={result['title']}\n")
+    # Missing or stale Chinese translations, on the workflow run's page too
+    step_summary = os.environ.get("GITHUB_STEP_SUMMARY")
+    if step_summary and result["zh_lines"]:
+        with open(step_summary, "a", encoding="utf-8") as file:
+            file.write("\n".join(result["zh_lines"]) + "\n")
+    if result["zh_lines"]:
+        print("\n".join(result["zh_lines"]))
 
     statuses: Dict[str, int] = {}
     for record in result["records"]:

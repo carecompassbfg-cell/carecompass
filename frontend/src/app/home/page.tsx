@@ -3,7 +3,14 @@
 import { useAuthStore } from "@/stores/auth";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { ReactElement, ReactNode, useEffect, useMemo } from "react";
+import { ReactElement, ReactNode, useEffect, useMemo, useState } from "react";
+import CareMonitoringTab from "@/components/home/CareMonitoringTab";
+import HomeTabs, {
+  HomeTab,
+  readSavedTab,
+  saveTab,
+} from "@/components/home/HomeTabs";
+import LanguagePill from "@/components/home/LanguagePill";
 import HomeSchemesStatusLine from "@/components/schemes/HomeSchemesStatusLine";
 import ResumeStrip from "@/components/schemes/ResumeStrip";
 import { useSchemeAnswersStore, isAnswered } from "@/stores/schemeAnswers";
@@ -14,6 +21,7 @@ import {
   getStatusLineParts,
 } from "@/util/homeSchemes";
 import { getRecipientName } from "@/util/recipient";
+import { t } from "@/i18n";
 
 interface MenuCardData {
   span: ReactElement;
@@ -26,6 +34,10 @@ interface MenuCardData {
   isFinancial?: boolean;
 }
 
+const HL = (chunks: ReactNode) => (
+  <span className="text-brand-primary-500">{chunks}</span>
+);
+
 // The financial card's question uses the saved name, so the list is built
 // per render. Order, links and illustrations are unchanged.
 const getCardDataList = (financial: {
@@ -33,14 +45,9 @@ const getCardDataList = (financial: {
   text: string;
 }): MenuCardData[] => [
   {
-    span: (
-      <span>
-        What <span className="text-brand-primary-500">caregiving services</span>{" "}
-        are available?
-      </span>
-    ),
-    text: "What caregiving services are available?",
-    subtitle: "Day care, home care, nursing homes, respite",
+    span: <span>{t.rich("home.cards.services", { hl: HL })}</span>,
+    text: t("home.cards.servicesPlain"),
+    subtitle: t("home.cards.servicesSub"),
     img: "/img/illustration_5.svg",
     link: "/careservice",
     isSignInRequired: false,
@@ -49,12 +56,16 @@ const getCardDataList = (financial: {
     // A saved name is shown exactly as typed
     span: (
       <span>
-        What <span className="text-brand-primary-500">financial support</span>{" "}
-        might {/* May be the saved name: kept out of PostHog autocapture */}
-        <span className="ph-no-capture text-brand-primary-500">
-          {financial.recipient}
-        </span>{" "}
-        and I be eligible for?
+        {t.rich("home.cards.financial", {
+          hl: HL,
+          recipient: financial.recipient,
+          // May be the saved name: kept out of PostHog autocapture
+          name: (chunks) => (
+            <span className="ph-no-capture text-brand-primary-500">
+              {chunks}
+            </span>
+          ),
+        })}
       </span>
     ),
     text: financial.text,
@@ -64,45 +75,26 @@ const getCardDataList = (financial: {
     isFinancial: true,
   },
   {
-    span: (
-      <span>
-        Where can I go for{" "}
-        <span className="text-brand-primary-500">help and support</span>?
-      </span>
-    ),
-    text: "Where can I go for help and support?",
-    subtitle: "Courses, support groups, hotlines",
+    span: <span>{t.rich("home.cards.help", { hl: HL })}</span>,
+    text: t("home.cards.helpPlain"),
+    subtitle: t("home.cards.helpSub"),
     img: "/img/illustration_1.svg",
     link: "/help",
     isSignInRequired: true,
   },
   {
-    span: (
-      <span>
-        How can I <span className="text-brand-primary-500">monitor</span> my{" "}
-        <span className="text-brand-primary-500">
-          loved one&apos;s mental state
-        </span>
-        ?
-      </span>
-    ),
-    text: "How can I monitor my loved one's mental state?",
+    span: <span>{t.rich("home.cards.monitor", { hl: HL })}</span>,
+    text: t("home.cards.monitorPlain"),
     // Fixed phrase: not personalised with the name
-    subtitle: "Daily updates on your loved one's mood",
+    subtitle: t("home.cards.monitorSub"),
     img: "/img/illustration_2.svg",
     link: "/heartbeat",
     isSignInRequired: true,
   },
   {
-    span: (
-      <span>
-        How can I <span className="text-brand-primary-500">plan ahead</span>{" "}
-        with my loved one for{" "}
-        <span className="text-brand-primary-500">end-of-life</span>?
-      </span>
-    ),
-    text: "How can I plan ahead with my loved one for end-of-life?",
-    subtitle: "LPA and advance care planning",
+    span: <span>{t.rich("home.cards.plan", { hl: HL })}</span>,
+    text: t("home.cards.planPlain"),
+    subtitle: t("home.cards.planSub"),
     img: "/img/illustration_4.svg",
     link: "https://mylegacy.life.gov.sg/end-of-life-planning/",
     isSignInRequired: false,
@@ -182,15 +174,49 @@ export default function Home() {
     router.prefetch("/help");
   }, [router]);
 
+  // Care assistance by default; remembers the last tab for this session
+  const [tab, setTab] = useState<HomeTab>("assistance");
+  useEffect(() => setTab(readSavedTab() ?? "assistance"), []);
+  const changeTab = (next: HomeTab) => {
+    setTab(next);
+    saveTab(next);
+  };
+
   return (
-    <div className="flex h-full w-full flex-col place-content-start place-items-start pt-8">
-      <div className="flex h-full max-h-[512px] w-full flex-col place-content-between">
-        <div className="mb-6 flex flex-col gap-1">
-          <h1 className="text-3xl font-bold text-brand-primary-500">
-            What do you need help with today?
+    <div className="flex h-full w-full flex-col place-content-start place-items-start pt-2">
+      <div className="flex w-full flex-col">
+        <div className="mb-3 flex w-full items-center justify-between gap-3">
+          <h1 className="min-w-0 text-xl font-bold text-gray-900">
+            {t("home.welcome")}
           </h1>
+          <LanguagePill />
+        </div>
+        <HomeTabs value={tab} onChange={changeTab} />
+      </div>
+
+      <div
+        role="tabpanel"
+        id="home-panel-monitoring"
+        aria-labelledby="home-tab-monitoring"
+        hidden={tab !== "monitoring"}
+        className="w-full pb-8 pt-5"
+      >
+        {tab === "monitoring" && <CareMonitoringTab isSignedIn={isSignedIn} />}
+      </div>
+
+      <div
+        role="tabpanel"
+        id="home-panel-assistance"
+        aria-labelledby="home-tab-assistance"
+        hidden={tab !== "assistance"}
+        className="flex w-full flex-col pt-5"
+      >
+        <div className="mb-6 flex flex-col gap-1">
+          <h2 className="text-3xl font-bold text-brand-primary-500">
+            {t("home.assistance.title")}
+          </h2>
           <span className="text-xl font-bold text-[rgb(128,128,128,0.55)]">
-            See what other caregivers are asking
+            {t("home.assistance.subtitle")}
           </span>
         </div>
         {openQuestions.length > 0 && schemesToCheck > 0 && (
@@ -212,7 +238,7 @@ export default function Home() {
         {disabledCards.length > 0 && (
           <div className="flex flex-col gap-2 pb-8">
             <p>
-              <i>Sign-In Required</i>
+              <i>{t("home.signInRequired")}</i>
             </p>
             {disabledCards.map((data, index) => (
               <MenuCard key={index} data={data} isDisabled />

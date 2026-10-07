@@ -4,14 +4,15 @@ import { possessive } from "@/util/recipient";
 import { SchemeWithStatus } from "@/util/schemeCatalog";
 import SchemeCard from "./SchemeCard";
 import SchemeIcon, { FOCUS_RING } from "./SchemeIcon";
+import { t } from "@/i18n";
 
 type Filter = "all" | Exclude<SchemeStatusKind, "not_a_match">;
 
-const FILTERS: { value: Filter; label: string }[] = [
-  { value: "all", label: "All" },
-  { value: "likely", label: "Likely eligible" },
-  { value: "needs_answers", label: "Need answers" },
-  { value: "provider_decides", label: "Check with agency" },
+const FILTERS: { value: Filter; labelKey: string }[] = [
+  { value: "all", labelKey: "filters.all" },
+  { value: "likely", labelKey: "schemes.status.likely" },
+  { value: "needs_answers", labelKey: "schemes.status.needs_answers" },
+  { value: "provider_decides", labelKey: "schemes.status.provider_decides" },
 ];
 
 // Filterable list of scheme cards. Schemes that don't match the profile are
@@ -38,9 +39,10 @@ export default function SchemeList({
       <div
         className="flex flex-wrap gap-2"
         role="group"
-        aria-label="Filter by eligibility"
+        aria-label={t("filters.byEligibility")}
       >
-        {FILTERS.map(({ value, label }) => {
+        {FILTERS.map(({ value, labelKey }) => {
+          const label = t(labelKey);
           const isActive = filter === value;
           return (
             <button
@@ -66,7 +68,7 @@ export default function SchemeList({
         ))}
         {filtered.length === 0 && (
           <p className="rounded-xl border border-gray-200 bg-white p-4 text-sm text-gray-600">
-            No schemes with this status.
+            {t("filters.noneWithStatus")}
           </p>
         )}
       </div>
@@ -80,7 +82,10 @@ export default function SchemeList({
             className={`flex min-h-11 w-full items-center gap-2 rounded-xl border border-gray-200 bg-white p-4 text-left text-[15px] font-semibold text-gray-600 ${FOCUS_RING}`}
           >
             <span className="flex-1">
-              {`${hidden.length} hidden: doesn't match ${possessive(recipientName)} profile`}
+              {t("filters.hidden", {
+                count: hidden.length,
+                name: possessive(recipientName),
+              })}
             </span>
             <SchemeIcon
               name="chevron-card"

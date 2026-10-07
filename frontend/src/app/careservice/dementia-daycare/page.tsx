@@ -11,6 +11,7 @@ import { Button } from "@chakra-ui/react";
 import { BxRightArrowAlt, Input } from "@opengovsg/design-system-react";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import { t } from "@/i18n";
 
 export default function DementiaDaycarePage() {
   const router = useRouter();
@@ -53,9 +54,9 @@ export default function DementiaDaycarePage() {
   return (
     <div className="flex flex-col gap-4 bg-white p-6">
       <BackButton />
-      <h1 className="text-xl font-semibold">Dementia Day Care Centres</h1>
+      <h1 className="text-xl font-semibold">{t("daycare.list.title")}</h1>
       <Input
-        placeholder="Search for a centre"
+        placeholder={t("daycare.list.searchPlaceholder")}
         onChange={(e) => setQuery(e.target.value)}
       />
       <div className="flex flex-col divide-y divide-solid">
@@ -105,7 +106,7 @@ function CentreCard({ centre }: { centre: DDCBase }) {
             marginLeft="auto"
             onClick={handleViewDetails}
           >
-            View Details
+            {t("provider.viewDetails")}
           </Button>
         </div>
       </div>
