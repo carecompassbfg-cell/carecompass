@@ -2,7 +2,7 @@
 
 The words the app uses for 中文. Every translation should match this table. Scheme and agency names are the official Singapore names, as used by Lianhe Zaobao (联合早报) and the agencies themselves.
 
-Style: Simplified Chinese as written in Singapore. Keep sentences short and plain, for older readers. Use 您 for "you". Use full-width punctuation (，。？！：（）) in Chinese text. Write numbers and amounts as digits ($250, 65 岁).
+Style: Simplified Chinese as written in Singapore. Keep sentences short and plain, for older readers. Use 您 for "you". Use full-width punctuation (，。？！：（）) in Chinese text. Write numbers and amounts as digits with no space ($250, 65岁).
 
 ## Schemes and agencies (official names)
 
@@ -45,11 +45,17 @@ Style: Simplified Chinese as written in Singapore. Keep sentences short and plai
 | Eligibility | 申请资格 | |
 | Scheme | 援助计划 | |
 | Dementia day care | 失智症日间护理 | |
+| Day care (services) | 日间护理 | |
+| Non-Residential Long-Term Care Subsidy | 非住宿长期护理（服务）津贴 | No official name found; please check |
+| Nursing home | 疗养院 | |
+| Polyclinic / GP | 综合诊疗所 / 家庭医生 | |
+| Postal code | 邮区编号 | |
 | Home care | 居家护理 | |
 | Day care centre | 日间护理中心 | |
 | Domestic helper / MDW | 女佣 | |
 | Hotline | 热线 | |
 | Profile | 个人资料 | |
+| MSF / HDB / CPF Board | 社会及家庭发展部 / 建屋发展局 / 中央公积金局 | |
 | Saved | 已收藏 | |
 
 ## App labels
@@ -59,7 +65,9 @@ Style: Simplified Chinese as written in Singapore. Keep sentences short and plai
 | Care monitoring | 关怀监测 |
 | Care assistance | 护理协助 |
 | Likely eligible | 可能符合资格 |
-| Need answers / to check | 待确认 |
+| Need answers | 需要回答问题 |
+| Check with agency | 向机构确认 |
+| Sign in to check | 登录以确认 |
 | Not a match | 不符合 |
 | Sign in | 登录 |
 | Close | 关闭 |
