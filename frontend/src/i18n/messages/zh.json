@@ -7,7 +7,7 @@
     "welcome": "欢迎使用 CareCompass",
     "tabs": {
       "label": "首页分区",
-      "monitoring": "关怀监测",
+      "monitoring": "护理监测",
       "assistance": "护理协助"
     },
     "assistance": {
@@ -44,20 +44,20 @@
     }
   },
   "monitoring": {
-    "title": "关怀监测",
-    "help": "关怀监测如何运作",
+    "title": "护理监测",
+    "help": "护理监测如何运作",
     "subtitleSetUp": "您照顾的人这周过得怎么样",
     "subtitle": "每天一键报平安，让您知道亲人一切安好",
-    "loading": "正在加载关怀监测",
-    "error": "暂时无法加载您的关怀监测摘要。您仍可打开 HeartBeat 查看全部内容。",
+    "loading": "正在加载护理监测",
+    "error": "暂时无法加载您的护理监测摘要。您仍可打开 HeartBeat 查看全部内容。",
     "viewDashboard": "查看完整仪表板",
     "tryAgain": "重试",
     "personsICareFor": "我照顾的人",
     "addPerson": "添加其他人",
-    "setUp": "设置关怀监测",
-    "setUpTitle": "为您的亲人设置关怀监测",
+    "setUp": "设置护理监测",
+    "setUpTitle": "为您的亲人设置护理监测",
     "setUpBody": "您的亲人每天只需点一下，分享当天的心情。如果哪天没有报平安，我们会通过 WhatsApp 通知您，让您及早关心。",
-    "signInToSetUp": "请登录以设置关怀监测。",
+    "signInToSetUp": "请登录以设置护理监测。",
     "howDoesItWork": "如何运作？"
   },
   "mood": {
@@ -79,8 +79,8 @@
     "snapshot": "心情概况"
   },
   "howItWorks": {
-    "title": "关怀监测如何运作",
-    "description": "{count} 个步骤，介绍 HeartBeat 关怀监测",
+    "title": "护理监测如何运作",
+    "description": "{count} 个步骤，介绍 HeartBeat 护理监测",
     "close": "关闭",
     "step": "第 {n} 步，共 {total} 步",
     "back": "上一步",
@@ -624,7 +624,7 @@
       "subsidyLoadError": "无法加载津贴资料",
       "notFound": "找不到这家中心",
       "howToApply": "如何申请？",
-      "howToApplyDetails": "- 您需要先取得医院、综合诊疗所或家庭医生的转介。这位医生须了解您亲人的病情和需要。您也可以联系服务提供者商讨。\n\n - 如需更多协助，请联系护联局：拨打 [1800 650 6060](tel:18006506060)，电邮 [enquiries@aic.sg](mailto:enquiries@aic.sg)，或前往附近的 [AIC Link服务点](https://www.aic.sg/about-us/aic-link-locations/)。",
+      "howToApplyDetails": "- 您需要先取得医院、综合诊疗所或家庭医生的转介。这位医生须了解您亲人的病情和需要。您也可以联系服务提供者商讨。\n\n - 如需更多协助，请联系护联局：拨打 [1800 650 6060](tel:18006506060)，电邮 [enquiries@aic.sg](mailto:enquiries@aic.sg)，或前往附近的 [护联局（AIC）服务点](https://www.aic.sg/about-us/aic-link-locations/)。",
       "fees": "费用",
       "subsidyPrompt": "这项服务适用卫生部非住宿长期护理津贴。请提供您的家庭资料，看看您可能获得多少津贴。",
       "subsidyQualify": "您可能符合卫生部非住宿长期护理津贴的资格，费用可减免<b>{level}%</b>！",
@@ -819,7 +819,7 @@
     },
     "personalDetails": "个人资料",
     "caregiverInfo": "看护者资料",
-    "careRecipientInfo": "亲人资料",
+    "careRecipientInfo": "受照顾者资料",
     "householdIncome": "家庭收入",
     "pchiNote": "*PCHI 指家庭人均月入。",
     "edit": "修改",
@@ -836,8 +836,8 @@
       "contactError": "请输入 8 位数号码，或留空"
     },
     "recipientEdit": {
-      "title": "修改亲人资料",
-      "updated": "亲人资料已更新"
+      "title": "修改受照顾者资料",
+      "updated": "受照顾者资料已更新"
     },
     "incomeEdit": {
       "title": "修改家庭收入",
@@ -897,8 +897,8 @@
   },
   "singpass": {
     "myInfoAlert": "此演示版本不提供 Singpass 功能。\n\n系统将使用预设资料。",
-    "scanNricAlert": "这个选项让看护者扫描亲人的身份证，以读取姓名、年龄和地址等基本资料。\n\n此功能尚未推出，系统将使用预设资料。",
-    "question": "您是否愿意提供亲人的资料，让我们为您提供更合适的建议？",
+    "scanNricAlert": "这个选项让看护者扫描受照顾者的身份证，以读取姓名、年龄和地址等基本资料。\n\n此功能尚未推出，系统将使用预设资料。",
+    "question": "您是否愿意提供受照顾者的资料，让我们为您提供更合适的建议？",
     "explainer": "我们会用这些资料，为您推荐可能有用的津贴或服务。",
     "authorizeMyInfo": "是，授权使用 MyInfo",
     "scanNric": "是，扫描身份证",
