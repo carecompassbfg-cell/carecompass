@@ -15,7 +15,8 @@ import { Button, ModalCloseButton } from "@opengovsg/design-system-react";
 // Same width as the desktop column rule in globals.css
 const DESKTOP_QUERY = "(min-width: 640px)";
 
-// Closed once, stays closed in this browser
+// Closed once per visit: stays closed while they use the site, and shows
+// again the next time they open CareCompass in a new tab or browser
 const DISMISSED_KEY = "cc_desktop_notice_dismissed";
 
 export const isDesktopWidth = (): boolean => {
@@ -28,7 +29,7 @@ export const isDesktopWidth = (): boolean => {
 
 const readDismissed = (): boolean => {
   try {
-    return localStorage.getItem(DISMISSED_KEY) === "true";
+    return sessionStorage.getItem(DISMISSED_KEY) === "true";
   } catch {
     return false;
   }
@@ -46,7 +47,7 @@ export default function DesktopNotice() {
 
   const close = () => {
     try {
-      localStorage.setItem(DISMISSED_KEY, "true");
+      sessionStorage.setItem(DISMISSED_KEY, "true");
     } catch {
       // Closed for this visit only
     }
