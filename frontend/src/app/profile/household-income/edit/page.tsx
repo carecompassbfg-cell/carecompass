@@ -1,5 +1,6 @@
 "use client";
 
+import { t } from "@/i18n";
 import { api } from "@/api";
 import { useAuthStore } from "@/stores/auth";
 import { useRouter } from "next/navigation";
@@ -25,7 +26,7 @@ export default function EditHouseholdIncomePage() {
       api
         .get<UserData>("/users/me")
         .then((response) => setUser(response.data))
-        .catch(() => toast.error("Failed to fetch user data"))
+        .catch(() => toast.error(t("profilePage.incomeEdit.fetchError")))
         .catch((error) => {
           console.error(error);
         });
@@ -42,11 +43,13 @@ export default function EditHouseholdIncomePage() {
   return (
     <div className="flex h-full w-full flex-col gap-4">
       <BackButton />
-      <h1 className="text-2xl font-semibold">Edit Household Income</h1>
+      <h1 className="text-2xl font-semibold">
+        {t("profilePage.incomeEdit.title")}
+      </h1>
       <PCHIForm
         data={pchiData}
         callbackFn={() => {
-          toast.success("Household income updated");
+          toast.success(t("profilePage.incomeEdit.updated"));
         }}
       />
     </div>

@@ -2,23 +2,23 @@
 
 import { BackButton } from "@/ui/button";
 import { PhoneIcon } from "@chakra-ui/icons";
+import { t } from "@/i18n";
+
 type HotlineData = {
   name: string;
   description: string;
   link: string;
 };
 
-const HOTLINES: HotlineData[] = [
+const getHotlines = (): HotlineData[] => [
   {
-    name: "Dementia Helpline",
-    description:
-      "Provides information and service linkages on dementia care. Operated by Dementia Singapore, Singapore’s leading Social Service Agency (SSA) in specialised dementia care.",
+    name: t("help.hotline.dementia.name"),
+    description: t("help.hotline.dementia.description"),
     link: "63770700",
   },
   {
-    name: "Caregiver Services Support Care Line",
-    description:
-      "Speak with trained care coordinators to brainstorm practical solutions. Operated by TOUCH Community Services, a not-for-profit charitable organisation.",
+    name: t("help.hotline.touch.name"),
+    description: t("help.hotline.touch.description"),
     link: "68046555",
   },
 ];
@@ -28,13 +28,13 @@ export default function Page() {
     <div className="flex h-full w-full flex-col gap-4">
       <BackButton />
       <h3 className="text-lg font-semibold leading-tight text-gray-500">
-        I see that you wish to speak to a professional for help.
+        {t("help.hotline.intro")}
       </h3>
       <h1 className="mb-4 text-2xl font-semibold leading-tight text-brand-primary-500">
-        Here are some agencies with qualified professionals you can speak to
+        {t("help.hotline.title")}
       </h1>
       <section className="flex flex-col gap-2 pb-8">
-        {HOTLINES.map((hotline, index) => (
+        {getHotlines().map((hotline, index) => (
           <HotlineCard key={index} hotline={hotline} />
         ))}
       </section>

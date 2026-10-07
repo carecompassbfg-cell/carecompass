@@ -1,3 +1,4 @@
+import { t } from "@/i18n";
 import { useState } from "react";
 import { Stack } from "@chakra-ui/react";
 import { FormLabel, Input } from "@opengovsg/design-system-react";
@@ -34,13 +35,13 @@ export default function RecipientDetailsFields({
     <div className="ph-no-capture flex flex-col gap-4">
       <Stack gap={0} spacing={0}>
         <FormLabel htmlFor="care-recipient-name" marginBottom={0}>
-          What do you call your loved one? (optional)
+          {t("onboarding.nameLabel")}
         </FormLabel>
         <span
           id="care-recipient-name-hint"
           className="pb-1 text-sm text-gray-600"
         >
-          A name or nickname, e.g. Mum, Ah Ma, Mr Tan
+          {t("onboarding.nameHint")}
         </span>
         <Input
           id="care-recipient-name"
@@ -67,10 +68,10 @@ export default function RecipientDetailsFields({
       </Stack>
       <Stack gap={0} spacing={0}>
         <FormLabel htmlFor="home-postal-code" marginBottom={0}>
-          Postal code where your loved one lives (optional)
+          {t("onboarding.postalLabel")}
         </FormLabel>
         <span id="home-postal-code-hint" className="pb-1 text-sm text-gray-600">
-          Helps us show services and schemes near them
+          {t("onboarding.postalHint")}
         </span>
         <Input
           id="home-postal-code"

@@ -4,12 +4,13 @@
 
 import { ProfileQuestionId } from "@/types/scheme";
 import { UserDataFull } from "@/types/user";
-import { getRecipientName, RECIPIENT_FALLBACK } from "@/util/recipient";
+import { getSavedRecipientName } from "@/util/recipient";
 import {
   countByStatus,
   getOpenSheetQuestions,
   SchemeWithStatus,
 } from "@/util/schemeCatalog";
+import { t } from "@/i18n";
 
 // Open sheet questions that would change a scheme's status, and how many
 // "Need answers" schemes they'd check. The dashboard's "Answer N questions"
@@ -40,19 +41,19 @@ export const getStatusLineParts = (
   const counts = countByStatus(items);
   const parts: StatusLinePart[] = [];
   if (counts.likely > 0) {
-    parts.push({ kind: "likely", label: `${counts.likely} likely` });
+    parts.push({
+      kind: "likely",
+      label: t("home.statusLine.likely", { count: counts.likely }),
+    });
   }
   if (counts.needs_answers > 0) {
     parts.push({
       kind: "needs_answers",
-      label: `${counts.needs_answers} to check`,
+      label: t("home.statusLine.toCheck", { count: counts.needs_answers }),
     });
   }
   return parts;
 };
-
-const plural = (count: number, one: string, many: string): string =>
-  `${count} ${count === 1 ? one : many}`;
 
 // "2 quick questions to check 11 more schemes for Mum"
 export const getResumeStripSubtitle = (
@@ -60,18 +61,21 @@ export const getResumeStripSubtitle = (
   schemeCount: number,
   recipientName: string,
 ): string =>
-  `${plural(questionCount, "quick question", "quick questions")} to check ${plural(schemeCount, "more scheme", "more schemes")} for ${recipientName}`;
+  t("home.resume.subtitle", {
+    questions: questionCount,
+    schemes: schemeCount,
+    name: recipientName,
+  });
 
 // The financial card's question. The highlighted part is the saved name
 // exactly as typed, or "my loved one".
 export const getFinancialQuestion = (
   user: Pick<UserDataFull, "care_recipient_name"> | null | undefined,
 ): { recipient: string; text: string } => {
-  const name = getRecipientName(user);
-  const recipient = name === RECIPIENT_FALLBACK ? "my loved one" : name;
+  const recipient = getSavedRecipientName(user) ?? t("home.cards.myLovedOne");
   return {
     recipient,
-    text: `What financial support might ${recipient} and I be eligible for?`,
+    text: t("home.cards.financialPlain", { recipient }),
   };
 };
 

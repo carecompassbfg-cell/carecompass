@@ -2,21 +2,22 @@
 
 import { BackButton } from "@/ui/button";
 import Link from "next/link";
+import { t } from "@/i18n";
 
 const OPTIONS = [
   {
-    title: "I’d like to learn how to care for my loved one and myself.",
-    subtitle: "Educational Resources",
+    titleKey: "help.options.education.title",
+    subtitleKey: "help.options.education.subtitle",
     link: "/help/education",
   },
   {
-    title: "I’d like to speak to someone.",
-    subtitle: "Hotline",
+    titleKey: "help.options.hotline.title",
+    subtitleKey: "help.options.hotline.subtitle",
     link: "/help/hotline",
   },
   {
-    title: "I’d like to connect with other caregivers and/or join a community",
-    subtitle: "Community Support",
+    titleKey: "help.options.community.title",
+    subtitleKey: "help.options.community.subtitle",
     link: "/help/community",
   },
 ];
@@ -26,14 +27,15 @@ export default function HelpPage() {
     <div className="flex h-full w-full flex-col gap-4">
       <BackButton />
       <h1 className="mb-4 text-2xl font-semibold leading-tight text-brand-primary-500">
-        Let me know which help and support options you’d like to get started
-        with
+        {t("help.title")}
       </h1>
       {OPTIONS.map((option) => (
         <Link href={option.link} key={option.link}>
           <div className="flex flex-col gap-1 rounded-lg border border-gray-200 bg-white p-4">
-            <p className="text-sm text-gray-500">{option.subtitle}</p>
-            <h2 className="font-semibold leading-tight">{option.title}</h2>
+            <p className="text-sm text-gray-500">{t(option.subtitleKey)}</p>
+            <h2 className="font-semibold leading-tight">
+              {t(option.titleKey)}
+            </h2>
           </div>
         </Link>
       ))}

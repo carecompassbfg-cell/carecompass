@@ -1,9 +1,12 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { api } from "@/api";
+import { useLocale } from "@/i18n";
 import { useAuthStore } from "@/stores/auth";
+import { Locale } from "@/stores/locale";
 import { toCheckAnswers, useSchemeAnswersStore } from "@/stores/schemeAnswers";
 import { CatalogScheme, ProfileQuestionId } from "@/types/scheme";
 import { UserData } from "@/types/user";
+import { applyCatalogOverlay, overlayUrl } from "@/util/catalogTranslation";
 import { isKnownAge } from "@/util/profileInput";
 import { SchemeWithStatus } from "@/util/schemeCatalog";
 import useSchemeAnswersSync from "@/util/hooks/useSchemeAnswersSync";
@@ -20,6 +23,24 @@ const fetchCatalog = async (url: string): Promise<CatalogScheme[]> => {
   return response.json();
 };
 
+// In Chinese, puts the translated text (e.g. catalog.tier1.zh.json) over the
+// English. A missing or failed overlay, or a translation made from older
+// English, leaves that text in English (see util/catalogTranslation.ts).
+const fetchLocalisedCatalog = async (
+  url: string,
+  locale: Locale,
+): Promise<CatalogScheme[]> => {
+  const [schemes, overlay] = await Promise.all([
+    fetchCatalog(url),
+    locale === "en"
+      ? Promise.resolve(null)
+      : fetch(overlayUrl(url, locale))
+          .then((response) => (response.ok ? response.json() : null))
+          .catch(() => null),
+  ]);
+  return overlay ? applyCatalogOverlay(schemes, overlay) : schemes;
+};
+
 // Loads the scheme catalog and the signed-in user's profile, and works out
 // each scheme's status. Signed-out users get getSchemeStatus(scheme, null).
 // With enabled: false the catalog isn't fetched (e.g. home page, signed out).
@@ -30,6 +51,7 @@ export default function useSchemeCatalog({
   const isSignedIn = useAuthStore((state) => state.isSignedIn);
   const userData = useAuthStore((state) => state.userData);
   const setUserData = useAuthStore((state) => state.setUserData);
+  const locale = useLocale();
 
   const [catalog, setCatalog] = useState<CatalogScheme[]>();
   const [catalogError, setCatalogError] = useState(false);
@@ -37,10 +59,13 @@ export default function useSchemeCatalog({
 
   useEffect(() => {
     if (!enabled) return;
+    // A language change mid-fetch must not let the old language's result win
+    let isCurrent = true;
     Promise.allSettled([
-      fetchCatalog(TIER1_URL),
-      fetchCatalog(SCHEMESSG_URL),
+      fetchLocalisedCatalog(TIER1_URL, locale),
+      fetchLocalisedCatalog(SCHEMESSG_URL, locale),
     ]).then(([tier1, schemesSg]) => {
+      if (!isCurrent) return;
       if (tier1.status === "rejected") {
         console.error(tier1.reason);
         setCatalogError(true);
@@ -55,7 +80,10 @@ export default function useSchemeCatalog({
         ...(schemesSg.status === "fulfilled" ? schemesSg.value : []),
       ]);
     });
-  }, [enabled]);
+    return () => {
+      isCurrent = false;
+    };
+  }, [enabled, locale]);
 
   const refreshUser = useCallback(async () => {
     try {

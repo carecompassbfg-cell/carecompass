@@ -1,6 +1,11 @@
 "use client";
 
+import { t } from "@/i18n";
 import { Citizenship, Relationship, Residence, UserData } from "@/types/user";
+import {
+  getCitizenshipOptions,
+  getRelationshipOptions,
+} from "@/util/userPropMapping";
 import LoadingSpinner from "@/ui/loading";
 import { Stack } from "@chakra-ui/react";
 import {
@@ -20,7 +25,7 @@ import { api } from "@/api";
 import RecipientDetailsFields from "@/components/RecipientDetailsFields";
 import { useSchemeAnswersStore } from "@/stores/schemeAnswers";
 import {
-  AGE_ERROR,
+  getAgeError,
   parseAge,
   parsePostalCode,
   parseRecipientName,
@@ -39,40 +44,6 @@ type PersonalDetails = {
   care_recipient_residence: Residence;
   care_recipient_relationship: string;
 };
-
-const citizenshipOptions = [
-  {
-    label: "Singapore Citizen",
-    value: Citizenship.CITIZEN,
-  },
-  {
-    label: "Permanent Resident",
-    value: Citizenship.PR,
-  },
-  {
-    label: "Other",
-    value: Citizenship.OTHER,
-  },
-];
-
-const relationshipOptions = [
-  {
-    label: "Parent",
-    value: Relationship.PARENT,
-  },
-  {
-    label: "Spouse",
-    value: Relationship.SPOUSE,
-  },
-  {
-    label: "Other family",
-    value: Relationship.OTHER_FAMILY,
-  },
-  {
-    label: "Non-family member",
-    value: Relationship.NON_FAMILY,
-  },
-];
 
 function PersonalDetailsForm() {
   const router = useRouter();
@@ -125,7 +96,7 @@ function PersonalDetailsForm() {
       setUserData(true, res.data);
       router.push("/home");
     } catch (error) {
-      toast.error("Something went wrong. Please try again later.");
+      toast.error(t("profilePage.genericError"));
     } finally {
       setIsSubmitting(false);
     }
@@ -141,19 +112,17 @@ function PersonalDetailsForm() {
   return (
     <main className="flex h-full w-full flex-col gap-8 overflow-auto p-8 py-16">
       <div className="flex flex-col gap-2">
-        <h3 className="text-2xl font-bold">Get Started</h3>
-        <span className="">
-          Could you tell us a little more about yourself and your loved one?
-        </span>
+        <h3 className="text-2xl font-bold">{t("onboarding.title")}</h3>
+        <span className="">{t("onboarding.intro")}</span>
       </div>
       <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
         <Stack gap={0} spacing={0}>
-          <FormLabel isRequired>{`Your citizenship status`}</FormLabel>
+          <FormLabel isRequired>{t("onboarding.yourCitizenship")}</FormLabel>
           <SingleSelect
-            placeholder="Select an option"
+            placeholder={t("profilePage.selectOption")}
             value={personalDetails.citizenship}
             name="citizenship"
-            items={citizenshipOptions}
+            items={getCitizenshipOptions()}
             onChange={(e) =>
               setPersonalDetails({
                 ...personalDetails,
@@ -163,12 +132,12 @@ function PersonalDetailsForm() {
           />
         </Stack>
         <Stack gap={0} spacing={0}>
-          <FormLabel isRequired>{`I am caring for my`}</FormLabel>
+          <FormLabel isRequired>{t("onboarding.caringFor")}</FormLabel>
           <SingleSelect
-            placeholder="Select an option"
+            placeholder={t("profilePage.selectOption")}
             value={personalDetails.care_recipient_relationship}
             name="carerecipient_relationship"
-            items={relationshipOptions}
+            items={getRelationshipOptions()}
             onChange={(e) =>
               setPersonalDetails({
                 ...personalDetails,
@@ -178,12 +147,14 @@ function PersonalDetailsForm() {
           />
         </Stack>
         <Stack gap={0} spacing={0}>
-          <FormLabel isRequired>{`Loved one’s citizenship status`}</FormLabel>
+          <FormLabel isRequired>
+            {t("onboarding.recipientCitizenship")}
+          </FormLabel>
           <SingleSelect
-            placeholder="Select an option"
+            placeholder={t("profilePage.selectOption")}
             value={personalDetails.care_recipient_citizenship}
             name="carerecipient_citizenship"
-            items={citizenshipOptions}
+            items={getCitizenshipOptions()}
             onChange={(e) =>
               setPersonalDetails({
                 ...personalDetails,
@@ -193,11 +164,11 @@ function PersonalDetailsForm() {
           />
         </Stack>
         <Stack gap={0} spacing={0}>
-          <FormLabel isRequired>{`Loved one’s age`}</FormLabel>
+          <FormLabel isRequired>{t("onboarding.recipientAge")}</FormLabel>
           <NumberInput
             min={1}
             max={120}
-            placeholder="Age"
+            placeholder={t("onboarding.agePlaceholder")}
             value={personalDetails.care_recipient_age}
             name="carerecipient_age"
             isInvalid={showAgeError}
@@ -209,11 +180,11 @@ function PersonalDetailsForm() {
             }
           />
           {showAgeError && (
-            <p className="pt-1 text-sm text-red-600">{AGE_ERROR}</p>
+            <p className="pt-1 text-sm text-red-600">{getAgeError()}</p>
           )}
         </Stack>
         <Stack gap={0} spacing={0}>
-          <FormLabel isRequired>{`Loved one’s residential status`}</FormLabel>
+          <FormLabel isRequired>{t("onboarding.recipientResidence")}</FormLabel>
           <RadioGroup
             onChange={(e) =>
               setPersonalDetails({
@@ -224,14 +195,13 @@ function PersonalDetailsForm() {
             value={personalDetails.care_recipient_residence.toString()}
           >
             <Radio value={Residence.HOME} allowDeselect>
-              My loved one stays with me
+              {t("onboarding.residence.HOME")}
             </Radio>
             <Radio value={Residence.NURSING_HOME_LTCF} allowDeselect>
-              My loved one stays in a nursing home or residential long-term care
-              facility
+              {t("onboarding.residence.NURSING_HOME_LTCF")}
             </Radio>
             <Radio value={Residence.OTHER} allowDeselect>
-              Others
+              {t("onboarding.residence.OTHER")}
             </Radio>
           </RadioGroup>
         </Stack>
@@ -244,12 +214,12 @@ function PersonalDetailsForm() {
         <Button
           isDisabled={submitDisabled}
           isLoading={isSubmitting}
-          loadingText="Submitting"
+          loadingText={t("profilePage.submitting")}
           variant="solid"
           type="submit"
           rightIcon={<BxRightArrowAlt />}
         >
-          {"Next"}
+          {t("onboarding.next")}
         </Button>
       </form>
     </main>

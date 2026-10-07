@@ -1,5 +1,6 @@
 "use client";
 
+import { t } from "@/i18n";
 import LoadingSpinner from "@/ui/loading";
 import { Button, BxRightArrowAlt } from "@opengovsg/design-system-react";
 import Image from "next/image";
@@ -10,16 +11,12 @@ function SingpassAuth() {
   const router = useRouter();
 
   function handleMyInfo() {
-    alert(
-      "Singpass integration is not available in this demo.\n\nPreloaded data will be used instead.",
-    );
+    alert(t("singpass.myInfoAlert"));
     router.push(`/chat`);
   }
 
   function handleScanNRIC() {
-    alert(
-      "This option allows caregivers to scan the care recipient's NRIC to retrieve basic information such as name, age, and address.\n\nThis feature is not available yet and preloaded data will be used instead.",
-    );
+    alert(t("singpass.scanNricAlert"));
     router.push(`/chat`);
   }
 
@@ -37,11 +34,10 @@ function SingpassAuth() {
           height={200}
         />
         <div className="flex flex-col gap-2">
-          <span className="text-lg font-semibold">{`Would you like to share your care recipient’s details for a more personalised experience?`}</span>
-          <span className="text-sm">
-            This information will be used to recommend any subsidies or services
-            that may be useful to you.
+          <span className="text-lg font-semibold">
+            {t("singpass.question")}
           </span>
+          <span className="text-sm">{t("singpass.explainer")}</span>
         </div>
         <div className="flex flex-col gap-4">
           <Button
@@ -52,21 +48,21 @@ function SingpassAuth() {
             borderColor="#F4333D"
             _hover={{ bg: "#df0c17", borderColor: "#df0c17" }}
           >
-            Yes, Authorize MyInfo
+            {t("singpass.authorizeMyInfo")}
           </Button>
           <Button
             variant="solid"
             onClick={handleScanNRIC}
             rightIcon={<BxRightArrowAlt />}
           >
-            Yes, scan NRIC
+            {t("singpass.scanNric")}
           </Button>
           <Button
             variant="outline"
             onClick={handleNext}
             rightIcon={<BxRightArrowAlt />}
           >
-            Skip for now
+            {t("singpass.skip")}
           </Button>
         </div>
       </main>

@@ -1,5 +1,6 @@
 "use client";
 
+import { t } from "@/i18n";
 import {
   CareRecipientData,
   Citizenship,
@@ -7,6 +8,10 @@ import {
   Residence,
   UserData,
 } from "@/types/user";
+import {
+  getCitizenshipOptions,
+  getRelationshipOptions,
+} from "@/util/userPropMapping";
 import LoadingSpinner from "@/ui/loading";
 import { Stack } from "@chakra-ui/react";
 import {
@@ -26,46 +31,12 @@ import { api } from "@/api";
 import useInitialUserData from "@/util/hooks/useInitialUserData";
 import RecipientDetailsFields from "@/components/RecipientDetailsFields";
 import {
-  AGE_ERROR,
+  getAgeError,
   parseAge,
   parsePostalCode,
   parseRecipientName,
   safeReturnTo,
 } from "@/util/profileInput";
-
-const citizenshipOptions = [
-  {
-    label: "Singapore Citizen",
-    value: Citizenship.CITIZEN,
-  },
-  {
-    label: "Permanent Resident",
-    value: Citizenship.PR,
-  },
-  {
-    label: "Other",
-    value: Citizenship.OTHER,
-  },
-];
-
-const relationshipOptions = [
-  {
-    label: "Parent",
-    value: Relationship.PARENT,
-  },
-  {
-    label: "Spouse",
-    value: Relationship.SPOUSE,
-  },
-  {
-    label: "Other family",
-    value: Relationship.OTHER_FAMILY,
-  },
-  {
-    label: "Non-family member",
-    value: Relationship.NON_FAMILY,
-  },
-];
 
 const selectCareRecipientData = (userData: UserData): CareRecipientData => ({
   care_recipient_age: userData.care_recipient_age,
@@ -119,12 +90,12 @@ function CareRecipientDetailsForm() {
         home_postal_code: postal.value,
       });
       setUserData(true, res.data);
-      toast.success("Care recipient info updated successfully");
+      toast.success(t("profilePage.recipientEdit.updated"));
       if (returnTo) {
         router.push(returnTo);
       }
     } catch (e) {
-      toast.error("Something went wrong. Please try again later.");
+      toast.error(t("profilePage.genericError"));
     } finally {
       setIsSubmitting(false);
     }
@@ -137,13 +108,13 @@ function CareRecipientDetailsForm() {
   return (
     <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
       <Stack gap={0} spacing={0}>
-        <FormLabel isRequired>{`I am caring for my`}</FormLabel>
+        <FormLabel isRequired>{t("onboarding.caringFor")}</FormLabel>
         <SingleSelect
           isClearable={false}
-          placeholder="Select an option"
+          placeholder={t("profilePage.selectOption")}
           value={formData.care_recipient_relationship}
           name="carerecipient_relationship"
-          items={relationshipOptions}
+          items={getRelationshipOptions()}
           onChange={(e) =>
             setFormData({
               ...formData,
@@ -153,13 +124,13 @@ function CareRecipientDetailsForm() {
         />
       </Stack>
       <Stack gap={0} spacing={0}>
-        <FormLabel isRequired>{`Loved one’s citizenship status`}</FormLabel>
+        <FormLabel isRequired>{t("onboarding.recipientCitizenship")}</FormLabel>
         <SingleSelect
           isClearable={false}
-          placeholder="Select an option"
+          placeholder={t("profilePage.selectOption")}
           value={formData.care_recipient_citizenship}
           name="carerecipient_citizenship"
-          items={citizenshipOptions}
+          items={getCitizenshipOptions()}
           onChange={(e) =>
             setFormData({
               ...formData,
@@ -169,22 +140,22 @@ function CareRecipientDetailsForm() {
         />
       </Stack>
       <Stack gap={0} spacing={0}>
-        <FormLabel isRequired>{`Loved one’s age`}</FormLabel>
+        <FormLabel isRequired>{t("onboarding.recipientAge")}</FormLabel>
         <NumberInput
           min={1}
           max={120}
-          placeholder="Age"
+          placeholder={t("onboarding.agePlaceholder")}
           value={ageValue}
           name="carerecipient_age"
           isInvalid={ageValue !== "" && age === null}
           onChange={(e) => setAgeText(e)}
         />
         {ageValue !== "" && age === null && (
-          <p className="pt-1 text-sm text-red-600">{AGE_ERROR}</p>
+          <p className="pt-1 text-sm text-red-600">{getAgeError()}</p>
         )}
       </Stack>
       <Stack gap={0} spacing={0}>
-        <FormLabel isRequired>{`Loved one’s residential status`}</FormLabel>
+        <FormLabel isRequired>{t("onboarding.recipientResidence")}</FormLabel>
         <RadioGroup
           onChange={(e) =>
             setFormData({
@@ -195,14 +166,13 @@ function CareRecipientDetailsForm() {
           value={formData.care_recipient_residence.toString()}
         >
           <Radio value={Residence.HOME} allowDeselect>
-            My loved one stays with me
+            {t("onboarding.residence.HOME")}
           </Radio>
           <Radio value={Residence.NURSING_HOME_LTCF} allowDeselect>
-            My loved one stays in a nursing home or residential long-term care
-            facility
+            {t("onboarding.residence.NURSING_HOME_LTCF")}
           </Radio>
           <Radio value={Residence.OTHER} allowDeselect>
-            Others
+            {t("onboarding.residence.OTHER")}
           </Radio>
         </RadioGroup>
       </Stack>
@@ -215,11 +185,11 @@ function CareRecipientDetailsForm() {
       <Button
         isDisabled={submitDisabled}
         isLoading={isSubmitting}
-        loadingText="Submitting"
+        loadingText={t("profilePage.submitting")}
         variant="solid"
         type="submit"
       >
-        Save
+        {t("profilePage.save")}
       </Button>
     </form>
   );
@@ -229,7 +199,9 @@ export default function EditCareRecipientInfo() {
   return (
     <div className="flex h-full w-full flex-col gap-4">
       <BackButton />
-      <h1 className="text-2xl font-semibold">Edit Care Recipient Info</h1>
+      <h1 className="text-2xl font-semibold">
+        {t("profilePage.recipientEdit.title")}
+      </h1>
       <Suspense fallback={<LoadingSpinner />}>
         <CareRecipientDetailsForm />
       </Suspense>

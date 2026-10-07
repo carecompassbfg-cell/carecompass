@@ -4,8 +4,8 @@ import {
   parseAge,
   parsePostalCode,
   parseRecipientName,
-  POSTAL_CODE_ERROR,
-  RECIPIENT_NAME_ERROR,
+  getPostalCodeError,
+  getRecipientNameError,
   safeReturnTo,
 } from "@/util/profileInput";
 
@@ -69,7 +69,9 @@ describe("parseRecipientName", () => {
 
   it("allows up to 40 characters", () => {
     expect(parseRecipientName("a".repeat(40)).value).toBe("a".repeat(40));
-    expect(parseRecipientName("a".repeat(41)).error).toBe(RECIPIENT_NAME_ERROR);
+    expect(parseRecipientName("a".repeat(41)).error).toBe(
+      getRecipientNameError(),
+    );
   });
 
   it("rejects control characters", () => {
@@ -89,7 +91,7 @@ describe("parsePostalCode", () => {
 
   it("rejects anything that isn't 6 digits", () => {
     for (const value of ["12345", "1234567", "52O123", "S520123"]) {
-      expect(parsePostalCode(value).error).toBe(POSTAL_CODE_ERROR);
+      expect(parsePostalCode(value).error).toBe(getPostalCodeError());
     }
   });
 });

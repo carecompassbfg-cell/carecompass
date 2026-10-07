@@ -5,6 +5,7 @@ import LoadingSpinner from "@/ui/loading";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef } from "react";
 import { toast } from "sonner";
+import { t } from "@/i18n";
 
 const HEARTBEAT_URL = "https://heartbeat.carecompass.sg/login";
 
@@ -27,7 +28,7 @@ export default function HeartbeatRedirect() {
       hasRun.current = true;
       // Using router.replace instead of router.push to allow user to navigate back to the page user was at before /heartbeat from Caregiver Profile Edit page
       router.replace("/profile/caregiver-info/edit");
-      toast.error("Phone number is required for this function");
+      toast.error(t("heartbeat.phoneRequired"));
     }
   }, [router, userData]);
 

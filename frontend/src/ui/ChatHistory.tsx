@@ -6,6 +6,7 @@ import { Skeleton, Stack } from "@chakra-ui/react";
 import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
 import { useEffect, useState } from "react";
 import { api } from "@/api";
+import { t } from "@/i18n";
 
 export default function ChatHistory({
   router,
@@ -29,12 +30,14 @@ export default function ChatHistory({
   }, [userId]);
 
   if (!userId) {
-    return <span className="font-semibold">Chat History is not available</span>;
+    return (
+      <span className="font-semibold">{t("chat.history.unavailable")}</span>
+    );
   }
 
   return (
     <div className="flex h-full grow flex-col gap-4">
-      <h3 className="text-xl font-semibold">Chat History</h3>
+      <h3 className="text-xl font-semibold">{t("chat.history.title")}</h3>
       {isLoading || chats == undefined ? (
         <Stack spacing={4}>
           {Array.from({ length: 10 }).map((_, index) => (
@@ -54,7 +57,7 @@ export default function ChatHistory({
               }}
               className="min-h-8 w-full max-w-56 overflow-hidden text-ellipsis whitespace-nowrap rounded-md py-1 pr-2 text-left duration-100 ease-in-out hover:bg-gray-600 hover:bg-opacity-35"
             >
-              {chat.title || "Untitled - " + chat.thread_id}
+              {chat.title || t("chat.history.untitled", { id: chat.thread_id })}
             </button>
           ))}
         </div>

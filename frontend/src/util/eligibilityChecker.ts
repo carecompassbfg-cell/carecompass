@@ -14,6 +14,7 @@ import {
   UserDataFull,
 } from "../types/user";
 import { isKnownAge } from "./profileInput";
+import { t } from "@/i18n";
 
 export type AdlFullHelp = "yes" | "no" | "not_sure";
 export type LtcPlan =
@@ -109,48 +110,42 @@ export const checkParentRelief: EligibilityCheck = (
 
   switch (user.care_recipient_relationship) {
     case Relationship.PARENT:
-      result.met.push("Your parent");
+      result.met.push(t("elig.s01"));
       break;
     case Relationship.OTHER_FAMILY:
-      result.met.push("A family member");
-      result.agencyWillCheck.push("Must be your parent, grandparent or in-law");
+      result.met.push(t("elig.s02"));
+      result.agencyWillCheck.push(t("elig.s03"));
       break;
     default:
-      result.notMet.push("For parents, grandparents and in-laws");
+      result.notMet.push(t("elig.s04"));
   }
 
   if (isKnownAge(age) && age >= 55) {
-    result.met.push("Aged 55 or older");
+    result.met.push(t("elig.s05"));
   } else if (adl !== null && adl >= 1) {
     // Parent Relief (Disability): the age rule does not count
-    result.met.push(
-      "Needs help with at least one daily activity, so Parent Relief (Disability) may apply",
-    );
+    result.met.push(t("elig.s06"));
   } else if (!isKnownAge(age)) {
     ask(result, ProfileQuestionId.CARE_RECIPIENT_AGE);
   } else if (adl === 0) {
-    result.notMet.push(
-      "Aged 55 or older, or needs help with at least one daily activity",
-    );
+    result.notMet.push(t("elig.s07"));
   } else {
     ask(result, ProfileQuestionId.ADL_NEEDS);
   }
 
   result.met.push(
     user.care_recipient_residence === Residence.HOME
-      ? "$9,000 (living with you)"
-      : "$5,500 if you spent $2,000 or more supporting them",
+      ? t("elig.s08")
+      : t("elig.s09"),
   );
   if (adl !== null && adl >= 1) {
-    result.met.push(
-      "May qualify for Parent Relief (Disability): $14,000 / $10,000",
-    );
+    result.met.push(t("elig.s10"));
   }
 
   result.agencyWillCheck.push(
-    `Dependant's income in ${lastYear} was $8,000 or less`,
-    "No one else has claimed Spouse Relief or another relief on the same person",
-    "For the disability version, a doctor's or disability association's document if IRAS asks",
+    t("elig.parentRelief.dependantIncome", { year: lastYear }),
+    t("elig.s11"),
+    t("elig.s12"),
   );
   return result;
 };
@@ -168,33 +163,25 @@ export const checkCaregiversTrainingGrant: EligibilityCheck = (
   const age = user.care_recipient_age;
 
   if (isCitizenOrPr(user.care_recipient_citizenship)) {
-    result.met.push("Singapore Citizen or PR");
+    result.met.push(t("elig.s13"));
   } else {
-    result.notMet.push("For Singapore Citizens and PRs");
+    result.notMet.push(t("elig.s14"));
   }
 
   if (isKnownAge(age) && age >= 65) {
-    result.met.push("Aged 65 or older");
+    result.met.push(t("elig.s15"));
   } else if (adl !== null && adl >= 1) {
-    result.met.push("Needs help with at least one daily activity");
-    result.agencyWillCheck.push(
-      "The need is permanent: a Functional Assessment Report, unless already on a scheme such as CareShield Life or ElderFund",
-    );
+    result.met.push(t("elig.s16"));
+    result.agencyWillCheck.push(t("elig.s17"));
   } else if (!isKnownAge(age)) {
     ask(result, ProfileQuestionId.CARE_RECIPIENT_AGE);
   } else if (adl === 0) {
-    result.notMet.push(
-      "For someone 65 or older, or who needs help with at least one daily activity",
-    );
+    result.notMet.push(t("elig.s18"));
   } else {
     ask(result, ProfileQuestionId.ADL_NEEDS);
   }
 
-  result.agencyWillCheck.push(
-    "You are a main caregiver",
-    "The course is on the approved list",
-    "The grant has not already been used up by another caregiver",
-  );
+  result.agencyWillCheck.push(t("elig.s19"), t("elig.s20"), t("elig.s21"));
   return result;
 };
 
@@ -210,22 +197,20 @@ export const checkHomeCaregivingGrant: EligibilityCheck = (
   const adl = knownAdlCount(answers);
 
   if (isCitizen(user.care_recipient_citizenship)) {
-    result.met.push("Singapore Citizen");
+    result.met.push(t("elig.s22"));
   } else if (user.care_recipient_citizenship === Citizenship.PR) {
-    result.met.push("Permanent Resident");
+    result.met.push(t("elig.s23"));
     if (!prHasScFamilyCaregiver(user)) {
-      result.agencyWillCheck.push(
-        "PRs qualify only if a parent, child or spouse is a Singapore Citizen",
-      );
+      result.agencyWillCheck.push(t("elig.s24"));
     }
   } else {
-    result.notMet.push("For Singapore Citizens and PRs");
+    result.notMet.push(t("elig.s14"));
   }
 
   if (user.care_recipient_residence === Residence.NURSING_HOME_LTCF) {
-    result.notMet.push("Not for someone living in a nursing home");
+    result.notMet.push(t("elig.s25"));
   } else if (user.care_recipient_residence === Residence.HOME) {
-    result.met.push("Lives at home");
+    result.met.push(t("elig.s26"));
   } else {
     ask(result, ProfileQuestionId.CARE_RECIPIENT_RESIDENCE);
   }
@@ -235,42 +220,29 @@ export const checkHomeCaregivingGrant: EligibilityCheck = (
     ask(result, ProfileQuestionId.HOUSEHOLD_INCOME);
   } else if (income.kind === "no_income") {
     if (income.lowAnnualValue) {
-      result.met.push(
-        "$600 a month (no income and home Annual Value $21,000 or less)",
-      );
+      result.met.push(t("elig.s27"));
     } else {
-      result.notMet.push(
-        "No household income and home Annual Value above $21,000",
-      );
+      result.notMet.push(t("elig.s28"));
     }
   } else if (income.pchi <= 1500) {
-    result.met.push(
-      "$600 a month (household income per person $1,500 or less)",
-    );
+    result.met.push(t("elig.s29"));
   } else if (income.pchi <= 3600) {
-    result.met.push(
-      "$400 a month (household income per person $1,501 to $3,600)",
-    );
+    result.met.push(t("elig.s30"));
   } else if (income.pchi <= 4800) {
-    result.met.push(
-      "$200 a month (household income per person $3,601 to $4,800)",
-    );
+    result.met.push(t("elig.s31"));
   } else {
-    result.notMet.push("Household income per person is above $4,800");
+    result.notMet.push(t("elig.s32"));
   }
 
   if (adl === null) {
     ask(result, ProfileQuestionId.ADL_NEEDS);
   } else if (adl >= 3) {
-    result.met.push("Needs help with at least 3 daily activities");
+    result.met.push(t("elig.s33"));
   } else {
-    result.notMet.push("Needs help with at least 3 daily activities");
+    result.notMet.push(t("elig.s33"));
   }
 
-  result.agencyWillCheck.push(
-    "A Functional Assessment Report confirming the daily-activity needs are permanent",
-    "Property ownership: households that own more than one property get $200",
-  );
+  result.agencyWillCheck.push(t("elig.s34"), t("elig.s35"));
   return result;
 };
 
@@ -286,38 +258,29 @@ export const checkMdwLevyConcession: EligibilityCheck = (
   const adl = knownAdlCount(answers);
   const age = user.care_recipient_age;
   const citizenship = user.care_recipient_citizenship;
-  const neitherRoute =
-    "For someone 67 or older, or who needs help with at least one daily activity";
+  const neitherRoute = t("elig.s36");
 
   if (user.care_recipient_residence === Residence.HOME) {
-    result.met.push("Lives with you");
+    result.met.push(t("elig.s37"));
   } else {
-    result.notMet.push("Must live with you at the same address");
+    result.notMet.push(t("elig.s38"));
   }
 
   if (!isCitizenOrPr(citizenship)) {
     result.notMet.push(neitherRoute);
   } else if (isKnownAge(age) && age >= 67) {
     // Route A, elderly
-    result.met.push(
-      isCitizen(citizenship)
-        ? "Singapore Citizen aged 67 or older"
-        : "Permanent Resident aged 67 or older",
-    );
+    result.met.push(isCitizen(citizenship) ? t("elig.s39") : t("elig.s40"));
     if (!isCitizen(citizenship) && !isCitizen(user.citizenship)) {
-      result.agencyWillCheck.push(
-        "You or your spouse must be a Singapore Citizen",
-      );
+      result.agencyWillCheck.push(t("elig.s41"));
     }
   } else if (adl !== null && adl >= 1) {
     // Route B, disability
-    result.met.push("Needs help with at least one daily activity");
+    result.met.push(t("elig.s16"));
     if (!isCitizen(citizenship) && !prHasScFamilyCaregiver(user)) {
-      result.agencyWillCheck.push(
-        "PRs qualify only if a parent, child or spouse is a Singapore Citizen",
-      );
+      result.agencyWillCheck.push(t("elig.s24"));
     }
-    result.agencyWillCheck.push("An AIC recommendation letter");
+    result.agencyWillCheck.push(t("elig.s42"));
   } else if (!isKnownAge(age)) {
     ask(result, ProfileQuestionId.CARE_RECIPIENT_AGE);
   } else if (adl === 0) {
@@ -326,10 +289,7 @@ export const checkMdwLevyConcession: EligibilityCheck = (
     ask(result, ProfileQuestionId.ADL_NEEDS);
   }
 
-  result.agencyWillCheck.push(
-    "The helper is registered to your household",
-    "Your loved one is listed as a household member on the FDW eService",
-  );
+  result.agencyWillCheck.push(t("elig.s43"), t("elig.s44"));
   return result;
 };
 
@@ -339,30 +299,30 @@ export const checkMdwLevyConcession: EligibilityCheck = (
 
 type LtcColumn = "sc_1969_or_earlier" | "sc_after_1969" | "pr";
 
-// [band label, upper bound of household income per person, rates by column]
+// [band label message key, upper bound of household income per person, rates by column]
 const LTC_BANDS: [string, number, Record<LtcColumn, number>][] = [
   [
-    "$1,500 or less",
+    "elig.ltc.band.b1",
     1500,
     { sc_1969_or_earlier: 95, sc_after_1969: 80, pr: 55 },
   ],
   [
-    "$1,501–$2,300",
+    "elig.ltc.band.b2",
     2300,
     { sc_1969_or_earlier: 85, sc_after_1969: 70, pr: 45 },
   ],
   [
-    "$2,301–$2,600",
+    "elig.ltc.band.b3",
     2600,
     { sc_1969_or_earlier: 75, sc_after_1969: 60, pr: 35 },
   ],
   [
-    "$2,601–$3,600",
+    "elig.ltc.band.b4",
     3600,
     { sc_1969_or_earlier: 55, sc_after_1969: 40, pr: 20 },
   ],
   [
-    "$3,601–$4,800",
+    "elig.ltc.band.b5",
     4800,
     { sc_1969_or_earlier: 35, sc_after_1969: 20, pr: 10 },
   ],
@@ -372,10 +332,11 @@ const LTC_NO_INCOME: Record<LtcColumn, number> = {
   sc_after_1969: 80,
   pr: 55,
 };
+// Message keys (translated where used)
 const LTC_COLUMN_LABELS: Record<LtcColumn, string> = {
-  sc_1969_or_earlier: "Singapore Citizen born 1969 or earlier",
-  sc_after_1969: "Singapore Citizen born after 1969",
-  pr: "Permanent Resident",
+  sc_1969_or_earlier: "elig.ltc.column.sc1969",
+  sc_after_1969: "elig.ltc.column.scAfter1969",
+  pr: "elig.ltc.column.pr",
 };
 
 export const checkMohLtcSubsidy: EligibilityCheck = (
@@ -388,10 +349,10 @@ export const checkMohLtcSubsidy: EligibilityCheck = (
   const age = user.care_recipient_age;
 
   if (!isCitizenOrPr(citizenship)) {
-    result.notMet.push("For Singapore Citizens and PRs");
+    result.notMet.push(t("elig.s14"));
   }
   if (user.care_recipient_residence === Residence.NURSING_HOME_LTCF) {
-    result.notMet.push("For care at home or at a centre");
+    result.notMet.push(t("elig.s45"));
   }
 
   // Birth cohort from age: in 2026, 57+ was born 1969 or earlier, 55 or
@@ -409,7 +370,7 @@ export const checkMohLtcSubsidy: EligibilityCheck = (
       } else {
         column = "sc_after_1969";
         if (age === ageIfBornIn1969 - 1) {
-          result.agencyWillCheck.push("Could be higher if born in 1969");
+          result.agencyWillCheck.push(t("elig.s46"));
         }
       }
     }
@@ -422,35 +383,34 @@ export const checkMohLtcSubsidy: EligibilityCheck = (
     ask(result, ProfileQuestionId.HOUSEHOLD_INCOME);
   } else if (income.kind === "no_income") {
     if (income.lowAnnualValue) {
-      band = "no income, Annual Value $21,000 or less";
+      band = t("elig.ltc.bandNoIncome");
       if (column) rate = LTC_NO_INCOME[column];
     } else {
-      result.notMet.push(
-        "No household income and home Annual Value above $21,000",
-      );
+      result.notMet.push(t("elig.s28"));
     }
   } else {
     const match = LTC_BANDS.find(([, upTo]) => income.pchi <= upTo);
     if (!match) {
-      result.notMet.push("Household income per person is above $4,800");
+      result.notMet.push(t("elig.s32"));
     } else {
-      band = `household income per person ${match[0]}`;
+      band = t("elig.ltc.bandIncome", { band: t(match[0]) });
       if (column) rate = match[2][column];
     }
   }
 
   if (column && rate !== null) {
     result.met.push(
-      `${rate}% off fees (${LTC_COLUMN_LABELS[column]}, ${band})`,
+      t("elig.ltc.rate", {
+        rate,
+        column: t(LTC_COLUMN_LABELS[column]),
+        band,
+      }),
     );
   } else if (isCitizenOrPr(citizenship) && column) {
-    result.met.push(LTC_COLUMN_LABELS[column]);
+    result.met.push(t(LTC_COLUMN_LABELS[column]));
   }
 
-  result.agencyWillCheck.push(
-    "The provider is government-funded",
-    "The doctor or AIC referral",
-  );
+  result.agencyWillCheck.push(t("elig.s47"), t("elig.s48"));
   return result;
 };
 
@@ -463,21 +423,21 @@ export const checkSeniorsMobilityFund: EligibilityCheck = (user) => {
   const age = user.care_recipient_age;
 
   if (isCitizenOrPr(user.care_recipient_citizenship)) {
-    result.met.push("Singapore Citizen or PR");
+    result.met.push(t("elig.s13"));
   } else {
-    result.notMet.push("For Singapore Citizens and PRs");
+    result.notMet.push(t("elig.s14"));
   }
 
   if (!isKnownAge(age)) {
     ask(result, ProfileQuestionId.CARE_RECIPIENT_AGE);
   } else if (age >= 60) {
-    result.met.push("Aged 60 or older");
+    result.met.push(t("elig.s49"));
   } else {
-    result.notMet.push("For seniors aged 60 or older");
+    result.notMet.push(t("elig.s50"));
   }
 
   if (user.care_recipient_residence === Residence.NURSING_HOME_LTCF) {
-    result.notMet.push("Not for someone living in a nursing home");
+    result.notMet.push(t("elig.s25"));
   }
 
   const income = household(user);
@@ -485,24 +445,17 @@ export const checkSeniorsMobilityFund: EligibilityCheck = (user) => {
     ask(result, ProfileQuestionId.HOUSEHOLD_INCOME);
   } else if (income.kind === "no_income") {
     if (income.lowAnnualValue) {
-      result.met.push(
-        "No household income and home Annual Value $21,000 or less",
-      );
+      result.met.push(t("elig.s51"));
     } else {
-      result.notMet.push(
-        "No household income and home Annual Value above $21,000",
-      );
+      result.notMet.push(t("elig.s28"));
     }
   } else if (income.pchi <= 4800) {
-    result.met.push("Household income per person of $4,800 or less");
+    result.met.push(t("elig.s52"));
   } else {
-    result.notMet.push("Household income per person is above $4,800");
+    result.notMet.push(t("elig.s32"));
   }
 
-  result.agencyWillCheck.push(
-    "An assessment by an approved health professional says the item is needed",
-    "Extra conditions for motorised devices",
-  );
+  result.agencyWillCheck.push(t("elig.s53"), t("elig.s54"));
   return result;
 };
 
@@ -521,18 +474,16 @@ const checkSevereDisability = (
   } else if (adl < 3) {
     result.notMet.push(notMetText);
   } else if (answers.adlFullHelp === "yes") {
-    result.met.push("Needs full help with at least 3 daily activities");
+    result.met.push(t("elig.s55"));
   } else if (answers.adlFullHelp === "no") {
-    result.notMet.push(
-      "For severe disability: needs full help with at least 3 daily activities",
-    );
+    result.notMet.push(t("elig.s56"));
   } else {
     // Not answered yet, or "not sure". "Not sure" counts as answered (the
     // sheet won't ask again) but the scheme stays at "needs answers" until
     // the severe disability assessment decides.
     ask(result, ProfileQuestionId.ADL_FULL_HELP);
     if (answers.adlFullHelp === "not_sure") {
-      result.agencyWillCheck.push("The severe disability assessment decides");
+      result.agencyWillCheck.push(t("elig.s57"));
     }
   }
   return adl;
@@ -543,25 +494,18 @@ export const checkMediSaveCare: EligibilityCheck = (user, answers = {}) => {
   const age = user.care_recipient_age;
 
   if (isCitizenOrPr(user.care_recipient_citizenship)) {
-    result.met.push("Singapore Citizen or PR");
+    result.met.push(t("elig.s13"));
   } else {
-    result.notMet.push("For Singapore Citizens and PRs");
+    result.notMet.push(t("elig.s14"));
   }
   // Age 30 or older is effectively always met, so an unknown age isn't asked
   if (isKnownAge(age) && age < 30) {
-    result.notMet.push("For people aged 30 or older");
+    result.notMet.push(t("elig.s58"));
   }
 
-  checkSevereDisability(
-    result,
-    answers,
-    "For severe disability: needs full help with at least 3 daily activities",
-  );
+  checkSevereDisability(result, answers, t("elig.s56"));
 
-  result.agencyWillCheck.push(
-    "Severe disability assessment by an MOH-accredited assessor",
-    "MediSave balance of at least $5,000",
-  );
+  result.agencyWillCheck.push(t("elig.s59"), t("elig.s60"));
   return result;
 };
 
@@ -569,12 +513,8 @@ export const checkMediSaveCare: EligibilityCheck = (user, answers = {}) => {
 // 8. CareShield Life / ElderShield claims
 // ---------------------------------------------------------------------------
 
-const CARESHIELD_PAYOUT =
-  "CareShield Life: monthly payouts for life while severely disabled. The starting payout is $689 a month in 2026 and rises each year until age 67 or a claim. People born in 1954 or earlier who joined at 67 or above get a fixed $612 a month";
-const ELDERSHIELD_PAYOUTS = [
-  "ElderShield 400 (joined Sep 2007 to Dec 2019): $400 a month for up to 72 months",
-  "ElderShield 300 (joined Sep 2002 to Sep 2007): $300 a month for up to 60 months",
-];
+const CARESHIELD_PAYOUT = t("elig.s61");
+const ELDERSHIELD_PAYOUTS = [t("elig.s62"), t("elig.s63")];
 
 export const checkCareShieldElderShield: EligibilityCheck = (
   user,
@@ -583,28 +523,20 @@ export const checkCareShieldElderShield: EligibilityCheck = (
   const result = newResult("CARESHIELD-ELDERSHIELD-CLAIM");
   const age = user.care_recipient_age;
 
-  const adl = checkSevereDisability(
-    result,
-    answers,
-    "For severe disability: unable to do at least 3 daily activities",
-  );
+  const adl = checkSevereDisability(result, answers, t("elig.s64"));
 
   if (isKnownAge(age) && age <= 45) {
     // Certainly born 1980 or later, so covered by CareShield Life
-    result.met.push(
-      "Covered by CareShield Life (everyone born in 1980 or later)",
-    );
+    result.met.push(t("elig.s65"));
     result.met.push(CARESHIELD_PAYOUT);
   } else if (answers.ltcInsurance === "careshield_life") {
-    result.met.push("Covered by CareShield Life");
+    result.met.push(t("elig.s66"));
     result.met.push(CARESHIELD_PAYOUT);
   } else if (answers.ltcInsurance === "eldershield") {
-    result.met.push("Covered by ElderShield");
+    result.met.push(t("elig.s67"));
     result.met.push(...ELDERSHIELD_PAYOUTS);
   } else if (answers.ltcInsurance === "neither") {
-    result.notMet.push(
-      "Only if covered by CareShield Life or ElderShield. See [ElderFund](/dashboard/schemes?id=ssg-aic-elderfund) instead",
-    );
+    result.notMet.push(t("elig.s68"));
   } else if (adl !== null && adl >= 3) {
     // Only asked once 3+ activities are ticked (and age is 46 or older)
     if (isKnownAge(age)) {
@@ -614,10 +546,7 @@ export const checkCareShieldElderShield: EligibilityCheck = (
     }
   }
 
-  result.agencyWillCheck.push(
-    "A severe disability assessment by an MOH-accredited assessor",
-    "The policy is active",
-  );
+  result.agencyWillCheck.push(t("elig.s69"), t("elig.s70"));
   return result;
 };
 

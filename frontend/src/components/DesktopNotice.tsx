@@ -11,6 +11,7 @@ import {
   ModalOverlay,
 } from "@chakra-ui/react";
 import { Button, ModalCloseButton } from "@opengovsg/design-system-react";
+import { t } from "@/i18n";
 
 // Same width as the desktop column rule in globals.css
 const DESKTOP_QUERY = "(min-width: 640px)";
@@ -74,20 +75,19 @@ export default function DesktopNotice() {
             priority
           />
         </div>
-        <ModalHeader>CareCompass works best on your phone</ModalHeader>
+        <ModalHeader>{t("desktop.title")}</ModalHeader>
         <ModalBody>
           <p className="text-base leading-6 text-gray-600">
-            You can keep using it here on your computer. For the full
-            experience, open{" "}
-            <span className="font-semibold text-gray-900">
-              my.carecompass.sg
-            </span>{" "}
-            on your phone and add it to your home screen.
+            {t.rich("desktop.body", {
+              b: (chunks) => (
+                <span className="font-semibold text-gray-900">{chunks}</span>
+              ),
+            })}
           </p>
         </ModalBody>
         <ModalFooter>
           <Button ref={continueRef} width="100%" onClick={close}>
-            Continue on this computer
+            {t("desktop.continue")}
           </Button>
         </ModalFooter>
       </ModalContent>

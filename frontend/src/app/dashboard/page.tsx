@@ -29,26 +29,21 @@ import {
   pickBestMatches,
   QUESTION_META,
 } from "@/util/schemeCatalog";
+import { t } from "@/i18n";
 
 // The three status counts in the summary box; each opens the full list
 // filtered to that status
 const SUMMARY_TILES = [
   {
     status: "likely",
-    label: "Likely eligible",
-    ariaLabel: "likely eligible",
     className: "bg-green-100 text-green-600",
   },
   {
     status: "needs_answers",
-    label: "Need answers",
-    ariaLabel: "need answers",
     className: "bg-yellow-50 text-yellow-600",
   },
   {
     status: "provider_decides",
-    label: "Check with agency",
-    ariaLabel: "check with agency",
     className: "bg-gray-100 text-gray-600",
   },
 ] as const;
@@ -59,22 +54,19 @@ const ELSEWHERE_LINKS = [
   {
     href: "/careservice",
     icon: "elsewhere-care",
-    title: "Care services",
-    description: "Day care, home care, nursing homes, respite",
+    key: "care",
     external: false,
   },
   {
     href: "/help",
     icon: "elsewhere-help",
-    title: "Help and support",
-    description: "Courses, support groups, hotlines, counselling",
+    key: "help",
     external: false,
   },
   {
     href: PLAN_AHEAD_URL,
     icon: "elsewhere-plan",
-    title: "Plan ahead",
-    description: "LPA, advance care planning, deputyship",
+    key: "plan",
     external: true,
   },
 ];
@@ -136,11 +128,11 @@ export default function SchemesPage() {
       {!isSignedIn && (
         <section className="flex flex-col gap-4 rounded border border-brand-primary-300 bg-brand-primary-100 p-4">
           <p className="text-brand-primary-900">
-            Sign in to get personalized recommendations
+            {t("dashboard.signInPrompt")}
           </p>
           <SignInButton>
             <Button variant="solid" size="xs" colorScheme="blue">
-              Sign in
+              {t("common.signIn")}
             </Button>
           </SignInButton>
         </section>
@@ -148,7 +140,7 @@ export default function SchemesPage() {
 
       <header className="flex flex-col gap-1.5">
         <h1 className="text-[28px] font-bold leading-[34px] text-gray-800">
-          Financial schemes for {getRecipientTitleName(user)}
+          {t("dashboard.title", { name: getRecipientTitleName(user) })}
         </h1>
         {profileFacts.length > 0 && (
           <p className="flex flex-wrap items-center gap-x-1.5 text-sm leading-5 text-gray-600">
@@ -162,7 +154,8 @@ export default function SchemesPage() {
               href="/profile/care-recipient-info/edit?returnTo=/dashboard"
               className={`inline-flex min-h-11 items-center px-1 font-semibold text-interaction-links-default ${FOCUS_RING}`}
             >
-              Edit<span className="sr-only"> profile</span>
+              {t("dashboard.edit")}
+              <span className="sr-only">{t("dashboard.editProfileSr")}</span>
             </Link>
           </p>
         )}
@@ -170,31 +163,38 @@ export default function SchemesPage() {
 
       {catalogError && (
         <p className="rounded-xl border border-gray-200 bg-white p-4 text-sm text-gray-600">
-          We couldn&apos;t load the list of schemes. Please try again later.
+          {t("dashboard.catalogError")}
         </p>
       )}
       {isSignedIn && userLoadError && (
         <p className="rounded-xl border border-gray-200 bg-white p-4 text-sm text-gray-600">
-          We couldn&apos;t load your profile, so these results are not
-          personalised yet. Please try again later.
+          {t("dashboard.profileError")}
         </p>
       )}
 
       {/* Summary */}
       <section
-        aria-label="Summary"
+        aria-label={t("dashboard.summary")}
         className="flex flex-col gap-3.5 rounded-2xl border border-gray-200 bg-white p-4"
       >
         <div className="flex items-start gap-2">
           <p className="flex-1 text-[15px] leading-[22px] text-gray-800">
-            We checked <b>{items.length}</b> grants, subsidies and reliefs
-            {user ? ` against ${possessive(name)} profile.` : "."}
+            {user
+              ? t.rich("dashboard.checkedAgainst", {
+                  count: items.length,
+                  name: possessive(name),
+                  b: (chunks) => <b>{chunks}</b>,
+                })
+              : t.rich("dashboard.checked", {
+                  count: items.length,
+                  b: (chunks) => <b>{chunks}</b>,
+                })}
           </p>
           <button
             ref={aboutButtonRef}
             type="button"
             onClick={() => setIsAboutOpen(true)}
-            aria-label="About these results"
+            aria-label={t("dashboard.aboutResults")}
             className={`-mr-2 -mt-2 flex size-11 shrink-0 items-center justify-center rounded-full text-gray-600 hover:bg-gray-100 ${FOCUS_RING}`}
           >
             <CircleHelp aria-hidden size={20} />
@@ -207,7 +207,10 @@ export default function SchemesPage() {
               <li key={tile.status} className="flex flex-1">
                 <Link
                   href={`/dashboard/all-schemes?status=${tile.status}`}
-                  aria-label={`${count} ${tile.ariaLabel}, see the list`}
+                  aria-label={t("dashboard.tileAria", {
+                    count,
+                    status: t(`schemes.status.${tile.status}`),
+                  })}
                   className={`flex min-h-11 w-full flex-col gap-0.5 rounded-[10px] p-2.5 ${tile.className} ${FOCUS_RING}`}
                 >
                   <span className="flex items-center justify-between">
@@ -215,7 +218,7 @@ export default function SchemesPage() {
                     <ChevronRight aria-hidden size={18} />
                   </span>
                   <span className="text-xs font-semibold leading-4">
-                    {tile.label}
+                    {t(`schemes.status.${tile.status}`)}
                   </span>
                 </Link>
               </li>
@@ -229,11 +232,10 @@ export default function SchemesPage() {
           >
             <CircleX aria-hidden size={16} className="shrink-0" />
             <span>
-              {statusCounts.not_a_match}{" "}
-              {statusCounts.not_a_match === 1
-                ? "doesn't look like a fit"
-                : "don't look like a fit"}{" "}
-              for {name}
+              {t("dashboard.notAFit", {
+                count: statusCounts.not_a_match,
+                name,
+              })}
             </span>
             <ChevronRight aria-hidden size={16} className="shrink-0" />
           </Link>
@@ -246,15 +248,16 @@ export default function SchemesPage() {
               </span>
               <div className="flex flex-col gap-0.5">
                 <p className="text-[15px] font-semibold leading-5 text-gray-800">
-                  Answer {openQuestions.length}{" "}
-                  {openQuestions.length === 1 ? "question" : "questions"} to
-                  check {schemesUnlocked} more
+                  {t("dashboard.answerToCheck", {
+                    questions: openQuestions.length,
+                    schemes: schemesUnlocked,
+                  })}
                 </p>
                 <p className="text-[13px] leading-[18px] text-gray-600">
                   {openQuestions
                     .map((id) => QUESTION_META[id].summary)
                     .join(" ")}{" "}
-                  About 1 minute.
+                  {t("dashboard.aboutOneMinute")}
                 </p>
               </div>
             </div>
@@ -264,14 +267,16 @@ export default function SchemesPage() {
               minHeight="44px"
               onClick={() => setIsSheetOpen(true)}
             >
-              Answer now
+              {t("dashboard.answerNow")}
             </Button>
           </div>
         )}
         {!isSignedIn && statusCounts.needs_answers > 0 && (
           <p className="border-t border-gray-200 pt-3.5 text-[13px] leading-[18px] text-gray-600">
-            Sign in and tell us about {name} to check{" "}
-            {statusCounts.needs_answers} of these against their profile.
+            {t("dashboard.signInToCheck", {
+              name,
+              count: statusCounts.needs_answers,
+            })}
           </p>
         )}
       </section>
@@ -287,10 +292,10 @@ export default function SchemesPage() {
               id="best-matches"
               className="text-lg font-bold leading-6 text-gray-800"
             >
-              Best matches
+              {t("dashboard.bestMatches")}
             </h2>
             <p className="text-sm leading-5 text-gray-600">
-              Likely eligible first, then schemes that need a few answers
+              {t("dashboard.bestMatchesHint")}
             </p>
           </div>
           {bestMatches.map((item) => (
@@ -301,7 +306,7 @@ export default function SchemesPage() {
               href="/dashboard/all-schemes?status=likely,needs_answers"
               className={`flex min-h-11 items-center justify-center gap-1 rounded-xl border border-gray-200 bg-white p-3 text-[15px] font-semibold text-interaction-links-default ${FOCUS_RING}`}
             >
-              See all {allMatchesCount} matches
+              {t("dashboard.seeAllMatches", { count: allMatchesCount })}
               <SchemeIcon name="chevron-link" size={16} />
             </Link>
           )}
@@ -317,10 +322,10 @@ export default function SchemesPage() {
         </span>
         <span className="flex flex-1 flex-col gap-0.5">
           <span className="text-[15px] font-semibold leading-5 text-interaction-links-default">
-            Search all caregiving schemes
+            {t("dashboard.searchAll")}
           </span>
           <span className="text-[13px] leading-[18px] text-gray-600">
-            Filter by what the schemes pay for.
+            {t("dashboard.searchAllHint")}
           </span>
         </span>
         <ChevronRight
@@ -333,7 +338,7 @@ export default function SchemesPage() {
       {/* Browse by category */}
       <section aria-labelledby="browse" className="flex flex-col gap-2.5">
         <h2 id="browse" className="text-lg font-bold leading-6 text-gray-800">
-          Browse by what it helps pay for
+          {t("dashboard.browse")}
         </h2>
         <ul className="grid grid-cols-2 gap-2.5">
           {PAY_FOR_ORDER.filter((category) => categoryCounts[category]).map(
@@ -356,7 +361,7 @@ export default function SchemesPage() {
                       {meta.description}
                     </span>
                     <span className="mt-auto text-xs font-semibold leading-4 text-gray-800">
-                      {count} {count === 1 ? "scheme" : "schemes"}
+                      {t("dashboard.schemeCount", { count })}
                     </span>
                   </Link>
                 </li>
@@ -375,7 +380,7 @@ export default function SchemesPage() {
           id="elsewhere"
           className="pb-1 text-base font-bold leading-[22px] text-gray-800"
         >
-          Not a scheme? These live elsewhere in CareCompass
+          {t("dashboard.elsewhere")}
         </h2>
         {ELSEWHERE_LINKS.map((link) => {
           const content = (
@@ -385,10 +390,10 @@ export default function SchemesPage() {
               </span>
               <span className="flex flex-1 flex-col">
                 <span className="text-[15px] font-semibold text-gray-800">
-                  {link.title}
+                  {t(`dashboard.elsewhereLinks.${link.key}.title`)}
                 </span>
                 <span className="text-[13px] leading-[18px] text-gray-600">
-                  {link.description}
+                  {t(`dashboard.elsewhereLinks.${link.key}.description`)}
                 </span>
               </span>
               <SchemeIcon name="chevron-card" size={18} />
@@ -404,7 +409,7 @@ export default function SchemesPage() {
               className={className}
             >
               {content}
-              <span className="sr-only">(opens in a new tab)</span>
+              <span className="sr-only">{t("common.opensInNewTab")}</span>
             </a>
           ) : (
             <Link key={link.href} href={link.href} className={className}>
@@ -416,11 +421,7 @@ export default function SchemesPage() {
 
       <p className="flex items-start gap-2 pb-4 text-xs leading-[18px] text-gray-600">
         <SchemeIcon name="info-footer" size={16} />
-        <span>
-          Information from Schemes.sg and CareCompass, refreshed weekly.
-          &lsquo;Likely eligible&rsquo; is a guide based on your profile. The
-          agency makes the final decision.
-        </span>
+        <span>{t("dashboard.footer")}</span>
       </p>
 
       <AboutPanel

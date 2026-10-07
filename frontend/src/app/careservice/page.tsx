@@ -28,8 +28,12 @@ import { useEffect, useState } from "react";
 import HomeCareServices from "./homecareService";
 import { useAuthStore } from "@/stores/auth";
 import useSignInOnlyFeaturePrompt from "@/util/hooks/useSignInOnlyFeaturePrompt";
+import { t } from "@/i18n";
+
+type CareServiceKey = "daycare" | "homecare" | "fdw" | "nursingHome";
 
 type CareServiceData = {
+  key: CareServiceKey;
   title: string;
   description: string;
   eligibleForSubsidies: boolean;
@@ -49,44 +53,69 @@ type Params = {
   remove: (name: string) => URLSearchParams;
 };
 
+// Title and description are getters so they follow the chosen language
 const careServiceDataList: CareServiceData[] = [
   {
-    title: "Daycare Services",
-    description:
-      "Full day programmes offered by centres for seniors with dementia. This could be useful if your loved one requires supervision during the day.",
+    key: "daycare",
+    get title() {
+      return t("careservice.service.daycare.title");
+    },
+    get description() {
+      return t("careservice.service.daycare.description");
+    },
     eligibleForSubsidies: true,
     icon: "/icon/daycare.svg",
     enabled: true,
     isSignInRequired: false,
   },
   {
-    title: "Home Care Services",
-    description:
-      "Assistance with day-to-day care tasks and medical services at your home.",
+    key: "homecare",
+    get title() {
+      return t("careservice.service.homecare.title");
+    },
+    get description() {
+      return t("careservice.service.homecare.description");
+    },
     icon: "/icon/homecare.svg",
     enabled: true,
     eligibleForSubsidies: true,
     isSignInRequired: true,
   },
   {
-    title: "Hire a Foreign Domestic Worker",
-    description:
-      "Pre-trained in eldercare, they will have basic skills to care for your loved one.",
+    key: "fdw",
+    get title() {
+      return t("careservice.service.fdw.title");
+    },
+    get description() {
+      return t("careservice.service.fdw.description");
+    },
     icon: "/icon/careworker.svg",
     enabled: false,
     eligibleForSubsidies: false,
     isSignInRequired: true,
   },
   {
-    title: "Engage a Nursing Home",
-    description:
-      "Residential care facility that would assist with your loved one's activities of daily living and nursing care needs.",
+    key: "nursingHome",
+    get title() {
+      return t("careservice.service.nursingHome.title");
+    },
+    get description() {
+      return t("careservice.service.nursingHome.description");
+    },
     icon: "/icon/nursinghome.svg",
     enabled: false,
     eligibleForSubsidies: false,
     isSignInRequired: true,
   },
 ];
+
+// Sentry element names for each option (not shown to users)
+const SENTRY_ELEMENTS: Record<CareServiceKey, string> = {
+  daycare: "CTA-Daycare",
+  homecare: "CTA-Homecare",
+  fdw: "CTA-FDW",
+  nursingHome: "CTA-NursingHome",
+};
 
 export default function CareServiceRecommender() {
   const searchParams = useSearchParams();
@@ -178,8 +207,7 @@ export default function CareServiceRecommender() {
       <section className="flex flex-col">
         <BackButton />
         <span className="py-4 text-2xl font-semibold leading-tight text-brand-primary-500">
-          Let me know which caregiving option you&apos;d like to get started
-          with
+          {t("careservice.overview.title")}
         </span>
         <div className="mt-4 flex flex-col gap-2">
           {careServiceDataList.map((service, index) => (
@@ -208,7 +236,8 @@ export default function CareServiceRecommender() {
       isDisbledDueToNotImplemented || isDisabledDueToNotSignedIn;
 
     const handleClick = () => {
-      if (service.title === "Home Care Services") {
+      if (service.key === "homecare") {
+        // URL value, not shown to users
         handleServiceSelection("Home Care Services");
       } else {
         incrementIndex();
@@ -221,17 +250,7 @@ export default function CareServiceRecommender() {
         onClick={handleClick}
         disabled={isDisabled}
         data-sentry-component="CareServiceButton"
-        data-sentry-element={
-          service.title === "Daycare Services"
-            ? "CTA-Daycare"
-            : service.title === "Home Care Services"
-              ? "CTA-Homecare"
-              : service.title === "Hire a Foreign Domestic Worker"
-                ? "CTA-FDW"
-                : service.title === "Engage a Nursing Home"
-                  ? "CTA-NursingHome"
-                  : undefined
-        }
+        data-sentry-element={SENTRY_ELEMENTS[service.key]}
       >
         <Image src={service.icon} alt="ds" width={40} height={40} />
         <div className="flex flex-col gap-2">
@@ -243,18 +262,18 @@ export default function CareServiceRecommender() {
                 colorScheme={isDisabled ? "neutral" : "success"}
                 variant="subtle"
               >
-                $ May be eligible for subsidies
+                {t("careservice.badge.subsidies")}
               </Badge>
             )}
             {isDisabledDueToNotSignedIn && (
               <Badge colorScheme="neutral" variant="subtle">
-                Sign-in required
+                {t("careservice.badge.signInRequired")}
               </Badge>
             )}
           </div>
           {isDisbledDueToNotImplemented && (
             <span className="text-sm italic">
-              This recommender is not yet available
+              {t("careservice.notAvailable")}
             </span>
           )}
         </div>
@@ -277,14 +296,13 @@ export default function CareServiceRecommender() {
       <section className="flex flex-col gap-4">
         <BackButton />
         <span className="text-lg font-semibold leading-tight text-gray-500">
-          I see that you&apos;re looking out for daycare services for your loved
-          one.
+          {t("careservice.location.intro")}
         </span>
         <span className="text-2xl font-semibold leading-tight text-brand-primary-500">
-          Could you provide me your postal code to assist you better?
+          {t("careservice.location.question")}
         </span>
         <Input
-          placeholder="e.g. 310149"
+          placeholder={t("careservice.location.placeholder")}
           value={postalCode}
           onChange={(e) => {
             setPostalCode(e.target.value);
@@ -300,7 +318,7 @@ export default function CareServiceRecommender() {
             className="w-[calc(50%-4px)]"
             variant="outline"
           >
-            Skip
+            {t("careservice.skip")}
           </Button>
           <Button
             className="w-[calc(50%-4px)]"
@@ -313,7 +331,7 @@ export default function CareServiceRecommender() {
               router.replace("?" + p.toString());
             }}
           >
-            Next
+            {t("careservice.next")}
           </Button>
         </div>
       </section>
@@ -329,10 +347,10 @@ export default function CareServiceRecommender() {
       <section className="flex flex-col gap-4">
         <BackButton />
         <span className="text-lg font-semibold leading-tight text-gray-500">
-          Got it.
+          {t("careservice.other.intro")}
         </span>
         <span className="text-2xl font-semibold leading-tight text-brand-primary-500">
-          Are there any other information you&apos;d like us to be mindful of?
+          {t("careservice.other.question")}
         </span>
         {/* This is just a placeholder for now */}
         <Textarea
@@ -354,7 +372,7 @@ export default function CareServiceRecommender() {
             router.replace("?" + p.toString());
           }}
         >
-          Next
+          {t("careservice.next")}
         </Button>
       </section>
     );
@@ -401,10 +419,10 @@ export default function CareServiceRecommender() {
       <section className="flex flex-col gap-4">
         <BackButton />
         <span className="text-lg font-semibold leading-tight text-gray-500">
-          Thank you.
+          {t("careservice.recommendations.intro")}
         </span>
         <span className="text-2xl font-semibold leading-tight text-brand-primary-500">
-          Based on your inputs, here are the recommended daycare centres
+          {t("careservice.recommendations.title")}
         </span>
         <div className="flex flex-col gap-4">
           {recommendations.map((centre, index) => (
@@ -412,7 +430,7 @@ export default function CareServiceRecommender() {
           ))}
         </div>
         <Button variant="outline" onClick={handleShowAll}>
-          Show me the full list of centres
+          {t("careservice.recommendations.showAll")}
         </Button>
         {/* TODO: fix this hack */}
         <div className="pb-8">
@@ -435,12 +453,12 @@ export default function CareServiceRecommender() {
     }, [router, centre.id]);
 
     const parseDistance = (distance: number) => {
-      return `${(distance / 1000).toFixed(1)}km`;
+      return t("careservice.card.km", { km: (distance / 1000).toFixed(1) });
     };
 
     const parseDuration = (duration: number) => {
       const minutes = Math.floor(duration / 60);
-      return `${minutes} min`;
+      return t("careservice.card.minutes", { minutes });
     };
 
     const handleViewDetails = () => {
@@ -459,7 +477,9 @@ export default function CareServiceRecommender() {
     );
     const distance =
       centre.distanceFromHome || centre.distanceFromHome == 0
-        ? `(${parseDistance(centre.distanceFromHome)} away from home)`
+        ? t("careservice.card.awayFromHome", {
+            distance: parseDistance(centre.distanceFromHome),
+          })
         : "";
 
     return (
@@ -475,10 +495,9 @@ export default function CareServiceRecommender() {
           <div className="flex flex-col gap-2">
             <span>
               <b>
-                {`From ${formatPriceRange(
-                  centre.minPrice,
-                  centre.maxPrice,
-                )}/month (pre-subsidy)`}
+                {t("price.fromPerMonthPreSubsidy", {
+                  price: formatPriceRange(centre.minPrice, centre.maxPrice),
+                })}
               </b>
             </span>
           </div>
@@ -491,8 +510,11 @@ export default function CareServiceRecommender() {
             centre.distanceFromHome > 0 && (
               <div className="flex flex-col rounded border border-brand-primary-400 bg-brand-primary-50 p-4">
                 <span>
-                  <b>{parseDuration(centre.drivingDuration!)}</b> by car, or{" "}
-                  <b>{parseDuration(centre.transitDuration!)}</b> by bus/MRT
+                  {t.rich("careservice.card.travel", {
+                    car: parseDuration(centre.drivingDuration!),
+                    transit: parseDuration(centre.transitDuration!),
+                    b: (chunks) => <b>{chunks}</b>,
+                  })}
                 </span>
               </div>
             )}
@@ -512,7 +534,7 @@ export default function CareServiceRecommender() {
             marginLeft="auto"
             onClick={handleViewDetails}
           >
-            View Details
+            {t("provider.viewDetails")}
           </Button>
         </div>
       </div>

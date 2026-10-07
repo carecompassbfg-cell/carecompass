@@ -8,13 +8,19 @@ import {
   SNAPSHOT_DAYS,
   STATUS_COLOURS,
 } from "@/util/heartbeat";
+import { t } from "@/i18n";
 
-const DAY_LABELS = ["Today", "1d ago", "2d ago", "3d ago"];
+const DAY_KEYS = [
+  "mood.days.today",
+  "mood.days.1",
+  "mood.days.2",
+  "mood.days.3",
+];
 
-const MOOD_LABELS = {
-  happy: "Good",
-  ok: "Okay",
-  sad: "Not great",
+const MOOD_KEYS = {
+  happy: "mood.happy",
+  ok: "mood.ok",
+  sad: "mood.sad",
 } as const;
 
 // Same icons and rules as the HeartBeat dashboard: a face for a check-in,
@@ -27,7 +33,7 @@ function MoodIcon({ day }: { day: MoodTimelineDay | undefined }) {
         src={`/img/heartbeat/${day.mood}.svg`}
         width={20}
         height={20}
-        alt={MOOD_LABELS[day.mood]}
+        alt={t(MOOD_KEYS[day.mood])}
       />
     );
   }
@@ -37,12 +43,12 @@ function MoodIcon({ day }: { day: MoodTimelineDay | undefined }) {
         src="/img/heartbeat/cross.svg"
         width={18}
         height={18}
-        alt="Missed check-in"
+        alt={t("mood.missed")}
       />
     );
   }
   return (
-    <span className="text-gray-500" aria-label="Not checked in yet">
+    <span className="text-gray-500" aria-label={t("mood.notYet")}>
       –
     </span>
   );
@@ -85,19 +91,19 @@ export default function MoodSnapshot({
       <div className="flex gap-2">
         <SummaryTile
           count={counts.poor}
-          label="In poor mental state"
+          label={t("mood.poor")}
           colour={STATUS_COLOURS.poor}
         />
         <SummaryTile
           count={counts.unresponsive}
-          label="Unresponsive"
+          label={t("mood.unresponsive")}
           colour={STATUS_COLOURS.unresponsive}
         />
       </div>
 
       <div
         role="table"
-        aria-label="Mood snapshot for the last 4 days"
+        aria-label={t("mood.tableLabel")}
         className="overflow-hidden rounded-xl ring-1 ring-gray-200"
       >
         <div
@@ -106,13 +112,13 @@ export default function MoodSnapshot({
           style={{ gridTemplateColumns: columns }}
         >
           <span role="columnheader" className="px-3 py-2">
-            Name
+            {t("mood.name")}
           </span>
           <span
             role="columnheader"
             className="col-span-4 border-l border-white/40 py-2 text-center"
           >
-            Mood snapshot
+            {t("mood.snapshot")}
           </span>
         </div>
         <div
@@ -121,12 +127,12 @@ export default function MoodSnapshot({
           style={{ gridTemplateColumns: columns }}
         >
           <span role="columnheader" className="sr-only">
-            Name
+            {t("mood.name")}
           </span>
           <span aria-hidden />
-          {DAY_LABELS.map((label) => (
-            <span role="columnheader" key={label} className="py-1 text-center">
-              {label}
+          {DAY_KEYS.map((key) => (
+            <span role="columnheader" key={key} className="py-1 text-center">
+              {t(key)}
             </span>
           ))}
         </div>

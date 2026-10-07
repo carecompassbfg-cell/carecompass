@@ -4,14 +4,14 @@ import { api } from "@/api";
 import { useAuthStore } from "@/stores/auth";
 import { useSchemeAnswersStore } from "@/stores/schemeAnswers";
 import { UserData } from "@/types/user";
+import { t } from "@/i18n";
 import {
   applySync,
   ProfilePatch,
   saveAnswersIfChanged,
 } from "@/util/schemeAnswersSync";
 
-export const SAVE_FAILED_MESSAGE =
-  "Couldn't save your answers. They'll stay for this visit.";
+export const getSaveFailedMessage = (): string => t("toast.saveAnswersFailed");
 
 // Signed in: loads the question-sheet answers from the profile, and returns
 // saveAnswers() to call when the sheet closes. Signed out: answers stay in
@@ -45,7 +45,7 @@ export default function useSchemeAnswersSync() {
       }
     } catch {
       // Keep the answers; the next close tries again
-      toast(SAVE_FAILED_MESSAGE);
+      toast(getSaveFailedMessage());
     }
   }, [isSignedIn, userData, setUserData]);
 

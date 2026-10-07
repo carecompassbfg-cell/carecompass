@@ -5,6 +5,7 @@ import { PCHIBase, PCHIFormData } from "@/types/pchi";
 import { QuestionIcon } from "@chakra-ui/icons";
 import CustomMarkdown from "@/ui/CustomMarkdown";
 import MobileTooltip from "./MobileTooltip";
+import { t } from "@/i18n";
 
 interface PCHIFormProps {
   data?: PCHIFormData;
@@ -60,11 +61,10 @@ export function PCHIForm({ data, callbackFn }: PCHIFormProps) {
       <section className="flex flex-col gap-2">
         <div className="flex flex-col gap-1">
           <FormLabel marginBottom={0} isRequired>
-            How many people live with your loved one?
+            {t("pchi.householdSize")}
           </FormLabel>
           <span className="text-sm leading-tight text-gray-500">
-            E.g. if your loved one lives alone, type ‘0’. If one other person
-            lives with your loved one, type ’1’
+            {t("pchi.householdSizeHint")}
           </span>
         </div>
         <NumberInput
@@ -82,11 +82,10 @@ export function PCHIForm({ data, callbackFn }: PCHIFormProps) {
       <section className="flex flex-col gap-2">
         <div className="flex flex-col gap-1">
           <FormLabel marginBottom={0} marginTop={4} isRequired>
-            What is the total monthly household income of everyone living with
-            your loved one?
+            {t("pchi.income")}
           </FormLabel>
           <span className="text-sm leading-tight text-gray-500">
-            Include your loved one’s income as well
+            {t("pchi.incomeHint")}
           </span>
         </div>
         <NumberInput
@@ -106,16 +105,16 @@ export function PCHIForm({ data, callbackFn }: PCHIFormProps) {
         <section className="flex flex-col gap-2">
           <div className="flex flex-col gap-1">
             <FormLabel marginBottom={0} marginTop={4} isRequired>
-              What is the Annual Value of your residential property?&nbsp;
+              {t("pchi.annualValue")}&nbsp;
               <MobileTooltip
-                label="Annual Value is the estimated gross annual rent of a property if it were to be rented out, excluding furnishings and maintenance fees. It is determined by IRAS, and may be checked via IRAS website. Subsidy levels in 2024 will be determined using 2023 Annual Values"
+                label={t("pchi.annualValueTooltip")}
                 placement="top"
               >
                 <QuestionIcon color="gray.500" w={4} h={4} />
               </MobileTooltip>
             </FormLabel>
             <CustomMarkdown
-              content="Check your property's Annual Value on [IRAS](https://mytax.iras.gov.sg/ESVWeb/default.aspx)"
+              content={t("pchi.annualValueCheck")}
               className="text-sm leading-tight text-gray-500"
             />
           </div>
@@ -139,7 +138,7 @@ export function PCHIForm({ data, callbackFn }: PCHIFormProps) {
         isDisabled={!canSubmit}
         isLoading={isSubmitting}
       >
-        Save
+        {t("pchi.save")}
       </Button>
     </div>
   );

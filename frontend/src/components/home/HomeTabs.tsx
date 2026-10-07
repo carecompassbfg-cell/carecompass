@@ -2,12 +2,13 @@
 
 import { KeyboardEvent, useRef } from "react";
 import { FOCUS_RING } from "@/components/schemes/SchemeIcon";
+import { t } from "@/i18n";
 
 export type HomeTab = "monitoring" | "assistance";
 
-const TABS: { id: HomeTab; label: string }[] = [
-  { id: "monitoring", label: "Care monitoring" },
-  { id: "assistance", label: "Care assistance" },
+const TABS: { id: HomeTab; labelKey: string }[] = [
+  { id: "monitoring", labelKey: "home.tabs.monitoring" },
+  { id: "assistance", labelKey: "home.tabs.assistance" },
 ];
 
 // Last tab picked, for this browser session only
@@ -53,7 +54,7 @@ export default function HomeTabs({
   return (
     <div
       role="tablist"
-      aria-label="Home sections"
+      aria-label={t("home.tabs.label")}
       className="grid w-full grid-cols-2 gap-1 rounded-xl bg-gray-200 p-1"
     >
       {TABS.map((tab, i) => {
@@ -78,7 +79,7 @@ export default function HomeTabs({
                 : "font-medium text-gray-600"
             } ${FOCUS_RING}`}
           >
-            {tab.label}
+            {t(tab.labelKey)}
           </button>
         );
       })}

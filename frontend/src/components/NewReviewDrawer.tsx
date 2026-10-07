@@ -10,6 +10,7 @@ import { useAuthStore } from "@/stores/auth";
 import { Rating } from "@smastrom/react-rating";
 import { ReviewCreate, ReviewSource, ReviewTargetType } from "@/types/review";
 import { api } from "@/api";
+import { t } from "@/i18n";
 
 interface NewReviewDrawerProps {
   serviceProviderId: number;
@@ -44,7 +45,7 @@ export function NewReviewDrawer({
   return (
     <Drawer.Root open={isOpen} onOpenChange={setIsOpen}>
       <Drawer.Trigger className="w-full">
-        <Button className="w-full">Leave a review</Button>
+        <Button className="w-full">{t("review.leaveReview")}</Button>
       </Drawer.Trigger>
       <Drawer.Portal>
         <Drawer.Overlay className="fixed inset-0 bg-black/40" />
@@ -52,29 +53,27 @@ export function NewReviewDrawer({
           <Drawer.Handle className="my-2" />
           <div className="flex flex-col gap-4 bg-white px-8 py-8 pt-6">
             <Drawer.Title className="text-xl font-semibold">
-              Leave a review
+              {t("review.leaveReview")}
             </Drawer.Title>
             <div className="flex flex-col gap-2 rounded-md border border-brand-primary-200 bg-brand-primary-50 p-4 leading-tight">
               <span>
-                Thank you for helping other caregivers by sharing your
-                experiences. We ask that you declare below that you have indeed
-                used the{" "}
-                {targetType === ReviewTargetType.DEMENTIA_DAY_CARE
-                  ? "daycare"
-                  : "homecare"}
-                service, as we value genuine reviews only.
+                {t("review.declarationIntro", {
+                  type:
+                    targetType === ReviewTargetType.DEMENTIA_DAY_CARE
+                      ? "daycare"
+                      : "homecare",
+                })}
               </span>
               <Checkbox
                 isChecked={isDeclarationChecked}
                 onChange={(e) => setIsDeclarationChecked(e.target.checked)}
               >
-                I declare that I have used this service and my review is based
-                on my actual experiences.
+                {t("review.declaration")}
               </Checkbox>
             </div>
             <div>
               <FormLabel className="mt-2" isRequired>
-                Rating
+                {t("review.rating")}
               </FormLabel>
               <Rating
                 value={review.overall_rating}
@@ -88,15 +87,13 @@ export function NewReviewDrawer({
               />
             </div>
             <div>
-              <FormLabel className="mt-2">
-                Please share more about why you chose this rating
-              </FormLabel>
+              <FormLabel className="mt-2">{t("review.whyRating")}</FormLabel>
               <Textarea
                 value={review.content}
                 onChange={(e) =>
                   setReview({ ...review, content: e.target.value })
                 }
-                placeholder="Share your experience with us"
+                placeholder={t("review.placeholder")}
               />
             </div>
             <Button
@@ -104,7 +101,7 @@ export function NewReviewDrawer({
               onClick={submitReview}
               isDisabled={canSubmit}
             >
-              Share
+              {t("review.submit")}
             </Button>
           </div>
         </Drawer.Content>

@@ -11,10 +11,9 @@ import { useParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { ArrowLeft } from "lucide-react";
 import { Review, ReviewSource, ReviewTargetType } from "@/types/review";
-import moment from "moment";
 import { Drawer } from "vaul";
 import { Rating } from "@smastrom/react-rating";
-import { mapReviewSource } from "@/util/review";
+import { formatReviewTime, mapReviewSource } from "@/util/review";
 import { getRatingColor } from "@/util/helper";
 import { BackButton, BookmarkButton, ShareButton } from "@/ui/button";
 import { BxRightArrowAlt } from "@opengovsg/design-system-react";
@@ -25,6 +24,7 @@ import Hidden from "@/ui/Hidden";
 import { GetReviewsParams } from "@/types/api";
 import { getReviews } from "@/api";
 import PhotoCarousel from "@/ui/carousel/PhotoCarousel";
+import { t } from "@/i18n";
 
 export default function HomeCareDetailPage() {
   const { homecareId } = useParams();
@@ -108,7 +108,10 @@ export default function HomeCareDetailPage() {
                     backgroundColor: getRatingColor(provider.rating),
                   }}
                 >
-                  <span>{provider.rating?.toFixed(1) || "N/A"}</span>
+                  <span>
+                    {provider.rating?.toFixed(1) ||
+                      t("homecare.detail.notAvailable")}
+                  </span>
                 </div>
               </div>
               {provider.reviewCount > 0 && (
@@ -119,7 +122,9 @@ export default function HomeCareDetailPage() {
                     className="max-w-24"
                   />
                   <span className="text-sm">
-                    (from {provider.reviewCount} reviews)
+                    {t("homecare.detail.fromReviews", {
+                      count: provider.reviewCount,
+                    })}
                   </span>
                 </div>
               )}
@@ -141,13 +146,15 @@ export default function HomeCareDetailPage() {
 
       {/* Address Section */}
       <div className="-mt-4">
-        <h2 className="text-md font-bold">Address</h2>
+        <h2 className="text-md font-bold">{t("homecare.detail.address")}</h2>
         <p className="text-gray-700">{formatAddress(provider)}</p>
       </div>
 
       {/* Contact Details Section */}
       <div className="-mt-2">
-        <h2 className="text-md font-bold">Contact Details</h2>
+        <h2 className="text-md font-bold">
+          {t("homecare.detail.contactDetails")}
+        </h2>
         <div className="flex flex-col gap-2">
           {provider.phone && (
             <div className="flex items-center gap-2">
@@ -238,7 +245,9 @@ export default function HomeCareDetailPage() {
       {/* Operating Hours Section */}
       {provider.operatingHours && (
         <div>
-          <h2 className="text-md mb-1 font-bold">Operating Hours</h2>
+          <h2 className="text-md mb-1 font-bold">
+            {t("homecare.detail.operatingHours")}
+          </h2>
           <VStack alignItems="flex-start" gap={0}>
             {provider.operatingHours.map((hour, index) => (
               <Text key={index} className="text-gray-700">
@@ -283,21 +292,21 @@ function ReviewDetailDrawer({ review }: { review: Review }) {
             <Button
               colorScheme="white"
               variant="link"
-              aria-label="Close drawer"
+              aria-label={t("review.closeDrawer")}
               leftIcon={<ArrowLeft size={16} />}
               size="sm"
               onClick={() => setIsOpen(false)}
             >
-              Back
+              {t("review.back")}
             </Button>
             <VisuallyHidden>
               <Drawer.Title className="text-xl font-semibold">
-                Review by {review.authorName}
+                {t("review.reviewBy", { name: review.authorName })}
               </Drawer.Title>
             </VisuallyHidden>
             <div className="flex flex-col gap-2">
               <span className="text-lg font-semibold">
-                Review from {review.authorName}
+                {t("review.reviewFrom", { name: review.authorName })}
               </span>
               <div className="flex gap-2">
                 <Rating
@@ -318,9 +327,7 @@ function ReviewDetailDrawer({ review }: { review: Review }) {
   );
 }
 
-const getRelativeTime = (date: string) => {
-  return moment.utc(date).local().fromNow();
-};
+const getRelativeTime = (date: string) => formatReviewTime(date);
 
 function ReviewSection({
   reviews,
@@ -345,7 +352,7 @@ function ReviewSection({
   return (
     <section className="-mx-6 flex flex-col gap-1 bg-white">
       <div className="px-6">
-        <h1 className="text-xl font-semibold">Reviews</h1>
+        <h1 className="text-xl font-semibold">{t("review.title")}</h1>
         {reviewCount > 0 && (
           <div className="mt-3 flex place-items-center gap-4">
             <h3 className="text-5xl font-bold">{googleRating.toFixed(1)}</h3>
@@ -362,7 +369,7 @@ function ReviewSection({
         ) : (
           <SignInButton>
             <Button variant="solid" colorScheme="blue">
-              Sign in to leave a review
+              {t("review.signInToReview")}
             </Button>
           </SignInButton>
         )}
@@ -371,7 +378,7 @@ function ReviewSection({
         <div className="flex flex-col divide-y divide-solid">
           {reviewCount && numOfGoogleRatings > reviewCount && (
             <span className="mt-2 text-sm italic text-gray-500">
-              Showing 5 most recent Google reviews
+              {t("review.showingRecentGoogle")}
             </span>
           )}
           {sortedReviews.map((review, index) => (
@@ -390,7 +397,9 @@ function ReviewSection({
               <ReviewDetailDrawer review={review} />
               {review.reviewSource !== ReviewSource.IN_APP && (
                 <span className="text-sm text-gray-500">
-                  This review is from {mapReviewSource(review.reviewSource)}
+                  {t("review.fromSource", {
+                    source: mapReviewSource(review.reviewSource),
+                  })}
                 </span>
               )}
             </div>
@@ -412,26 +421,22 @@ function FinancialSupportSection() {
   const SCHEMES = [
     {
       id: "MOH-NR-LTC-SUBSIDY",
-      name: "Non-Residential Long-Term Care (LTC) Services Subsidy",
-      description:
-        "Singapore Citizens and Permanent Residents can receive up to 80% and 55% subsidies for Non-Residential LTC services respectively.",
+      name: t("homecare.support.ltc.name"),
+      description: t("homecare.support.ltc.description"),
     },
     {
       id: "HOME-CAREGIVING-GRANT",
-      name: "Home Caregiving Grant",
-      description:
-        "Defrays caregiving costs for eligible individuals with permanent moderate disability living in the community.",
+      name: t("homecare.support.hcg.name"),
+      description: t("homecare.support.hcg.description"),
     },
   ];
 
   return (
     <section className="flex flex-col gap-4">
       <div className="flex flex-col">
-        <h1 className="text-xl font-semibold">
-          Recommended Support & Subsidies
-        </h1>
+        <h1 className="text-xl font-semibold">{t("homecare.support.title")}</h1>
         <span className="text-sm text-gray-500">
-          Find out what assistance you may be eligible for.
+          {t("homecare.support.subtitle")}
         </span>
       </div>
       <section className="flex flex-col gap-4">
@@ -445,7 +450,7 @@ function FinancialSupportSection() {
             <span className="leading-tight">{scheme.description}</span>
             <div className="flex w-full place-content-end place-items-center gap-1">
               <span className="text-sm text-brand-primary-500">
-                View details
+                {t("homecare.support.viewDetails")}
               </span>
               <BxRightArrowAlt className="text-brand-primary-500" />
             </div>

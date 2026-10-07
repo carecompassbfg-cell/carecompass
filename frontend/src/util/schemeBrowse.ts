@@ -11,6 +11,7 @@ import {
   PAY_FOR_ORDER,
   SchemeWithStatus,
 } from "@/util/schemeCatalog";
+import { t } from "@/i18n";
 
 export const STATUS_ORDER: SchemeStatusKind[] = [
   "likely",
@@ -20,10 +21,18 @@ export const STATUS_ORDER: SchemeStatusKind[] = [
 ];
 
 export const STATUS_FILTER_LABELS: Record<SchemeStatusKind, string> = {
-  likely: "Likely eligible",
-  needs_answers: "Need answers",
-  provider_decides: "Check with agency",
-  not_a_match: "Not a fit",
+  get likely() {
+    return t("schemes.status.likely");
+  },
+  get needs_answers() {
+    return t("schemes.status.needs_answers");
+  },
+  get provider_decides() {
+    return t("schemes.status.provider_decides");
+  },
+  get not_a_match() {
+    return t("schemes.status.not_a_match");
+  },
 };
 
 export const ISLANDWIDE = "islandwide";
@@ -72,7 +81,7 @@ export const getAreaOptions = (items: SchemeWithStatus[]): AreaOption[] => {
     }
   }
   return [
-    { value: ISLANDWIDE, label: "Islandwide" },
+    { value: ISLANDWIDE, label: t("filters.islandwide") },
     ...Array.from(districts, ([value, label]) => ({ value, label })).sort(
       (a, b) => a.label.localeCompare(b.label),
     ),
@@ -250,7 +259,7 @@ export const chipLabel = (
   };
   const selected = filters[key];
   if (!selected.length) {
-    return { status: "Status", payFor: "Helps pay for", area: "Area" }[key];
+    return t(`schemes.filters.${key}`);
   }
   const first = labelFor(selected[0]);
   return selected.length === 1 ? first : `${first} +${selected.length - 1}`;

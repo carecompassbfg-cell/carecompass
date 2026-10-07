@@ -8,6 +8,7 @@ import { FOCUS_RING } from "@/components/schemes/SchemeIcon";
 import useHeartbeatDashboard from "@/util/hooks/useHeartbeatDashboard";
 import HowItWorksSheet from "./HowItWorksSheet";
 import MoodSnapshot from "./MoodSnapshot";
+import { t } from "@/i18n";
 
 // Every button here goes through the existing /heartbeat route, which checks
 // the caregiver has a phone number and then opens HeartBeat. No new flows.
@@ -47,21 +48,21 @@ export default function CareMonitoringTab({
     isSignedIn && dashboard.status === "ready" && dashboard.people.length > 0;
 
   const subtitle = isSetUp
-    ? "How the people you care for are doing this week"
-    : "A daily one-tap check-in, so you know your loved one is okay";
+    ? t("monitoring.subtitleSetUp")
+    : t("monitoring.subtitle");
 
   return (
     <div className="flex flex-col gap-4">
       <div className="flex flex-col gap-1">
         <div className="flex items-center justify-between gap-3">
           <h2 className="text-3xl font-bold text-brand-primary-500">
-            Care monitoring
+            {t("monitoring.title")}
           </h2>
           <button
             ref={helpButtonRef}
             type="button"
             onClick={() => openHelp(helpButtonRef)}
-            aria-label="How care monitoring works"
+            aria-label={t("monitoring.help")}
             className={`flex size-11 shrink-0 items-center justify-center rounded-full text-brand-primary-500 hover:bg-brand-primary-50 ${FOCUS_RING}`}
           >
             <HelpCircle aria-hidden size={28} strokeWidth={1.75} />
@@ -82,7 +83,7 @@ export default function CareMonitoringTab({
       ) : dashboard.status === "loading" ? (
         <Card>
           <div className="flex animate-pulse flex-col gap-3" aria-busy>
-            <span className="sr-only">Loading care monitoring</span>
+            <span className="sr-only">{t("monitoring.loading")}</span>
             <div className="h-6 w-40 rounded bg-gray-200" />
             <div className="flex gap-2">
               <div className="h-16 flex-1 rounded-xl bg-gray-200" />
@@ -93,29 +94,26 @@ export default function CareMonitoringTab({
         </Card>
       ) : dashboard.status === "error" ? (
         <Card>
-          <p className="text-base text-gray-700">
-            We couldn&apos;t load your care monitoring summary right now. You
-            can still open HeartBeat to see everything.
-          </p>
+          <p className="text-base text-gray-700">{t("monitoring.error")}</p>
           <button
             type="button"
             onClick={goToHeartbeat}
             className={PRIMARY_BUTTON}
           >
-            View Full Dashboard
+            {t("monitoring.viewDashboard")}
           </button>
           <button
             type="button"
             onClick={dashboard.retry}
             className={SECONDARY_BUTTON}
           >
-            Try again
+            {t("monitoring.tryAgain")}
           </button>
         </Card>
       ) : isSetUp ? (
         <Card>
           <h3 className="text-xl font-bold text-gray-900">
-            Persons I care for
+            {t("monitoring.personsICareFor")}
           </h3>
           <MoodSnapshot people={dashboard.people} />
           <button
@@ -123,14 +121,14 @@ export default function CareMonitoringTab({
             onClick={goToHeartbeat}
             className={PRIMARY_BUTTON}
           >
-            View Full Dashboard
+            {t("monitoring.viewDashboard")}
           </button>
           <button
             type="button"
             onClick={goToHeartbeat}
             className={SECONDARY_BUTTON}
           >
-            Add another person
+            {t("monitoring.addPerson")}
           </button>
         </Card>
       ) : (
@@ -147,7 +145,7 @@ export default function CareMonitoringTab({
         returnFocusRef={returnFocus}
         finalAction={
           isSignedIn && !isSetUp
-            ? { label: "Set up care monitoring", onClick: goToHeartbeat }
+            ? { label: t("monitoring.setUp"), onClick: goToHeartbeat }
             : undefined
         }
       />
@@ -178,20 +176,18 @@ function SetUpCard({
         />
       </div>
       <h3 className="text-xl font-bold text-gray-900">
-        Set up care monitoring for your loved one
+        {t("monitoring.setUpTitle")}
       </h3>
       <p className="text-base leading-6 text-gray-600">
-        Your loved one taps once a day to share how they&apos;re feeling. If
-        they miss a day, we&apos;ll message you on WhatsApp so you can step in
-        early.
+        {t("monitoring.setUpBody")}
       </p>
       {isDisabled ? (
         <p className="text-sm italic text-gray-500">
-          Sign in to set up care monitoring.
+          {t("monitoring.signInToSetUp")}
         </p>
       ) : (
         <button type="button" onClick={onSetUp} className={PRIMARY_BUTTON}>
-          Set up care monitoring
+          {t("monitoring.setUp")}
         </button>
       )}
       <button
@@ -200,7 +196,7 @@ function SetUpCard({
         onClick={onHowItWorks}
         className={`self-center text-base font-medium text-brand-primary-500 underline ${FOCUS_RING}`}
       >
-        How does it work?
+        {t("monitoring.howDoesItWork")}
       </button>
     </Card>
   );

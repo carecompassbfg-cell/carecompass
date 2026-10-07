@@ -16,6 +16,7 @@ import { MenuIcon, SquarePenIcon } from "lucide-react";
 import { useAuthStore } from "@/stores/auth";
 import LoadingSpinner from "@/ui/loading";
 import BottomNav from "@/ui/layouts/BottomNav";
+import { t } from "@/i18n";
 
 export default function ChatLayout({
   children,
@@ -52,12 +53,12 @@ export default function ChatLayout({
         <Button
           colorScheme="white"
           variant="clear"
-          aria-label="Support Dashboard"
+          aria-label={t("chat.newChatAria")}
           rightIcon={<SquarePenIcon />}
           size="sm"
           onClick={handleNewThread}
         >
-          New Chat
+          {t("chat.newChat")}
         </Button>
       </header>
       <main className="flex h-full w-full flex-col place-content-between overflow-hidden bg-gray-100 px-6 pt-6">
@@ -85,10 +86,10 @@ function LeftDrawer() {
         colorScheme="white"
         variant="clear"
         onClick={onOpen}
-        aria-label="Menu button"
+        aria-label={t("chat.menu")}
         icon={<MenuIcon />}
       >
-        Open
+        {t("chat.open")}
       </IconButton>
       <Drawer
         isOpen={isOpen}

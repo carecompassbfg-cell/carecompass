@@ -2,27 +2,26 @@
 
 import { useRef, useState } from "react";
 import { Check, ChevronDown, Globe } from "lucide-react";
-import { toast } from "sonner";
 import useClickOutside from "@/util/hooks/useClickOutside";
 import { FOCUS_RING } from "@/components/schemes/SchemeIcon";
+import { useT } from "@/i18n";
+import { Locale, useLocaleStore } from "@/stores/locale";
 
 // Languages offered for now: English and Chinese (Malay and Tamil later,
-// once someone can review them). Each is shown in its own script so people
-// who don't read English can still find theirs.
+// once someone can review them). Each is shown in its own script, never
+// translated, so people who don't read English can still find theirs.
 const LANGUAGES = [
   { code: "en", short: "EN", label: "English", english: null },
   { code: "zh", short: "中文", label: "中文", english: "Chinese" },
 ] as const;
 
-type LanguageCode = (typeof LANGUAGES)[number]["code"];
-
-// Translations aren't built yet, so only English is selectable today.
-// Picking another language explains that instead of switching.
-const AVAILABLE: LanguageCode[] = ["en"];
+type LanguageCode = Locale;
 
 export default function LanguagePill() {
+  const t = useT();
   const [isOpen, setIsOpen] = useState(false);
-  const [current] = useState<LanguageCode>("en");
+  const current = useLocaleStore((state) => state.locale);
+  const setLocale = useLocaleStore((state) => state.setLocale);
   const ref = useRef<HTMLDivElement>(null);
   useClickOutside(ref, () => setIsOpen(false));
 
@@ -30,10 +29,7 @@ export default function LanguagePill() {
 
   const choose = (code: LanguageCode) => {
     setIsOpen(false);
-    if (code === current) return;
-    if (!AVAILABLE.includes(code)) {
-      toast("中文版即将推出 · Chinese is coming soon");
-    }
+    if (code !== current) setLocale(code);
   };
 
   return (
@@ -42,7 +38,7 @@ export default function LanguagePill() {
         type="button"
         aria-haspopup="listbox"
         aria-expanded={isOpen}
-        aria-label={`Language: ${selected.label}. Change language`}
+        aria-label={t("language.changeLabel", { language: selected.label })}
         onClick={() => setIsOpen((open) => !open)}
         className={`flex h-8 items-center gap-1.5 rounded-full border px-2.5 text-[13px] font-semibold ${
           isOpen
@@ -61,7 +57,7 @@ export default function LanguagePill() {
       {isOpen && (
         <ul
           role="listbox"
-          aria-label="Language"
+          aria-label={t("language.menuLabel")}
           className="absolute right-0 top-10 z-30 w-56 rounded-2xl bg-white p-1.5 shadow-lg ring-1 ring-black/5"
         >
           {LANGUAGES.map((lang) => {

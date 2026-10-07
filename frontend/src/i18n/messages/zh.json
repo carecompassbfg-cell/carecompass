@@ -1,0 +1,1012 @@
+{
+  "language": {
+    "changeLabel": "语言：{language}。更改语言",
+    "menuLabel": "语言"
+  },
+  "home": {
+    "welcome": "欢迎使用 CareCompass",
+    "tabs": {
+      "label": "首页分区",
+      "monitoring": "关怀监测",
+      "assistance": "护理协助"
+    },
+    "assistance": {
+      "title": "今天您需要什么帮助？",
+      "subtitle": "看看其他看护者在问什么"
+    },
+    "signInRequired": "需要登录",
+    "cards": {
+      "services": "有哪些<hl>护理服务</hl>可以选择？",
+      "servicesPlain": "有哪些护理服务可以选择？",
+      "servicesSub": "日间护理、居家护理、疗养院、暂托服务",
+      "financial": "<name>{recipient}</name>和我可能符合哪些<hl>经济援助</hl>？",
+      "financialPlain": "{recipient}和我可能符合哪些经济援助？",
+      "myLovedOne": "我的亲人",
+      "help": "我可以去哪里寻求<hl>帮助和支持</hl>？",
+      "helpPlain": "我可以去哪里寻求帮助和支持？",
+      "helpSub": "课程、互助小组、热线",
+      "monitor": "我该如何<hl>关注</hl><hl>亲人的心理状态</hl>？",
+      "monitorPlain": "我该如何关注亲人的心理状态？",
+      "monitorSub": "每天了解亲人的心情",
+      "plan": "我该如何与亲人<hl>提前规划</hl><hl>临终事宜</hl>？",
+      "planPlain": "我该如何与亲人提前规划临终事宜？",
+      "planSub": "持久授权书与预先护理计划"
+    },
+    "resume": {
+      "title": "继续上次的进度",
+      "subtitle": "再回答 {questions} 个简单问题，就能为{name}查看另外 {schemes} 项计划",
+      "hide": "暂时隐藏"
+    },
+    "statusLine": {
+      "label": "援助计划：",
+      "likely": "{count} 项可能符合",
+      "toCheck": "{count} 项待确认"
+    }
+  },
+  "monitoring": {
+    "title": "关怀监测",
+    "help": "关怀监测如何运作",
+    "subtitleSetUp": "您照顾的人这周过得怎么样",
+    "subtitle": "每天一键报平安，让您知道亲人一切安好",
+    "loading": "正在加载关怀监测",
+    "error": "暂时无法加载您的关怀监测摘要。您仍可打开 HeartBeat 查看全部内容。",
+    "viewDashboard": "查看完整仪表板",
+    "tryAgain": "重试",
+    "personsICareFor": "我照顾的人",
+    "addPerson": "添加其他人",
+    "setUp": "设置关怀监测",
+    "setUpTitle": "为您的亲人设置关怀监测",
+    "setUpBody": "您的亲人每天只需点一下，分享当天的心情。如果哪天没有报平安，我们会通过 WhatsApp 通知您，让您及早关心。",
+    "signInToSetUp": "请登录以设置关怀监测。",
+    "howDoesItWork": "如何运作？"
+  },
+  "mood": {
+    "days": {
+      "today": "今天",
+      "1": "1天前",
+      "2": "2天前",
+      "3": "3天前"
+    },
+    "happy": "好",
+    "ok": "还好",
+    "sad": "不太好",
+    "missed": "未报平安",
+    "notYet": "尚未报平安",
+    "poor": "心理状态欠佳",
+    "unresponsive": "无回应",
+    "tableLabel": "过去 4 天的心情概况",
+    "name": "姓名",
+    "snapshot": "心情概况"
+  },
+  "howItWorks": {
+    "title": "关怀监测如何运作",
+    "description": "{count} 个步骤，介绍 HeartBeat 关怀监测",
+    "close": "关闭",
+    "step": "第 {n} 步，共 {total} 步",
+    "back": "上一步",
+    "next": "下一步",
+    "gotIt": "知道了",
+    "tap": "点按",
+    "exampleName": "美玲",
+    "fieldName": "姓名",
+    "fieldMobile": "手机号码",
+    "loginLink": "{name}的登录链接",
+    "copyLink": "复制链接",
+    "affirmation": "Your resilience is your power.",
+    "missedTile": "未报平安",
+    "poorTile": "心理状态欠佳",
+    "missedAlert": "{name}昨天没有报平安",
+    "waAlert": "Alert",
+    "waBody": "{name} has missed their check-in. Please verify their well-being as soon as possible.",
+    "waButton": "View Mood Dashboard",
+    "steps": {
+      "1": {
+        "title": "添加您的亲人",
+        "body": "输入亲人的姓名、手机号码和地址，让我们知道要关心谁。"
+      },
+      "2": {
+        "title": "把专属链接发给他们",
+        "body": "我们会为亲人生成专属登录链接，无需密码。复制链接，通过 WhatsApp 或短信发给他们。"
+      },
+      "3": {
+        "title": "他们一键报平安",
+        "body": "您的亲人每天打开链接，点选当天的心情，之后会看到一句鼓励的话。"
+      },
+      "4": {
+        "title": "一眼看出他们的近况",
+        "body": "仪表板会显示每个人最近的报平安记录和心情，有异样时您能及早发现。"
+      },
+      "5": {
+        "title": "漏报一天，WhatsApp 提醒您",
+        "body": "如果亲人哪天没有报平安，HeartBeat 会立即通过 WhatsApp 通知您，发送到您 CareCompass 账户登记的号码。"
+      }
+    }
+  },
+  "desktop": {
+    "title": "CareCompass 在手机上使用效果最佳",
+    "body": "您可以继续在电脑上使用。若要获得完整体验，请在手机上打开 <b>my.carecompass.sg</b>，并添加到主屏幕。",
+    "continue": "继续在电脑上使用"
+  },
+  "common": {
+    "close": "关闭",
+    "dateLocale": "zh-SG",
+    "signIn": "登录",
+    "opensInNewTab": "（在新标签页中打开）",
+    "cancel": "取消"
+  },
+  "recipient": {
+    "fallback": "您的亲人",
+    "titleFallback": "您和您的亲人",
+    "possessive": "{name}的",
+    "citizenship": {
+      "CITIZEN": "新加坡公民",
+      "PR": "永久居民",
+      "OTHER": "非新加坡公民或永久居民"
+    },
+    "residence": {
+      "HOME": "住在家中",
+      "NURSING_HOME_LTCF": "住在疗养院",
+      "OTHER": "住在其他地方"
+    },
+    "aged": "{age} 岁"
+  },
+  "elig": {
+    "s01": "您的父母",
+    "s02": "家人",
+    "s03": "必须是您的父母、祖父母或岳父母/公婆",
+    "s04": "适用于父母、祖父母及岳父母/公婆",
+    "s05": "55岁或以上",
+    "s06": "至少一项日常生活活动需要协助，因此可能适用父母（残障）估税扣税",
+    "s07": "55岁或以上，或至少一项日常生活活动需要协助",
+    "s08": "$9,000（与您同住）",
+    "s09": "$5,500（如果您在赡养方面花费$2,000或以上）",
+    "s10": "可能符合父母（残障）估税扣税：$14,000 / $10,000",
+    "s11": "没有其他人已就同一人申请配偶估税扣税或其他扣税",
+    "s12": "申请残障版本时，如国内税务局要求，需提供医生或残障协会的证明文件",
+    "s13": "新加坡公民或永久居民",
+    "s14": "适用于新加坡公民及永久居民",
+    "s15": "65岁或以上",
+    "s16": "至少一项日常生活活动需要协助",
+    "s17": "需要是长期的：须有功能评估报告，除非已在终身护保或乐龄关护基金等计划下",
+    "s18": "适用于65岁或以上，或至少一项日常生活活动需要协助的人士",
+    "s19": "您是主要看护者",
+    "s20": "课程在获批准的名单上",
+    "s21": "津贴尚未被其他看护者用完",
+    "s22": "新加坡公民",
+    "s23": "永久居民",
+    "s24": "永久居民须有父母、子女或配偶为新加坡公民才符合资格",
+    "s25": "不适用于住在疗养院的人士",
+    "s26": "住在家中",
+    "s27": "每月$600（无收入，且住所年值$21,000或以下）",
+    "s28": "家庭无收入，且住所年值超过$21,000",
+    "s29": "每月$600（家庭人均月入$1,500或以下）",
+    "s30": "每月$400（家庭人均月入$1,501至$3,600）",
+    "s31": "每月$200（家庭人均月入$3,601至$4,800）",
+    "s32": "家庭人均月入超过$4,800",
+    "s33": "至少三项日常生活活动需要协助",
+    "s34": "功能评估报告确认日常生活活动方面的需要是长期的",
+    "s35": "房产拥有情况：拥有超过一处房产的家庭可获$200",
+    "s36": "适用于67岁或以上，或至少一项日常生活活动需要协助的人士",
+    "s37": "与您同住",
+    "s38": "必须与您住在同一地址",
+    "s39": "67岁或以上的新加坡公民",
+    "s40": "67岁或以上的永久居民",
+    "s41": "您或您的配偶必须是新加坡公民",
+    "s42": "护联局的推荐信",
+    "s43": "女佣登记在您的住户名下",
+    "s44": "您的亲人在外籍女佣电子服务（FDW eService）中列为住户成员",
+    "s45": "适用于居家或中心护理",
+    "s46": "如果在1969年出生，津贴可能更高",
+    "s47": "服务提供者获政府资助",
+    "s48": "医生或护联局的转介",
+    "s49": "60岁或以上",
+    "s50": "适用于60岁或以上的年长者",
+    "s51": "家庭无收入，且住所年值$21,000或以下",
+    "s52": "家庭人均月入$4,800或以下",
+    "s53": "经认可的医疗专业人员评估，确认需要该辅助用品",
+    "s54": "电动辅助器材另有条件",
+    "s55": "至少三项日常生活活动需要完全协助",
+    "s56": "适用于重度残障：至少三项日常生活活动需要完全协助",
+    "s57": "以重度残障评估结果为准",
+    "s58": "适用于30岁或以上的人士",
+    "s59": "由卫生部认可的评估员进行重度残障评估",
+    "s60": "保健储蓄余额至少$5,000",
+    "s61": "终身护保：重度残障期间终身每月获得赔付。2026年起始赔付额为每月$689，并逐年增加，直到67岁或提出索赔为止。1954年或之前出生、67岁或以上才加入的人士，每月固定获得$612",
+    "s62": "乐龄健保400（2007年9月至2019年12月加入）：每月$400，最长72个月",
+    "s63": "乐龄健保300（2002年9月至2007年9月加入）：每月$300，最长60个月",
+    "s64": "适用于重度残障：无法自行完成至少三项日常生活活动",
+    "s65": "受终身护保保障（1980年或之后出生的所有人）",
+    "s66": "受终身护保保障",
+    "s67": "受乐龄健保保障",
+    "s68": "仅限受终身护保或乐龄健保保障者。否则请参考[乐龄关护基金](/dashboard/schemes?id=ssg-aic-elderfund)",
+    "s69": "由卫生部认可的评估员进行重度残障评估",
+    "s70": "保单仍然有效",
+    "ltc": {
+      "column": {
+        "sc1969": "1969年或之前出生的新加坡公民",
+        "scAfter1969": "1969年之后出生的新加坡公民",
+        "pr": "永久居民"
+      },
+      "band": {
+        "b1": "$1,500或以下",
+        "b2": "$1,501至$2,300",
+        "b3": "$2,301至$2,600",
+        "b4": "$2,601至$3,600",
+        "b5": "$3,601至$4,800"
+      },
+      "bandIncome": "家庭人均月入{band}",
+      "bandNoIncome": "无收入，住所年值$21,000或以下",
+      "rate": "费用减免{rate}%（{column}，{band}）"
+    },
+    "parentRelief": {
+      "dependantIncome": "受扶养者在{year}年的收入为$8,000或以下"
+    }
+  },
+  "schemes": {
+    "payFor": {
+      "CARE_SERVICES": {
+        "label": "护理服务",
+        "description": "日间护理、居家护理、疗养院费用",
+        "title": "支付护理服务费用",
+        "pageDescription": "日间护理、居家护理和疗养院的津贴"
+      },
+      "MONTHLY_PAYOUTS": {
+        "label": "现金援助",
+        "description": "支付看护开销的每月或一次性现金",
+        "title": "现金援助",
+        "pageDescription": "支付看护开销的每月或一次性现金"
+      },
+      "HELPER_COSTS": {
+        "label": "女佣开销",
+        "description": "女佣税及聘请援助",
+        "title": "聘请女佣的开销",
+        "pageDescription": "优惠女佣税及聘请女佣的援助"
+      },
+      "CAREGIVER_COURSES": {
+        "label": "看护者课程",
+        "description": "培训费用",
+        "title": "看护者课程",
+        "pageDescription": "看护培训费用援助"
+      },
+      "EQUIPMENT_HOME": {
+        "label": "辅助用品与居家",
+        "description": "助行用品、居家改装",
+        "title": "辅助用品与居家改装",
+        "pageDescription": "助行用品、辅助器材及居家改装"
+      },
+      "TRANSPORT": {
+        "label": "交通",
+        "description": "德士及交通援助",
+        "title": "交通",
+        "pageDescription": "前往复诊及护理服务的交通援助"
+      },
+      "MEDICAL_BILLS": {
+        "label": "医药费",
+        "description": "医院、诊所、保健储蓄",
+        "title": "支付医药费",
+        "pageDescription": "医院及诊所账单援助"
+      },
+      "TAX_CPF": {
+        "label": "税务与公积金",
+        "description": "估税扣税与填补",
+        "title": "税务与公积金",
+        "pageDescription": "看护者的估税扣税及公积金填补"
+      }
+    },
+    "question": {
+      "HOUSEHOLD_INCOME": {
+        "pillLabel": "提供收入以查看津贴",
+        "rowTitle": "家庭收入",
+        "rowHint": "津贴额取决于家庭人均月入。",
+        "summary": "您的家庭收入是多少？"
+      },
+      "ADL_NEEDS": {
+        "pillLabel": "确认日常生活活动需要",
+        "rowTitle": "需要协助的日常生活活动",
+        "rowHint": "例如洗澡、穿衣或走动。",
+        "summary": "哪些日常生活活动需要协助？"
+      },
+      "ADL_FULL_HELP": {
+        "pillLabel": "确认需要多少协助",
+        "rowTitle": "日常生活活动需要完全协助",
+        "rowHint": "是否至少有三项需要别人完全代劳。",
+        "summary": "是否需要完全协助？"
+      },
+      "HAS_FAR": {
+        "pillLabel": "确认评估报告",
+        "rowTitle": "功能评估报告",
+        "rowHint": "由医生或治疗师就日常生活活动需要出具的报告。",
+        "summary": "是否有功能评估报告？"
+      },
+      "HOUSING_TYPE": {
+        "pillLabel": "提供住房类型",
+        "rowTitle": "住房类型",
+        "rowHint": "部分计划取决于住房类型。",
+        "summary": "住房属于哪种类型？"
+      },
+      "LTC_INSURANCE": {
+        "pillLabel": "提供保险保障",
+        "rowTitle": "长期护理保险",
+        "rowHint": "终身护保或乐龄健保。",
+        "summary": "是否受终身护保或乐龄健保保障？"
+      },
+      "CARE_RECIPIENT_AGE": {
+        "pillLabel": "提供年龄以确认",
+        "rowTitle": "年龄",
+        "rowHint": "部分计划取决于年龄。",
+        "summary": "他们几岁？"
+      },
+      "CARE_RECIPIENT_CITIZENSHIP": {
+        "pillLabel": "登录以确认",
+        "rowTitle": "公民身份",
+        "rowHint": "请登录并完成个人资料以确认此项。",
+        "summary": "他们的公民身份是什么？"
+      },
+      "CARE_RECIPIENT_RESIDENCE": {
+        "pillLabel": "确认居住地点",
+        "rowTitle": "居住地点",
+        "rowHint": "请更新亲人的资料以确认此项。",
+        "summary": "他们住在哪里？"
+      },
+      "CAREGIVER_CITIZENSHIP": {
+        "pillLabel": "登录以确认",
+        "rowTitle": "您的公民身份",
+        "rowHint": "请登录并完成个人资料以确认此项。",
+        "summary": "您的公民身份是什么？"
+      }
+    },
+    "sourceLine": {
+      "reviewed": "{agency} · 经 CareCompass 审核",
+      "from": "{agency} · 资料来自 {source}"
+    },
+    "lastChecked": "最后核实于 {date}",
+    "status": {
+      "likely": "可能符合资格",
+      "needs_answers": "需要回答问题",
+      "provider_decides": "向机构确认",
+      "not_a_match": "不符合",
+      "notAMatch": "不符合",
+      "signInToCheck": "登录以确认"
+    },
+    "filters": {
+      "status": "状态",
+      "payFor": "用于支付",
+      "area": "地区"
+    },
+    "about": {
+      "title": "关于这些结果",
+      "intro": "这些计划是根据您资料中的信息推荐的，由政府机构、慈善团体和社区组织提供。请把这份列表当作参考，最终资格由提供计划的机构决定。",
+      "sourcesHeading": "资料来源",
+      "sources": {
+        "carecompass": {
+          "title": "经 CareCompass 审核",
+          "body": "主要计划由我们自行撰写，并根据护联局、卫生部和人力部等官方来源核实。"
+        },
+        "schemessg": {
+          "title": "Schemes.sg",
+          "body": "由社区管理的政府及慈善援助计划目录。"
+        }
+      },
+      "labelsHeading": "标签的意思",
+      "labels": {
+        "likely": "符合我们能根据资料核对的所有条件。",
+        "needs_answers": "只需您回答一两个问题，我们就能核对。",
+        "provider_decides": "请到相关机构的官方网站查看资格。"
+      },
+      "button": "查看所有看护援助计划"
+    }
+  },
+  "profile": {
+    "errors": {
+      "age": "请输入 {min} 至 {max} 之间的年龄",
+      "nameLength": "请使用 {max} 个字符或以内",
+      "nameChars": "只能使用字母、数字和空格",
+      "postalCode": "请输入 6 位数邮区编号"
+    }
+  },
+  "dashboard": {
+    "signInPrompt": "登录以获取个性化推荐",
+    "title": "适合{name}的经济援助计划",
+    "edit": "编辑",
+    "editProfileSr": "资料",
+    "catalogError": "无法加载援助计划列表，请稍后再试。",
+    "profileError": "无法加载您的资料，因此以下结果尚未根据您的情况调整。请稍后再试。",
+    "summary": "摘要",
+    "checked": "我们查看了 <b>{count}</b> 项补助金、津贴和扣税。",
+    "checkedAgainst": "我们根据{name}资料，查看了 <b>{count}</b> 项补助金、津贴和扣税。",
+    "aboutResults": "关于这些结果",
+    "tileAria": "{count} 项{status}，查看列表",
+    "notAFit": "{count} 项看起来不适合{name}",
+    "answerToCheck": "回答 {questions} 个问题，再查看 {schemes} 项",
+    "aboutOneMinute": "大约 1 分钟。",
+    "answerNow": "现在回答",
+    "signInToCheck": "登录并告诉我们{name}的情况，即可根据资料查看其中 {count} 项。",
+    "bestMatches": "最适合的计划",
+    "bestMatchesHint": "先列出可能符合资格的，再列出需要回答几个问题的",
+    "seeAllMatches": "查看全部 {count} 项",
+    "searchAll": "搜索所有看护援助计划",
+    "searchAllHint": "按计划用途筛选。",
+    "browse": "按用途浏览",
+    "schemeCount": "{count} 项计划",
+    "elsewhere": "不是援助计划？这些在 CareCompass 的其他地方",
+    "elsewhereLinks": {
+      "care": {
+        "title": "护理服务",
+        "description": "日间护理、居家护理、疗养院、暂托服务"
+      },
+      "help": {
+        "title": "帮助与支持",
+        "description": "课程、互助小组、热线、辅导"
+      },
+      "plan": {
+        "title": "提前规划",
+        "description": "持久授权书、预先护理计划、代理人"
+      }
+    },
+    "footer": "资料来自 Schemes.sg 和 CareCompass，每周更新。“可能符合资格”仅根据您的资料提供参考，最终由相关机构决定。"
+  },
+  "allSchemes": {
+    "clearFilter": "清除筛选：{label}",
+    "title": "所有看护援助计划",
+    "showing": "显示 {total} 项中的 {count} 项",
+    "subtitle": "共 {total} 项补助金、津贴和扣税，按最适合{name}的顺序排列。",
+    "searchLabel": "搜索援助计划",
+    "searchPlaceholder": "按名称搜索，例如交通、保健储蓄",
+    "clearSearch": "清除搜索",
+    "filters": "筛选",
+    "clearAll": "全部清除",
+    "noMatch": "没有符合的计划。请减少筛选条件或换个关键词。",
+    "results": "结果",
+    "alsoMatching": "也符合“{q}”",
+    "notInFilter": "不在您的“{status}”筛选中",
+    "answerToCheckThese": "回答 {count} 个问题以查看这些计划",
+    "checkOfficial": "请到官方网站查看资格。",
+    "probablyNot": "可能不适合{name}",
+    "tapToSeeWhy": "{count} 项计划。点按查看原因。",
+    "profileOutOfDate": "资料过时了？",
+    "editDetails": "编辑{name}资料",
+    "cantFind": "找不到某项计划？<link>告诉我们</link>，我们会考虑加入。",
+    "telegramSr": "（通过 Telegram，在新标签页中打开）"
+  },
+  "questions": {
+    "adl": {
+      "bathing": "洗澡",
+      "dressing": "穿衣",
+      "eating": "进食",
+      "toilet": "如厕",
+      "moving": "走动或上下床",
+      "continence": "控制大小便"
+    },
+    "yes": "是",
+    "no": "否",
+    "notSure": "不确定",
+    "notSureYet": "暂时不确定",
+    "careShieldLife": "终身护保",
+    "elderShield": "乐龄健保",
+    "neither": "两者都没有",
+    "prompt": {
+      "age": "{name}几岁？",
+      "adl": "{name}在以下哪些方面需要协助？",
+      "fullHelp": "其中至少三项，是否需要别人完全代劳？",
+      "income": "{name}家庭收入是多少？",
+      "ltc": "{name}是否受终身护保或乐龄健保保障？"
+    },
+    "age": "年龄",
+    "noneOfThese": "以上皆无",
+    "signInForIncome": "请登录以提供家庭收入。资料会保存在您的个人资料中，只需填写一次。",
+    "ltcHint": "可在公积金网站或应用程序的“Healthcare”部分查看。",
+    "progress": "第 {n} 题，共 {total} 题",
+    "progressLabel": "进度",
+    "skip": "跳过",
+    "pickAll": "可多选。",
+    "letsUsCheck": "这能让我们再查看 {count} 项计划，例如{example}。",
+    "noDocsNeeded": "现在不需要提供文件。部分计划之后会要求医生或治疗师出具功能评估报告来确认。",
+    "continue": "继续"
+  },
+  "answers": {
+    "cleared": "您的回答已清除",
+    "clearError": "无法清除您的回答，请重试。",
+    "title": "您的回答",
+    "editSr": "您的回答",
+    "none": "尚未保存任何回答。这些回答能帮助我们查看需要更多资料的计划。",
+    "clear": "清除我的回答",
+    "confirm": "要清除所有回答吗？需要这些资料的计划会再次询问。",
+    "yesClear": "是的，清除",
+    "value": {
+      "yes": "是",
+      "no": "否",
+      "notSure": "不确定",
+      "neither": "两者都没有"
+    },
+    "line": {
+      "adlNotSure": "日常生活活动：不确定",
+      "adlNone": "日常生活活动：不需要协助",
+      "adlCount": "日常生活活动：{count} 项需要协助",
+      "fullHelp": "需要完全协助：{value}",
+      "insurance": "保险：{value}",
+      "far": "功能评估报告：{value}",
+      "ageNotSure": "年龄：不确定"
+    }
+  },
+  "filters": {
+    "description": "筛选看护援助计划列表",
+    "showAll": "显示全部 {count} 项",
+    "showResults": "显示 {count} 项计划",
+    "islandwide": "全岛",
+    "all": "全部",
+    "byEligibility": "按资格筛选",
+    "noneWithStatus": "没有此状态的计划。",
+    "hidden": "已隐藏 {count} 项：不符合{name}资料"
+  },
+  "category": {
+    "notFound": "找不到这个类别。",
+    "seeAll": "查看所有经济援助计划",
+    "compare": "还在挑选日间护理或居家护理服务？<b>在护理服务中比较</b>"
+  },
+  "scheme": {
+    "fullEligibility": "完整申请资格",
+    "notFound": "找不到这项援助计划。",
+    "whatYouGet": "您可获得什么",
+    "canGet": "{name}可以申请吗？",
+    "profileLoadError": "无法加载您的个人资料，所以暂时无法为{name}确认。请稍后再试。",
+    "checkOfficialPage": "查看官方网页",
+    "eligibilityNote": "申请资格内容取自 Schemes.sg",
+    "answer": "回答",
+    "answerFor": "：{question}",
+    "updateProfile": "更新个人资料",
+    "agencyWillCheck": "相关机构还会核查",
+    "nextSteps": "接下来怎么做",
+    "readMoreOfficial": "在官方网站了解更多",
+    "sources": "来源：",
+    "fromSource": "资料来自 {source}"
+  },
+  "careservice": {
+    "overview": {
+      "title": "请告诉我们您想先了解哪一种护理服务"
+    },
+    "service": {
+      "daycare": {
+        "title": "日间护理服务",
+        "description": "护理中心为失智症年长者提供的全日活动。如果您的亲人白天需要有人看顾，这项服务会有帮助。"
+      },
+      "homecare": {
+        "title": "居家护理服务",
+        "description": "在您家中提供日常护理协助和医疗服务。"
+      },
+      "fdw": {
+        "title": "聘请外籍女佣",
+        "description": "她们受过乐龄护理培训，具备照顾您亲人的基本技能。"
+      },
+      "nursingHome": {
+        "title": "入住疗养院",
+        "description": "住宿型护理机构，协助您的亲人进行日常生活活动，并照顾护理需要。"
+      }
+    },
+    "badge": {
+      "subsidies": "$ 可能符合津贴申请资格",
+      "signInRequired": "需要登录"
+    },
+    "notAvailable": "此推荐功能尚未推出",
+    "location": {
+      "intro": "我们知道您正在为亲人寻找日间护理服务。",
+      "question": "可以告诉我们您的邮区编号吗？这样我们能更好地协助您。",
+      "placeholder": "例如：310149"
+    },
+    "skip": "跳过",
+    "next": "下一步",
+    "other": {
+      "intro": "好的。",
+      "question": "还有其他需要我们注意的事项吗？"
+    },
+    "recommendations": {
+      "intro": "谢谢您。",
+      "title": "根据您提供的资料，以下是推荐的日间护理中心",
+      "showAll": "查看所有中心"
+    },
+    "card": {
+      "km": "{km}公里",
+      "minutes": "{minutes}分钟",
+      "awayFromHome": "（离家{distance}）",
+      "travel": "开车<b>{car}</b>，或乘搭巴士/地铁<b>{transit}</b>"
+    },
+    "sgw": {
+      "poweredBy": "资料来自",
+      "agencyWebsite": "新加坡政府机构网站"
+    }
+  },
+  "daycare": {
+    "list": {
+      "title": "失智症日间护理中心",
+      "searchPlaceholder": "搜索护理中心"
+    },
+    "detail": {
+      "userLoadError": "无法加载用户资料",
+      "subsidyLoadError": "无法加载津贴资料",
+      "notFound": "找不到这家中心",
+      "howToApply": "如何申请？",
+      "howToApplyDetails": "- 您需要先取得医院、综合诊疗所或家庭医生的转介。这位医生须了解您亲人的病情和需要。您也可以联系服务提供者商讨。\n\n - 如需更多协助，请联系护联局：拨打 [1800 650 6060](tel:18006506060)，电邮 [enquiries@aic.sg](mailto:enquiries@aic.sg)，或前往附近的 [AIC Link 服务站](https://www.aic.sg/about-us/aic-link-locations/)。",
+      "fees": "费用",
+      "subsidyPrompt": "这项服务适用卫生部非住宿式长期护理津贴。请提供您的家庭资料，看看您可能获得多少津贴。",
+      "subsidyQualify": "您可能符合卫生部非住宿式长期护理津贴的资格，费用可减免<b>{level}%</b>！",
+      "basedOnIncome": "*根据估计的家庭人均月入",
+      "andAnnualValue": "（以及住所年值{value}）",
+      "learnMore": "了解更多",
+      "operatingHours": "营业时间",
+      "contactDetails": "联系方式",
+      "phone": "电话：",
+      "email": "电邮：",
+      "website": "网站：",
+      "address": "地址"
+    },
+    "review": {
+      "leave": "写评价",
+      "thanks": "感谢您分享经验，帮助其他看护者。我们只接受真实的评价，所以请您在下方声明您确实使用过这项日间护理服务。",
+      "declaration": "我声明我使用过这项服务，我的评价是根据我的亲身经历。",
+      "rating": "评分",
+      "whyRating": "请说说您为什么给这个评分",
+      "placeholder": "和我们分享您的经验",
+      "share": "提交",
+      "closeDrawer": "关闭",
+      "back": "返回",
+      "reviewBy": "{name}的评价",
+      "reviewFrom": "来自{name}的评价",
+      "title": "评价",
+      "subtitle": "看看其他看护者怎么说",
+      "signInToReview": "登录后写评价",
+      "fromSource": "这则评价来自{source}"
+    },
+    "support": {
+      "title": "经济援助",
+      "subtitle": "为您和亲人取得所需的援助",
+      "viewDetails": "查看详情",
+      "nrLtc": {
+        "name": "卫生部非住宿式长期护理津贴",
+        "description": "减轻住在社区的人士使用长期护理服务的费用"
+      },
+      "hcg": {
+        "name": "居家看护津贴",
+        "description": "为住在社区、符合资格的长期中度残障人士减轻看护费用。"
+      }
+    }
+  },
+  "provider": {
+    "viewDetails": "查看详情",
+    "servicesOffered": "提供的服务",
+    "notAvailable": "暂无",
+    "fromReviews": "（{count} 条评价）",
+    "photoAlt": "照片"
+  },
+  "price": {
+    "notAvailable": "暂无价格",
+    "fromPerMonth": "每月{price}起",
+    "fromPerMonthPreSubsidy": "每月{price}起（津贴前）",
+    "fromEstPerMonth": "估计每月{price}起",
+    "beforeSubsidy": "津贴前：",
+    "afterSubsidy": "津贴后："
+  },
+  "homecare": {
+    "list": {
+      "title": "居家护理服务",
+      "subtitle": "寻找合适的居家护理服务机构。",
+      "showTop3": "只显示前 3 家机构",
+      "showAll": "显示全部"
+    },
+    "picker": {
+      "title": "您在为亲人考虑哪类居家护理服务？",
+      "pickOne": "请至少选择 1 项，才能继续。",
+      "proceed": "继续"
+    },
+    "services": {
+      "homeMedical": {
+        "label": "居家医疗",
+        "description": "医生上门提供医疗服务，例如身体检查和开药。"
+      },
+      "homeNursing": {
+        "label": "居家护士服务",
+        "description": "护士上门提供护理，例如包扎伤口和更换喂食管。"
+      },
+      "homeTherapy": {
+        "label": "居家康复治疗",
+        "description": "在家中进行康复治疗，包括物理治疗、职能治疗和言语治疗。"
+      },
+      "homePersonalCare": {
+        "label": "居家个人护理",
+        "description": "提供个人护理服务，例如洗澡、穿衣和梳洗。"
+      },
+      "medicalEscort": {
+        "label": "医疗陪同",
+        "description": "为无法独自出门看病的人，提供交通和／或陪同人员。"
+      },
+      "dementiaEnrichment": {
+        "label": "失智症益智活动",
+        "description": "为失智症患者设计的专门活动，帮助认知、情绪和／或身体健康。"
+      }
+    },
+    "detail": {
+      "notAvailable": "暂无",
+      "fromReviews": "（来自 {count} 条评价）",
+      "address": "地址",
+      "contactDetails": "联系方式",
+      "operatingHours": "营业时间"
+    },
+    "support": {
+      "title": "推荐的援助和津贴",
+      "subtitle": "看看您可能符合哪些援助的申请资格。",
+      "viewDetails": "查看详情",
+      "ltc": {
+        "name": "非住宿长期护理服务津贴",
+        "description": "使用非住宿长期护理服务时，新加坡公民最高可获得 80% 津贴，永久居民最高可获得 55% 津贴。"
+      },
+      "hcg": {
+        "name": "居家看护津贴",
+        "description": "为住在社区、有永久性中度残障的合格人士，分担看护费用。"
+      }
+    }
+  },
+  "share": {
+    "copiedToast": "链接已复制！",
+    "sharePage": "分享此页",
+    "share": "分享",
+    "shareLink": "分享此链接",
+    "copied": "已复制！",
+    "copy": "复制",
+    "shareVia": "通过以下方式分享"
+  },
+  "bookmark": {
+    "added": "已加入收藏",
+    "removed": "已从收藏中移除",
+    "removeLabel": "从收藏中移除",
+    "savePage": "收藏此页",
+    "saved": "已收藏",
+    "save": "收藏"
+  },
+  "review": {
+    "leaveReview": "写评价",
+    "declarationIntro": "感谢您分享经验，帮助其他看护者。我们只接受真实的评价，所以请您在下面声明，您确实使用过这项{type, select, daycare {日间护理} other {居家护理}}服务。",
+    "declaration": "我声明我使用过这项服务，我的评价是根据亲身经历写的。",
+    "rating": "评分",
+    "whyRating": "请告诉我们，您为什么给这个评分",
+    "placeholder": "和我们分享您的经验",
+    "submit": "提交",
+    "closeDrawer": "关闭",
+    "back": "返回",
+    "reviewBy": "{name} 的评价",
+    "reviewFrom": "{name} 的评价",
+    "title": "评价",
+    "signInToReview": "登录后写评价",
+    "showingRecentGoogle": "显示最近 5 条 Google 评价",
+    "fromSource": "此评价来自 {source}",
+    "source": {
+      "google": "Google",
+      "inApp": "应用内"
+    },
+    "targetType": {
+      "dayCare": "日间护理",
+      "homeCare": "居家护理"
+    }
+  },
+  "pchi": {
+    "householdSize": "有多少人和您的亲人同住？",
+    "householdSizeHint": "例如：如果您的亲人独居，请填“0”。如果还有 1 个人和您的亲人同住，请填“1”。",
+    "income": "和您的亲人同住的所有人，每月家庭总收入是多少？",
+    "incomeHint": "也要算上您亲人的收入",
+    "annualValue": "您住宅的年值是多少？",
+    "annualValueTooltip": "年值是房产如果出租，估计一年可收到的总租金，不包括家具费和维修费。年值由国内税务局决定，可在国内税务局网站查询。2024 年的津贴等级，将根据 2023 年的年值来决定。",
+    "annualValueCheck": "在[国内税务局](https://mytax.iras.gov.sg/ESVWeb/default.aspx)网站查询您房产的年值",
+    "save": "保存",
+    "checkSubsidy": "查看津贴等级"
+  },
+  "profilePage": {
+    "title": "我的个人资料",
+    "savedSearches": "已收藏的搜索",
+    "logOut": "退出登录",
+    "signIn": "登录",
+    "guest": "访客",
+    "notSet": "未填写",
+    "fieldLabel": "{label}：",
+    "fields": {
+      "citizenship": "公民身份",
+      "contactNumber": "联系电话",
+      "nameOrNickname": "名字或称呼",
+      "relationship": "与看护者的关系",
+      "age": "年龄",
+      "stayingAt": "居住地点",
+      "postalCode": "邮区编号",
+      "householdSize": "家庭人数",
+      "totalMonthlyIncome": "家庭每月总收入",
+      "annualPropertyValue": "房屋年值",
+      "monthlyPchi": "家庭人均月入*"
+    },
+    "personalDetails": "个人资料",
+    "caregiverInfo": "看护者资料",
+    "careRecipientInfo": "亲人资料",
+    "householdIncome": "家庭收入",
+    "pchiNote": "*PCHI 指家庭人均月入。",
+    "edit": "修改",
+    "genericError": "出了点问题。请稍后再试。",
+    "selectOption": "请选择",
+    "submitting": "正在提交",
+    "save": "保存",
+    "caregiverEdit": {
+      "title": "修改看护者资料",
+      "updated": "看护者资料已更新",
+      "citizenshipStatus": "公民身份",
+      "contactNumber": "联系电话",
+      "contactPlaceholder": "8 位数新加坡电话号码",
+      "contactError": "请输入 8 位数号码，或留空"
+    },
+    "recipientEdit": {
+      "title": "修改亲人资料",
+      "updated": "亲人资料已更新"
+    },
+    "incomeEdit": {
+      "title": "修改家庭收入",
+      "updated": "家庭收入已更新",
+      "fetchError": "无法载入您的资料"
+    },
+    "saved": {
+      "filterBy": "筛选",
+      "filterByType": "按类型筛选"
+    }
+  },
+  "onboarding": {
+    "title": "开始使用",
+    "intro": "请告诉我们一些关于您和您亲人的资料。",
+    "yourCitizenship": "您的公民身份",
+    "caringFor": "我照顾的是我的",
+    "recipientCitizenship": "亲人的公民身份",
+    "recipientAge": "亲人的年龄",
+    "agePlaceholder": "年龄",
+    "recipientResidence": "亲人的居住情况",
+    "residence": {
+      "HOME": "我的亲人和我同住",
+      "NURSING_HOME_LTCF": "我的亲人住在疗养院或长期护理机构",
+      "OTHER": "其他"
+    },
+    "next": "下一步",
+    "nameLabel": "您怎么称呼您的亲人？（可不填）",
+    "nameHint": "名字或称呼，例如：妈妈、阿嬷、陈先生",
+    "postalLabel": "亲人住处的邮区编号（可不填）",
+    "postalHint": "方便我们显示他们附近的服务和援助计划"
+  },
+  "userProp": {
+    "residence": {
+      "HOME": "家里",
+      "NURSING_HOME_LTCF": "疗养院／长期护理机构",
+      "OTHER": "其他"
+    },
+    "citizenship": {
+      "CITIZEN": "新加坡公民",
+      "PR": "永久居民",
+      "OTHER": "其他"
+    },
+    "relationship": {
+      "PARENT": "父母",
+      "SPOUSE": "配偶",
+      "OTHER_FAMILY": "其他家人",
+      "NON_FAMILY": "非家人"
+    }
+  },
+  "a2hs": {
+    "ios": "<hl>如果您用的是 iOS（Safari 或 Chrome）：</hl>点击“<b>分享</b>”，再选择“<b>添加到主屏幕</b>”，就能在手机上快速打开 CareCompass。",
+    "android": "<hl>如果您用的是安卓（Chrome）：</hl>点击<b>三个点</b>，再选择“<b>添加到主屏幕</b>”，就能在手机上快速打开 CareCompass。",
+    "imageAlt": "添加到主屏幕",
+    "title": "欢迎加入<br></br>CareCompass 社群",
+    "intro": "继续之前，请按照以下步骤，把 CareCompass 添加到手机主屏幕，以后打开更方便。",
+    "done": "好的，我已完成"
+  },
+  "singpass": {
+    "myInfoAlert": "此演示版本不提供 Singpass 功能。\n\n系统将使用预设资料。",
+    "scanNricAlert": "这个选项让看护者扫描亲人的身份证，以读取姓名、年龄和地址等基本资料。\n\n此功能尚未推出，系统将使用预设资料。",
+    "question": "您是否愿意提供亲人的资料，让我们为您提供更合适的建议？",
+    "explainer": "我们会用这些资料，为您推荐可能有用的津贴或服务。",
+    "authorizeMyInfo": "是，授权使用 MyInfo",
+    "scanNric": "是，扫描身份证",
+    "skip": "暂时跳过"
+  },
+  "signIn": {
+    "title": "欢迎使用 CareCompass",
+    "intro": "我们根据您的看护需要，为您推荐合适的护理服务和援助。",
+    "signIn": "登录",
+    "guest": "以访客身份试用"
+  },
+  "help": {
+    "title": "请选择您想先了解的帮助和支持。",
+    "options": {
+      "education": {
+        "title": "我想学习怎样照顾亲人和自己。",
+        "subtitle": "学习资源"
+      },
+      "hotline": {
+        "title": "我想找人谈谈。",
+        "subtitle": "热线"
+      },
+      "community": {
+        "title": "我想认识其他看护者，或加入社群",
+        "subtitle": "社群支持"
+      }
+    },
+    "community": {
+      "intro": "您想认识志同道合的看护者。",
+      "title": "以下的资源和社群可以给您支持，也能让您听听其他人的经验",
+      "dementiaSg": {
+        "name": "新加坡失智症协会看护者支援网络（Caregiver Support & Network）",
+        "description": "鼓励看护者照顾好自己。看护者可以在这里培养兴趣、学习技能，并认识其他看护者。",
+        "cta": "了解更多"
+      },
+      "carecompass": {
+        "name": "CareCompass 用户社群",
+        "description": "加入我们在 Telegram 上的看护者社群，互相交流经验，也告诉我们您希望应用程序增加什么功能！",
+        "cta": "立即加入"
+      }
+    },
+    "hotline": {
+      "intro": "您想找专业人士谈谈，寻求帮助。",
+      "title": "以下机构有合格的专业人士，可以和您谈谈",
+      "dementia": {
+        "name": "失智症热线（Dementia Helpline）",
+        "description": "提供失智症护理的资讯，并为您转介相关服务。由新加坡失智症协会（Dementia Singapore）营运。该协会是新加坡专门从事失智症护理的主要社会服务机构。"
+      },
+      "touch": {
+        "name": "看护者服务支援热线（Caregiver Services Support Care Line）",
+        "description": "和受过培训的护理协调员谈谈，一起想出实际的解决办法。由非营利慈善机构 TOUCH 社区服务（TOUCH Community Services）营运。"
+      }
+    },
+    "education": {
+      "intro": "您希望得到支持，更好地照顾亲人和自己。",
+      "title": "以下课程可能对您有帮助",
+      "programmes": "学习课程",
+      "events": "学习活动",
+      "learnMore": "了解更多",
+      "overview": "简介",
+      "nextSteps": "下一步"
+    }
+  },
+  "chat": {
+    "intro": "今天我可以怎样帮您？",
+    "prompts": {
+      "options": "我有哪些护理选择？",
+      "eligible": "我可能符合哪些援助的申请资格？",
+      "help": "我可以去哪里寻求帮助和支持？"
+    },
+    "newChat": "新对话",
+    "newChatAria": "新对话",
+    "menu": "菜单",
+    "open": "打开",
+    "history": {
+      "title": "对话记录",
+      "unavailable": "无法查看对话记录",
+      "untitled": "无标题 - {id}"
+    },
+    "message": {
+      "learnMore": "点击了解更多",
+      "call": "拨打 {number}"
+    }
+  },
+  "search": {
+    "placeholder": "输入信息",
+    "send": "发送"
+  },
+  "nav": {
+    "home": "首页",
+    "chat": "聊天",
+    "askAnything": "随时提问",
+    "profile": "个人资料",
+    "askCareCompass": "问问 CareCompass",
+    "ask": "提问",
+    "back": "返回"
+  },
+  "heartbeat": {
+    "phoneRequired": "使用这个功能需要手机号码。"
+  },
+  "errors": {
+    "global": "应用程序出错了。请刷新页面，或稍后再试。"
+  },
+  "toast": {
+    "signInRequired": "请先登录，才能使用这个功能！",
+    "saveAnswersFailed": "无法保存您的回答。这次使用期间，回答会暂时保留。"
+  },
+  "misc": {
+    "logo": "CareCompass 标志"
+  }
+}

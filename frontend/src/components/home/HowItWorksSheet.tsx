@@ -6,9 +6,10 @@ import useEmblaCarousel from "embla-carousel-react";
 import Image from "next/image";
 import { ArrowRight, Bell, Link2, X } from "lucide-react";
 import { FOCUS_RING } from "@/components/schemes/SchemeIcon";
+import { t } from "@/i18n";
 
 // Made-up example person, never a real care recipient
-const EXAMPLE_NAME = "Mei Ling";
+const exampleName = () => t("howItWorks.exampleName");
 
 function Panel({ children }: { children: ReactNode }) {
   return (
@@ -74,12 +75,14 @@ function CheckInVisual() {
       </MiniPhone>
       <span className="flex flex-col items-center text-brand-primary-500">
         <ArrowRight aria-hidden size={18} />
-        <span className="text-[10px] font-medium text-gray-500">Tap</span>
+        <span className="text-[10px] font-medium text-gray-500">
+          {t("howItWorks.tap")}
+        </span>
       </span>
       <MiniPhone>
         <div className="flex flex-1 bg-[#E1FBC8] p-1.5">
           <span className="flex flex-1 items-center justify-center rounded-lg bg-[#53AB5F] px-2 text-center text-[11px] font-bold leading-tight text-white">
-            Your resilience is your power.
+            {t("howItWorks.affirmation")}
           </span>
         </div>
       </MiniPhone>
@@ -92,8 +95,8 @@ function StatusVisual() {
     <>
       <div className="flex w-full gap-2">
         {[
-          { n: 1, label: "Missed a check-in", colour: "#AF52DE" },
-          { n: 0, label: "In poor mental state", colour: "#FF3B30" },
+          { n: 1, label: t("howItWorks.missedTile"), colour: "#AF52DE" },
+          { n: 0, label: t("howItWorks.poorTile"), colour: "#FF3B30" },
         ].map((tile) => (
           <div
             key={tile.label}
@@ -109,7 +112,7 @@ function StatusVisual() {
       </div>
       <div className="flex w-full items-center gap-1.5 rounded-lg bg-red-100 px-2.5 py-2 text-xs font-medium text-red-700">
         <Bell aria-hidden size={14} />
-        {EXAMPLE_NAME} missed yesterday&apos;s check-in
+        {t("howItWorks.missedAlert", { name: exampleName() })}
       </div>
     </>
   );
@@ -126,14 +129,15 @@ function WhatsAppVisual() {
       </div>
       <div className="p-2.5">
         <div className="flex flex-col gap-1 rounded-lg bg-white px-3 pt-2">
-          <span className="text-xs font-bold text-gray-900">Alert</span>
+          <span className="text-xs font-bold text-gray-900">
+            {t("howItWorks.waAlert")}
+          </span>
           <span className="text-[11px] leading-4 text-gray-800">
-            {EXAMPLE_NAME} has missed their check-in. Please verify their
-            well-being as soon as possible.
+            {t("howItWorks.waBody", { name: exampleName() })}
           </span>
           <span className="text-[9px] text-gray-500">powered by heartbeat</span>
           <span className="-mx-3 mt-1 border-t border-gray-200 py-1.5 text-center text-[11px] font-semibold text-[#2E7D4F]">
-            View Mood Dashboard
+            {t("howItWorks.waButton")}
           </span>
         </div>
       </div>
@@ -141,39 +145,41 @@ function WhatsAppVisual() {
   );
 }
 
-const STEPS: { title: string; body: string; visual: ReactNode }[] = [
+// Built when shown, so the text follows the chosen language
+const getSteps = (): { title: string; body: string; visual: ReactNode }[] => [
   {
-    title: "Add your loved one",
-    body: "Enter their name, mobile number and address so we know who to check in on.",
+    title: t("howItWorks.steps.1.title"),
+    body: t("howItWorks.steps.1.body"),
     visual: (
       <Panel>
-        <FakeField label="Name" value={EXAMPLE_NAME} />
-        <FakeField label="Mobile number" value="8123 4567" />
+        <FakeField label={t("howItWorks.fieldName")} value={exampleName()} />
+        <FakeField label={t("howItWorks.fieldMobile")} value="8123 4567" />
       </Panel>
     ),
   },
   {
-    title: "Send them their personal link",
-    body: "We create a login link just for them — no password needed. Copy it and send it on WhatsApp or SMS.",
+    title: t("howItWorks.steps.2.title"),
+    body: t("howItWorks.steps.2.body"),
     visual: (
       <Panel>
         <div className="flex w-full flex-col gap-2">
           <span className="flex items-center gap-1.5 text-sm font-semibold text-gray-800">
-            <Link2 aria-hidden size={16} /> {EXAMPLE_NAME}&apos;s login link
+            <Link2 aria-hidden size={16} />{" "}
+            {t("howItWorks.loginLink", { name: exampleName() })}
           </span>
           <span className="truncate rounded-md border border-gray-300 bg-white px-3 py-2 text-xs text-gray-800">
             heartbeat.carecompass.sg/login/k3Pq9…
           </span>
           <span className="rounded-lg bg-brand-primary-500 py-2 text-center text-sm font-semibold text-white">
-            Copy link
+            {t("howItWorks.copyLink")}
           </span>
         </div>
       </Panel>
     ),
   },
   {
-    title: "They check in with one tap",
-    body: "Each day, your loved one opens their link and taps how they're feeling. They'll see an encouraging message after.",
+    title: t("howItWorks.steps.3.title"),
+    body: t("howItWorks.steps.3.body"),
     visual: (
       <Panel>
         <CheckInVisual />
@@ -181,8 +187,8 @@ const STEPS: { title: string; body: string; visual: ReactNode }[] = [
     ),
   },
   {
-    title: "See how they're doing at a glance",
-    body: "Your dashboard shows everyone's latest check-in and mood, so you can spot when something's off.",
+    title: t("howItWorks.steps.4.title"),
+    body: t("howItWorks.steps.4.body"),
     visual: (
       <Panel>
         <StatusVisual />
@@ -190,8 +196,8 @@ const STEPS: { title: string; body: string; visual: ReactNode }[] = [
     ),
   },
   {
-    title: "Get a WhatsApp alert if they miss a day",
-    body: "If your loved one misses a day, HeartBeat messages you on WhatsApp straight away, using the number on your CareCompass account.",
+    title: t("howItWorks.steps.5.title"),
+    body: t("howItWorks.steps.5.body"),
     visual: (
       <Panel>
         <WhatsAppVisual />
@@ -240,6 +246,7 @@ export default function HowItWorksSheet({
     }
   }, [isOpen, emblaApi]);
 
+  const STEPS = getSteps();
   const isLast = index === STEPS.length - 1;
 
   return (
@@ -257,19 +264,19 @@ export default function HowItWorksSheet({
           <div className="flex flex-col gap-4 overflow-y-auto px-5 pb-8 pt-1">
             <div className="flex items-center justify-between gap-2">
               <Drawer.Title className="text-xl font-bold text-gray-800">
-                How care monitoring works
+                {t("howItWorks.title")}
               </Drawer.Title>
               <button
                 type="button"
                 onClick={onClose}
-                aria-label="Close"
+                aria-label={t("common.close")}
                 className={`flex size-11 items-center justify-center rounded-full text-gray-600 hover:bg-gray-100 ${FOCUS_RING}`}
               >
                 <X aria-hidden size={22} />
               </button>
             </div>
             <Drawer.Description className="sr-only">
-              {STEPS.length} steps explaining care monitoring with HeartBeat
+              {t("howItWorks.description", { count: STEPS.length })}
             </Drawer.Description>
 
             {/* data-vaul-no-drag: horizontal swipes move the steps, not the sheet */}
@@ -279,14 +286,20 @@ export default function HowItWorksSheet({
                   <section
                     key={step.title}
                     aria-roledescription="slide"
-                    aria-label={`Step ${i + 1} of ${STEPS.length}`}
+                    aria-label={t("howItWorks.step", {
+                      n: i + 1,
+                      total: STEPS.length,
+                    })}
                     aria-hidden={i !== index}
                     className="flex min-w-0 flex-[0_0_100%] flex-col gap-3 pl-4"
                   >
                     {step.visual}
                     <div className="flex flex-col gap-1">
                       <span className="text-[13px] font-semibold text-brand-primary-500">
-                        Step {i + 1} of {STEPS.length}
+                        {t("howItWorks.step", {
+                          n: i + 1,
+                          total: STEPS.length,
+                        })}
                       </span>
                       <h3 className="text-lg font-bold text-gray-900">
                         {step.title}
@@ -318,7 +331,7 @@ export default function HowItWorksSheet({
                   onClick={() => emblaApi?.scrollPrev()}
                   className={`h-12 flex-1 rounded-lg border-[1.5px] border-brand-primary-500 font-semibold text-brand-primary-500 ${FOCUS_RING}`}
                 >
-                  Back
+                  {t("howItWorks.back")}
                 </button>
               )}
               <button
@@ -330,7 +343,9 @@ export default function HowItWorksSheet({
                 }}
                 className={`h-12 flex-1 rounded-lg bg-brand-primary-500 font-semibold text-white ${FOCUS_RING}`}
               >
-                {isLast ? (finalAction?.label ?? "Got it") : "Next"}
+                {isLast
+                  ? (finalAction?.label ?? t("howItWorks.gotIt"))
+                  : t("howItWorks.next")}
               </button>
             </div>
           </div>
