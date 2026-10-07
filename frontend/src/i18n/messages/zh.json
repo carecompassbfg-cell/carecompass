@@ -624,7 +624,7 @@
       "subsidyLoadError": "无法加载津贴资料",
       "notFound": "找不到这家中心",
       "howToApply": "如何申请？",
-      "howToApplyDetails": "- 您需要先取得医院、综合诊疗所或家庭医生的转介。这位医生须了解您亲人的病情和需要。您也可以联系服务提供者商讨。\n\n - 如需更多协助，请联系护联局：拨打 [1800 650 6060](tel:18006506060)，电邮 [enquiries@aic.sg](mailto:enquiries@aic.sg)，或前往附近的 [AIC Link 服务站](https://www.aic.sg/about-us/aic-link-locations/)。",
+      "howToApplyDetails": "- 您需要先取得医院、综合诊疗所或家庭医生的转介。这位医生须了解您亲人的病情和需要。您也可以联系服务提供者商讨。\n\n - 如需更多协助，请联系护联局：拨打 [1800 650 6060](tel:18006506060)，电邮 [enquiries@aic.sg](mailto:enquiries@aic.sg)，或前往附近的 [AIC Link服务点](https://www.aic.sg/about-us/aic-link-locations/)。",
       "fees": "费用",
       "subsidyPrompt": "这项服务适用卫生部非住宿长期护理津贴。请提供您的家庭资料，看看您可能获得多少津贴。",
       "subsidyQualify": "您可能符合卫生部非住宿长期护理津贴的资格，费用可减免<b>{level}%</b>！",
