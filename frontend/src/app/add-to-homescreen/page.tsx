@@ -5,6 +5,8 @@ import { Button } from "@opengovsg/design-system-react";
 import { CircleAlert } from "lucide-react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { useEffect } from "react";
+import { isDesktopWidth } from "@/components/DesktopNotice";
 
 const slidesInfoList = [
   {
@@ -67,6 +69,14 @@ export default function AddToHomeScreen() {
     localStorage.setItem("cc_add_to_homescreen_prompted", "true");
     router.push("/home");
   };
+
+  // On a computer there's no home screen to add to, so go straight on
+  useEffect(() => {
+    if (isDesktopWidth()) {
+      localStorage.setItem("cc_add_to_homescreen_prompted", "true");
+      router.replace("/home");
+    }
+  }, [router]);
 
   return (
     <div className="flex h-full flex-col place-items-center gap-4 overflow-y-auto p-8">

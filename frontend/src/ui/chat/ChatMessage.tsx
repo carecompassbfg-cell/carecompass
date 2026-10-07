@@ -18,13 +18,13 @@ import { Fragment } from "react";
 
 export default function ChatMessage({ message }: { message: Message }) {
   return (
-    <div className="flex place-items-start gap-2 md:gap-4">
+    <div className="flex place-items-start gap-2">
       {message.role === MessageRole.User ? (
         <Avatar className="sticky mt-2" colorScheme="sub" size="xs" />
       ) : (
         <Avatar className="sticky mt-2" src="/img/logo.svg" size="xs" />
       )}
-      <div className="flex w-[calc(100%-40px)] flex-col rounded-lg border bg-white p-4 md:w-[calc(100%-48px)]">
+      <div className="flex w-[calc(100%-40px)] flex-col rounded-lg border bg-white p-4">
         {message.role === MessageRole.User ? (
           <UserMessage content={message.content} />
         ) : (
