@@ -24,9 +24,11 @@ body {
   html {
     background: #d9dce3;
   }
-  body {
+  /* "html body" and !important: the UI library's own reset (Chakra) sets
+     body { margin: 0 } after this file loads */
+  html body {
     max-width: 480px;
-    margin: 0 auto;
+    margin: 0 auto !important;
     height: 100dvh;
     transform: translateZ(0);
     box-shadow: 0 0 24px rgba(0, 0, 0, 0.12);
