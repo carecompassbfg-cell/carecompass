@@ -3,6 +3,7 @@
 import { ProviderCard } from "@/components/ProviderCard";
 import SGWBanner from "@/components/SGWBanner";
 import {
+  getServiceLabel,
   HomeCareDetail,
   SERVICE_ID_TO_LABEL,
   transformHomeCareData,
@@ -12,6 +13,7 @@ import LoadingSpinner from "@/ui/loading";
 import { Button } from "@opengovsg/design-system-react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
+import { t } from "@/i18n";
 
 export default function HomeCarePage() {
   const router = useRouter();
@@ -86,9 +88,9 @@ export default function HomeCarePage() {
     <div className="flex flex-col gap-1 bg-white p-6">
       <div>
         <BackButton />
-        <h1 className="text-2xl font-bold">Home Care Services</h1>
+        <h1 className="text-2xl font-bold">{t("homecare.list.title")}</h1>
         <p className="py-1 font-semibold text-gray-600">
-          Find suitable home care centres providers.
+          {t("homecare.list.subtitle")}
         </p>
       </div>
 
@@ -119,7 +121,7 @@ export default function HomeCarePage() {
                   : "bg-[#DADADA] text-gray-800"
               }`}
             >
-              {service}
+              {serviceId ? getServiceLabel(serviceId) : service}
             </button>
           );
         })}
@@ -141,7 +143,7 @@ export default function HomeCarePage() {
           onClick={handleToggleShowAll}
           className="mb-4 mt-6"
         >
-          {showAll ? "Show me just the top 3 providers" : "Show all"}
+          {showAll ? t("homecare.list.showTop3") : t("homecare.list.showAll")}
         </Button>
       )}
       {/* TODO: fix this hack */}

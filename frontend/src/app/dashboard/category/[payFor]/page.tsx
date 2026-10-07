@@ -10,6 +10,7 @@ import LoadingSpinner from "@/ui/loading";
 import useSchemeCatalog from "@/util/hooks/useSchemeCatalog";
 import { getRecipientName } from "@/util/recipient";
 import { isPayForCategory, PAY_FOR_META } from "@/util/schemeCatalog";
+import { t } from "@/i18n";
 
 export default function CategoryPage() {
   const params = useParams<{ payFor: string }>();
@@ -23,12 +24,12 @@ export default function CategoryPage() {
     return (
       <div className="flex w-full flex-col gap-4 py-6">
         <BackButton />
-        <p className="text-gray-800">We couldn&apos;t find that category.</p>
+        <p className="text-gray-800">{t("category.notFound")}</p>
         <Link
           href="/dashboard"
           className={`font-semibold text-interaction-links-default ${FOCUS_RING}`}
         >
-          See all financial schemes
+          {t("category.seeAll")}
         </Link>
       </div>
     );
@@ -71,10 +72,11 @@ export default function CategoryPage() {
         >
           <SchemeIcon name="banner-care" size={18} />
           <span className="flex-1 text-sm leading-5 text-gray-800">
-            Still choosing a day care or home care provider?{" "}
-            <b className="text-interaction-links-default">
-              Compare them in Care services
-            </b>
+            {t.rich("category.compare", {
+              b: (chunks) => (
+                <b className="text-interaction-links-default">{chunks}</b>
+              ),
+            })}
           </span>
           <SchemeIcon name="chevron-link" size={16} />
         </Link>
@@ -82,7 +84,7 @@ export default function CategoryPage() {
 
       {catalogError ? (
         <p className="rounded-xl border border-gray-200 bg-white p-4 text-sm text-gray-600">
-          We couldn&apos;t load the list of schemes. Please try again later.
+          {t("dashboard.catalogError")}
         </p>
       ) : (
         <SchemeList

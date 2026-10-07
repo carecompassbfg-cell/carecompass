@@ -1,5 +1,6 @@
 "use client";
 
+import { t } from "@/i18n";
 import { useAuthStore } from "@/stores/auth";
 import { SignInButton } from "@clerk/nextjs";
 import { Button } from "@opengovsg/design-system-react";
@@ -23,11 +24,8 @@ export default function SignIn() {
   return (
     <div className="flex h-dvh max-h-dvh flex-col">
       <main className="flex h-full w-full flex-col place-content-center gap-4 overflow-auto p-8">
-        <h3 className="text-2xl font-bold">Welcome to CareCompass</h3>
-        <span>
-          We are a care recommender that provides personalized recommendations
-          based on your caregiving needs.
-        </span>
+        <h3 className="text-2xl font-bold">{t("signIn.title")}</h3>
+        <span>{t("signIn.intro")}</span>
         <Image
           src="/img/meditation.svg"
           alt="logo"
@@ -36,13 +34,13 @@ export default function SignIn() {
           className="py-4"
         />
         <SignInButton forceRedirectUrl="/">
-          <Button>Sign In</Button>
+          <Button>{t("signIn.signIn")}</Button>
         </SignInButton>
         <button
           className="underline underline-offset-4"
           onClick={handleSignInAsGuest}
         >
-          Try as a Guest
+          {t("signIn.guest")}
         </button>
       </main>
     </div>

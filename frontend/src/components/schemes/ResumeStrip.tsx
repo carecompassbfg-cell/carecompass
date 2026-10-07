@@ -6,6 +6,7 @@ import {
   getResumeStripSubtitle,
 } from "@/util/homeSchemes";
 import SchemeIcon, { FOCUS_RING } from "./SchemeIcon";
+import { t } from "@/i18n";
 
 // Hidden for the rest of this browser session only, not saved to the profile
 export const RESUME_STRIP_HIDDEN_KEY = "cc-home-resume-strip-hidden";
@@ -55,7 +56,7 @@ export default function ResumeStrip({
         </span>
         <span className="flex flex-1 flex-col gap-0.5">
           <span className="text-[15px] font-semibold leading-5 text-gray-800">
-            Pick up where you left off
+            {t("home.resume.title")}
           </span>
           <span className="ph-no-capture text-[13px] leading-[18px] text-gray-600">
             {getResumeStripSubtitle(questionCount, schemeCount, recipientName)}
@@ -72,7 +73,7 @@ export default function ResumeStrip({
       <button
         type="button"
         onClick={hide}
-        aria-label="Hide for now"
+        aria-label={t("home.resume.hide")}
         className={`absolute -right-3 -top-3 flex size-11 items-center justify-center rounded-full ${FOCUS_RING}`}
       >
         <span className="flex size-6 items-center justify-center rounded-full bg-white text-gray-600 shadow">

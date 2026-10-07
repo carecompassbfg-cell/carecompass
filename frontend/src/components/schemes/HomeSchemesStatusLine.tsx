@@ -1,6 +1,7 @@
 import { Fragment } from "react";
 import { StatusLinePart } from "@/util/homeSchemes";
 import { STATUS_TEXT_CLASS } from "./StatusPill";
+import { t } from "@/i18n";
 
 // "● 8 likely · ● 11 to check" on the home page's financial support card,
 // using the dashboard's statuses and StatusPill colours. Text, not colour
@@ -12,7 +13,7 @@ export default function HomeSchemesStatusLine({
 }) {
   return (
     <p className="ph-no-capture flex flex-wrap items-center gap-x-1.5 text-[13px] font-semibold leading-[18px]">
-      <span className="sr-only">Schemes: </span>
+      <span className="sr-only">{t("home.statusLine.label")}</span>
       {parts.map((part, index) => (
         <Fragment key={part.kind}>
           {index > 0 && (

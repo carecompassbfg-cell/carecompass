@@ -7,45 +7,24 @@ import { useRouter } from "next/navigation";
 import { QuestionIcon } from "@chakra-ui/icons";
 import BackButton from "@/ui/button/BackButton";
 import MobileTooltip from "@/components/MobileTooltip";
+import { t } from "@/i18n";
+import { getServiceDescription, getServiceLabel } from "@/types/homecare";
 
-const HOME_CARE_SERVICES = [
-  {
-    id: "home-medical",
-    label: "Home Medical",
-    description:
-      "Provides medical services  in the home such as physical examinations and prescriptions.",
-  },
-  {
-    id: "home-nursing",
-    label: "Home Nursing",
-    description:
-      "Provides nursing care at home such as wound dressing and changing of feeding tubes.",
-  },
-  {
-    id: "home-therapy",
-    label: "Home Therapy",
-    description:
-      "Home-based rehabilitation, including physiotherapy, occupational therapy and speech therapy.",
-  },
-  {
-    id: "home-personal-care",
-    label: "Home Personal Care",
-    description:
-      "Provides personal care services such as bathing, dressing and grooming.",
-  },
-  {
-    id: "medical-escort",
-    label: "Medical Escort",
-    description:
-      "Provides transportation and/or someone to accompany those who are unable to travel independently to their medical appointments.",
-  },
-  {
-    id: "dementia-enrichment",
-    label: "Dementia Enrichment",
-    description:
-      "Specialised activities targeting cognitive, emotional and/or physical health of dementia patients.",
-  },
+const HOME_CARE_SERVICE_IDS = [
+  "home-medical",
+  "home-nursing",
+  "home-therapy",
+  "home-personal-care",
+  "medical-escort",
+  "dementia-enrichment",
 ];
+
+const getHomeCareServices = () =>
+  HOME_CARE_SERVICE_IDS.map((id) => ({
+    id,
+    label: getServiceLabel(id),
+    description: getServiceDescription(id),
+  }));
 
 export default function HomeCareServices() {
   const router = useRouter();
@@ -75,13 +54,12 @@ export default function HomeCareServices() {
       <section className="flex flex-col gap-4">
         <BackButton />
         <h1 className="text-2xl font-semibold leading-tight text-brand-primary-500">
-          What kind of home care services are you considering for your loved
-          one?
+          {t("homecare.picker.title")}
         </h1>
-        <span className="leading-tight">Pick at least 1 to continue.</span>
+        <span className="leading-tight">{t("homecare.picker.pickOne")}</span>
 
         <Stack direction="column" spacing={1}>
-          {HOME_CARE_SERVICES.map((service) => (
+          {getHomeCareServices().map((service) => (
             <div key={service.id}>
               <Flex align="flex-start" gap={1}>
                 <Checkbox
@@ -105,7 +83,7 @@ export default function HomeCareServices() {
           className="mt-4"
           isDisabled={selectedServices.length === 0}
         >
-          Proceed
+          {t("homecare.picker.proceed")}
         </Button>
       </section>
     </div>

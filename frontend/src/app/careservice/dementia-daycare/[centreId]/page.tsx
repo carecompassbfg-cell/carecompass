@@ -45,6 +45,8 @@ import { UserData } from "@/types/user";
 import { MohNrLtcSubsidy } from "@/types/scheme";
 import { toast } from "sonner";
 import { PCHIDrawer } from "@/components/PCHIDrawer";
+import { t } from "@/i18n";
+import { useLocaleStore } from "@/stores/locale";
 
 export default function DaycareCentreDetails({
   params,
@@ -76,7 +78,7 @@ export default function DaycareCentreDetails({
         .then((response) => setUser(response.data))
         .catch((error) => {
           console.error(error);
-          toast.error("Failed to fetch user data");
+          toast.error(t("daycare.detail.userLoadError"));
         });
     }
   }, [isSignedIn, userId, user]);
@@ -89,7 +91,7 @@ export default function DaycareCentreDetails({
         .then((response) => setSubsidyInfo(response.data))
         .catch((error) => {
           console.error(error);
-          toast.error("Failed to fetch subsidy info");
+          toast.error(t("daycare.detail.subsidyLoadError"));
         });
     }
   }, [isSignedIn, userId, subsidyInfo]);
@@ -100,12 +102,10 @@ export default function DaycareCentreDetails({
 
   if (!centre) {
     // TODO: log error to sentry, and fix placeholder text
-    return <div>Centre not found</div>;
+    return <div>{t("daycare.detail.notFound")}</div>;
   }
 
-  // TODO: move all constant strings to a separate data file
-  const applicationDetails =
-    "- You will need to get a referral from a hospital, polyclinic or GP who is familiar with your loved ones’ condition and needs. You may also contact the service provider for a discussion. \n\n - For further assistance, contact the Agency for Integrated Care (AIC) at [1800 650 6060](tel:18006506060), email [enquiries@aic.sg](mailto:enquiries@aic.sg) or walk in to a nearby [AIC Link](https://www.aic.sg/about-us/aic-link-locations/).";
+  const applicationDetails = t("daycare.detail.howToApplyDetails");
 
   return (
     <section className="flex flex-col gap-4 overflow-x-hidden bg-white p-6">
@@ -126,7 +126,10 @@ export default function DaycareCentreDetails({
                   backgroundColor: getRatingColor(centre.averageRating),
                 }}
               >
-                <span>{centre.averageRating?.toFixed(1) || "N/A"}</span>
+                <span>
+                  {centre.averageRating?.toFixed(1) ||
+                    t("provider.notAvailable")}
+                </span>
               </div>
             </div>
             {centre.reviewCount > 0 && (
@@ -137,7 +140,7 @@ export default function DaycareCentreDetails({
                   className="max-w-24"
                 />
                 <span className="text-sm">
-                  (from {centre.reviewCount} reviews)
+                  {t("provider.fromReviews", { count: centre.reviewCount })}
                 </span>
               </div>
             )}
@@ -160,7 +163,7 @@ export default function DaycareCentreDetails({
         <AccordionItem>
           <AccordionButton>
             <Box as="span" flex="1" textAlign="left">
-              How to apply?
+              {t("daycare.detail.howToApply")}
             </Box>
             <AccordionIcon />
           </AccordionButton>
@@ -173,21 +176,18 @@ export default function DaycareCentreDetails({
         {centre.minPrice !== null && (
           <div className="flex flex-col gap-2">
             <span className="text-lg">
-              <b>Fees</b>
+              <b>{t("daycare.detail.fees")}</b>
             </span>
             <span>
-              <b>Before subsidy: </b>
-              {`From ${formatPriceRange(
-                centre.minPrice,
-                centre.maxPrice,
-              )}/month`}
+              <b>{t("price.beforeSubsidy")}</b>
+              {t("price.fromPerMonth", {
+                price: formatPriceRange(centre.minPrice, centre.maxPrice),
+              })}
             </span>
             {isSignedIn && user.monthly_pchi === null && (
               <section className="flex flex-col gap-4 rounded border border-brand-primary-300 bg-brand-primary-100 p-4">
                 <p className="text-brand-primary-900">
-                  This service is eligible for MOH Non-Residential Long-Term
-                  Care Subsidy. Share your household information to see how much
-                  subsidy you may be eligible for.
+                  {t("daycare.detail.subsidyPrompt")}
                 </p>
                 <PCHIDrawer />
               </section>
@@ -195,22 +195,25 @@ export default function DaycareCentreDetails({
             {subsidyInfo && (
               <>
                 <span>
-                  <b>After subsidy: </b>
-                  {`From est. ${formatPriceRange(
-                    centre.minPrice * (1 - subsidyInfo.subsidyLevel / 100),
-                    centre.maxPrice
-                      ? centre.maxPrice * (1 - subsidyInfo.subsidyLevel / 100)
-                      : centre.maxPrice,
-                  )}/month`}
+                  <b>{t("price.afterSubsidy")}</b>
+                  {t("price.fromEstPerMonth", {
+                    price: formatPriceRange(
+                      centre.minPrice * (1 - subsidyInfo.subsidyLevel / 100),
+                      centre.maxPrice
+                        ? centre.maxPrice * (1 - subsidyInfo.subsidyLevel / 100)
+                        : centre.maxPrice,
+                    ),
+                  })}
                 </span>
                 <section className="flex flex-col place-items-end gap-4 rounded border border-brand-primary-300 bg-brand-primary-100 p-4">
                   <p className="text-brand-primary-900">
-                    You may qualify for <b>{subsidyInfo.subsidyLevel}%</b>{" "}
-                    subsidy from the MOH Non-Residential Long-Term Care Subsidy!
+                    {t.rich("daycare.detail.subsidyQualify", {
+                      level: subsidyInfo.subsidyLevel,
+                      b: (chunks) => <b>{chunks}</b>,
+                    })}
                   </p>
                   <p className="text-sm leading-tight text-brand-primary-900">
-                    *Based on an estimated per capita monthly household income
-                    of&nbsp;
+                    {t("daycare.detail.basedOnIncome")}&nbsp;
                     <b>
                       {subsidyInfo.monthlyPchi.toLocaleString("en-SG", {
                         style: "currency",
@@ -219,13 +222,15 @@ export default function DaycareCentreDetails({
                     </b>
                     {subsidyInfo.monthlyPchi === 0 &&
                       subsidyInfo.annualPropertyValue !== null &&
-                      ` (and Annual Property Value of ${subsidyInfo.annualPropertyValue.toLocaleString(
-                        "en-SG",
-                        {
-                          style: "currency",
-                          currency: "SGD",
-                        },
-                      )})`}
+                      t("daycare.detail.andAnnualValue", {
+                        value: subsidyInfo.annualPropertyValue.toLocaleString(
+                          "en-SG",
+                          {
+                            style: "currency",
+                            currency: "SGD",
+                          },
+                        ),
+                      })}
                   </p>
                   <Button
                     variant="link"
@@ -234,7 +239,7 @@ export default function DaycareCentreDetails({
                       router.push("/dashboard/schemes?id=MOH-NR-LTC-SUBSIDY");
                     }}
                   >
-                    Learn more
+                    {t("daycare.detail.learnMore")}
                   </Button>
                 </section>
               </>
@@ -243,18 +248,18 @@ export default function DaycareCentreDetails({
         )}
         <div className="flex flex-col">
           <span className="text-lg">
-            <b>Operating hours</b>
+            <b>{t("daycare.detail.operatingHours")}</b>
           </span>
           <span>{centre.operatingHours.join(", \n")}</span>
         </div>
         <div className="my-2 flex flex-col gap-2">
           <span className="text-lg">
-            <b>Contact Details</b>
+            <b>{t("daycare.detail.contactDetails")}</b>
           </span>
           <div className="flex flex-col gap-2">
             {centre.phone && (
               <span>
-                <b>Phone: </b>
+                <b>{t("daycare.detail.phone")}</b>
                 <a
                   href={`tel:+65${centre.phone}`}
                   target="_blank"
@@ -266,7 +271,7 @@ export default function DaycareCentreDetails({
             )}
             {centre.email && (
               <span>
-                <b>Email: </b>
+                <b>{t("daycare.detail.email")}</b>
                 <a
                   href={`mailto:${centre.email}`}
                   target="_blank"
@@ -278,7 +283,7 @@ export default function DaycareCentreDetails({
             )}
             {centre.website && (
               <span>
-                <b>Website: </b>
+                <b>{t("daycare.detail.website")}</b>
                 <a
                   href={centre.website}
                   target="_blank"
@@ -292,7 +297,7 @@ export default function DaycareCentreDetails({
         </div>
         <div className="my-2 flex flex-col gap-2">
           <span className="text-lg">
-            <b>Address</b>
+            <b>{t("daycare.detail.address")}</b>
           </span>
           <div className="flex flex-col">
             {constructAddress(
@@ -328,6 +333,7 @@ function NewReviewDrawer({ centreId }: { centreId: number }) {
     target_id: centreId,
     target_type: ReviewTargetType.DEMENTIA_DAY_CARE,
     overall_rating: 0,
+    // Saved with the review, so stays in English
     author_name: userFullName || "Anonymous",
     content: "",
   });
@@ -344,7 +350,7 @@ function NewReviewDrawer({ centreId }: { centreId: number }) {
   return (
     <Drawer.Root open={isOpen} onOpenChange={setIsOpen}>
       <Drawer.Trigger>
-        <Button className="w-full">Leave a review</Button>
+        <Button className="w-full">{t("daycare.review.leave")}</Button>
       </Drawer.Trigger>
       <Drawer.Portal>
         <Drawer.Overlay className="fixed inset-0 bg-black/40" />
@@ -352,25 +358,20 @@ function NewReviewDrawer({ centreId }: { centreId: number }) {
           <Drawer.Handle className="my-2" />
           <div className="flex flex-col gap-4 bg-white px-8 py-8 pt-6">
             <Drawer.Title className="text-xl font-semibold">
-              Leave a review
+              {t("daycare.review.leave")}
             </Drawer.Title>
             <div className="flex flex-col gap-2 rounded-md border border-brand-primary-200 bg-brand-primary-50 p-4 leading-tight">
-              <span>
-                Thank you for helping other caregivers by sharing your
-                experiences. We ask that you declare below that you have indeed
-                used the daycare service, as we value genuine reviews only.
-              </span>
+              <span>{t("daycare.review.thanks")}</span>
               <Checkbox
                 isChecked={isDeclarationChecked}
                 onChange={(e) => setIsDeclarationChecked(e.target.checked)}
               >
-                I declare that I have used this service and my review is based
-                on my actual experiences.
+                {t("daycare.review.declaration")}
               </Checkbox>
             </div>
             <div>
               <FormLabel className="mt-2" isRequired>
-                Rating
+                {t("daycare.review.rating")}
               </FormLabel>
               <Rating
                 value={review.overall_rating}
@@ -385,14 +386,14 @@ function NewReviewDrawer({ centreId }: { centreId: number }) {
             </div>
             <div>
               <FormLabel className="mt-2">
-                Please share more about why you chose this rating
+                {t("daycare.review.whyRating")}
               </FormLabel>
               <Textarea
                 value={review.content}
                 onChange={(e) =>
                   setReview({ ...review, content: e.target.value })
                 }
-                placeholder="Share your experience with us"
+                placeholder={t("daycare.review.placeholder")}
               />
             </div>
             <Button
@@ -400,7 +401,7 @@ function NewReviewDrawer({ centreId }: { centreId: number }) {
               onClick={submitReview}
               isDisabled={canSubmit}
             >
-              Share
+              {t("daycare.review.share")}
             </Button>
           </div>
         </Drawer.Content>
@@ -409,8 +410,30 @@ function NewReviewDrawer({ centreId }: { centreId: number }) {
   );
 }
 
+const RELATIVE_UNITS: [Intl.RelativeTimeFormatUnit, number][] = [
+  ["year", 365 * 24 * 3600],
+  ["month", 30 * 24 * 3600],
+  ["day", 24 * 3600],
+  ["hour", 3600],
+  ["minute", 60],
+];
+
 const getRelativeTime = (date: string) => {
-  return moment.utc(date).local().fromNow();
+  const time = moment.utc(date).local();
+  if (useLocaleStore.getState().locale === "en") {
+    return time.fromNow();
+  }
+  // moment only has English loaded, so use the browser's formatter otherwise
+  const seconds = time.diff(moment(), "seconds");
+  const formatter = new Intl.RelativeTimeFormat(t("common.dateLocale"), {
+    numeric: "auto",
+  });
+  for (const [unit, size] of RELATIVE_UNITS) {
+    if (Math.abs(seconds) >= size) {
+      return formatter.format(Math.trunc(seconds / size), unit);
+    }
+  }
+  return formatter.format(seconds, "second");
 };
 
 function ReviewDetailDrawer({ review }: { review: Review }) {
@@ -431,21 +454,21 @@ function ReviewDetailDrawer({ review }: { review: Review }) {
             <Button
               colorScheme="white"
               variant="link"
-              aria-label="Close drawer"
+              aria-label={t("daycare.review.closeDrawer")}
               leftIcon={<ArrowLeft size={16} />}
               size="sm"
               onClick={() => setIsOpen(false)}
             >
-              Back
+              {t("daycare.review.back")}
             </Button>
             <VisuallyHidden>
               <Drawer.Title className="text-xl font-semibold">
-                Review by {review.authorName}
+                {t("daycare.review.reviewBy", { name: review.authorName })}
               </Drawer.Title>
             </VisuallyHidden>
             <div className="flex flex-col gap-2">
               <span className="text-lg font-semibold">
-                Review from {review.authorName}
+                {t("daycare.review.reviewFrom", { name: review.authorName })}
               </span>
               <div className="flex gap-2">
                 <Rating
@@ -489,9 +512,9 @@ function ReviewSection({
   return (
     <section className="flex flex-col gap-4">
       <div className="flex flex-col">
-        <h1 className="text-xl font-semibold">Reviews</h1>
+        <h1 className="text-xl font-semibold">{t("daycare.review.title")}</h1>
         <span className="text-sm text-gray-500">
-          See what other caregivers are saying
+          {t("daycare.review.subtitle")}
         </span>
       </div>
       {reviewCount > 0 && (
@@ -506,7 +529,7 @@ function ReviewSection({
       ) : (
         <SignInButton>
           <Button variant="solid" colorScheme="blue">
-            Sign in to leave a review
+            {t("daycare.review.signInToReview")}
           </Button>
         </SignInButton>
       )}
@@ -527,7 +550,9 @@ function ReviewSection({
             <ReviewDetailDrawer review={review} />
             {review.reviewSource !== ReviewSource.IN_APP && (
               <span className="text-sm text-gray-500">
-                This review is from {mapReviewSource(review.reviewSource)}
+                {t("daycare.review.fromSource", {
+                  source: mapReviewSource(review.reviewSource),
+                })}
               </span>
             )}
           </div>
@@ -550,24 +575,22 @@ function FinancialSupportSection() {
   const SCHEMES = [
     {
       id: "MOH-NR-LTC-SUBSIDY",
-      name: "MOH Non-Residential Long-Term Care Subsidy",
-      description:
-        "Defrays cost of long-term care services for persons living in the community",
+      name: t("daycare.support.nrLtc.name"),
+      description: t("daycare.support.nrLtc.description"),
     },
     {
       id: "HOME-CAREGIVING-GRANT",
-      name: "Home Caregiving Grant",
-      description:
-        "Defrays caregiving costs for eligible individuals with permanent moderate disability living in the community.",
+      name: t("daycare.support.hcg.name"),
+      description: t("daycare.support.hcg.description"),
     },
   ];
 
   return (
     <section className="flex flex-col gap-4">
       <div className="flex flex-col">
-        <h1 className="text-xl font-semibold">Financial Support</h1>
+        <h1 className="text-xl font-semibold">{t("daycare.support.title")}</h1>
         <span className="text-sm text-gray-500">
-          Get the support you and loved ones need
+          {t("daycare.support.subtitle")}
         </span>
       </div>
       <section className="flex flex-col gap-4">
@@ -581,7 +604,7 @@ function FinancialSupportSection() {
             <span className="leading-tight">{scheme.description}</span>
             <div className="flex w-full place-content-end place-items-center gap-1">
               <span className="text-sm text-brand-primary-500">
-                View details
+                {t("daycare.support.viewDetails")}
               </span>
               <BxRightArrowAlt className="text-brand-primary-500" />
             </div>

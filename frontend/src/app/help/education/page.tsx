@@ -8,6 +8,7 @@ import ExternalLink from "@/ui/ExternalLink";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import LoadingSpinner from "@/ui/loading";
+import { t } from "@/i18n";
 
 export default function Page() {
   const [programmeData, setProgrammeData] = useState<ProgrammeData[]>([]);
@@ -34,20 +35,21 @@ export default function Page() {
     <div className="flex h-full w-full flex-col gap-4">
       <BackButton />
       <h3 className="text-lg font-semibold leading-tight text-gray-500">
-        I see that you’re looking for support to better care for your loved one
-        and yourself.
+        {t("help.education.intro")}
       </h3>
       <h1 className="mb-4 text-2xl font-semibold leading-tight text-brand-primary-500">
-        Here are some programmes that may help
+        {t("help.education.title")}
       </h1>
       <section className="flex flex-col gap-2 pb-6">
-        <h3 className="text-lg font-semibold">Educational Programmes</h3>
+        <h3 className="text-lg font-semibold">
+          {t("help.education.programmes")}
+        </h3>
         {programmeData.map((programme, index) => (
           <ProgrammeCard key={index} programme={programme} />
         ))}
       </section>
       <section className="flex flex-col gap-2 pb-6">
-        <h3 className="text-lg font-semibold">Educational Events</h3>
+        <h3 className="text-lg font-semibold">{t("help.education.events")}</h3>
         {eventData.map((event, index) => (
           <ProgrammeCard key={index} programme={event} />
         ))}
@@ -69,7 +71,10 @@ function ProgrammeCard({ programme }: { programme: ProgrammeData }) {
         <span className="text-lg font-semibold">{programme.name}</span>
         <span>{programme.description}</span>
         {programme.link ? (
-          <ExternalLink link={programme.link} text="Learn more" />
+          <ExternalLink
+            link={programme.link}
+            text={t("help.education.learnMore")}
+          />
         ) : (
           <Button
             onClick={handleClick}
@@ -77,7 +82,7 @@ function ProgrammeCard({ programme }: { programme: ProgrammeData }) {
             colorScheme="blue"
             variant="link"
           >
-            Learn more
+            {t("help.education.learnMore")}
           </Button>
         )}
       </div>

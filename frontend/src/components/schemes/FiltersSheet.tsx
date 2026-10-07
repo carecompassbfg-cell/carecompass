@@ -13,6 +13,7 @@ import {
 } from "@/util/schemeBrowse";
 import { PAY_FOR_META, SchemeWithStatus } from "@/util/schemeCatalog";
 import SchemeIcon, { FOCUS_RING } from "./SchemeIcon";
+import { t } from "@/i18n";
 
 function FilterOption({
   label,
@@ -111,7 +112,7 @@ export default function FiltersSheet({
           <Drawer.Handle className="my-2" />
           <div className="flex items-center justify-between px-5 pt-2">
             <Drawer.Title className="text-[22px] font-bold leading-7 text-gray-800">
-              Filters
+              {t("allSchemes.filters")}
             </Drawer.Title>
             <button
               type="button"
@@ -120,17 +121,17 @@ export default function FiltersSheet({
               }
               className={`min-h-11 px-2 text-sm font-semibold text-interaction-links-default ${FOCUS_RING}`}
             >
-              Clear all
+              {t("allSchemes.clearAll")}
             </button>
           </div>
           <Drawer.Description className="sr-only">
-            Filter the list of caregiving schemes
+            {t("filters.description")}
           </Drawer.Description>
 
           <div className="flex flex-col gap-4 overflow-y-auto px-5 pb-4">
             <fieldset className="flex flex-col">
               <legend className="pb-1 text-sm font-bold text-gray-800">
-                Status
+                {t("schemes.filters.status")}
               </legend>
               {STATUS_ORDER.map((kind: SchemeStatusKind) => (
                 <FilterOption
@@ -150,7 +151,7 @@ export default function FiltersSheet({
 
             <fieldset className="flex flex-col">
               <legend className="pb-1 text-sm font-bold text-gray-800">
-                Helps pay for
+                {t("schemes.filters.payFor")}
               </legend>
               {visiblePayFor.map((category: PayForCategory) => (
                 <FilterOption
@@ -172,14 +173,14 @@ export default function FiltersSheet({
                   onClick={() => setShowAllPayFor(true)}
                   className={`min-h-11 self-start px-1 text-sm font-semibold text-interaction-links-default ${FOCUS_RING}`}
                 >
-                  Show all {payForOptions.length}
+                  {t("filters.showAll", { count: payForOptions.length })}
                 </button>
               )}
             </fieldset>
 
             <fieldset className="flex flex-col">
               <legend className="pb-1 text-sm font-bold text-gray-800">
-                Area
+                {t("schemes.filters.area")}
               </legend>
               {areaOptions.map((option) => (
                 <FilterOption
@@ -207,7 +208,7 @@ export default function FiltersSheet({
               }}
               className={`flex min-h-11 w-full items-center justify-center rounded-lg bg-interaction-main-default px-4 text-[15px] font-semibold text-white hover:bg-interaction-main-hover ${FOCUS_RING}`}
             >
-              Show {resultCount} {resultCount === 1 ? "scheme" : "schemes"}
+              {t("filters.showResults", { count: resultCount })}
             </button>
           </div>
         </Drawer.Content>

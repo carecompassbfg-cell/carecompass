@@ -15,6 +15,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { parse } from "partial-json";
 import CustomMarkdown from "../CustomMarkdown";
 import { Fragment } from "react";
+import { t } from "@/i18n";
 
 export default function ChatMessage({ message }: { message: Message }) {
   return (
@@ -196,7 +197,7 @@ function parseActionMarkup(action: string, router: AppRouterInstance) {
           className="text-blue-500 underline"
           onClick={() => router.push(actionVal)}
         >
-          Click to learn more
+          {t("chat.message.learnMore")}
         </button>
       );
     } else if (actionType === BotResponseCardAction.Phone) {
@@ -205,7 +206,7 @@ function parseActionMarkup(action: string, router: AppRouterInstance) {
           href={`tel:${actionVal}`}
           className="text-sm text-blue-500 underline"
         >
-          Call {actionVal}
+          {t("chat.message.call", { number: actionVal })}
         </a>
       );
     }

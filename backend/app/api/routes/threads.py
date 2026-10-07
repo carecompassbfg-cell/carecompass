@@ -1,4 +1,4 @@
-from typing import List, Optional
+from typing import List, Literal, Optional
 from fastapi import APIRouter, HTTPException
 from sse_starlette.sse import EventSourceResponse
 from openai import NotFoundError
@@ -16,6 +16,8 @@ router = APIRouter()
 # Pydantic models
 class ChatCompletionRequest(BaseModel):
     query: str
+    # The app's language. Older app versions don't send it (English).
+    locale: Optional[Literal["en", "zh"]] = None
 
 class ThreadCreateResponse(BaseModel):
     thread_id: str
@@ -104,7 +106,7 @@ async def create_message(
         db.add(thread)
         db.commit()
 
-    return EventSourceResponse(stream_chat_responses(thread_id, req.query))
+    return EventSourceResponse(stream_chat_responses(thread_id, req.query, req.locale))
 
 
 @router.get('/threads', response_model=List[ThreadReadResponse])

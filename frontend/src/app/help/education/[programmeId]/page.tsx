@@ -5,6 +5,7 @@ import { BackButton } from "@/ui/button";
 import CustomMarkdown from "@/ui/CustomMarkdown";
 import LoadingSpinner from "@/ui/loading";
 import { useState, useEffect } from "react";
+import { t } from "@/i18n";
 
 export default function ProgrammeDetails({
   params,
@@ -34,7 +35,9 @@ export default function ProgrammeDetails({
         <h3 className="text-lg font-semibold">{programmeData.name}</h3>
         <div className="flex place-content-start place-items-start gap-2 rounded-md border border-gray-200 bg-white p-4 text-left">
           <div className="flex flex-col gap-2">
-            <span className="text-lg font-semibold">Overview</span>
+            <span className="text-lg font-semibold">
+              {t("help.education.overview")}
+            </span>
             <span className="mb-4">{programmeData.description}</span>
             {programmeData.content && (
               <CustomMarkdown content={programmeData.content} />
@@ -43,7 +46,9 @@ export default function ProgrammeDetails({
         </div>
       </section>
       <section className="flex flex-col gap-2 pb-6">
-        <h3 className="text-lg font-semibold">Next steps</h3>
+        <h3 className="text-lg font-semibold">
+          {t("help.education.nextSteps")}
+        </h3>
         <div className="flex flex-col place-content-start place-items-start gap-2 rounded-md border border-gray-200 bg-white p-4 text-left">
           <div className="flex flex-col gap-3">
             {programmeData.actionable && (

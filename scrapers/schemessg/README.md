@@ -50,6 +50,8 @@ pipenv run pytest           # tests, no network
 | `data/state.json` | This run's normalised records, used to diff the next run. |
 | `data/tier1_sources.json` | Hash of each Tier 1 source page's visible text, used to spot changes next run. |
 
+The report also lists Chinese translations (`catalog.*.zh.json`) that are missing or stale, using `zh_status.py`. The sync only reads those files. See `docs/i18n/README.md`.
+
 Every run rewrites the outputs, because dates move forward: Tier 2 schemes' `lastRefreshed` follows the sync date, and Tier 1 `lastChecked` dates move as described below. The PR title says which kind of week it was:
 
 - **"Schemes.sg weekly sync: changes to review"**: schemes added, removed or changed, a Tier 1 description or overridden text changed on Schemes.sg, a Tier 1 official page changed, or the environment changed.

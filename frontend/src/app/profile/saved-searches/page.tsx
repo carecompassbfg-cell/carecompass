@@ -1,5 +1,6 @@
 "use client";
 
+import { t } from "@/i18n";
 import { api } from "@/api";
 import { Bookmark } from "@/types/bookmark";
 import {
@@ -39,11 +40,15 @@ export default function SavedSearchesPage() {
   return (
     <div className="flex h-full w-full flex-col gap-4">
       <BackButton />
-      <h1 className="text-2xl font-semibold">Saved Searches</h1>
+      <h1 className="text-2xl font-semibold">
+        {t("profilePage.savedSearches")}
+      </h1>
       <div className="flex flex-col gap-2">
         <div className="flex items-center gap-2">
           <ListFilterIcon size={16} />
-          <span className="font-semibold">Filter by</span>
+          <span className="font-semibold">
+            {t("profilePage.saved.filterBy")}
+          </span>
         </div>
         <MultiSelect
           values={selectedResourceTypes.map((resourceType) =>
@@ -54,7 +59,7 @@ export default function SavedSearchesPage() {
             value: resourceType.toString(),
           }))}
           name="resourceTypes"
-          placeholder="Filter by type"
+          placeholder={t("profilePage.saved.filterByType")}
           onChange={(values) => {
             setSelectedResourceTypes(values);
           }}

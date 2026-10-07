@@ -1,5 +1,6 @@
 "use client";
 
+import { t } from "@/i18n";
 import { SignInButton, SignOutButton, UserButton } from "@clerk/nextjs";
 import {
   AccordionIcon,
@@ -40,7 +41,7 @@ export default function ProfilePage() {
 
   return (
     <div className="mb-8 flex h-full w-full flex-col gap-2">
-      <h1 className="mb-2 text-2xl font-semibold">My Profile</h1>
+      <h1 className="mb-2 text-2xl font-semibold">{t("profilePage.title")}</h1>
       {isSignedIn ? <SignedInUserProfileCard /> : <GuestUserProfileCard />}
       <button
         disabled={!isSignedIn}
@@ -51,7 +52,7 @@ export default function ProfilePage() {
       >
         <BookmarkIcon size={20} />
         <span className="w-f<BookmarkIcon size={24} />ull text-left font-semibold">
-          Saved Searches
+          {t("profilePage.savedSearches")}
         </span>
         <ChevronRightIcon size={24} className="ml-auto" />
       </button>
@@ -77,7 +78,7 @@ function ProfileSignOutButton() {
         size="xs"
         rightIcon={<LogOutIcon size={16} />}
       >
-        Log out
+        {t("profilePage.logOut")}
       </Button>
     </SignOutButton>
   );
@@ -100,7 +101,7 @@ function ProfileSignInButton() {
         size="xs"
         rightIcon={<LogOutIcon size={16} />}
       >
-        Sign In
+        {t("profilePage.signIn")}
       </Button>
     </SignInButton>
   );
@@ -149,7 +150,7 @@ function SignedInUserProfileCard() {
 function GuestUserProfileCard() {
   return (
     <UserProfileCard
-      displayName="Guest"
+      displayName={t("profilePage.guest")}
       profileAvatar={<GuestUserAvatar />}
       profileActionButton={<ProfileSignInButton />}
     />
@@ -161,57 +162,57 @@ function UserInfoAccordian({ user }: { user: UserData }) {
 
   const caregiverDataDisplay = [
     {
-      label: "Citizenship",
+      label: t("profilePage.fields.citizenship"),
       value: getFormattedUserCitizenship(user.citizenship),
     },
     {
-      label: "Contact Number",
+      label: t("profilePage.fields.contactNumber"),
       value: getFormattedContactNumber(user.contact_number),
     },
   ];
 
   const careRecipientDataDisplay = [
     {
-      label: "Name or nickname",
-      value: user.care_recipient_name || "Not set",
+      label: t("profilePage.fields.nameOrNickname"),
+      value: user.care_recipient_name || t("profilePage.notSet"),
     },
     {
-      label: "Relationship to caregiver",
+      label: t("profilePage.fields.relationship"),
       value: getFormattedUserRelationship(user.care_recipient_relationship),
     },
     {
-      label: "Age",
+      label: t("profilePage.fields.age"),
       value: user.care_recipient_age,
     },
     {
-      label: "Citizenship",
+      label: t("profilePage.fields.citizenship"),
       value: getFormattedUserCitizenship(user.care_recipient_citizenship),
     },
     {
-      label: "Staying at",
+      label: t("profilePage.fields.stayingAt"),
       value: getFormattedUserResidence(user.care_recipient_residence),
     },
     {
-      label: "Postal code",
-      value: user.home_postal_code || "Not set",
+      label: t("profilePage.fields.postalCode"),
+      value: user.home_postal_code || t("profilePage.notSet"),
     },
   ];
 
   const pchiDisplay = [
     {
-      label: "Household size",
+      label: t("profilePage.fields.householdSize"),
       value: user.household_size,
     },
     {
-      label: "Total monthly household income",
+      label: t("profilePage.fields.totalMonthlyIncome"),
       value: formatPrice(user.total_monthly_household_income),
     },
     {
-      label: "Annual property value",
+      label: t("profilePage.fields.annualPropertyValue"),
       value: formatPrice(user.annual_property_value),
     },
     {
-      label: "Monthly PCHI*",
+      label: t("profilePage.fields.monthlyPchi"),
       value: formatPrice(user.monthly_pchi),
     },
   ];
@@ -221,13 +222,15 @@ function UserInfoAccordian({ user }: { user: UserData }) {
       <section className="flex w-full flex-col rounded-lg border border-gray-200 bg-white">
         <h3 className="text-md flex items-center gap-2 p-4 font-semibold">
           <InfoIcon size={20} />
-          Personal Details
+          {t("profilePage.personalDetails")}
         </h3>
         <Accordion allowMultiple>
           <AccordionItem>
             <h2>
               <AccordionButton>
-                <span className="flex-1 text-left">Caregiver Information</span>
+                <span className="flex-1 text-left">
+                  {t("profilePage.caregiverInfo")}
+                </span>
                 <AccordionIcon />
               </AccordionButton>
             </h2>
@@ -235,7 +238,9 @@ function UserInfoAccordian({ user }: { user: UserData }) {
               <section className="flex flex-col">
                 {caregiverDataDisplay.map((item) => (
                   <div key={item.label}>
-                    <span>{item.label}: </span>
+                    <span>
+                      {t("profilePage.fieldLabel", { label: item.label })}
+                    </span>
                     <span className="font-semibold">{item.value}</span>
                   </div>
                 ))}
@@ -250,7 +255,7 @@ function UserInfoAccordian({ user }: { user: UserData }) {
                     router.push("/profile/caregiver-info/edit");
                   }}
                 >
-                  Edit
+                  {t("profilePage.edit")}
                 </Button>
               </section>
             </AccordionPanel>
@@ -259,7 +264,7 @@ function UserInfoAccordian({ user }: { user: UserData }) {
             <h2>
               <AccordionButton>
                 <span className="flex-1 text-left">
-                  Care Recipient Information
+                  {t("profilePage.careRecipientInfo")}
                 </span>
                 <AccordionIcon />
               </AccordionButton>
@@ -269,7 +274,9 @@ function UserInfoAccordian({ user }: { user: UserData }) {
               <section className="flex flex-col">
                 {careRecipientDataDisplay.map((item) => (
                   <div key={item.label}>
-                    <span>{item.label}: </span>
+                    <span>
+                      {t("profilePage.fieldLabel", { label: item.label })}
+                    </span>
                     <span className="font-semibold">{item.value}</span>
                   </div>
                 ))}
@@ -284,7 +291,7 @@ function UserInfoAccordian({ user }: { user: UserData }) {
                     router.push("/profile/care-recipient-info/edit");
                   }}
                 >
-                  Edit
+                  {t("profilePage.edit")}
                 </Button>
               </section>
               <YourAnswers user={user} />
@@ -294,7 +301,9 @@ function UserInfoAccordian({ user }: { user: UserData }) {
             <AccordionItem>
               <h2>
                 <AccordionButton>
-                  <span className="flex-1 text-left">Household Income</span>
+                  <span className="flex-1 text-left">
+                    {t("profilePage.householdIncome")}
+                  </span>
                   <AccordionIcon />
                 </AccordionButton>
               </h2>
@@ -302,13 +311,15 @@ function UserInfoAccordian({ user }: { user: UserData }) {
                 <section className="flex flex-col">
                   {pchiDisplay.map((item) => (
                     <div key={item.label}>
-                      <span>{item.label}: </span>
+                      <span>
+                        {t("profilePage.fieldLabel", { label: item.label })}
+                      </span>
                       <span className="font-semibold">{item.value}</span>
                     </div>
                   ))}
                 </section>
                 <span className="text-xs text-gray-500">
-                  *PCHI is the Per Capita Household Income.
+                  {t("profilePage.pchiNote")}
                 </span>
                 <section className="mt-2 flex">
                   <Button
@@ -320,7 +331,7 @@ function UserInfoAccordian({ user }: { user: UserData }) {
                       router.push("/profile/household-income/edit");
                     }}
                   >
-                    Edit
+                    {t("profilePage.edit")}
                   </Button>
                 </section>
               </AccordionPanel>

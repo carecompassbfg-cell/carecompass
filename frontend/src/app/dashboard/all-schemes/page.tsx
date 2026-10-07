@@ -30,6 +30,7 @@ import {
   STATUS_FILTER_LABELS,
 } from "@/util/schemeBrowse";
 import { getOpenSheetQuestions, SchemeWithStatus } from "@/util/schemeCatalog";
+import { t } from "@/i18n";
 
 const GROUP_PREVIEW = 3;
 
@@ -122,7 +123,7 @@ function FilterChip({
       <button
         type="button"
         onClick={onClear}
-        aria-label={`Clear filter: ${label}`}
+        aria-label={t("allSchemes.clearFilter", { label })}
         className={`flex min-h-11 min-w-11 items-center justify-center rounded-r-full ${FOCUS_RING}`}
       >
         <X aria-hidden size={16} />
@@ -219,24 +220,24 @@ function AllSchemes() {
 
       <header className="flex flex-col gap-1">
         <h1 className="text-[28px] font-bold leading-[34px] text-gray-800">
-          All caregiving schemes
+          {t("allSchemes.title")}
         </h1>
         <p className="text-sm leading-5 text-gray-600" aria-live="polite">
           {hasActiveFilters(filters)
-            ? `Showing ${matching.length} of ${total}`
-            : `${total} grants, subsidies and reliefs. Sorted by best match for ${name}.`}
+            ? t("allSchemes.showing", { count: matching.length, total })
+            : t("allSchemes.subtitle", { total, name })}
         </p>
       </header>
 
       {catalogError && (
         <p className="rounded-xl border border-gray-200 bg-white p-4 text-sm text-gray-600">
-          We couldn&apos;t load the list of schemes. Please try again later.
+          {t("dashboard.catalogError")}
         </p>
       )}
 
       <div className="relative">
         <label htmlFor="scheme-search" className="sr-only">
-          Search schemes
+          {t("allSchemes.searchLabel")}
         </label>
         <Search
           aria-hidden
@@ -248,14 +249,14 @@ function AllSchemes() {
           type="search"
           value={q}
           onChange={(event) => update({ ...filters, q: event.target.value })}
-          placeholder="Search by name, e.g. transport, MediSave"
+          placeholder={t("allSchemes.searchPlaceholder")}
           className={`min-h-12 w-full rounded-xl border border-gray-300 bg-white pl-10 pr-12 text-[15px] text-gray-800 placeholder:text-sm placeholder:text-gray-600 [&::-webkit-search-cancel-button]:hidden ${FOCUS_RING}`}
         />
         {q && (
           <button
             type="button"
             onClick={() => update({ ...filters, q: "" })}
-            aria-label="Clear search"
+            aria-label={t("allSchemes.clearSearch")}
             className={`absolute right-1 top-1/2 flex size-11 -translate-y-1/2 items-center justify-center rounded-full text-gray-600 ${FOCUS_RING}`}
           >
             <X aria-hidden size={18} />
@@ -264,7 +265,11 @@ function AllSchemes() {
       </div>
 
       <div className="flex flex-col gap-1">
-        <div className="flex flex-wrap gap-2" role="group" aria-label="Filters">
+        <div
+          className="flex flex-wrap gap-2"
+          role="group"
+          aria-label={t("allSchemes.filters")}
+        >
           {(["status", "payFor", "area"] as FilterKey[]).map((key) => (
             <FilterChip
               key={key}
@@ -281,22 +286,20 @@ function AllSchemes() {
             onClick={() => update(EMPTY_FILTERS)}
             className={`min-h-11 self-end px-2 text-sm font-semibold text-interaction-links-default ${FOCUS_RING}`}
           >
-            Clear all
+            {t("allSchemes.clearAll")}
           </button>
         )}
       </div>
 
       {matching.length === 0 && (
         <div className="flex flex-col items-start gap-2 rounded-xl border border-gray-200 bg-white p-4">
-          <p className="text-[15px] text-gray-800">
-            No schemes match. Try fewer filters or a different word.
-          </p>
+          <p className="text-[15px] text-gray-800">{t("allSchemes.noMatch")}</p>
           <button
             type="button"
             onClick={() => update(EMPTY_FILTERS)}
             className={`min-h-11 text-sm font-semibold text-interaction-links-default ${FOCUS_RING}`}
           >
-            Clear all
+            {t("allSchemes.clearAll")}
           </button>
         </div>
       )}
@@ -305,16 +308,16 @@ function AllSchemes() {
         <>
           {flat.length > 0 && (
             <section className="flex flex-col gap-2.5">
-              <h2 className="sr-only">Results</h2>
+              <h2 className="sr-only">{t("allSchemes.results")}</h2>
               {notFitCards(flat)}
             </section>
           )}
           {alsoMatching.length > 0 && (
             <section className="flex flex-col gap-2.5">
               <GroupHeading
-                title={`Also matching "${filters.q.trim()}"`}
+                title={t("allSchemes.alsoMatching", { q: filters.q.trim() })}
                 count={alsoMatching.length}
-                subtitle={`Not in your "${statusLabel}" filter`}
+                subtitle={t("allSchemes.notInFilter", { status: statusLabel })}
               />
               {notFitCards(alsoMatching)}
             </section>
@@ -322,19 +325,22 @@ function AllSchemes() {
         </>
       ) : (
         <>
-          <StatusGroup title="Likely eligible" items={groups.likely} />
           <StatusGroup
-            title="Need answers"
+            title={t("schemes.status.likely")}
+            items={groups.likely}
+          />
+          <StatusGroup
+            title={t("schemes.status.needs_answers")}
             subtitle={
               openQuestions > 0
-                ? `Answer ${openQuestions} ${openQuestions === 1 ? "question" : "questions"} to check these`
+                ? t("allSchemes.answerToCheckThese", { count: openQuestions })
                 : undefined
             }
             items={groups.needs_answers}
           />
           <StatusGroup
-            title="Check with agency"
-            subtitle="Check eligibility on the official website."
+            title={t("schemes.status.provider_decides")}
+            subtitle={t("allSchemes.checkOfficial")}
             items={groups.provider_decides}
           />
           {groups.not_a_match.length > 0 && (
@@ -352,12 +358,12 @@ function AllSchemes() {
                 />
                 <span className="flex flex-1 flex-col gap-0.5">
                   <span className="text-[15px] font-semibold text-gray-800">
-                    Probably not for {name}
+                    {t("allSchemes.probablyNot", { name })}
                   </span>
                   <span className="text-[13px] leading-[18px] text-gray-600">
-                    {groups.not_a_match.length}{" "}
-                    {groups.not_a_match.length === 1 ? "scheme" : "schemes"}.
-                    Tap to see why.
+                    {t("allSchemes.tapToSeeWhy", {
+                      count: groups.not_a_match.length,
+                    })}
                   </span>
                 </span>
                 {showNotFit ? (
@@ -376,12 +382,14 @@ function AllSchemes() {
                   <p className="flex items-start gap-2 px-1 text-[13px] leading-[18px] text-gray-600">
                     <Info aria-hidden size={16} className="mt-px shrink-0" />
                     <span>
-                      Profile out of date?{" "}
+                      {t("allSchemes.profileOutOfDate")}{" "}
                       <Link
                         href={editProfileHref}
                         className={`font-semibold text-interaction-links-default ${FOCUS_RING}`}
                       >
-                        Edit {possessive(name)} details
+                        {t("allSchemes.editDetails", {
+                          name: possessive(name),
+                        })}
                       </Link>
                     </span>
                   </p>
@@ -395,17 +403,19 @@ function AllSchemes() {
       <p className="flex items-start gap-2 pb-4 text-xs leading-[18px] text-gray-600">
         <Info aria-hidden size={16} className="shrink-0" />
         <span>
-          Can&apos;t find a scheme?{" "}
-          <a
-            href={COMMUNITY_TELEGRAM_URL}
-            target="_blank"
-            rel="noreferrer"
-            className={`font-semibold text-interaction-links-default underline ${FOCUS_RING}`}
-          >
-            Tell us
-            <span className="sr-only"> on Telegram (opens in a new tab)</span>
-          </a>{" "}
-          and we&apos;ll look into adding it.
+          {t.rich("allSchemes.cantFind", {
+            link: (chunks) => (
+              <a
+                href={COMMUNITY_TELEGRAM_URL}
+                target="_blank"
+                rel="noreferrer"
+                className={`font-semibold text-interaction-links-default underline ${FOCUS_RING}`}
+              >
+                {chunks}
+                <span className="sr-only">{t("allSchemes.telegramSr")}</span>
+              </a>
+            ),
+          })}
         </span>
       </p>
 

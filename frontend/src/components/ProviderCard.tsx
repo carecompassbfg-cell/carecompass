@@ -5,6 +5,7 @@ import { BookmarkButton } from "@/ui/button";
 import { ReviewTargetType } from "@/types/review";
 import { BxRightArrowAlt } from "@opengovsg/design-system-react";
 import ReviewScore from "./ReviewScore";
+import { t } from "@/i18n";
 
 interface ProviderCardProps {
   provider: HomeCareDetail;
@@ -27,7 +28,9 @@ export function ProviderCard({ provider, baseUrl }: ProviderCardProps) {
       />
       {/* Services Offered */}
       <div>
-        <h3 className="mb-2 text-sm font-bold">Services Offered</h3>
+        <h3 className="mb-2 text-sm font-bold">
+          {t("provider.servicesOffered")}
+        </h3>
         <div className="flex flex-col gap-1">
           {provider.services?.map((service) => (
             <div key={service} className="flex items-center gap-2">
@@ -63,7 +66,7 @@ export function ProviderCard({ provider, baseUrl }: ProviderCardProps) {
           marginLeft="auto"
           onClick={handleViewDetails}
         >
-          View Details
+          {t("provider.viewDetails")}
         </Button>
       </div>
     </div>

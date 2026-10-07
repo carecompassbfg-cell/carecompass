@@ -4,6 +4,7 @@ import { Suspense, useState } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { SignInButton } from "@clerk/nextjs";
+import { t } from "@/i18n";
 import QuestionSheet from "@/components/schemes/QuestionSheet";
 import SchemeIcon, { FOCUS_RING } from "@/components/schemes/SchemeIcon";
 import StatusPill from "@/components/schemes/StatusPill";
@@ -36,7 +37,7 @@ function FullEligibility({
       <summary
         className={`flex min-h-11 cursor-pointer list-none items-center text-sm font-semibold text-interaction-links-default [&::-webkit-details-marker]:hidden ${FOCUS_RING}`}
       >
-        <span className="flex-1">Full eligibility</span>
+        <span className="flex-1">{t("scheme.fullEligibility")}</span>
         <SchemeIcon
           name="chevron-link"
           size={16}
@@ -103,12 +104,12 @@ function SchemeDetail() {
     return (
       <div className="flex w-full flex-col gap-4 py-6">
         <BackButton />
-        <p className="text-gray-800">We couldn&apos;t find that scheme.</p>
+        <p className="text-gray-800">{t("scheme.notFound")}</p>
         <Link
           href="/dashboard"
           className={`font-semibold text-interaction-links-default ${FOCUS_RING}`}
         >
-          See all financial schemes
+          {t("category.seeAll")}
         </Link>
       </div>
     );
@@ -149,7 +150,7 @@ function SchemeDetail() {
         className="flex flex-col gap-2.5 rounded-xl border border-gray-200 bg-white p-4"
       >
         <h2 id="what-you-get" className="text-base font-bold text-gray-800">
-          What you get
+          {t("scheme.whatYouGet")}
         </h2>
         <CustomMarkdown content={scheme.description} />
         {scheme.whatYouGet.length > 0 && (
@@ -169,22 +170,21 @@ function SchemeDetail() {
       >
         <div className="flex flex-wrap items-center justify-between gap-2">
           <h2 id="can-get" className="text-base font-bold text-gray-800">
-            Can {name} get this?
+            {t("scheme.canGet", { name })}
           </h2>
           <StatusPill status={status} />
         </div>
 
         {isSignedIn && userLoadError && (
           <p className="text-sm text-gray-600">
-            We couldn&apos;t load your profile, so we can&apos;t check this for{" "}
-            {name} yet. Please try again later.
+            {t("scheme.profileLoadError", { name })}
           </p>
         )}
 
         {scheme.tier === 2 ? (
           <>
             <p className="text-sm leading-5 text-gray-600">
-              Check eligibility on the official website.
+              {t("allSchemes.checkOfficial")}
             </p>
             <a
               href={scheme.link}
@@ -193,13 +193,13 @@ function SchemeDetail() {
               className={`flex min-h-11 items-center gap-2.5 text-[15px] font-semibold text-interaction-links-default ${FOCUS_RING}`}
             >
               <SchemeIcon name="external" size={18} />
-              Check the official page
-              <span className="sr-only">(opens in a new tab)</span>
+              {t("scheme.checkOfficialPage")}
+              <span className="sr-only">{t("common.opensInNewTab")}</span>
             </a>
             {scheme.eligibility && (
               <FullEligibility
                 content={scheme.eligibility}
-                note="Eligibility as described by Schemes.sg"
+                note={t("scheme.eligibilityNote")}
               />
             )}
           </>
@@ -225,9 +225,11 @@ function SchemeDetail() {
                         onClick={() => setSheetStart(question)}
                         className={`min-h-11 rounded-lg border border-interaction-main-default px-3 text-sm font-semibold text-interaction-links-default ${FOCUS_RING}`}
                       >
-                        Answer
+                        {t("scheme.answer")}
                         <span className="sr-only">
-                          : {QUESTION_META[question].rowTitle}
+                          {t("scheme.answerFor", {
+                            question: QUESTION_META[question].rowTitle,
+                          })}
                         </span>
                       </button>
                     ) : isSignedIn ? (
@@ -239,7 +241,7 @@ function SchemeDetail() {
                         )}`}
                         className={`flex min-h-11 items-center rounded-lg border border-interaction-main-default px-3 text-sm font-semibold text-interaction-links-default ${FOCUS_RING}`}
                       >
-                        Update profile
+                        {t("scheme.updateProfile")}
                       </Link>
                     ) : !isSignedIn ? (
                       <SignInButton>
@@ -247,7 +249,7 @@ function SchemeDetail() {
                           type="button"
                           className={`min-h-11 rounded-lg border border-interaction-main-default px-3 text-sm font-semibold text-interaction-links-default ${FOCUS_RING}`}
                         >
-                          Sign in
+                          {t("common.signIn")}
                         </button>
                       </SignInButton>
                     ) : undefined
@@ -259,7 +261,7 @@ function SchemeDetail() {
             {status.agencyWillCheck.length > 0 && (
               <div className="flex flex-col gap-3 border-t border-gray-200 pt-3.5">
                 <h3 className="text-sm font-semibold text-gray-800">
-                  The agency will also check
+                  {t("scheme.agencyWillCheck")}
                 </h3>
                 <ul className="flex flex-col gap-3.5">
                   {status.agencyWillCheck.map((check) => (
@@ -281,7 +283,7 @@ function SchemeDetail() {
         className="flex flex-col gap-3 rounded-xl border border-gray-200 bg-white p-4"
       >
         <h2 id="next-steps" className="text-base font-bold text-gray-800">
-          Next steps
+          {t("scheme.nextSteps")}
         </h2>
         {scheme.nextSteps && <CustomMarkdown content={scheme.nextSteps} />}
         <a
@@ -291,8 +293,8 @@ function SchemeDetail() {
           className={`flex min-h-11 items-center gap-2.5 text-[15px] font-semibold text-interaction-links-default ${FOCUS_RING}`}
         >
           <SchemeIcon name="external" size={18} />
-          Read more on the official website
-          <span className="sr-only">(opens in a new tab)</span>
+          {t("scheme.readMoreOfficial")}
+          <span className="sr-only">{t("common.opensInNewTab")}</span>
         </a>
       </section>
 
@@ -300,7 +302,7 @@ function SchemeDetail() {
         {getLastCheckedText(scheme)} ·{" "}
         {scheme.tier === 1 ? (
           <>
-            Sources:{" "}
+            {t("scheme.sources")}{" "}
             {scheme.sources.map((source, index) => (
               <span key={source.url}>
                 {index > 0 && ", "}
@@ -311,13 +313,13 @@ function SchemeDetail() {
                   className={`underline ${FOCUS_RING}`}
                 >
                   {source.name}
-                  <span className="sr-only"> (opens in a new tab)</span>
+                  <span className="sr-only"> {t("common.opensInNewTab")}</span>
                 </a>
               </span>
             ))}
           </>
         ) : (
-          `From ${SOURCE_LABELS[scheme.source]}`
+          t("scheme.fromSource", { source: SOURCE_LABELS[scheme.source] })
         )}
       </p>
 

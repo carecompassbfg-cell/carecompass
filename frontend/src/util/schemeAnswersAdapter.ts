@@ -5,6 +5,7 @@ import { NOT_SURE, SchemeAnswers } from "@/stores/schemeAnswers";
 import { ProfileQuestionId } from "@/types/scheme";
 import { SavedSchemeAnswers } from "@/types/user";
 import { AdlFullHelp, LtcPlan } from "@/util/eligibilityChecker";
+import { t } from "@/i18n";
 
 const YES_NO_NOT_SURE = ["yes", "no", NOT_SURE] as const;
 const LTC_PLANS: LtcPlan[] = [
@@ -83,16 +84,17 @@ export const answersFingerprint = (answers: SchemeAnswers): string => {
   });
 };
 
+// Message keys for the answer values
 const YES_NO_LABELS: Record<string, string> = {
-  yes: "yes",
-  no: "no",
-  [NOT_SURE]: "not sure",
+  yes: "answers.value.yes",
+  no: "answers.value.no",
+  [NOT_SURE]: "answers.value.notSure",
 };
 const LTC_LABELS: Record<LtcPlan, string> = {
-  careshield_life: "CareShield Life",
-  eldershield: "ElderShield",
-  neither: "neither",
-  [NOT_SURE]: "not sure",
+  careshield_life: "questions.careShieldLife",
+  eldershield: "questions.elderShield",
+  neither: "answers.value.neither",
+  [NOT_SURE]: "answers.value.notSure",
 };
 
 // Short read-only lines for the profile, e.g. "Daily activities: needs help
@@ -100,18 +102,22 @@ const LTC_LABELS: Record<LtcPlan, string> = {
 export const summariseAnswers = (answers: SchemeAnswers): string[] => {
   const lines: string[] = [];
   const adl = answers[ProfileQuestionId.ADL_NEEDS];
-  if (adl === NOT_SURE) lines.push("Daily activities: not sure");
-  else if (adl === 0) lines.push("Daily activities: no help needed");
+  if (adl === NOT_SURE) lines.push(t("answers.line.adlNotSure"));
+  else if (adl === 0) lines.push(t("answers.line.adlNone"));
   else if (isAdlCount(adl))
-    lines.push(`Daily activities: needs help with ${adl}`);
+    lines.push(t("answers.line.adlCount", { count: adl }));
   const fullHelp = answers[ProfileQuestionId.ADL_FULL_HELP];
-  if (fullHelp) lines.push(`Full help: ${YES_NO_LABELS[fullHelp]}`);
+  if (fullHelp)
+    lines.push(
+      t("answers.line.fullHelp", { value: t(YES_NO_LABELS[fullHelp]) }),
+    );
   const ltc = answers[ProfileQuestionId.LTC_INSURANCE];
-  if (ltc) lines.push(`Insurance: ${LTC_LABELS[ltc]}`);
+  if (ltc)
+    lines.push(t("answers.line.insurance", { value: t(LTC_LABELS[ltc]) }));
   const far = answers[ProfileQuestionId.HAS_FAR];
-  if (far) lines.push(`Functional Assessment Report: ${YES_NO_LABELS[far]}`);
+  if (far) lines.push(t("answers.line.far", { value: t(YES_NO_LABELS[far]) }));
   if (answers[ProfileQuestionId.CARE_RECIPIENT_AGE] === NOT_SURE) {
-    lines.push("Age: not sure");
+    lines.push(t("answers.line.ageNotSure"));
   }
   return lines;
 };

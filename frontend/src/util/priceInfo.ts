@@ -1,4 +1,5 @@
 import { Nullable } from "@/types/util";
+import { t } from "@/i18n";
 
 const CURRENCY_SYMBOL = "$";
 
@@ -14,7 +15,7 @@ export function formatPriceRange(
   maxPrice: Nullable<number>,
 ) {
   if (minPrice === null && maxPrice === null) {
-    return "Price not available";
+    return t("price.notAvailable");
   }
 
   if (minPrice === null) {

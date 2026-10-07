@@ -1,41 +1,37 @@
-// Text for the "About these results" panel on the schemes page, in one place
-// so it's easy to change. Any {name} is replaced with getRecipientName().
+// Text for the "About these results" panel on the schemes page. The words
+// live in the message files (schemes.about.*); any {name} is replaced with
+// getRecipientName().
 
 import { SchemeStatusKind } from "@/types/scheme";
+import { t } from "@/i18n";
 
-export const ABOUT_COPY = {
-  title: "About these results",
-  intro:
-    "These schemes are recommended based on the information in your profile. They are offered by government agencies, charities and community organisations. Please use this list as a guide. The organisation offering each scheme will determine final eligibility.",
-  sourcesHeading: "Where the information comes from",
+// Built when shown, so the text follows the chosen language
+export const getAboutCopy = () => ({
+  title: t("schemes.about.title"),
+  intro: t("schemes.about.intro"),
+  sourcesHeading: t("schemes.about.sourcesHeading"),
   // SupportGoWhere will be added here as a third source once we have
   // approval to use its data.
   sources: [
     {
       icon: "shield",
-      title: "Reviewed by CareCompass",
-      body: "Key schemes we write and check ourselves against official sources such as AIC, MOH and MOM.",
+      title: t("schemes.about.sources.carecompass.title"),
+      body: t("schemes.about.sources.carecompass.body"),
     },
     {
       icon: "globe",
-      title: "Schemes.sg",
-      body: "A community-run directory of government and charity schemes.",
+      title: t("schemes.about.sources.schemessg.title"),
+      body: t("schemes.about.sources.schemessg.body"),
     },
-  ],
-  labelsHeading: "What the labels mean",
+  ] as const,
+  labelsHeading: t("schemes.about.labelsHeading"),
   labels: [
-    {
-      status: "likely",
-      body: "Matches everything we can check from the profile.",
-    },
-    {
-      status: "needs_answers",
-      body: "One or two answers from you would let us check.",
-    },
+    { status: "likely", body: t("schemes.about.labels.likely") },
+    { status: "needs_answers", body: t("schemes.about.labels.needs_answers") },
     {
       status: "provider_decides",
-      body: "Please check eligibility on the agency's official website.",
+      body: t("schemes.about.labels.provider_decides"),
     },
   ] as { status: SchemeStatusKind; body: string }[],
-  button: "See all caregiving schemes",
-} as const;
+  button: t("schemes.about.button"),
+});

@@ -11,6 +11,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import useSignInOnlyFeaturePrompt from "@/util/hooks/useSignInOnlyFeaturePrompt";
+import { t } from "@/i18n";
 
 interface BookmarkButtonProps extends ButtonProps {
   targetId: number;
@@ -67,21 +68,21 @@ export default function BookmarkButton({
 
     api.post<{ id: number }>("/bookmarks", bookmarkToCreate).then((res) => {
       if (res.data?.id !== undefined) setBookmarkId(res.data.id);
-      toast.success("Added to saved searches");
+      toast.success(t("bookmark.added"));
     });
   };
 
   const handleUnmark = () => {
     api.delete(`/bookmarks/${bookmarkId}`).then(() => {
       setBookmarkId(UNCREATED_BOOKMARK_ID);
-      toast.success("Removed from saved searches");
+      toast.success(t("bookmark.removed"));
     });
   };
 
   return mini ? (
     <IconButton
       {...props}
-      aria-label={isMarked ? "Remove from saved searches" : "Save this page"}
+      aria-label={isMarked ? t("bookmark.removeLabel") : t("bookmark.savePage")}
       onClick={isMarked ? handleUnmark : handleMark}
       icon={
         <BookmarkIcon size={16} fill={isMarked ? "currentColor" : "none"} />
@@ -93,10 +94,10 @@ export default function BookmarkButton({
       leftIcon={
         <BookmarkIcon size={16} fill={isMarked ? "currentColor" : "none"} />
       }
-      aria-label="Save this page"
+      aria-label={t("bookmark.savePage")}
       onClick={isMarked ? handleUnmark : handleMark}
     >
-      {isMarked ? "Saved" : "Save"}
+      {isMarked ? t("bookmark.saved") : t("bookmark.save")}
     </Button>
   );
 }
