@@ -20,7 +20,7 @@ LANGUAGE_INSTRUCTIONS = {
         "specified, in English. Use the official Singapore Chinese names for schemes "
         "and agencies (e.g. Agency for Integrated Care = 护联局, Home "
         "Caregiving Grant = 居家看护津贴, CareShield Life = 终身护保, "
-        "MediSave = 保健储蓄, CPF = 公积金). Keep URLs, phone numbers and "
+        "MediSave = 保健储蓄, CPF = 公积金, AIC Link = 护联局（AIC）服务点). Keep URLs, phone numbers and "
         "amounts exactly as they are. Use short, plain sentences and 您."
     ),
 }

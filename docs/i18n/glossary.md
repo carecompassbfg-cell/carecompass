@@ -9,6 +9,7 @@ Style: Simplified Chinese as written in Singapore. Keep sentences short and plai
 | English | 中文 | Note |
 |---|---|---|
 | Agency for Integrated Care (AIC) | 护联局 | Formerly 护联中心 |
+| AIC Link | 护联局（AIC）服务点 | |
 | Ministry of Health (MOH) | 卫生部 | |
 | Ministry of Manpower (MOM) | 人力部 | |
 | Inland Revenue Authority of Singapore (IRAS) | 国内税务局 | |
@@ -37,7 +38,8 @@ Style: Simplified Chinese as written in Singapore. Keep sentences short and plai
 | Severe disability | 重度残障 | |
 | Dementia | 失智症 | |
 | Caregiver | 看护者 | |
-| Care recipient / loved one | 亲人 | App choice, not official |
+| Loved one | 亲人 | Warm, everyday wording ("your loved one") |
+| Care recipient | 受照顾者 | Formal wording: profile labels, forms and scheme criteria that say "care recipient" |
 | Subsidy / grant | 津贴 | |
 | Annual Value (of home) | 年值 | |
 | Per-capita household income | 家庭人均月入 | |
@@ -62,7 +64,7 @@ Style: Simplified Chinese as written in Singapore. Keep sentences short and plai
 
 | English | 中文 |
 |---|---|
-| Care monitoring | 关怀监测 |
+| Care monitoring | 护理监测 |
 | Care assistance | 护理协助 |
 | Likely eligible | 可能符合资格 |
 | Need answers | 需要回答问题 |
