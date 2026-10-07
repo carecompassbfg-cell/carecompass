@@ -23,6 +23,7 @@ body {
 @media (min-width: 640px) {
   html {
     background: #d9dce3;
+    overflow: hidden;
   }
   /* "html body" and !important: the UI library's own reset (Chakra) sets
      body { margin: 0 } after this file loads */
@@ -38,6 +39,12 @@ body {
   html body[data-scroll-locked] {
     margin: 0 auto !important;
     padding: 0 !important;
+  }
+  /* Chakra modals and drawers size themselves to the window (100vw); keep
+     them to the column */
+  .chakra-modal__overlay,
+  .chakra-modal__content-container {
+    width: 100% !important;
   }
 }
 

@@ -1,7 +1,16 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { Smartphone, X } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
+import {
+  Modal,
+  ModalBody,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  ModalOverlay,
+} from "@chakra-ui/react";
+import { Button, ModalCloseButton } from "@opengovsg/design-system-react";
 
 // Same width as the desktop column rule in globals.css
 const DESKTOP_QUERY = "(min-width: 640px)";
@@ -25,15 +34,15 @@ const readDismissed = (): boolean => {
   }
 };
 
-// Shown on computers only: CareCompass is built for phones, but works here
+// Shown on computers only: CareCompass is built for phones, but works here.
+// Uses the OGP design system modal (styled by its ThemeProvider).
 export default function DesktopNotice() {
   const [isOpen, setIsOpen] = useState(false);
+  const continueRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     if (isDesktopWidth() && !readDismissed()) setIsOpen(true);
   }, []);
-
-  if (!isOpen) return null;
 
   const close = () => {
     try {
@@ -45,43 +54,42 @@ export default function DesktopNotice() {
   };
 
   return (
-    <div className="fixed inset-0 z-[1500] flex items-center justify-center bg-black/40 p-6">
-      <div
-        role="dialog"
-        aria-modal="true"
-        aria-labelledby="desktop-notice-title"
-        className="relative flex w-full flex-col items-center gap-3 rounded-2xl bg-white p-6 text-center shadow-xl"
-      >
-        <button
-          type="button"
-          onClick={close}
-          aria-label="Close"
-          className="absolute right-2 top-2 flex size-11 items-center justify-center rounded-full text-gray-600 hover:bg-gray-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-brand-primary-500"
-        >
-          <X aria-hidden size={22} />
-        </button>
-        <span className="flex size-14 items-center justify-center rounded-full bg-brand-primary-50 text-brand-primary-500">
-          <Smartphone aria-hidden size={28} />
-        </span>
-        <h2
-          id="desktop-notice-title"
-          className="text-xl font-bold text-gray-900"
-        >
-          CareCompass is best viewed on your phone
-        </h2>
-        <p className="text-base leading-6 text-gray-600">
-          You can keep using it here on your computer. For the best experience,
-          open my.carecompass.sg on your phone.
-        </p>
-        <button
-          type="button"
-          onClick={close}
-          autoFocus
-          className="mt-1 h-12 w-full rounded-lg bg-brand-primary-500 font-semibold text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-primary-500"
-        >
-          Continue on this computer
-        </button>
-      </div>
-    </div>
+    <Modal
+      isOpen={isOpen}
+      onClose={close}
+      isCentered
+      size="md"
+      initialFocusRef={continueRef}
+    >
+      <ModalOverlay />
+      <ModalContent mx={6} overflow="hidden">
+        <ModalCloseButton />
+        <div className="flex justify-center bg-brand-primary-100 pb-4 pt-6">
+          <Image
+            src="/img/best-on-phone.png"
+            alt=""
+            width={160}
+            height={196}
+            priority
+          />
+        </div>
+        <ModalHeader>CareCompass works best on your phone</ModalHeader>
+        <ModalBody>
+          <p className="text-base leading-6 text-gray-600">
+            You can keep using it here on your computer. For the full
+            experience, open{" "}
+            <span className="font-semibold text-gray-900">
+              my.carecompass.sg
+            </span>{" "}
+            on your phone and add it to your home screen.
+          </p>
+        </ModalBody>
+        <ModalFooter>
+          <Button ref={continueRef} width="100%" onClick={close}>
+            Continue on this computer
+          </Button>
+        </ModalFooter>
+      </ModalContent>
+    </Modal>
   );
 }
