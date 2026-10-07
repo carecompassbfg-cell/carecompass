@@ -3,7 +3,7 @@
 import Providers from "./providers";
 import { Toaster } from "sonner";
 import "@smastrom/react-rating/style.css";
-import { IncompatibleDevicePage } from "../components/IncompatibleDevicePage";
+import DesktopNotice from "@/components/DesktopNotice";
 import { PropsWithChildren } from "react";
 import { useAuthStore } from "@/stores/auth";
 import SignIn from "@/components/SignIn";
@@ -11,11 +11,11 @@ import LoadingSpinner from "@/ui/loading";
 
 export default function RootLayoutClient({ children }: PropsWithChildren) {
   return (
-    <body className="h-dvh w-screen">
+    <body className="h-dvh w-full">
       <Toaster closeButton position="top-center" duration={2000} />
       <Providers>
         <Main>{children}</Main>
-        <IncompatibleDevicePage />
+        <DesktopNotice />
       </Providers>
     </body>
   );
@@ -27,7 +27,7 @@ function Main({ children }: PropsWithChildren) {
   const isGuest = useAuthStore((state) => state.isGuest);
 
   return (
-    <div className="h-full w-full sm:hidden">
+    <div className="h-full w-full">
       {isInitilised ? (
         isSignedIn || isGuest ? (
           children

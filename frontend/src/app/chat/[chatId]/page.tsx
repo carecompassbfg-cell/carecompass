@@ -71,9 +71,9 @@ export default function Chat({ params }: { params: { chatId: string } }) {
         ))}
         <div id="msg-bottom" />
         {isWaitingForResponse && (
-          <div className="flex place-items-start gap-2 md:gap-4">
+          <div className="flex place-items-start gap-2">
             <Avatar className="sticky mt-2" src="/img/logo.svg" size="xs" />
-            <div className="flex w-[calc(100%-40px)] flex-col rounded-lg border bg-white p-4 md:w-[calc(100%-48px)]">
+            <div className="flex w-[calc(100%-40px)] flex-col rounded-lg border bg-white p-4">
               <PulseLoader color="#1361F0" size={8} />
             </div>
           </div>

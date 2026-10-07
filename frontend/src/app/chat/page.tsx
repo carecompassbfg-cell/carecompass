@@ -43,7 +43,7 @@ function ChatIntro() {
       <span className="w-full text-left font-semibold">
         How can I help you today?
       </span>
-      <div className="flex w-full flex-col gap-2 sm:flex-row sm:gap-4">
+      <div className="flex w-full flex-col gap-2">
         {chatPrompts.map((chatPrompt, index) => (
           <form
             key={index}
