@@ -32,7 +32,7 @@ import {
 } from "@/types/review";
 import { Drawer } from "vaul";
 import { ArrowLeft } from "lucide-react";
-import { formatReviewTime, mapReviewSource } from "@/util/review";
+import { formatReviewTime, reviewSourceLabel } from "@/util/review";
 import { constructAddress } from "@/util/address";
 import { BackButton, BookmarkButton, ShareButton } from "@/ui/button";
 import { useRouter } from "next/navigation";
@@ -553,13 +553,9 @@ function ReviewSection({
               )}
             </div>
             <ReviewDetailDrawer review={review} />
-            {review.reviewSource !== ReviewSource.IN_APP && (
-              <span className="text-sm text-gray-500">
-                {t("daycare.review.fromSource", {
-                  source: mapReviewSource(review.reviewSource),
-                })}
-              </span>
-            )}
+            <span className="text-sm text-gray-500">
+              {reviewSourceLabel(review.reviewSource)}
+            </span>
           </div>
         ))}
       </div>

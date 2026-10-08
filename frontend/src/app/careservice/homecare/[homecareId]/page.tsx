@@ -13,7 +13,7 @@ import { ArrowLeft } from "lucide-react";
 import { Review, ReviewSource, ReviewTargetType } from "@/types/review";
 import { Drawer } from "vaul";
 import { Rating } from "@smastrom/react-rating";
-import { formatReviewTime, mapReviewSource } from "@/util/review";
+import { formatReviewTime, reviewSourceLabel } from "@/util/review";
 import { getRatingColor } from "@/util/helper";
 import { BackButton, BookmarkButton, ShareButton } from "@/ui/button";
 import { BxRightArrowAlt } from "@opengovsg/design-system-react";
@@ -395,13 +395,9 @@ function ReviewSection({
                 </span>
               </div>
               <ReviewDetailDrawer review={review} />
-              {review.reviewSource !== ReviewSource.IN_APP && (
-                <span className="text-sm text-gray-500">
-                  {t("review.fromSource", {
-                    source: mapReviewSource(review.reviewSource),
-                  })}
-                </span>
-              )}
+              <span className="text-sm text-gray-500">
+                {reviewSourceLabel(review.reviewSource)}
+              </span>
             </div>
           ))}
         </div>

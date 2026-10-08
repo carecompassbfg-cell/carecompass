@@ -794,6 +794,10 @@
       "dayCare": "Day Care",
       "homeCare": "Home Care",
       "scheme": "Scheme"
+    },
+    "label": {
+      "google": "Google review",
+      "careCompass": "CareCompass user review"
     }
   },
   "pchi": {

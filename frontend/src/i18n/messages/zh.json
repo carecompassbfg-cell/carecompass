@@ -794,6 +794,10 @@
       "dayCare": "日间护理",
       "homeCare": "居家护理",
       "scheme": "援助计划"
+    },
+    "label": {
+      "google": "Google 评价",
+      "careCompass": "CareCompass 用户评价"
     }
   },
   "pchi": {

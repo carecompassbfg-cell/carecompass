@@ -13,6 +13,14 @@ export function mapReviewSource(source: ReviewSource): string {
   }
 }
 
+// Shown under every review so readers can tell Google reviews from ones
+// written by CareCompass users
+export function reviewSourceLabel(source: ReviewSource): string {
+  return source === ReviewSource.IN_APP
+    ? t("review.label.careCompass")
+    : t("review.label.google");
+}
+
 export function ReviewTargetTypeToName(type: ReviewTargetType): string {
   switch (type) {
     case ReviewTargetType.DEMENTIA_DAY_CARE:
