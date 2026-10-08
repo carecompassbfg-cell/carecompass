@@ -660,7 +660,9 @@
       "title": "评价",
       "subtitle": "看看其他看护者怎么说",
       "signInToReview": "登录后写评价",
-      "fromSource": "这则评价来自{source}"
+      "fromSource": "这则评价来自{source}",
+      "seeMore": "查看更多评价（{count}）",
+      "seeLess": "收起评价"
     },
     "support": {
       "title": "经济援助",

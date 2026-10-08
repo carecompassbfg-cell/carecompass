@@ -470,6 +470,9 @@ function ReviewDetailDrawer({ review }: { review: Review }) {
   );
 }
 
+// Newest first; the rest behind "See more reviews"
+const REVIEWS_SHOWN_FIRST = 3;
+
 function ReviewSection({
   centreId,
   reviews,
@@ -492,6 +495,7 @@ function ReviewSection({
       .catch((error) => console.error(error));
   }, [centreId]);
 
+  const [showAllReviews, setShowAllReviews] = useState(false);
   const reviewList = fullReviews ?? reviews;
   const sortedReviews = [...reviewList].sort((a, b) => {
     return (
@@ -530,7 +534,10 @@ function ReviewSection({
         </SignInButton>
       )}
       <div className="flex flex-col divide-y divide-solid">
-        {sortedReviews.map((review, index) => (
+        {(showAllReviews
+          ? sortedReviews
+          : sortedReviews.slice(0, REVIEWS_SHOWN_FIRST)
+        ).map((review, index) => (
           <div key={index} className="flex flex-col gap-2 py-4">
             <span className="font-semibold">{review.authorName}</span>
             <div className="flex gap-2">
@@ -556,6 +563,18 @@ function ReviewSection({
           </div>
         ))}
       </div>
+      {sortedReviews.length > REVIEWS_SHOWN_FIRST && (
+        <Button
+          variant="outline"
+          onClick={() => setShowAllReviews((shown) => !shown)}
+        >
+          {showAllReviews
+            ? t("daycare.review.seeLess")
+            : t("daycare.review.seeMore", {
+                count: sortedReviews.length - REVIEWS_SHOWN_FIRST,
+              })}
+        </Button>
+      )}
     </section>
   );
 }

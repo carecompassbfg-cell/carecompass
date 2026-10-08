@@ -660,7 +660,9 @@
       "title": "Reviews",
       "subtitle": "See what other caregivers are saying",
       "signInToReview": "Sign in to leave a review",
-      "fromSource": "This review is from {source}"
+      "fromSource": "This review is from {source}",
+      "seeMore": "See more reviews ({count})",
+      "seeLess": "Show fewer reviews"
     },
     "support": {
       "title": "Financial Support",
