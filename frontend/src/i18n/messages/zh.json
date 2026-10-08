@@ -765,7 +765,8 @@
     "removeLabel": "从收藏中移除",
     "savePage": "收藏此页",
     "saved": "已收藏",
-    "save": "收藏"
+    "save": "收藏",
+    "error": "无法更新已保存列表，请再试一次。"
   },
   "review": {
     "leaveReview": "写评价",
@@ -789,7 +790,8 @@
     },
     "targetType": {
       "dayCare": "日间护理",
-      "homeCare": "居家护理"
+      "homeCare": "居家护理",
+      "scheme": "援助计划"
     }
   },
   "pchi": {

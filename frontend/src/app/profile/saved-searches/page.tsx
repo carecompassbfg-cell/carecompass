@@ -35,6 +35,7 @@ export default function SavedSearchesPage() {
   useEffect(() => {
     router.prefetch("/careservice/homecare/[homecareId]");
     router.prefetch("/careservice/dementia-daycare/[centreId]");
+    router.prefetch("/dashboard/schemes");
   }, [router]);
 
   return (

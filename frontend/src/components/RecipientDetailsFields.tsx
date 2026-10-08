@@ -34,7 +34,9 @@ export default function RecipientDetailsFields({
   return (
     <div className="ph-no-capture flex flex-col gap-4">
       <Stack gap={0} spacing={0}>
-        <FormLabel htmlFor="care-recipient-name" marginBottom={0}>
+        {/* isRequired only hides the design system's own English "(optional)";
+            our translated label already says the field is optional */}
+        <FormLabel htmlFor="care-recipient-name" marginBottom={0} isRequired>
           {t("onboarding.nameLabel")}
         </FormLabel>
         <span
@@ -67,7 +69,9 @@ export default function RecipientDetailsFields({
         )}
       </Stack>
       <Stack gap={0} spacing={0}>
-        <FormLabel htmlFor="home-postal-code" marginBottom={0}>
+        {/* isRequired only hides the design system's own English "(optional)";
+            our translated label already says the field is optional */}
+        <FormLabel htmlFor="home-postal-code" marginBottom={0} isRequired>
           {t("onboarding.postalLabel")}
         </FormLabel>
         <span id="home-postal-code-hint" className="pb-1 text-sm text-gray-600">

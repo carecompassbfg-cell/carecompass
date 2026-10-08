@@ -765,7 +765,8 @@
     "removeLabel": "Remove from saved searches",
     "savePage": "Save this page",
     "saved": "Saved",
-    "save": "Save"
+    "save": "Save",
+    "error": "Couldn't update your saved list. Please try again."
   },
   "review": {
     "leaveReview": "Leave a review",
@@ -789,7 +790,8 @@
     },
     "targetType": {
       "dayCare": "Day Care",
-      "homeCare": "Home Care"
+      "homeCare": "Home Care",
+      "scheme": "Scheme"
     }
   },
   "pchi": {

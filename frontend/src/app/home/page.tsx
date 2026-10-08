@@ -96,7 +96,7 @@ const getCardDataList = (financial: {
     text: t("home.cards.planPlain"),
     subtitle: t("home.cards.planSub"),
     img: "/img/illustration_4.svg",
-    link: "https://mylegacy.life.gov.sg/end-of-life-planning/",
+    link: "https://www.life.gov.sg/pages/EbR1nJj9/legacy-planning",
     isSignInRequired: false,
   },
 ];

@@ -19,6 +19,8 @@ export function ReviewTargetTypeToName(type: ReviewTargetType): string {
       return t("review.targetType.dayCare");
     case ReviewTargetType.DEMENTIA_HOME_CARE:
       return t("review.targetType.homeCare");
+    case ReviewTargetType.SCHEME:
+      return t("review.targetType.scheme");
   }
 }
 
@@ -30,6 +32,8 @@ export function ReviewTargetTypeToColorScheme(
       return "blue";
     case ReviewTargetType.DEMENTIA_HOME_CARE:
       return "green";
+    case ReviewTargetType.SCHEME:
+      return "purple";
   }
 }
 

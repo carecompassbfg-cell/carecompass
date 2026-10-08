@@ -1,6 +1,6 @@
 from typing import List, Optional
 from fastapi import APIRouter, HTTPException, Depends
-from pydantic import BaseModel, ConfigDict
+from pydantic import BaseModel, ConfigDict, model_validator
 from pydantic.alias_generators import to_camel
 
 from app.models.review import ReviewableType
@@ -19,13 +19,22 @@ class BookmarkBase(BaseModel):
         from_attributes=True
     )
 
-    target_id: int
+    target_id: Optional[int] = None
+    target_key: Optional[str] = None
     target_type: ReviewableType
     title: str
     link: str
 
 class BookmarkCreate(BookmarkBase):
-    pass
+    @model_validator(mode="after")
+    def check_target(self):
+        # Schemes are identified by a string key, care services by an int id
+        if self.target_type == ReviewableType.SCHEME:
+            if not self.target_key:
+                raise ValueError("target_key is required for scheme bookmarks")
+        elif self.target_id is None:
+            raise ValueError("target_id is required for this target_type")
+        return self
 
 class BookmarkResponse(BookmarkBase):
     model_config = ConfigDict(from_attributes=True)
@@ -42,6 +51,7 @@ def list_bookmarks(
     limit: Optional[int] = None,
     target_type: Optional[ReviewableType] = None,
     target_id: Optional[int] = None,
+    target_key: Optional[str] = None,
 ):
     """
     List bookmarks for the authenticated user.
@@ -55,6 +65,8 @@ def list_bookmarks(
         query = query.filter(Bookmark.target_type == target_type)
     if target_id:
         query = query.filter(Bookmark.target_id == target_id)
+    if target_key:
+        query = query.filter(Bookmark.target_key == target_key)
 
     bookmarks = query.offset(skip).limit(limit).all()
     return bookmarks

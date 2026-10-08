@@ -9,7 +9,8 @@ import QuestionSheet from "@/components/schemes/QuestionSheet";
 import SchemeIcon, { FOCUS_RING } from "@/components/schemes/SchemeIcon";
 import StatusPill from "@/components/schemes/StatusPill";
 import { ProfileQuestionId } from "@/types/scheme";
-import { BackButton } from "@/ui/button";
+import { ReviewTargetType } from "@/types/review";
+import { BackButton, BookmarkButton } from "@/ui/button";
 import CustomMarkdown from "@/ui/CustomMarkdown";
 import LoadingSpinner from "@/ui/loading";
 import useSchemeCatalog from "@/util/hooks/useSchemeCatalog";
@@ -124,9 +125,21 @@ function SchemeDetail() {
       <BackButton />
 
       <header className="flex flex-col gap-2">
-        <h1 className="text-[26px] font-bold leading-8 text-gray-800">
-          {scheme.name}
-        </h1>
+        <div className="flex items-start justify-between gap-3">
+          <h1 className="text-[26px] font-bold leading-8 text-gray-800">
+            {scheme.name}
+          </h1>
+          <BookmarkButton
+            targetKey={scheme.id}
+            targetType={ReviewTargetType.SCHEME}
+            title={scheme.name}
+            link={`/dashboard/schemes?id=${encodeURIComponent(scheme.id)}`}
+            size="sm"
+            variant="outline"
+            mini
+            flexShrink={0}
+          />
+        </div>
         <div className="flex flex-wrap gap-3 text-xs leading-4 text-gray-600">
           <span className="flex items-center gap-1">
             <SchemeIcon name={category.icon} size={13} />
