@@ -10,7 +10,7 @@ import { Button, VisuallyHidden, VStack, Text } from "@chakra-ui/react";
 import { useParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { ArrowLeft } from "lucide-react";
-import { Review, ReviewSource, ReviewTargetType } from "@/types/review";
+import { Review, ReviewTargetType } from "@/types/review";
 import { Drawer } from "vaul";
 import { Rating } from "@smastrom/react-rating";
 import { formatReviewTime, reviewSourceLabel } from "@/util/review";
