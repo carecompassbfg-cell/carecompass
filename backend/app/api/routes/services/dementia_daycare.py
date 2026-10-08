@@ -12,7 +12,7 @@ from app.core.auth import CurrentUserDependency
 from app.models import User
 from app.models.dementia_daycare import DementiaDaycare
 from app.models.review import Review, ReviewableType
-from app.api.routes.reviews import ReviewBase
+from app.api.routes.reviews import ReviewResponse
 from app.util.maps import getCoordFromAddress, getRouteDistance
 
 router = APIRouter(prefix="/dementia-daycare", tags=["dementia-daycare"])
@@ -78,7 +78,7 @@ class DementiaDaycareDetailResponse(DementiaDaycareDetails):
 
     review_count: int
     average_rating: float
-    reviews: List[ReviewBase]
+    reviews: List[ReviewResponse]
 
 class DementiaDaycareRecommendation(DementiaDaycareDetailResponse):
     distance_from_home: Optional[float] = None
@@ -167,7 +167,7 @@ async def rank_daycare_centers(
             **center.__dict__,
             review_count=len(reviews),
             average_rating=round(sum([review.overall_rating for review in reviews]) / len(reviews), 1) if reviews else 0,
-            reviews=[ReviewBase.model_validate(review) for review in reviews]
+            reviews=[ReviewResponse.model_validate(review) for review in reviews]
         )
 
         if home_coords:
@@ -223,7 +223,7 @@ async def get_daycare_center(
         **center.__dict__,
         review_count=len(reviews),
         average_rating=round(sum([review.overall_rating for review in reviews]) / len(reviews), 1) if reviews else 0,
-        reviews=[ReviewBase.model_validate(review) for review in reviews]
+        reviews=[ReviewResponse.model_validate(review) for review in reviews]
     )
 
 # Create new dementia daycare center (admin only)
@@ -300,7 +300,7 @@ async def update_daycare_center(
             **center.__dict__,
             review_count=len(reviews),
             average_rating=round(sum([review.overall_rating for review in reviews]) / len(reviews), 1) if reviews else 0,
-            reviews=[ReviewBase.model_validate(review) for review in reviews]
+            reviews=[ReviewResponse.model_validate(review) for review in reviews]
         )
 
     except IntegrityError as e:
@@ -354,7 +354,7 @@ async def upsert_daycare_center(
             **db_center.__dict__,
             review_count=len(reviews),
             average_rating=round(sum([review.overall_rating for review in reviews]) / len(reviews), 1) if reviews else 0,
-            reviews=[ReviewBase.model_validate(review) for review in reviews]
+            reviews=[ReviewResponse.model_validate(review) for review in reviews]
         )
 
         return Response(

@@ -601,9 +601,7 @@
     "recommendations": {
       "intro": "Thank you.",
       "title": "Based on your inputs, here are the recommended daycare centres",
-      "showAll": "Show me the full list of centres",
-      "postalNotFound": "We couldn't find postal code {postal}. Please go back and check it.",
-      "loadError": "Something went wrong loading recommendations. Please try again, or view the full list of centres."
+      "showAll": "Show me the full list of centres"
     },
     "card": {
       "km": "{km}km",

@@ -22,7 +22,7 @@ import LoadingSpinner from "@/ui/loading";
 import CustomMarkdown from "@/ui/CustomMarkdown";
 import { SignInButton } from "@clerk/nextjs";
 import { useAuthStore } from "@/stores/auth";
-import { api } from "@/api";
+import { api, getReviews } from "@/api";
 import { Rating } from "@smastrom/react-rating";
 import {
   Review,
@@ -30,10 +30,9 @@ import {
   ReviewSource,
   ReviewTargetType,
 } from "@/types/review";
-import moment from "moment";
 import { Drawer } from "vaul";
 import { ArrowLeft } from "lucide-react";
-import { mapReviewSource } from "@/util/review";
+import { formatReviewTime, mapReviewSource } from "@/util/review";
 import { constructAddress } from "@/util/address";
 import { BackButton, BookmarkButton, ShareButton } from "@/ui/button";
 import { useRouter } from "next/navigation";
@@ -46,7 +45,6 @@ import { MohNrLtcSubsidy } from "@/types/scheme";
 import { toast } from "sonner";
 import { PCHIDrawer } from "@/components/PCHIDrawer";
 import { t } from "@/i18n";
-import { useLocaleStore } from "@/stores/locale";
 import { buildMapEmbedUrl } from "@/util/mapEmbed";
 
 export default function DaycareCentreDetails({
@@ -417,32 +415,6 @@ function NewReviewDrawer({ centreId }: { centreId: number }) {
   );
 }
 
-const RELATIVE_UNITS: [Intl.RelativeTimeFormatUnit, number][] = [
-  ["year", 365 * 24 * 3600],
-  ["month", 30 * 24 * 3600],
-  ["day", 24 * 3600],
-  ["hour", 3600],
-  ["minute", 60],
-];
-
-const getRelativeTime = (date: string) => {
-  const time = moment.utc(date).local();
-  if (useLocaleStore.getState().locale === "en") {
-    return time.fromNow();
-  }
-  // moment only has English loaded, so use the browser's formatter otherwise
-  const seconds = time.diff(moment(), "seconds");
-  const formatter = new Intl.RelativeTimeFormat(t("common.dateLocale"), {
-    numeric: "auto",
-  });
-  for (const [unit, size] of RELATIVE_UNITS) {
-    if (Math.abs(seconds) >= size) {
-      return formatter.format(Math.trunc(seconds / size), unit);
-    }
-  }
-  return formatter.format(seconds, "second");
-};
-
 function ReviewDetailDrawer({ review }: { review: Review }) {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -483,9 +455,11 @@ function ReviewDetailDrawer({ review }: { review: Review }) {
                   value={review.overallRating}
                   className="max-w-24"
                 />
-                <span className="text-sm">
-                  {getRelativeTime(review.publishedTime)}
-                </span>
+                {review.publishedTime && (
+                  <span className="text-sm">
+                    {formatReviewTime(review.publishedTime)}
+                  </span>
+                )}
               </div>
               <span>{review.content}</span>
             </div>
@@ -504,16 +478,31 @@ function ReviewSection({
   reviews: Review[];
 }) {
   const isSignedIn = useAuthStore((state) => state.isSignedIn);
+  const [fullReviews, setFullReviews] = useState<Review[] | null>(null);
 
-  const sortedReviews = reviews.sort((a, b) => {
+  // The centre endpoint's reviews leave out the author and date, so load the
+  // full reviews (as on the home care page) and fall back to what we have.
+  useEffect(() => {
+    getReviews({
+      targetType: ReviewTargetType.DEMENTIA_DAY_CARE,
+      targetId: Number(centreId),
+      limit: 100,
+    })
+      .then(setFullReviews)
+      .catch((error) => console.error(error));
+  }, [centreId]);
+
+  const reviewList = fullReviews ?? reviews;
+  const sortedReviews = [...reviewList].sort((a, b) => {
     return (
-      new Date(b.publishedTime).getTime() - new Date(a.publishedTime).getTime()
+      new Date(b.publishedTime ?? 0).getTime() -
+      new Date(a.publishedTime ?? 0).getTime()
     );
   });
 
-  const reviewCount = reviews.length;
+  const reviewCount = reviewList.length;
   const averageRating =
-    reviews.reduce((acc, review) => acc + review.overallRating, 0) /
+    reviewList.reduce((acc, review) => acc + review.overallRating, 0) /
     reviewCount;
 
   return (
@@ -550,9 +539,11 @@ function ReviewSection({
                 value={review.overallRating}
                 className="max-w-24"
               />
-              <span className="text-sm">
-                {getRelativeTime(review.publishedTime)}
-              </span>
+              {review.publishedTime && (
+                <span className="text-sm">
+                  {formatReviewTime(review.publishedTime)}
+                </span>
+              )}
             </div>
             <ReviewDetailDrawer review={review} />
             {review.reviewSource !== ReviewSource.IN_APP && (

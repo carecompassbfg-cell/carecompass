@@ -3,12 +3,14 @@
 import { api } from "@/api";
 import ReviewScore from "@/components/ReviewScore";
 import SGWBanner from "@/components/SGWBanner";
-import { DDCRecommendation } from "@/types/ddc";
+import { DDCBase, DDCRecommendation } from "@/types/ddc";
 import { ReviewTargetType } from "@/types/review";
 import { BackButton, BookmarkButton } from "@/ui/button";
 import LoadingSpinner from "@/ui/loading";
 import { constructAddress } from "@/util/address";
 import { formatPriceRange } from "@/util/priceInfo";
+import { fallbackRecommendations } from "@/util/daycareFallback";
+import { isPostalCode, LatLng, lookupPostalCode } from "@/util/geo";
 import { Divider } from "@chakra-ui/react";
 import {
   Badge,
@@ -385,10 +387,6 @@ export default function CareServiceRecommender() {
     const [recommendations, setRecommendations] = useState<DDCRecommendation[]>(
       [],
     );
-    const [loadError, setLoadError] = useState<
-      "postalNotFound" | "other" | null
-    >(null);
-
     const homePostalCode = param.value.get("home");
 
     useEffect(() => {
@@ -396,23 +394,33 @@ export default function CareServiceRecommender() {
     }, [router]);
 
     useEffect(() => {
+      // If the recommendations API fails (e.g. route lookups are down or the
+      // postal code isn't found), quietly show a default list instead: the
+      // nearest centres by straight-line distance when we can place the
+      // postal code, otherwise the first few centres.
+      const loadFallback = async (): Promise<DDCRecommendation[]> => {
+        const { data: centres } = await api.get<DDCBase[]>(
+          "/services/dementia-daycare",
+        );
+        let home: LatLng | null = null;
+        if (homePostalCode && isPostalCode(homePostalCode)) {
+          home = await lookupPostalCode(homePostalCode).catch(() => null);
+        }
+        return fallbackRecommendations(centres ?? [], home);
+      };
+
       api
         .post<DDCRecommendation[]>(
           "/services/dementia-daycare/recommendations",
           { location: homePostalCode },
         )
-        .then((response) => {
-          setRecommendations(response.data ?? []);
-          setLoadError(null);
-        })
+        .then((response) => response.data ?? [])
         .catch((error) => {
           console.error(error);
-          setLoadError(
-            homePostalCode && error?.response?.status === 400
-              ? "postalNotFound"
-              : "other",
-          );
+          return loadFallback();
         })
+        .then(setRecommendations)
+        .catch((error) => console.error(error))
         .finally(() => {
           setIsLoading(false);
         });
@@ -435,15 +443,6 @@ export default function CareServiceRecommender() {
         <span className="text-2xl font-semibold leading-tight text-brand-primary-500">
           {t("careservice.recommendations.title")}
         </span>
-        {loadError && (
-          <span className="rounded border border-red-200 bg-red-50 p-4 text-red-700">
-            {loadError === "postalNotFound"
-              ? t("careservice.recommendations.postalNotFound", {
-                  postal: homePostalCode ?? "",
-                })
-              : t("careservice.recommendations.loadError")}
-          </span>
-        )}
         <div className="flex flex-col gap-4">
           {recommendations.map((centre, index) => (
             <DaycareRecommendationCard key={index} centre={centre} />

@@ -601,9 +601,7 @@
     "recommendations": {
       "intro": "谢谢您。",
       "title": "根据您提供的资料，以下是推荐的日间护理中心",
-      "showAll": "查看所有中心",
-      "postalNotFound": "找不到邮区编号{postal}，请返回检查。",
-      "loadError": "加载推荐时出错，请再试一次，或查看所有中心。"
+      "showAll": "查看所有中心"
     },
     "card": {
       "km": "{km}公里",
