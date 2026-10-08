@@ -601,13 +601,17 @@
     "recommendations": {
       "intro": "Thank you.",
       "title": "Based on your inputs, here are the recommended daycare centres",
-      "showAll": "Show me the full list of centres"
+      "showAll": "Show me the full list of centres",
+      "postalNotFound": "We couldn't find postal code {postal}. Please go back and check it.",
+      "loadError": "Something went wrong loading recommendations. Please try again, or view the full list of centres."
     },
     "card": {
       "km": "{km}km",
       "minutes": "{minutes} min",
       "awayFromHome": "({distance} away from home)",
-      "travel": "<b>{car}</b> by car, or <b>{transit}</b> by bus/MRT"
+      "travel": "<b>{car}</b> by car, or <b>{transit}</b> by bus/MRT",
+      "awayFromHomeApprox": "(about {distance} from home)",
+      "travelCar": "<b>{car}</b> by car"
     },
     "sgw": {
       "poweredBy": "Powered by",
@@ -617,7 +621,12 @@
   "daycare": {
     "list": {
       "title": "Dementia Day Care Centres",
-      "searchPlaceholder": "Search for a centre"
+      "searchPlaceholder": "Search by centre name or your postal code",
+      "nearPostal": "Nearest centres to {postal}",
+      "postalNotFound": "We couldn't find postal code {postal}. Please check it and try again.",
+      "postalLookupError": "We couldn't look up that postal code right now. Please try again.",
+      "noResults": "No centres match your search.",
+      "kmAway": "{km}km away"
     },
     "detail": {
       "userLoadError": "Failed to fetch user data",

@@ -139,7 +139,9 @@ async def rank_daycare_centers(
     if pref.location:
         home_coords = getCoordFromAddress(pref.location)
     
-    if not home_coords:
+    # No location (user skipped the postal code step) is fine: we just return
+    # the first few centres. Only reject a location we couldn't find.
+    if pref.location and not home_coords:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
             detail="Invalid address provided"
@@ -169,12 +171,20 @@ async def rank_daycare_centers(
         )
 
         if home_coords:
-            driving_dist = getRouteDistance(home_coords, (center.lat, center.lng), "driving")
-            transit_dist = getRouteDistance(home_coords, (center.lat, center.lng), "transit")
-            center_response.distance_from_home = driving_dist.distance
-            center_response.driving_duration = driving_dist.duration
-            center_response.transit_duration = transit_dist.duration
-        
+            centre_coords = (center.lat, center.lng)
+            driving_dist = getRouteDistance(home_coords, centre_coords, "driving")
+            transit_dist = getRouteDistance(home_coords, centre_coords, "transit")
+            if driving_dist:
+                center_response.distance_from_home = driving_dist.distance
+                center_response.driving_duration = driving_dist.duration
+            else:
+                # Google unavailable: fall back to straight-line distance (metres)
+                center_response.distance_from_home = int(
+                    haversine(home_coords, centre_coords) * 1000
+                )
+            if transit_dist:
+                center_response.transit_duration = transit_dist.duration
+
         response.append(center_response)
 
     # Sort centers again by distance from home (with more accurate values from gmaps)

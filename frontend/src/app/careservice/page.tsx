@@ -385,6 +385,9 @@ export default function CareServiceRecommender() {
     const [recommendations, setRecommendations] = useState<DDCRecommendation[]>(
       [],
     );
+    const [loadError, setLoadError] = useState<
+      "postalNotFound" | "other" | null
+    >(null);
 
     const homePostalCode = param.value.get("home");
 
@@ -398,9 +401,17 @@ export default function CareServiceRecommender() {
           "/services/dementia-daycare/recommendations",
           { location: homePostalCode },
         )
-        .then((response) => setRecommendations(response.data ?? []))
+        .then((response) => {
+          setRecommendations(response.data ?? []);
+          setLoadError(null);
+        })
         .catch((error) => {
           console.error(error);
+          setLoadError(
+            homePostalCode && error?.response?.status === 400
+              ? "postalNotFound"
+              : "other",
+          );
         })
         .finally(() => {
           setIsLoading(false);
@@ -424,6 +435,15 @@ export default function CareServiceRecommender() {
         <span className="text-2xl font-semibold leading-tight text-brand-primary-500">
           {t("careservice.recommendations.title")}
         </span>
+        {loadError && (
+          <span className="rounded border border-red-200 bg-red-50 p-4 text-red-700">
+            {loadError === "postalNotFound"
+              ? t("careservice.recommendations.postalNotFound", {
+                  postal: homePostalCode ?? "",
+                })
+              : t("careservice.recommendations.loadError")}
+          </span>
+        )}
         <div className="flex flex-col gap-4">
           {recommendations.map((centre, index) => (
             <DaycareRecommendationCard key={index} centre={centre} />
@@ -475,12 +495,22 @@ export default function CareServiceRecommender() {
       centre.buildingName,
       centre.unitNo,
     );
-    const distance =
-      centre.distanceFromHome || centre.distanceFromHome == 0
-        ? t("careservice.card.awayFromHome", {
-            distance: parseDistance(centre.distanceFromHome),
-          })
-        : "";
+    // Without a driving time the distance is a straight-line estimate
+    // (route lookup unavailable), so it's labelled "about".
+    const hasDistance =
+      centre.distanceFromHome !== undefined && centre.distanceFromHome !== null;
+    const hasDrivingTime =
+      centre.drivingDuration !== undefined && centre.drivingDuration !== null;
+    const hasTransitTime =
+      centre.transitDuration !== undefined && centre.transitDuration !== null;
+    const distance = hasDistance
+      ? t(
+          hasDrivingTime
+            ? "careservice.card.awayFromHome"
+            : "careservice.card.awayFromHomeApprox",
+          { distance: parseDistance(centre.distanceFromHome!) },
+        )
+      : "";
 
     return (
       <div className="flex flex-col gap-4 rounded-md border border-gray-200 p-4">
@@ -506,18 +536,22 @@ export default function CareServiceRecommender() {
           <span>
             {address} {distance}
           </span>
-          {centre.distanceFromHome !== undefined &&
-            centre.distanceFromHome > 0 && (
-              <div className="flex flex-col rounded border border-brand-primary-400 bg-brand-primary-50 p-4">
-                <span>
-                  {t.rich("careservice.card.travel", {
-                    car: parseDuration(centre.drivingDuration!),
-                    transit: parseDuration(centre.transitDuration!),
-                    b: (chunks) => <b>{chunks}</b>,
-                  })}
-                </span>
-              </div>
-            )}
+          {hasDrivingTime && (
+            <div className="flex flex-col rounded border border-brand-primary-400 bg-brand-primary-50 p-4">
+              <span>
+                {hasTransitTime
+                  ? t.rich("careservice.card.travel", {
+                      car: parseDuration(centre.drivingDuration!),
+                      transit: parseDuration(centre.transitDuration!),
+                      b: (chunks) => <b>{chunks}</b>,
+                    })
+                  : t.rich("careservice.card.travelCar", {
+                      car: parseDuration(centre.drivingDuration!),
+                      b: (chunks) => <b>{chunks}</b>,
+                    })}
+              </span>
+            </div>
+          )}
         </div>
         <Divider />
         <div className="flex">

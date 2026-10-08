@@ -10,6 +10,8 @@ declare global {
       // Analytics
       NEXT_PUBLIC_POSTHOG_KEY: string;
       NEXT_PUBLIC_POSTHOG_HOST: string;
+      // Maps (optional)
+      NEXT_PUBLIC_GOOGLE_MAPS_EMBED_KEY?: string;
     }
   }
 }
