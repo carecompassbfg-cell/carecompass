@@ -607,7 +607,9 @@
       "km": "{km}公里",
       "minutes": "{minutes}分钟",
       "awayFromHome": "（离家{distance}）",
-      "travel": "开车<b>{car}</b>，或乘搭巴士/地铁<b>{transit}</b>"
+      "travel": "开车<b>{car}</b>，或乘搭巴士/地铁<b>{transit}</b>",
+      "awayFromHomeApprox": "（离家约{distance}）",
+      "travelCar": "开车<b>{car}</b>"
     },
     "sgw": {
       "poweredBy": "资料来自",
@@ -617,7 +619,12 @@
   "daycare": {
     "list": {
       "title": "失智症日间护理中心",
-      "searchPlaceholder": "搜索护理中心"
+      "searchPlaceholder": "按中心名称或您的邮区编号搜索",
+      "nearPostal": "离{postal}最近的中心",
+      "postalNotFound": "找不到邮区编号{postal}，请检查后再试。",
+      "postalLookupError": "目前无法查询该邮区编号，请稍后再试。",
+      "noResults": "没有符合搜索条件的中心。",
+      "kmAway": "距离{km}公里"
     },
     "detail": {
       "userLoadError": "无法加载用户资料",
@@ -653,7 +660,9 @@
       "title": "评价",
       "subtitle": "看看其他看护者怎么说",
       "signInToReview": "登录后写评价",
-      "fromSource": "这则评价来自{source}"
+      "fromSource": "这则评价来自{source}",
+      "seeMore": "查看更多评价（{count}）",
+      "seeLess": "收起评价"
     },
     "support": {
       "title": "经济援助",
@@ -758,7 +767,8 @@
     "removeLabel": "从收藏中移除",
     "savePage": "收藏此页",
     "saved": "已收藏",
-    "save": "收藏"
+    "save": "收藏",
+    "error": "无法更新已保存列表，请再试一次。"
   },
   "review": {
     "leaveReview": "写评价",
@@ -782,7 +792,12 @@
     },
     "targetType": {
       "dayCare": "日间护理",
-      "homeCare": "居家护理"
+      "homeCare": "居家护理",
+      "scheme": "援助计划"
+    },
+    "label": {
+      "google": "Google 评价",
+      "careCompass": "CareCompass 用户评价"
     }
   },
   "pchi": {

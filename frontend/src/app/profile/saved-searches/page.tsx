@@ -15,15 +15,20 @@ import { MultiSelect } from "@opengovsg/design-system-react";
 import { ReviewTargetType } from "@/types/review";
 import React, { useEffect, useState } from "react";
 import BackButton from "@/ui/button/BackButton";
+import { SCHEME_BOOKMARKS_ENABLED } from "@/util/features";
+
+// Scheme bookmarks only once the backend supports them
+const RESOURCE_TYPES = Object.values(ReviewTargetType).filter(
+  (type) => SCHEME_BOOKMARKS_ENABLED || type !== ReviewTargetType.SCHEME,
+);
 
 export default function SavedSearchesPage() {
   const router = useRouter();
 
   const [isLoading, setIsLoading] = useState(true);
   const [bookmarks, setBookmarks] = useState<Bookmark[]>([]);
-  const [selectedResourceTypes, setSelectedResourceTypes] = useState<string[]>(
-    Object.values(ReviewTargetType),
-  );
+  const [selectedResourceTypes, setSelectedResourceTypes] =
+    useState<string[]>(RESOURCE_TYPES);
 
   useEffect(() => {
     api
@@ -35,6 +40,7 @@ export default function SavedSearchesPage() {
   useEffect(() => {
     router.prefetch("/careservice/homecare/[homecareId]");
     router.prefetch("/careservice/dementia-daycare/[centreId]");
+    router.prefetch("/dashboard/schemes");
   }, [router]);
 
   return (
@@ -54,7 +60,7 @@ export default function SavedSearchesPage() {
           values={selectedResourceTypes.map((resourceType) =>
             resourceType.toString(),
           )}
-          items={Object.values(ReviewTargetType).map((resourceType) => ({
+          items={RESOURCE_TYPES.map((resourceType) => ({
             label: ReviewTargetTypeToName(resourceType),
             value: resourceType.toString(),
           }))}

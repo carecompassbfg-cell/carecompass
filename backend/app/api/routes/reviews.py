@@ -27,6 +27,12 @@ class ReviewBase(BaseModel):
     author_id: Optional[str] = None
 
 class ReviewCreate(ReviewBase):
+    @model_validator(mode="after")
+    def check_reviewable(self):
+        if self.target_type == ReviewableType.SCHEME:
+            raise ValueError("schemes can't be reviewed")
+        return self
+
     author_name: str = "Anonymous"
     google_review_id: Optional[str] = None
     google_author_url: Optional[str] = None

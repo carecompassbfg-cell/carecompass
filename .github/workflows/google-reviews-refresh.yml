@@ -1,0 +1,63 @@
+name: Google reviews - Monthly refresh
+
+# Refreshes day care centres' Google reviews (up to 5 newest + 5 most
+# relevant each) in the production database via the backend API. See
+# scrapers/google_maps/refresh_reviews.py.
+#
+# Needs the repository secret GOOGLE_MAPS_API_KEY (a key with Places API
+# (New), and optionally Places API (Legacy) for newest-first reviews).
+# Without the secret the job skips. "Run workflow" offers a dry run.
+
+on:
+  schedule:
+    # 2nd of each month, 03:00 Singapore time (19:00 UTC on the 1st)
+    - cron: "0 19 1 * *"
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "Dry run (fetch and report, write nothing)"
+        type: boolean
+        default: true
+
+permissions:
+  contents: read
+
+concurrency:
+  group: google-reviews-refresh
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    defaults:
+      run:
+        working-directory: ./scrapers/google_maps
+    env:
+      BACKEND_URL: https://api.carecompass.sg
+      GOOGLE_MAPS_API_KEY: ${{ secrets.GOOGLE_MAPS_API_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Skip if no API key
+        id: guard
+        run: |
+          if [ -z "$GOOGLE_MAPS_API_KEY" ]; then
+            echo "GOOGLE_MAPS_API_KEY secret not set; skipping." >> "$GITHUB_STEP_SUMMARY"
+            echo "skip=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - uses: actions/setup-python@v5
+        if: steps.guard.outputs.skip != 'true'
+        with:
+          python-version: "3.12"
+
+      - name: Refresh reviews
+        if: steps.guard.outputs.skip != 'true'
+        run: |
+          pip install requests python-dotenv
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ] && [ "${{ inputs.dry_run }}" = "true" ]; then
+            python refresh_reviews.py --dry-run
+          else
+            python refresh_reviews.py
+          fi

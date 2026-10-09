@@ -1,3 +1,5 @@
+from typing import Optional
+
 from sqlalchemy import Integer, String
 from sqlalchemy import Enum as SQLAlchemyEnum
 from sqlalchemy.orm import Mapped, mapped_column
@@ -21,7 +23,10 @@ class Bookmark(Base):
     user_id: Mapped[str] = mapped_column(String)
 
     # We sacrifice referential integrity here for polymorphism
-    target_id: Mapped[int] = mapped_column(Integer)
+    # Care services are keyed by integer id; schemes by their string id
+    # (e.g. "HOME-CAREGIVING-GRANT"), stored in target_key. One of the two is set.
+    target_id: Mapped[Optional[int]] = mapped_column(Integer, nullable=True)
+    target_key: Mapped[Optional[str]] = mapped_column(String, nullable=True)
     target_type: Mapped[ReviewableType] = mapped_column(
         SQLAlchemyEnum(ReviewableType, values_callable=use_enum_values)
     )

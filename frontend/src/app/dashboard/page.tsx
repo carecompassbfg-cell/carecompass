@@ -48,7 +48,7 @@ const SUMMARY_TILES = [
   },
 ] as const;
 
-const PLAN_AHEAD_URL = "https://mylegacy.life.gov.sg/end-of-life-planning/";
+const PLAN_AHEAD_URL = "https://www.life.gov.sg/pages/EbR1nJj9/legacy-planning";
 
 const ELSEWHERE_LINKS = [
   {

@@ -607,7 +607,9 @@
       "km": "{km}km",
       "minutes": "{minutes} min",
       "awayFromHome": "({distance} away from home)",
-      "travel": "<b>{car}</b> by car, or <b>{transit}</b> by bus/MRT"
+      "travel": "<b>{car}</b> by car, or <b>{transit}</b> by bus/MRT",
+      "awayFromHomeApprox": "(about {distance} from home)",
+      "travelCar": "<b>{car}</b> by car"
     },
     "sgw": {
       "poweredBy": "Powered by",
@@ -617,7 +619,12 @@
   "daycare": {
     "list": {
       "title": "Dementia Day Care Centres",
-      "searchPlaceholder": "Search for a centre"
+      "searchPlaceholder": "Search by centre name or your postal code",
+      "nearPostal": "Nearest centres to {postal}",
+      "postalNotFound": "We couldn't find postal code {postal}. Please check it and try again.",
+      "postalLookupError": "We couldn't look up that postal code right now. Please try again.",
+      "noResults": "No centres match your search.",
+      "kmAway": "{km}km away"
     },
     "detail": {
       "userLoadError": "Failed to fetch user data",
@@ -653,7 +660,9 @@
       "title": "Reviews",
       "subtitle": "See what other caregivers are saying",
       "signInToReview": "Sign in to leave a review",
-      "fromSource": "This review is from {source}"
+      "fromSource": "This review is from {source}",
+      "seeMore": "See more reviews ({count})",
+      "seeLess": "Show fewer reviews"
     },
     "support": {
       "title": "Financial Support",
@@ -758,7 +767,8 @@
     "removeLabel": "Remove from saved searches",
     "savePage": "Save this page",
     "saved": "Saved",
-    "save": "Save"
+    "save": "Save",
+    "error": "Couldn't update your saved list. Please try again."
   },
   "review": {
     "leaveReview": "Leave a review",
@@ -782,7 +792,12 @@
     },
     "targetType": {
       "dayCare": "Day Care",
-      "homeCare": "Home Care"
+      "homeCare": "Home Care",
+      "scheme": "Scheme"
+    },
+    "label": {
+      "google": "Google review",
+      "careCompass": "CareCompass user review"
     }
   },
   "pchi": {

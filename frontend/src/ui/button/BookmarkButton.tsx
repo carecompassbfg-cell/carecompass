@@ -14,7 +14,9 @@ import useSignInOnlyFeaturePrompt from "@/util/hooks/useSignInOnlyFeaturePrompt"
 import { t } from "@/i18n";
 
 interface BookmarkButtonProps extends ButtonProps {
-  targetId: number;
+  // Care services are identified by targetId, schemes by targetKey
+  targetId?: number;
+  targetKey?: string;
   targetType: ReviewTargetType;
   title: string;
   link?: string;
@@ -25,6 +27,7 @@ const UNCREATED_BOOKMARK_ID = -1;
 
 export default function BookmarkButton({
   targetId,
+  targetKey,
   targetType,
   title,
   link,
@@ -42,15 +45,21 @@ export default function BookmarkButton({
 
   useEffect(() => {
     if (isSignedIn) {
+      const params: Record<string, string> = { target_type: targetType };
+      if (targetKey) params.target_key = targetKey;
+      else if (targetId !== undefined) params.target_id = String(targetId);
       api
-        .get<
-          Bookmark[]
-        >(`/bookmarks?target_id=${targetId}&target_type=${targetType}`)
+        .get<Bookmark[]>("/bookmarks", params)
         .then((res) => {
-          if (res.data && res.data.length > 0) setBookmarkId(res.data[0].id);
-        });
+          setBookmarkId(
+            res.data && res.data.length > 0
+              ? res.data[0].id
+              : UNCREATED_BOOKMARK_ID,
+          );
+        })
+        .catch((error) => console.error(error));
     }
-  }, [targetId, targetType, isSignedIn]);
+  }, [targetId, targetKey, targetType, isSignedIn]);
 
   const isMarked = bookmarkId !== UNCREATED_BOOKMARK_ID;
 
@@ -60,23 +69,36 @@ export default function BookmarkButton({
     }
 
     const bookmarkToCreate: Omit<Bookmark, "id" | "userId"> = {
-      targetId,
+      targetId: targetId ?? null,
+      targetKey: targetKey ?? null,
       targetType,
       title,
       link,
     };
 
-    api.post<{ id: number }>("/bookmarks", bookmarkToCreate).then((res) => {
-      if (res.data?.id !== undefined) setBookmarkId(res.data.id);
-      toast.success(t("bookmark.added"));
-    });
+    api
+      .post<{ id: number }>("/bookmarks", bookmarkToCreate)
+      .then((res) => {
+        if (res.data?.id !== undefined) setBookmarkId(res.data.id);
+        toast.success(t("bookmark.added"));
+      })
+      .catch((error) => {
+        console.error(error);
+        toast.error(t("bookmark.error"));
+      });
   };
 
   const handleUnmark = () => {
-    api.delete(`/bookmarks/${bookmarkId}`).then(() => {
-      setBookmarkId(UNCREATED_BOOKMARK_ID);
-      toast.success(t("bookmark.removed"));
-    });
+    api
+      .delete(`/bookmarks/${bookmarkId}`)
+      .then(() => {
+        setBookmarkId(UNCREATED_BOOKMARK_ID);
+        toast.success(t("bookmark.removed"));
+      })
+      .catch((error) => {
+        console.error(error);
+        toast.error(t("bookmark.error"));
+      });
   };
 
   return mini ? (

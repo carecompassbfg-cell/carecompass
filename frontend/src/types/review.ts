@@ -6,6 +6,8 @@ export enum ReviewSource {
 export enum ReviewTargetType {
   DEMENTIA_DAY_CARE = "CARESERVICE::DEMENTIA_DAY_CARE",
   DEMENTIA_HOME_CARE = "CARESERVICE::DEMENTIA_HOME_CARE",
+  // Saved searches only; schemes aren't reviewed
+  SCHEME = "SCHEME",
 }
 
 export type Review = {

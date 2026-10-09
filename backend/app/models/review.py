@@ -11,6 +11,9 @@ from app.models.util import use_enum_values
 class ReviewableType(str, Enum):
     DEMENTIA_DAY_CARE = "CARESERVICE::DEMENTIA_DAY_CARE"
     DEMENTIA_HOME_CARE = "CARESERVICE::DEMENTIA_HOME_CARE"
+    # Bookmarks only (schemes can be saved but not reviewed). Shares the
+    # Postgres "reviewabletype" enum with reviews, see the TODO on Bookmark.
+    SCHEME = "SCHEME"
 
 class ReviewSource(str, Enum):
     GOOGLE = "GOOGLE"

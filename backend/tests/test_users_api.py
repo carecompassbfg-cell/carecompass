@@ -113,7 +113,8 @@ def test_migration_adds_three_nullable_encrypted_columns(engine):
 def test_migration_downgrades_and_upgrades(alembic_config, engine):
     from alembic import command
 
-    command.downgrade(alembic_config, "-1")
+    # Down to the revision just before these columns were added
+    command.downgrade(alembic_config, "d4e5f6a7b8c9")
     assert new_columns(engine) == {}
     command.upgrade(alembic_config, "head")
     assert set(new_columns(engine)) == set(NEW_COLUMNS)

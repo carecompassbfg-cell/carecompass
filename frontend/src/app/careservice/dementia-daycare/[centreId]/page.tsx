@@ -22,7 +22,7 @@ import LoadingSpinner from "@/ui/loading";
 import CustomMarkdown from "@/ui/CustomMarkdown";
 import { SignInButton } from "@clerk/nextjs";
 import { useAuthStore } from "@/stores/auth";
-import { api } from "@/api";
+import { api, getReviews } from "@/api";
 import { Rating } from "@smastrom/react-rating";
 import {
   Review,
@@ -30,10 +30,9 @@ import {
   ReviewSource,
   ReviewTargetType,
 } from "@/types/review";
-import moment from "moment";
 import { Drawer } from "vaul";
 import { ArrowLeft } from "lucide-react";
-import { mapReviewSource } from "@/util/review";
+import { formatReviewTime, reviewSourceLabel } from "@/util/review";
 import { constructAddress } from "@/util/address";
 import { BackButton, BookmarkButton, ShareButton } from "@/ui/button";
 import { useRouter } from "next/navigation";
@@ -46,7 +45,7 @@ import { MohNrLtcSubsidy } from "@/types/scheme";
 import { toast } from "sonner";
 import { PCHIDrawer } from "@/components/PCHIDrawer";
 import { t } from "@/i18n";
-import { useLocaleStore } from "@/stores/locale";
+import { buildMapEmbedUrl } from "@/util/mapEmbed";
 
 export default function DaycareCentreDetails({
   params,
@@ -59,6 +58,7 @@ export default function DaycareCentreDetails({
   const isSignedIn = useAuthStore((state) => state.isSignedIn);
   const userId = useAuthStore((state) => state.userId);
   const [user, setUser] = useState<UserData>();
+  const [userLoadFailed, setUserLoadFailed] = useState(false);
   const router = useRouter();
 
   useEffect(() => {
@@ -72,16 +72,17 @@ export default function DaycareCentreDetails({
   // We fetch from backend instead of store for now because store
   // is currently not persisted across refreshes
   useEffect(() => {
-    if (isSignedIn && !user && userId) {
+    if (isSignedIn && !user && userId && !userLoadFailed) {
       api
         .get<UserData>("/users/me")
         .then((response) => setUser(response.data))
         .catch((error) => {
           console.error(error);
+          setUserLoadFailed(true);
           toast.error(t("daycare.detail.userLoadError"));
         });
     }
-  }, [isSignedIn, userId, user]);
+  }, [isSignedIn, userId, user, userLoadFailed]);
 
   // Super hacky need to fix ASAP
   useEffect(() => {
@@ -96,7 +97,9 @@ export default function DaycareCentreDetails({
     }
   }, [isSignedIn, userId, subsidyInfo]);
 
-  if (isLoading || !user) {
+  // Guests have no user to wait for; only signed-in users need it loaded
+  const isUserPending = isSignedIn && !!userId && !user && !userLoadFailed;
+  if (isLoading || isUserPending) {
     return <LoadingSpinner />;
   }
 
@@ -184,7 +187,7 @@ export default function DaycareCentreDetails({
                 price: formatPriceRange(centre.minPrice, centre.maxPrice),
               })}
             </span>
-            {isSignedIn && user.monthly_pchi === null && (
+            {isSignedIn && user?.monthly_pchi === null && (
               <section className="flex flex-col gap-4 rounded border border-brand-primary-300 bg-brand-primary-100 p-4">
                 <p className="text-brand-primary-900">
                   {t("daycare.detail.subsidyPrompt")}
@@ -312,8 +315,10 @@ export default function DaycareCentreDetails({
       </div>
       <div id="embed-map-canvas" className="w-full">
         <iframe
-          // api key from https://www.embed-map.com/
-          src={`https://www.google.com/maps/embed/v1/place?q=${centre.name.replace(" ", "+")}&key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8`}
+          title={centre.name}
+          src={buildMapEmbedUrl(centre)}
+          loading="lazy"
+          referrerPolicy="no-referrer-when-downgrade"
           allowFullScreen
           className="h-96 w-full rounded-md border border-gray-200 shadow"
         />
@@ -410,32 +415,6 @@ function NewReviewDrawer({ centreId }: { centreId: number }) {
   );
 }
 
-const RELATIVE_UNITS: [Intl.RelativeTimeFormatUnit, number][] = [
-  ["year", 365 * 24 * 3600],
-  ["month", 30 * 24 * 3600],
-  ["day", 24 * 3600],
-  ["hour", 3600],
-  ["minute", 60],
-];
-
-const getRelativeTime = (date: string) => {
-  const time = moment.utc(date).local();
-  if (useLocaleStore.getState().locale === "en") {
-    return time.fromNow();
-  }
-  // moment only has English loaded, so use the browser's formatter otherwise
-  const seconds = time.diff(moment(), "seconds");
-  const formatter = new Intl.RelativeTimeFormat(t("common.dateLocale"), {
-    numeric: "auto",
-  });
-  for (const [unit, size] of RELATIVE_UNITS) {
-    if (Math.abs(seconds) >= size) {
-      return formatter.format(Math.trunc(seconds / size), unit);
-    }
-  }
-  return formatter.format(seconds, "second");
-};
-
 function ReviewDetailDrawer({ review }: { review: Review }) {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -476,9 +455,11 @@ function ReviewDetailDrawer({ review }: { review: Review }) {
                   value={review.overallRating}
                   className="max-w-24"
                 />
-                <span className="text-sm">
-                  {getRelativeTime(review.publishedTime)}
-                </span>
+                {review.publishedTime && (
+                  <span className="text-sm">
+                    {formatReviewTime(review.publishedTime)}
+                  </span>
+                )}
               </div>
               <span>{review.content}</span>
             </div>
@@ -489,6 +470,9 @@ function ReviewDetailDrawer({ review }: { review: Review }) {
   );
 }
 
+// Newest first; the rest behind "See more reviews"
+const REVIEWS_SHOWN_FIRST = 3;
+
 function ReviewSection({
   centreId,
   reviews,
@@ -497,16 +481,32 @@ function ReviewSection({
   reviews: Review[];
 }) {
   const isSignedIn = useAuthStore((state) => state.isSignedIn);
+  const [fullReviews, setFullReviews] = useState<Review[] | null>(null);
 
-  const sortedReviews = reviews.sort((a, b) => {
+  // The centre endpoint's reviews leave out the author and date, so load the
+  // full reviews (as on the home care page) and fall back to what we have.
+  useEffect(() => {
+    getReviews({
+      targetType: ReviewTargetType.DEMENTIA_DAY_CARE,
+      targetId: Number(centreId),
+      limit: 100,
+    })
+      .then(setFullReviews)
+      .catch((error) => console.error(error));
+  }, [centreId]);
+
+  const [showAllReviews, setShowAllReviews] = useState(false);
+  const reviewList = fullReviews ?? reviews;
+  const sortedReviews = [...reviewList].sort((a, b) => {
     return (
-      new Date(b.publishedTime).getTime() - new Date(a.publishedTime).getTime()
+      new Date(b.publishedTime ?? 0).getTime() -
+      new Date(a.publishedTime ?? 0).getTime()
     );
   });
 
-  const reviewCount = reviews.length;
+  const reviewCount = reviewList.length;
   const averageRating =
-    reviews.reduce((acc, review) => acc + review.overallRating, 0) /
+    reviewList.reduce((acc, review) => acc + review.overallRating, 0) /
     reviewCount;
 
   return (
@@ -534,7 +534,10 @@ function ReviewSection({
         </SignInButton>
       )}
       <div className="flex flex-col divide-y divide-solid">
-        {sortedReviews.map((review, index) => (
+        {(showAllReviews
+          ? sortedReviews
+          : sortedReviews.slice(0, REVIEWS_SHOWN_FIRST)
+        ).map((review, index) => (
           <div key={index} className="flex flex-col gap-2 py-4">
             <span className="font-semibold">{review.authorName}</span>
             <div className="flex gap-2">
@@ -543,21 +546,31 @@ function ReviewSection({
                 value={review.overallRating}
                 className="max-w-24"
               />
-              <span className="text-sm">
-                {getRelativeTime(review.publishedTime)}
-              </span>
+              {review.publishedTime && (
+                <span className="text-sm">
+                  {formatReviewTime(review.publishedTime)}
+                </span>
+              )}
             </div>
             <ReviewDetailDrawer review={review} />
-            {review.reviewSource !== ReviewSource.IN_APP && (
-              <span className="text-sm text-gray-500">
-                {t("daycare.review.fromSource", {
-                  source: mapReviewSource(review.reviewSource),
-                })}
-              </span>
-            )}
+            <span className="text-sm text-gray-500">
+              {reviewSourceLabel(review.reviewSource)}
+            </span>
           </div>
         ))}
       </div>
+      {sortedReviews.length > REVIEWS_SHOWN_FIRST && (
+        <Button
+          variant="outline"
+          onClick={() => setShowAllReviews((shown) => !shown)}
+        >
+          {showAllReviews
+            ? t("daycare.review.seeLess")
+            : t("daycare.review.seeMore", {
+                count: sortedReviews.length - REVIEWS_SHOWN_FIRST,
+              })}
+        </Button>
+      )}
     </section>
   );
 }
