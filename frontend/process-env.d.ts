@@ -12,6 +12,8 @@ declare global {
       NEXT_PUBLIC_POSTHOG_HOST: string;
       // Maps (optional)
       NEXT_PUBLIC_GOOGLE_MAPS_EMBED_KEY?: string;
+      // Feature switches (optional, "true" to enable)
+      NEXT_PUBLIC_SCHEME_BOOKMARKS_ENABLED?: string;
     }
   }
 }
