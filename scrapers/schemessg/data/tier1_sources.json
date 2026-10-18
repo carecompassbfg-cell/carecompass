@@ -5,23 +5,23 @@
     "chars": 10862,
     "via": "fetch",
     "scheme": "Parent Relief",
-    "lastReadOn": "2026-10-05"
+    "lastReadOn": "2026-10-19"
   },
   "https://www.aic.sg/financial-assistance/caregivers-training-grant-ctg/": {
     "read": true,
-    "hash": "dda1c3cd746e391863cb1ab6d3d536a47fab38b8e9ba7140856d64dcbbef164a",
-    "chars": 4975,
+    "hash": "43340fb888e748f2f9840c3f8ea07a62eab1eaae9222a76a21b7b0e08a79cf8f",
+    "chars": 4953,
     "via": "fetch",
     "scheme": "Caregivers Training Grant",
-    "lastReadOn": "2026-10-05"
+    "lastReadOn": "2026-10-19"
   },
   "https://www.aic.sg/financial-assistance/home-caregiving-grant/": {
     "read": true,
-    "hash": "2b84eac24b138b53d4af7b6c08b9ae9ad6e980521b7ec0a95742603b12ffd0e1",
-    "chars": 11935,
+    "hash": "fe39c2596448a73801d7e401eee04b582ecef46547fa75335c6c85f7ff336d9a",
+    "chars": 11902,
     "via": "fetch",
     "scheme": "Home Caregiving Grant",
-    "lastReadOn": "2026-10-05"
+    "lastReadOn": "2026-10-19"
   },
   "https://www.mom.gov.sg/passes-and-permits/work-permit-for-foreign-domestic-worker/foreign-domestic-worker-levy/levy-concession": {
     "read": true,
@@ -29,7 +29,7 @@
     "chars": 4547,
     "via": "fetch",
     "scheme": "Migrant Domestic Worker Levy Concession",
-    "lastReadOn": "2026-10-05"
+    "lastReadOn": "2026-10-19"
   },
   "https://www.moh.gov.sg/managing-expenses/schemes-and-subsidies/subsidy-framework-for-non-residential-long-term-care-services": {
     "read": true,
@@ -37,7 +37,7 @@
     "chars": 3257,
     "via": "fetch",
     "scheme": "Subsidies for day care and home care",
-    "lastReadOn": "2026-10-05"
+    "lastReadOn": "2026-10-19"
   },
   "https://www.aic.sg/Care-Services/Enhanced-Home-Personal-Care": {
     "read": true,
@@ -45,23 +45,23 @@
     "chars": 4323,
     "via": "fetch",
     "scheme": "Subsidies for day care and home care",
-    "lastReadOn": "2026-10-05"
+    "lastReadOn": "2026-10-19"
   },
   "https://www.aic.sg/financial-assistance/seniors-mobility-and-enabling-fund/": {
     "read": true,
-    "hash": "988809753542b95e0d28b555118662774e2a30a7b3a18031d5fda3a1a22ac766",
-    "chars": 14005,
+    "hash": "e6e8c3940d5c15d8d5a5fdff38564a669bba5a8f263247c5708be369ed06e15e",
+    "chars": 13983,
     "via": "fetch",
     "scheme": "Seniors' Mobility and Enabling Fund",
-    "lastReadOn": "2026-10-05"
+    "lastReadOn": "2026-10-19"
   },
   "https://aic.sg/Financial-Assistance/MediSave-Care": {
     "read": true,
-    "hash": "5bea1d68a636e54118afdc88b9d081b40c0452c29172659fcc896cd6d3e44d7f",
-    "chars": 11711,
+    "hash": "404e291da444e3b61ae7421aed5e3e6400381d93716ba8c0495a7ffd7f4254ac",
+    "chars": 11689,
     "via": "fetch",
     "scheme": "MediSave Care",
-    "lastReadOn": "2026-10-05"
+    "lastReadOn": "2026-10-19"
   },
   "https://www.cpf.gov.sg/service/article/what-is-medisave-care": {
     "read": true,
@@ -69,7 +69,7 @@
     "chars": 1121,
     "via": "browser",
     "scheme": "MediSave Care",
-    "lastReadOn": "2026-10-05"
+    "lastReadOn": "2026-10-19"
   },
   "https://www.cpf.gov.sg/member/healthcare-financing/careshield-life": {
     "read": true,
@@ -77,7 +77,7 @@
     "chars": 9386,
     "via": "fetch",
     "scheme": "CareShield Life and ElderShield payouts",
-    "lastReadOn": "2026-10-05"
+    "lastReadOn": "2026-10-19"
   },
   "https://www.cpf.gov.sg/service/article/what-is-the-monthly-payout-amount-for-careshield-life": {
     "read": true,
@@ -85,22 +85,22 @@
     "chars": 1143,
     "via": "browser",
     "scheme": "CareShield Life and ElderShield payouts",
-    "lastReadOn": "2026-10-05"
+    "lastReadOn": "2026-10-19"
   },
   "https://www.aic.sg/financial-assistance/careshield-life": {
     "read": true,
-    "hash": "6b56d6c3c2f7ae5e7bdee3062fd147a14e4dd8ebe867e8c378fd35a705de4760",
-    "chars": 12255,
+    "hash": "2361df9e8c36044d0c1a70e62621b488de1763a321e500732940ece64e02fc62",
+    "chars": 12233,
     "via": "fetch",
     "scheme": "CareShield Life and ElderShield payouts",
-    "lastReadOn": "2026-10-05"
+    "lastReadOn": "2026-10-19"
   },
   "https://aic.sg/Financial-Assistance/ElderShield": {
     "read": true,
-    "hash": "ecdd960d11dd7589f1cc8bc098fc7a5f04b120874e4fc691514b8e5ae706dc43",
-    "chars": 9453,
+    "hash": "0c83a40b016370aa63c4e478b1e97d5b68b09a860db358504b076fa825b5aff3",
+    "chars": 9431,
     "via": "fetch",
     "scheme": "CareShield Life and ElderShield payouts",
-    "lastReadOn": "2026-10-05"
+    "lastReadOn": "2026-10-19"
   }
 }
