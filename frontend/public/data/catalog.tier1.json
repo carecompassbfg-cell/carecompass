@@ -25,7 +25,7 @@
         "url": "https://www.iras.gov.sg/taxes/individual-income-tax/basics-of-individual-income-tax/tax-reliefs-rebates-and-deductions/tax-reliefs/parent-relief-parent-relief-(disability)"
       }
     ],
-    "lastChecked": "2026-09-30",
+    "lastChecked": "2026-10-19",
     "checkerId": "PARENT-RELIEF",
     "eligibility": "- Your parent, grandparent or in-law\n- Aged 55 or older, or needs help with at least one daily activity (Parent Relief (Disability))\n- If they don't live with you, you spent $2,000 or more supporting them\n- Their income last year was $8,000 or less (2025, for the Year of Assessment 2026)\n- No one else has claimed Spouse Relief or another relief on the same person\n- For Parent Relief (Disability): a doctor's or disability association's document if IRAS asks",
     "nextSteps": "1. Log in to myTax Portal with Singpass when you file your tax return.\n2. Go to \"4. Deductions, Tax Reliefs and Rebates\" > \"Add New\" > \"Parent\".\n3. If you claimed last year, it is pre-filled automatically."
@@ -118,7 +118,7 @@
         "url": "https://www.mom.gov.sg/passes-and-permits/work-permit-for-foreign-domestic-worker/foreign-domestic-worker-levy/levy-concession"
       }
     ],
-    "lastChecked": "2026-10-05",
+    "lastChecked": "2026-10-19",
     "checkerId": "MIGRANT-DOMESTIC-WORKER-LEVY",
     "eligibility": "- Your loved one lives with you (same address on NRIC)\n- Aged 67 or older and a Singapore Citizen, or a PR where you or your spouse is a Singapore Citizen\n- Or needs help with at least one daily activity and is a Singapore Citizen, or a PR with a Singapore Citizen parent, spouse or child (needs an AIC recommendation letter)\n- The helper is registered to your household, and your loved one is listed as a household member on the FDW eService",
     "nextSteps": "- Aged 67+: usually applied automatically when the address and household details match. [Check if it has been applied](https://go.gov.sg/check-lc-elderly-pwd).\n- Disability route: apply to AIC for a recommendation letter first, then MOM applies the concession.\n- The concession shows within your next 2 levy bills and is backdated to when you completed the steps."
@@ -152,7 +152,7 @@
         "url": "https://www.aic.sg/Care-Services/Enhanced-Home-Personal-Care"
       }
     ],
-    "lastChecked": "2026-10-05",
+    "lastChecked": "2026-10-19",
     "checkerId": "MOH-NR-LTC-SUBSIDY",
     "eligibility": "- Your loved one is a Singapore Citizen or PR\n- For care at home or at a centre, not in a nursing home\n- Household income per person of $4,800 or less (or no income and home Annual Value $21,000 or less)\n- Singapore Citizens born 1969 or earlier get the highest rates\n- The provider is government-funded, with a referral from a doctor or AIC",
     "nextSteps": "1. Ask your loved one's doctor at the hospital or polyclinic, or AIC, to refer you to a subsidised service.\n2. The subsidy is applied to the provider's bill.\n3. Compare day care and home care providers in Care services."

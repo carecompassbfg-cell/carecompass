@@ -1,6 +1,6 @@
 # Schemes.sg sync report
 
-Synced on 2026-10-05 from the **prod** environment, category "Seniors & Caregiving".
+Synced on 2026-10-19 from the **prod** environment, category "Seniors & Caregiving".
 
 **Content changes to review** (see below).
 
@@ -8,133 +8,48 @@ Synced on 2026-10-05 from the **prod** environment, category "Seniors & Caregivi
 
 | | Count |
 |---|---:|
-| Fetched | 194 |
-| Published (money, Tier 2) | 17 |
-| Other services and programmes (`other.json`) | 87 |
-| Excluded | 82 |
+| Fetched | 199 |
+| Published (money, Tier 2) | 16 |
+| Other services and programmes (`other.json`) | 90 |
+| Excluded | 85 |
 | Unclassified money (not published) | 0 |
 | Tier 1 matches (ours, not published) | 8 |
 | Retired or not found | 0 |
 
 ## Changes since the last run
 
-Compared with the last run from the **dev** environment.
+### Added (6)
 
-### Added (50)
+- Food Care Programme (excluded)
+- Fei Yue Active Ageing Centres (AAC) (other)
+- Youth Employment Support (excluded)
+- White Cane Club (excluded)
+- Specialised Assistive Technology Centre (other)
+- Specialised Case Management Programme (other)
 
-- Aces HelpLife (excluded)
-- Enhancement for Active Seniors (EASE) (excluded, equipment_home)
-- Seniors' Mobility and Enabling Fund (SMF) (tier1, equipment_home)
-- Alive Counselling (excluded)
-- Mental Health Service (other)
-- CREST (AWWA) (other)
-- Positive Appearance Scheme (other)
-- Play.Able (excluded)
-- Brighthill Evergreen Home (excluded)
-- Sheltered Workshop Programme (other)
-- Counselling (other)
-- CREST-Youth (excluded)
-- CWS Soulfull Programme (excluded)
-- Dementia Helpline (other)
-- Friends-In-Deed Counselling Society (excluded)
-- Community Shop Programme (excluded)
-- Free Food For All (excluded)
-- COMIT Fei Yue (other)
-- Enhancement for Active Seniors (EASE) (excluded, equipment_home)
-- Lease Buyback Scheme (excluded, unclassified)
-- Deferred Downpayment Scheme (DDS) (excluded)
-- Silver Housing Bonus (excluded, equipment_home)
-- CREST HNF @ Fernvale and Jalan Kayu (other)
-- S17 Community Kitchen (excluded)
-- KampungSpirit (excluded, unclassified)
-- CREST-Youth Lakeside Family Services @ West (excluded)
-- LB Tech Care (excluded)
-- Silver is Gold (excluded, unclassified)
-- MINDS Caregivers Support Services (excluded)
-- MWS Active Ageing Centres (excluded)
-- NAMS Addiction Hotline (excluded)
-- Senior Care Centres (other)
-- Ray of Hope (excluded, unclassified)
-- REACH Community Mental Health Team (other)
-- Dignity of Work Programme (other)
-- CREST @ Anchorvale & Buangkok (excluded)
-- Sheng Hong Active Ageing Centre (Care)@Sennett (other)
-- Casework & Counselling Services (other)
-- Dementia Caregiver Support Group (other)
-- Dementia Support Group (other)
-- iREX : Integrated Rehabilitation & Exercise Programme (excluded)
-- StrokeConnect (other)
-- Special Needs Savings Scheme (other)
-- Community Outreach Programme for the Elderly (COPE) (excluded)
-- South West Community Caring Fund (published, monthly_payouts)
-- Project Dementia and Caregiver care services (Meeting Centre Support Programme) (other)
-- Tung Ling Counselling Centre (excluded)
-- Mental Wellness Outreach for Seniors (CREST Programme) (other)
-- Counselling and Coaching for Older Persons and Caregivers (other)
-- Care & Assistance (excluded, unclassified)
+### Removed (1)
 
-### Removed (3)
-
-- Community Intervention Teams (COMIT) (other)
-- Caregiver Empowerment Programme (other)
-- SAGE The Seniors Helpline (other)
-
-### Changed (7)
-
-- **CREST - Community Resource Engagement and Support Team**: agency, summary, description, eligibility, whatItGives, link
-  - link: `https://www.aic.sg/body-mind/dementia-support-referrals` → `https://www.aic.sg/Partners/Community-Mental-Health-Programmes`
-- **Financial and Food Rations assistance (Temporary)**: agency, summary, description, eligibility, whatItGives, link, area
-  - link: `https://www.bethelcs.org.sg/social-services/overview` → `https://www.bethelcs.org.sg/social-services/community-support`
-- **Financial Assistance Schemes & Food Vouchers**: agency, summary, description, eligibility, whatItGives, link
-  - link: `https://www.eurasians.sg/family-support/` → `https://www.eurasians.sg/families`
-- **Enhancement for Active Seniors (EASE)**: summary, description, eligibility
-- **Special Needs Trust Company**: name, summary, description, eligibility, whatItGives
-- **Caregiving @ South West**: summary, description, eligibility, whatItGives, link, kind, status, payFor
-  - link: `https://southwest.cdc.gov.sg/what-we-do/for-caregivers/caregiving/` → `https://southwest.cdc.gov.sg/what-we-do/for-caregivers/caregiving-sw/`
-  - kind: `service_or_programme` → `money`
-  - status: `other` → `excluded`
-  - payFor: `None` → `unclassified`
-- **South West Caregiver Support Fund**: eligibility, whatItGives, link
-  - link: `https://southwest.cdc.gov.sg/what-we-do/for-caregivers/csf/` → `https://southwest.cdc.gov.sg/what-we-do/for-caregivers/south-west-caregiver-support-fund/`
+- Singapore Red Cross' TransportAid (published, transport)
 
 ## Overrides to review
 
 Text we override by hand in overrides.json. When Schemes.sg changes the text we replaced, re-check the override and update `checked_on`.
+
+No Schemes.sg text behind an override changed.
 
 ### South West Caregiver Support Fund
 
 - Overrides: summary, description, valueText
 - Reason: Production Schemes.sg now says $1,000 (description), matching the official South West CDC page (updated 27 Aug 2026), but its summary and description describe the CDC's caregiver page rather than the fund, and it has no payFor. We keep our summary, "$1,000 one-off" and payFor. Dev said $800 (summary) and $500 (description).
 - Checked on: 2026-10-05
-- Status: **Schemes.sg text changed since the last run: review this override** (summary, description)
-
-Schemes.sg summary before:
-
-> One-time $800 aid for South West caregivers.
-
-Schemes.sg summary now:
-
-> South West CDC offers caregiver-focused resources, including a support fund for caregiving and self-care expenses, and a resource map of local services. It centralizes information to help caregivers in the South West District access support more easily.
-
-Schemes.sg description before:
-
-> The South West Caregiver Support Fund is an interim one-time assistance of $500, to help caregivers defray self-care and caregiving expenses.
-
-Schemes.sg description now:
-
-> This South West CDC page consolidates support for caregivers living in the South West District of Singapore.
-> - Highlights a Caregiving @ South West initiative that brings together support and resources tailored for caregivers.
-> - Features the South West Caregiver Support Fund, which helps caregivers defray self-care and caregiving-related expenses.
-> - Provides a South West Resource Map to help caregivers discover key caregiving support services available within their community.
-> - Aims to make it easier for caregivers to find relevant support, information, and financial help within the district.
-> - $1,000 to help caregivers with self-care and caregiving expenses.
+- Status: Schemes.sg text unchanged
 
 ### South West Community Caring Fund
 
 - Overrides: valueText
 - Reason: official page checked 5 Oct 2026
 - Checked on: 2026-10-05
-- Status: Baseline recorded this run; changes are tracked from the next run
+- Status: Schemes.sg text unchanged
 
 ## Tier 1 matches
 
@@ -192,7 +107,7 @@ Schemes outside the category that overrides.json asks for.
 
 - Medifund: Medifund (published)
 
-## Published schemes (17)
+## Published schemes (16)
 
 ### Cash support (7)
 
@@ -211,12 +126,6 @@ Schemes outside the category that overrides.json asks for.
 | Scheme | Agency | Area |
 |---|---|---|
 | [Enhancement for Active Seniors (EASE)](https://www.hdb.gov.sg/managing-my-home/upgrading-and-redevelopment/enhancement-for-active-seniors-ease) | HDB | Islandwide |
-
-### Transport (1)
-
-| Scheme | Agency | Area |
-|---|---|---|
-| [Singapore Red Cross' TransportAid](https://www.redcross.sg/get-assistance/transportaid.html) | Singapore Red Cross | Islandwide |
 
 ### Medical bills (7)
 
@@ -240,7 +149,7 @@ Schemes outside the category that overrides.json asks for.
 
 Financial help that doesn't map cleanly to one category, so it is not published. Set `payFor` in overrides.json to publish one.
 
-## Excluded (82)
+## Excluded (85)
 
 | Scheme | Agency | Kind | Reason |
 |---|---|---|---|
@@ -255,6 +164,7 @@ Financial help that doesn't map cleanly to one category, so it is not published.
 | Play.Able | Be Kind SG | service_or_programme | Aimed at children or youth |
 | Singapore Association for Mental Health Mobile Support Team COMIT | Singapore Association for Mental Health Mobile Support Team COMIT | service_or_programme | Aimed at children or youth |
 | Viriya Children Medical Programme (VCMP) | Viriya Community Services | service_or_programme | Aimed at children or youth |
+| Youth Employment Support | Metta Welfare Association | service_or_programme | Aimed at children or youth |
 | HCSA Dayspring | HCSA Dayspring SPIN | service_or_programme | Aimed at families only |
 | HCSA Dayspring SPIN | HCSA Community Services | service_or_programme | Aimed at families only |
 | 4S Active Ageing Centre @ Eunos Crescent | 4S Active Ageing Centre @ Eunos Crescent | service_or_programme | Not aimed at caregivers or seniors with a care need |
@@ -284,6 +194,7 @@ Financial help that doesn't map cleanly to one category, so it is not published.
 | Deferred Downpayment Scheme (DDS) | HDB | service_or_programme | Not aimed at caregivers or seniors with a care need |
 | Financial Assistance | Bcare | service_or_programme | Not aimed at caregivers or seniors with a care need |
 | Food Assistance | A Packet of Rice | service_or_programme | Not aimed at caregivers or seniors with a care need |
+| Food Care Programme | Cornerstone Community Services | service_or_programme | Not aimed at caregivers or seniors with a care need |
 | Free Food For All | Free Food For All Ltd | service_or_programme | Not aimed at caregivers or seniors with a care need |
 | Friends-In-Deed Counselling Society | Friends In Deed Counselling Society | service_or_programme | Not aimed at caregivers or seniors with a care need |
 | Friends @ St Hilda’s Link | St Hilda's Community Services | service_or_programme | Not aimed at caregivers or seniors with a care need |
@@ -313,6 +224,7 @@ Financial help that doesn't map cleanly to one category, so it is not published.
 | Traditional Chinese Medicine Free Clinic | Buddhist Compassion Relief Tzu-Chi Foundation (Singapore) | service_or_programme | Not aimed at caregivers or seniors with a care need |
 | Tung Ling Counselling Centre | Tung Ling Community Services | service_or_programme | Not aimed at caregivers or seniors with a care need |
 | Tzu Chi Free Clinic | Tzu Chi Singapore | service_or_programme | Not aimed at caregivers or seniors with a care need |
+| White Cane Club | Singapore Association of the Visually Handicapped (SAVH) | service_or_programme | Not aimed at caregivers or seniors with a care need |
 | KampungSpirit | Open Government Products | money | Override: Donor platform used by social workers for households; caregivers can't apply |
 | Enhancement for Active Seniors (EASE) | HDB | money | Override: Duplicate on production Schemes.sg (three EASE entries); we publish the HDB entry at hdb.gov.sg/managing-my-home/upgrading-and-redevelopment/enhancement-for-active-seniors-ease |
 | Enhancement for Active Seniors (EASE) | HDB | money | Override: Duplicate on production Schemes.sg (three EASE entries); we publish the HDB entry at hdb.gov.sg/managing-my-home/upgrading-and-redevelopment/enhancement-for-active-seniors-ease |
@@ -333,11 +245,16 @@ None.
 
 ## Tier 1 official pages
 
-Read 13 official pages behind our core schemes: 9 unchanged, 1 changed, 3 read for the first time, 0 couldn't be read. 2 needed a headless browser.
+Read 13 official pages behind our core schemes: 7 unchanged, 6 changed, 0 read for the first time, 0 couldn't be read. 2 needed a headless browser.
 
 ### Changed. Re-check docs/schemes/tier1-schemes.md
 
-- https://www.cpf.gov.sg/member/healthcare-financing/careshield-life (CareShield Life and ElderShield payouts)
+- https://www.aic.sg/financial-assistance/caregivers-training-grant-ctg/ (Caregivers Training Grant)
+- https://www.aic.sg/financial-assistance/home-caregiving-grant/ (Home Caregiving Grant)
+- https://www.aic.sg/financial-assistance/seniors-mobility-and-enabling-fund/ (Seniors' Mobility and Enabling Fund)
+- https://aic.sg/Financial-Assistance/MediSave-Care (MediSave Care)
+- https://www.aic.sg/financial-assistance/careshield-life (CareShield Life and ElderShield payouts)
+- https://aic.sg/Financial-Assistance/ElderShield (CareShield Life and ElderShield payouts)
 
 ### Couldn't read this week
 
@@ -347,32 +264,42 @@ None.
 
 ### Re-check before the date can move
 
-- **Parent Relief** (last checked 2026-09-30)
-  - https://www.iras.gov.sg/taxes/individual-income-tax/basics-of-individual-income-tax/tax-reliefs-rebates-and-deductions/tax-reliefs/parent-relief-parent-relief-(disability): read for the first time, nothing to compare with yet
+- **Caregivers Training Grant** (last checked 2026-10-05)
+  - https://www.aic.sg/financial-assistance/caregivers-training-grant-ctg/: changed
+- **Home Caregiving Grant** (last checked 2026-10-05)
+  - https://www.aic.sg/financial-assistance/home-caregiving-grant/: changed
+- **Seniors' Mobility and Enabling Fund** (last checked 2026-10-05)
+  - https://www.aic.sg/financial-assistance/seniors-mobility-and-enabling-fund/: changed
 - **MediSave Care** (last checked 2026-09-30)
-  - https://www.cpf.gov.sg/service/article/what-is-medisave-care: read for the first time, nothing to compare with yet
-- **CareShield Life and ElderShield payouts** (last checked 2026-10-01)
-  - https://www.cpf.gov.sg/member/healthcare-financing/careshield-life: changed
-  - https://www.cpf.gov.sg/service/article/what-is-the-monthly-payout-amount-for-careshield-life: read for the first time, nothing to compare with yet
+  - https://aic.sg/Financial-Assistance/MediSave-Care: changed
+- **CareShield Life and ElderShield payouts** (last checked 2026-10-05)
+  - https://www.aic.sg/financial-assistance/careshield-life: changed
+  - https://aic.sg/Financial-Assistance/ElderShield: changed
 
-### Last checked moved to 2026-10-05
+### Last checked moved to 2026-10-19
 
-- Caregivers Training Grant (was 2026-09-30)
-- Home Caregiving Grant (was 2026-09-30)
-- Migrant Domestic Worker Levy Concession (was 2026-09-30)
-- Subsidies for day care and home care (was 2026-09-30)
-- Seniors' Mobility and Enabling Fund (was 2026-09-30)
+- Parent Relief (was 2026-09-30)
+- Migrant Domestic Worker Levy Concession (was 2026-10-05)
+- Subsidies for day care and home care (was 2026-10-05)
+
+## Chinese translations
+
+Schemes without an up-to-date Chinese translation show in English in the Chinese app. To fix one, update its entry in the `.zh.json` file and run `python zh_status.py --stamp <id>` (see docs/i18n/README.md).
+
+- **Tier 1**: 8 of 8 translated and up to date.
+- **Schemes.sg**: 16 of 16 translated and up to date.
+  - Translation for a scheme no longer in the catalog: `ssg-redcross-transportaid`
 
 ## Feedback for Schemes.sg
 
-- `eligibility` is filled in for 162 of 194 schemes, although it was described as null everywhere. We don't publish it yet.
-- `status` is null for 141 of 194 schemes (other values: {'active': 53}). Is null the same as active?
+- `eligibility` is filled in for 167 of 199 schemes, although it was described as null everywhere. We don't publish it yet.
+- `status` is null for 140 of 199 schemes (other values: {'active': 59}). Is null the same as active?
 - List responses include `service_area`, `phone`, `email`, `address`, `eligibility`, but they are always null there; the values only appear in detail responses, so every scheme needs a detail call.
 - The same scheme from the same agency is listed more than once with different official links, which looks like duplicate entries: Seniors' Mobility and Enabling Fund (SMF).
 - `what_it_gives` has items split inside parentheses for 2 scheme(s), e.g. "Benefits and perks for PWDs (transport", "discounts", "facilities)". We rejoin them. Affected: CARA Membership, Merdeka Generation Package.
 - 8 official link(s) are shared by more than one scheme (usually an agency's general services page), so a link alone can't identify a scheme. Shared: carecorner.org.sg/services/caregiver-support, lakeside.org.sg/our-services/seniors-services, mindfull.org.sg/caregiver-education, onehopecentre.org/help-recovery-programmes, sasco.org.sg/our-services, sreenarayanamission.org/our-services/community-programmes, touch.org.sg/get-assistance/caregivers.html, tzuchi.org.sg/en/our-missions/medicine/traditional-chinese-medicine-free-clinic.
 - Several schemes share a generic name ("Active Ageing Centre" x5, "Active Ageing Centres" x4, "Enhancement for Active Seniors (EASE)" x3, "Pertapis Centre for Women and Girls" x2, "Seniors' Mobility and Enabling Fund (SMF)" x2); including the operator in the name would help users.
-- `phone` has mixed types ({'NoneType': 119, 'str': 67, 'list': 8}): sometimes a string, sometimes a list.
+- `phone` has mixed types ({'NoneType': 120, 'str': 71, 'list': 8}): sometimes a string, sometimes a list.
 - `who_is_it_for` values differ only by case: Caregivers, Families, Persons with Disabilities (PWDs), Persons with disabilities (PWDs), caregivers, families.
 - The same agency is written in different ways: Alzheimer's Disease Association / Alzheimers' Disease Association; BCARE / Bcare; Loving Heart Multi Service Centre / Loving Heart Multi-Service Centre; TOUCH Community Services / Touch Community Services.
 - In a category-filtered list, `scheme_type` only contains that category's types, so every scheme needs a detail call to get its full `scheme_type`.

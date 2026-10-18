@@ -1,5 +1,5 @@
 {
-  "syncedOn": "2026-10-05",
+  "syncedOn": "2026-10-19",
   "env": "prod",
   "records": [
     {
@@ -1896,6 +1896,36 @@
       }
     },
     {
+      "id": "ssg-cornerstoneservices-food-care-programme",
+      "sourceId": "xpVbnK2WEboWBdptEhaB",
+      "normLink": "cornerstoneservices.org.sg/families/food-care-programme",
+      "normName": "food care programme",
+      "tier1Id": null,
+      "sourceSummary": "A volunteer-supported programme providing monthly supermarket vouchers and companionship to low-income families and seniors in Singapore. Case workers assess needs and tailor support for 6–12 months.",
+      "sourceDescription": "- Provides monthly supermarket vouchers to help with essential groceries and daily necessities\n- Offers emotional companionship through dedicated volunteers, fostering social connection and support\n- Beneficiaries are matched with suitable volunteers for ongoing engagement and encouragement\n- Case workers conduct assessments to determine the right type and duration of support\n- Typical support period ranges from six months to one year, tailored to individual circumstances",
+      "contentOverride": null,
+      "name": "Food Care Programme",
+      "agency": "Cornerstone Community Services",
+      "summary": "A volunteer-supported programme providing monthly supermarket vouchers and companionship to low-income families and seniors in Singapore. Case workers assess needs and tailor support for 6–12 months.",
+      "description": "- Provides monthly supermarket vouchers to help with essential groceries and daily necessities\n- Offers emotional companionship through dedicated volunteers, fostering social connection and support\n- Beneficiaries are matched with suitable volunteers for ongoing engagement and encouragement\n- Case workers conduct assessments to determine the right type and duration of support\n- Typical support period ranges from six months to one year, tailored to individual circumstances",
+      "valueText": null,
+      "eligibility": "Low-income families or seniors; applicants are assessed by case workers before joining to ensure appropriate support.",
+      "whatItGives": [
+        "Casework",
+        "Emotional care",
+        "Befriending services",
+        "Financial assistance for daily living expenses",
+        "Food support"
+      ],
+      "link": "https://cornerstoneservices.org.sg/families/food-care-programme/",
+      "kind": "service_or_programme",
+      "status": "excluded",
+      "payFor": null,
+      "area": {
+        "kind": "islandwide"
+      }
+    },
+    {
       "id": "ssg-cpf-matching-grant-for-seniors-who-top-up",
       "sourceId": "LEA1pvdnUM7vVlYVSZKg",
       "normLink": "cpf.gov.sg/member/growing-your-savings/saving-more-with-cpf/matching-grant-for-seniors-who-top-up",
@@ -2315,6 +2345,39 @@
       "area": {
         "kind": "district",
         "name": "Service boundaries apply; within designated HDB flats and local community."
+      }
+    },
+    {
+      "id": "ssg-fycs-active-ageing-centres-2",
+      "sourceId": "mYniqZcZiXpDVN2Tr4Vd",
+      "normLink": "fycs.org/seniors/active-ageing-centres",
+      "normName": "fei yue active ageing centres aac",
+      "tier1Id": null,
+      "sourceSummary": "",
+      "sourceDescription": "The aim of Active Ageing Centres are to improve the health outcomes of seniors living in the community through provision of a suite of programmes to help seniors live healthier lives and support their aspirations to age in place.\nProgrammes available include: [1] Community programmes for the Elderly, [2] Buddying and Befriending Services for Seniors, [3] Building Outreach and Collaboration, and [4] Keeping Seniors Informed. \nFacilities at each Fei Yue centre varies, but overall they have health & fitness equipments for seniors, TV / video / singing facilites, reading / writing materials, hobby and craft corners and more!",
+      "contentOverride": null,
+      "name": "Fei Yue Active Ageing Centres (AAC)",
+      "agency": "Fei Yue Community Services",
+      "summary": "",
+      "description": "The aim of Active Ageing Centres are to improve the health outcomes of seniors living in the community through provision of a suite of programmes to help seniors live healthier lives and support their aspirations to age in place.\nProgrammes available include: [1] Community programmes for the Elderly, [2] Buddying and Befriending Services for Seniors, [3] Building Outreach and Collaboration, and [4] Keeping Seniors Informed. \nFacilities at each Fei Yue centre varies, but overall they have health & fitness equipments for seniors, TV / video / singing facilites, reading / writing materials, hobby and craft corners and more!",
+      "valueText": null,
+      "eligibility": "- Seniors aged 60 and above\n- Singapore Citizen or PR regardless of housing and income",
+      "whatItGives": [
+        "Befriending services",
+        "Referral services",
+        "Educational programmes",
+        "Emotional care",
+        "Respite care/Caregiver support",
+        "Support groups",
+        "Information services",
+        "Technology assistance"
+      ],
+      "link": "https://fycs.org/seniors/active-ageing-centres/",
+      "kind": "service_or_programme",
+      "status": "other",
+      "payFor": null,
+      "area": {
+        "kind": "islandwide"
       }
     },
     {
@@ -3352,6 +3415,36 @@
       }
     },
     {
+      "id": "ssg-metta-youth-employment-support",
+      "sourceId": "XjXCZYI0hYP0dkAmc7Cv",
+      "normLink": "metta.org.sg/youth-employment-support",
+      "normName": "youth employment support",
+      "tier1Id": null,
+      "sourceSummary": "Metta Welfare Association’s Youth Employment Support provides vocational training, supported employment, and life skills development for youths with special needs, including those with mild intellectual disability and/or autism. It operates Arts@Metta, Metta Café, and ECO@Metta to create practical training and employment pathways.",
+      "sourceDescription": "Youth Employment Support by Metta Welfare Association equips Metta School graduates and youths with special needs for meaningful employment and independence through structured training and supported employment pathways.\n- Arts@Metta: Visual arts training (batik painting, pottery) for youths with mild intellectual disability with/without autism, fostering life skills such as work etiquette, punctuality, task completion, and time management. Provides a safe, nurturing environment and leverages commissioned projects and retail sales to create supported employment opportunities.\n- Metta Café: An F&B vocational training and apprenticeship programme for Metta School graduates aged 18+ with mild intellectual disability and/or autism, offering on-the-job training in a commercial setting to build vocational, work, and life skills, and to support transition to open employment.\n- ECO@Metta: Sustainability-focused supported employment where youths produce all-natural orange enzyme cleaners from food waste, conduct CSR workshops, and develop social skills, promoting inclusive hiring and a circular economy.\n- Support services include social development and life skills training, caregivers’ support, and corporate social responsibility engagement platforms.\n- Outcomes include supported and open employment opportunities across F&B, services, sales, and administration sectors.",
+      "contentOverride": null,
+      "name": "Youth Employment Support",
+      "agency": "Metta Welfare Association",
+      "summary": "Metta Welfare Association’s Youth Employment Support provides vocational training, supported employment, and life skills development for youths with special needs, including those with mild intellectual disability and/or autism. It operates Arts@Metta, Metta Café, and ECO@Metta to create practical training and employment pathways.",
+      "description": "Youth Employment Support by Metta Welfare Association equips Metta School graduates and youths with special needs for meaningful employment and independence through structured training and supported employment pathways.\n- Arts@Metta: Visual arts training (batik painting, pottery) for youths with mild intellectual disability with/without autism, fostering life skills such as work etiquette, punctuality, task completion, and time management. Provides a safe, nurturing environment and leverages commissioned projects and retail sales to create supported employment opportunities.\n- Metta Café: An F&B vocational training and apprenticeship programme for Metta School graduates aged 18+ with mild intellectual disability and/or autism, offering on-the-job training in a commercial setting to build vocational, work, and life skills, and to support transition to open employment.\n- ECO@Metta: Sustainability-focused supported employment where youths produce all-natural orange enzyme cleaners from food waste, conduct CSR workshops, and develop social skills, promoting inclusive hiring and a circular economy.\n- Support services include social development and life skills training, caregivers’ support, and corporate social responsibility engagement platforms.\n- Outcomes include supported and open employment opportunities across F&B, services, sales, and administration sectors.",
+      "valueText": null,
+      "eligibility": "Primarily for Metta School graduates and youths aged 18 and above with special needs, including those diagnosed with mild intellectual disability with/without autism. For Metta Café apprenticeships, graduates with an ITE Skill Certificate (ISC) who are ready for open employment may be recruited. Programmes focus on post-18 youths with special needs seeking vocational, work, and life skills training and supported employment.",
+      "whatItGives": [
+        "Educational programmes",
+        "Vocational training",
+        "Employment assistance",
+        "Skills training and job matching",
+        "Respite care/Caregiver support"
+      ],
+      "link": "https://www.metta.org.sg/youth-employment-support/",
+      "kind": "service_or_programme",
+      "status": "excluded",
+      "payFor": null,
+      "area": {
+        "kind": "islandwide"
+      }
+    },
+    {
       "id": "ssg-mindfull-caregiver-education-caregiver-support",
       "sourceId": "7Hro3wmRTKB6dWgWDPJf",
       "normLink": "mindfull.org.sg/caregiver-education",
@@ -4174,33 +4267,6 @@
       }
     },
     {
-      "id": "ssg-redcross-transportaid",
-      "sourceId": "wlHkIcBIE3uzOr1PVJlv",
-      "normLink": "redcross.sg/get-assistance/transportaid.html",
-      "normName": "singapore red cross transportaid",
-      "tier1Id": null,
-      "sourceSummary": "Subsidised transport for low-income elderly and disabled.",
-      "sourceDescription": "Singapore Red Cross’ TransportAid service helps the elderly and disabled from low-income homes get to and from their healthcare service facilities, such as medical treatments, rehabilitation and day activity centres. The TransportAid service is offered at subsidised rates, based on means testing results that are assessed by social workers.\n Call 6337 3333 or email us at transportaid@redcross.sg for more information or assistance on Transport Aid.",
-      "contentOverride": null,
-      "name": "Singapore Red Cross' TransportAid",
-      "agency": "Singapore Red Cross",
-      "summary": "Subsidised transport for low-income elderly and disabled.",
-      "description": "Singapore Red Cross’ TransportAid service helps the elderly and disabled from low-income homes get to and from their healthcare service facilities, such as medical treatments, rehabilitation and day activity centres. The TransportAid service is offered at subsidised rates, based on means testing results that are assessed by social workers.\n Call 6337 3333 or email us at transportaid@redcross.sg for more information or assistance on Transport Aid.",
-      "valueText": null,
-      "eligibility": "Elderly and disabled individuals from low-income homes. Subsidy rates are based on means testing results assessed by social workers.",
-      "whatItGives": [
-        "Medical transport assistance",
-        "Transport subsidies"
-      ],
-      "link": "https://www.redcross.sg/get-assistance/transportaid.html",
-      "kind": "money",
-      "status": "published",
-      "payFor": "transport",
-      "area": {
-        "kind": "islandwide"
-      }
-    },
-    {
       "id": "ssg-s3-outreach-community-health",
       "sourceId": "IphFEQwQumWuEyDOiNPS",
       "normLink": "s3.org.sg/outreach-community-health",
@@ -4431,6 +4497,33 @@
       "link": "https://sasco.org.sg/our-services/",
       "kind": "service_or_programme",
       "status": "other",
+      "payFor": null,
+      "area": {
+        "kind": "islandwide"
+      }
+    },
+    {
+      "id": "ssg-savh-white-cane-club",
+      "sourceId": "rnQptJSrsVAG17ifbGb3",
+      "normLink": "savh.org.sg/white-cane-club",
+      "normName": "white cane club",
+      "tier1Id": null,
+      "sourceSummary": "A community club by SAVH that organises social and recreational activities for persons with visual impairment, promoting friendship, independence, and active participation. Open to members from teenagers to seniors and supported by volunteer facilitators.",
+      "sourceDescription": "The White Cane Club (WCC) is a community branch of the Singapore Association of the Visually Handicapped that brings together people of all ages with visual impairment to foster friendship, independence, and active participation. It is run by both visually impaired and sighted volunteers and creates an inclusive environment through ongoing social, recreational, and welfare-oriented activities.\n\nKey features:\n- Inclusive community hub for persons with visual impairment\n- Regular social and recreational activities such as hiking, cycling, rock climbing, trampoline sessions, and outings\n- Emphasis on peer interaction, mutual support, and leadership development among members\n- Complements SAVH in addressing members’ social and recreational needs while nurturing potential leaders",
+      "contentOverride": null,
+      "name": "White Cane Club",
+      "agency": "Singapore Association of the Visually Handicapped (SAVH)",
+      "summary": "A community club by SAVH that organises social and recreational activities for persons with visual impairment, promoting friendship, independence, and active participation. Open to members from teenagers to seniors and supported by volunteer facilitators.",
+      "description": "The White Cane Club (WCC) is a community branch of the Singapore Association of the Visually Handicapped that brings together people of all ages with visual impairment to foster friendship, independence, and active participation. It is run by both visually impaired and sighted volunteers and creates an inclusive environment through ongoing social, recreational, and welfare-oriented activities.\n\nKey features:\n- Inclusive community hub for persons with visual impairment\n- Regular social and recreational activities such as hiking, cycling, rock climbing, trampoline sessions, and outings\n- Emphasis on peer interaction, mutual support, and leadership development among members\n- Complements SAVH in addressing members’ social and recreational needs while nurturing potential leaders",
+      "valueText": null,
+      "eligibility": "Primarily for persons with visual impairment (teenagers to seniors) who wish to join social and recreational activities. Volunteers (sighted or visually impaired) are welcome to support activities.",
+      "whatItGives": [
+        "Befriending services",
+        "Support groups"
+      ],
+      "link": "https://savh.org.sg/white-cane-club/",
+      "kind": "service_or_programme",
+      "status": "excluded",
       "payFor": null,
       "area": {
         "kind": "islandwide"
@@ -4861,6 +4954,67 @@
       "area": {
         "kind": "district",
         "name": "South West District"
+      }
+    },
+    {
+      "id": "ssg-spd-assistive-technology-services",
+      "sourceId": "O3Ent0wpS0uUCOxRwOqu",
+      "normLink": "spd.org.sg/what-we-do/assistive-technology/assistive-technology-services",
+      "normName": "specialised assistive technology centre",
+      "tier1Id": null,
+      "sourceSummary": "SPD’s Specialised Assistive Technology Centre provides assessments, training, device trials/loans, technical support, and ATF application support to help people with disabilities adopt assistive technology for daily living, education, and work. Digital AAC resources and guidance for families and professionals are also available.",
+      "sourceDescription": "- Assistive Technology Services delivered by SPD's Specialised Assistive Technology Centre (ATC) help people with disabilities overcome daily challenges and participate fully in school, work, and community life.\n- Core services include comprehensive AT assessments, onsite evaluations (home, school, workplace), and prescription of suitable assistive devices tailored to individual needs.\n- The centre provides training on the use of AT devices and offers trials/loans through its AT Loan Library to help users make informed choices.\n- Ongoing technical support is available (virtual or in-person), alongside coordination for device purchases and guidance on applying for the Assistive Technology Fund (ATF) where applicable.\n- Digital resources and self-learning materials are available, including introductions to Augmentative and Alternative Communication (AAC) and manuals on Modelling/Aided Language Stimulation, benefiting users, families, and professionals.\n- Services operate by appointment during weekdays, ensuring structured, personalized support.",
+      "contentOverride": null,
+      "name": "Specialised Assistive Technology Centre",
+      "agency": "SPD",
+      "summary": "SPD’s Specialised Assistive Technology Centre provides assessments, training, device trials/loans, technical support, and ATF application support to help people with disabilities adopt assistive technology for daily living, education, and work. Digital AAC resources and guidance for families and professionals are also available.",
+      "description": "- Assistive Technology Services delivered by SPD's Specialised Assistive Technology Centre (ATC) help people with disabilities overcome daily challenges and participate fully in school, work, and community life.\n- Core services include comprehensive AT assessments, onsite evaluations (home, school, workplace), and prescription of suitable assistive devices tailored to individual needs.\n- The centre provides training on the use of AT devices and offers trials/loans through its AT Loan Library to help users make informed choices.\n- Ongoing technical support is available (virtual or in-person), alongside coordination for device purchases and guidance on applying for the Assistive Technology Fund (ATF) where applicable.\n- Digital resources and self-learning materials are available, including introductions to Augmentative and Alternative Communication (AAC) and manuals on Modelling/Aided Language Stimulation, benefiting users, families, and professionals.\n- Services operate by appointment during weekdays, ensuring structured, personalized support.",
+      "valueText": null,
+      "eligibility": "Primary users are people with disabilities who have assistive technology needs. Consultation is by appointment only. A referral form is required for assessment booking. Assessment and training fees apply.",
+      "whatItGives": [
+        "Educational programmes",
+        "Technology assistance",
+        "Information services"
+      ],
+      "link": "https://www.spd.org.sg/what-we-do/assistive-technology/assistive-technology-services/",
+      "kind": "service_or_programme",
+      "status": "other",
+      "payFor": null,
+      "area": {
+        "kind": "islandwide"
+      }
+    },
+    {
+      "id": "ssg-spd-case-management-support",
+      "sourceId": "0tTF4A34dJnxthYbPRPm",
+      "normLink": "spd.org.sg/what-we-do/social-support/case-management-support",
+      "normName": "specialised case management programme",
+      "tier1Id": null,
+      "sourceSummary": "SPD’s Specialised Case Management Programme (SCMP) provides coordinated case management, counselling, assistive device support, support groups, and caregiver training for persons with disabilities and their caregivers across Singapore.",
+      "sourceDescription": "The Specialised Case Management Programme (SCMP) by SPD is a nationwide initiative launched in 2006 to support persons with disabilities across all age groups and their caregivers. It aims to empower individuals and families to lead more fulfilling lives through coordinated, holistic support delivered by social workers and case management officers.\n\nKey supports include:\n- Coordination of services within SPD and with community resources\n- Supportive counselling and case management\n- Assessment and support for the purchase of assistive devices\n- Support groups for learning and networking\n- Caregiver support and training\n- Information and referral to relevant programmes and services\n\nThe programme is designed for individuals with disabilities who may face multiple and complex challenges, and for their caregivers who need guidance, training, and practical support.",
+      "contentOverride": null,
+      "name": "Specialised Case Management Programme",
+      "agency": "SPD",
+      "summary": "SPD’s Specialised Case Management Programme (SCMP) provides coordinated case management, counselling, assistive device support, support groups, and caregiver training for persons with disabilities and their caregivers across Singapore.",
+      "description": "The Specialised Case Management Programme (SCMP) by SPD is a nationwide initiative launched in 2006 to support persons with disabilities across all age groups and their caregivers. It aims to empower individuals and families to lead more fulfilling lives through coordinated, holistic support delivered by social workers and case management officers.\n\nKey supports include:\n- Coordination of services within SPD and with community resources\n- Supportive counselling and case management\n- Assessment and support for the purchase of assistive devices\n- Support groups for learning and networking\n- Caregiver support and training\n- Information and referral to relevant programmes and services\n\nThe programme is designed for individuals with disabilities who may face multiple and complex challenges, and for their caregivers who need guidance, training, and practical support.",
+      "valueText": null,
+      "eligibility": "- Persons of any age with physical or sensory disabilities and their caregivers. \n- Persons with multiple needs. \n- Singapore citizen or Permanent Resident.",
+      "whatItGives": [
+        "Counselling",
+        "Casework",
+        "Referral services",
+        "Respite care/Caregiver support",
+        "Support groups",
+        "Technology assistance",
+        "Information services"
+      ],
+      "link": "https://www.spd.org.sg/what-we-do/social-support/case-management-support/",
+      "kind": "service_or_programme",
+      "status": "other",
+      "payFor": null,
+      "area": {
+        "kind": "district",
+        "name": "Singapore (nationwide)"
       }
     },
     {
