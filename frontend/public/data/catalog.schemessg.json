@@ -29,7 +29,7 @@
         "url": "https://schemes.sg/schemes/IhKLeOTlBTc8tSkAgKEP"
       }
     ],
-    "lastRefreshed": "2026-10-05"
+    "lastRefreshed": "2026-10-26"
   },
   {
     "id": "ssg-aic-elderfund",
@@ -59,7 +59,7 @@
         "url": "https://schemes.sg/schemes/sSpXwuKcdNRPtqEZHI4i"
       }
     ],
-    "lastRefreshed": "2026-10-05"
+    "lastRefreshed": "2026-10-26"
   },
   {
     "id": "ssg-moh-interim-disability-assistance-programme-for-the-elderly",
@@ -89,7 +89,7 @@
         "url": "https://schemes.sg/schemes/n1JVQhzmWsrqRAxg93nA"
       }
     ],
-    "lastRefreshed": "2026-10-05"
+    "lastRefreshed": "2026-10-26"
   },
   {
     "id": "ssg-aic-pioneer-generation-disability-assistance-scheme",
@@ -119,7 +119,7 @@
         "url": "https://schemes.sg/schemes/2rK9LebmNpOVhNuJhpZc"
       }
     ],
-    "lastRefreshed": "2026-10-05"
+    "lastRefreshed": "2026-10-26"
   },
   {
     "id": "ssg-sbws-public-assistance-programme",
@@ -151,7 +151,7 @@
         "url": "https://schemes.sg/schemes/QMeMEyQ79DmOcbtN2ucH"
       }
     ],
-    "lastRefreshed": "2026-10-05"
+    "lastRefreshed": "2026-10-26"
   },
   {
     "id": "ssg-southwest-csf",
@@ -183,7 +183,7 @@
         "url": "https://schemes.sg/schemes/0IfTwD0f8BbxmpxapZQ2"
       }
     ],
-    "lastRefreshed": "2026-10-05"
+    "lastRefreshed": "2026-10-26"
   },
   {
     "id": "ssg-southwest-sw-community-caring-fund",
@@ -215,7 +215,7 @@
         "url": "https://schemes.sg/schemes/c0K5aIoUKEwgzjIR1Y7F"
       }
     ],
-    "lastRefreshed": "2026-10-05"
+    "lastRefreshed": "2026-10-26"
   },
   {
     "id": "ssg-hdb-enhancement-for-active-seniors-ease",
@@ -246,38 +246,7 @@
         "url": "https://schemes.sg/schemes/0TXzL4HkLRQF3NuUqHZA"
       }
     ],
-    "lastRefreshed": "2026-10-05"
-  },
-  {
-    "id": "ssg-redcross-transportaid",
-    "source": "schemes_sg",
-    "sourceId": "wlHkIcBIE3uzOr1PVJlv",
-    "tier": 2,
-    "name": "Singapore Red Cross' TransportAid",
-    "agency": "Singapore Red Cross",
-    "summary": "Subsidised transport for low-income elderly and disabled.",
-    "description": "Singapore Red Cross’ TransportAid service helps the elderly and disabled from low-income homes get to and from their healthcare service facilities, such as medical treatments, rehabilitation and day activity centres. The TransportAid service is offered at subsidised rates, based on means testing results that are assessed by social workers.\n Call 6337 3333 or email us at transportaid@redcross.sg for more information or assistance on Transport Aid.",
-    "eligibility": "Elderly and disabled individuals from low-income homes. Subsidy rates are based on means testing results assessed by social workers.",
-    "whatYouGet": [
-      "Medical transport assistance",
-      "Transport subsidies"
-    ],
-    "payFor": "transport",
-    "area": {
-      "kind": "islandwide"
-    },
-    "link": "https://www.redcross.sg/get-assistance/transportaid.html",
-    "sources": [
-      {
-        "name": "Singapore Red Cross",
-        "url": "https://www.redcross.sg/get-assistance/transportaid.html"
-      },
-      {
-        "name": "Schemes.sg",
-        "url": "https://schemes.sg/schemes/wlHkIcBIE3uzOr1PVJlv"
-      }
-    ],
-    "lastRefreshed": "2026-10-05"
+    "lastRefreshed": "2026-10-26"
   },
   {
     "id": "ssg-chas",
@@ -310,7 +279,7 @@
         "url": "https://schemes.sg/schemes/zaLdcbwlK49THVXQbtBi"
       }
     ],
-    "lastRefreshed": "2026-10-05"
+    "lastRefreshed": "2026-10-26"
   },
   {
     "id": "ssg-tzuchi-medical-assistance",
@@ -343,7 +312,7 @@
         "url": "https://schemes.sg/schemes/LeAXbtvj4oK3nhH4FrBo"
       }
     ],
-    "lastRefreshed": "2026-10-05"
+    "lastRefreshed": "2026-10-26"
   },
   {
     "id": "ssg-aic-medical-fee-exemption-card-mfec",
@@ -373,7 +342,7 @@
         "url": "https://schemes.sg/schemes/g46qLiec2dbf0M9GCash"
       }
     ],
-    "lastRefreshed": "2026-10-05"
+    "lastRefreshed": "2026-10-26"
   },
   {
     "id": "ssg-aic-medifund",
@@ -404,7 +373,7 @@
         "url": "https://schemes.sg/schemes/VHMs8PD8AxFHFCMSds8x"
       }
     ],
-    "lastRefreshed": "2026-10-05"
+    "lastRefreshed": "2026-10-26"
   },
   {
     "id": "ssg-moh-merdeka-generation-package",
@@ -437,7 +406,7 @@
         "url": "https://schemes.sg/schemes/qA6GtDXuV49biV9ER6qX"
       }
     ],
-    "lastRefreshed": "2026-10-05"
+    "lastRefreshed": "2026-10-26"
   },
   {
     "id": "ssg-moh-pioneer-generation-package",
@@ -470,7 +439,7 @@
         "url": "https://schemes.sg/schemes/iol6ea7rylJvuK14byGY"
       }
     ],
-    "lastRefreshed": "2026-10-05"
+    "lastRefreshed": "2026-10-26"
   },
   {
     "id": "ssg-viriya-seniors",
@@ -505,7 +474,7 @@
         "url": "https://schemes.sg/schemes/TWb6eDtDEYY3jPzTblbO"
       }
     ],
-    "lastRefreshed": "2026-10-05"
+    "lastRefreshed": "2026-10-26"
   },
   {
     "id": "ssg-cpf-matching-grant-for-seniors-who-top-up",
@@ -535,6 +504,6 @@
         "url": "https://schemes.sg/schemes/LEA1pvdnUM7vVlYVSZKg"
       }
     ],
-    "lastRefreshed": "2026-10-05"
+    "lastRefreshed": "2026-10-26"
   }
 ]
